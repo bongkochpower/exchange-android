@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Button-->
+    <dimen name="button_mini_height">36dp</dimen>
+    <dimen name="button_small_height">44dp</dimen>
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="button_large_height">60dp</dimen>
+
+    <dimen name="button_small_width">60dp</dimen>
+    <dimen name="button_no_cart_width">200dp</dimen>
+
+    <!--EditText-->
+    <dimen name="edit_text_height">56dp</dimen>
+    <dimen name="edit_text_small_height">48dp</dimen>
+    <dimen name="edit_text_large_height">100dp</dimen>
+
+    <!--Text-->
+    <dimen name="text_size_default_xxxl">44sp</dimen>
+    <dimen name="text_size_default_xxl">34sp</dimen>
+    <dimen name="text_size_default_xl">30sp</dimen>
+    <dimen name="text_size_default_l">26sp</dimen>
+    <dimen name="text_size_default_mm">24sp</dimen>
+    <dimen name="text_size_default_m">22sp</dimen>
+    <dimen name="text_size_default_sm">20sp</dimen>
+    <dimen name="text_size_default_s">18sp</dimen>
+    <dimen name="text_size_default_ss">16sp</dimen>
+    <dimen name="text_size_default_sss">14sp</dimen>
+    <dimen name="text_size_default_ssss">12sp</dimen>
+    <dimen name="text_size_default_sssss">8sp</dimen>
+
+    <dimen name="text_quantity_width">48dp</dimen>
+
+    <dimen name="text_duration_width">40dp</dimen>
+
+    <!--Margin-->
+    <dimen name="margin_2dp">2dp</dimen>
+    <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_6dp">6dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_14dp">14dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_18dp">18dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_30dp">30dp</dimen>
+    <dimen name="margin_36dp">36dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_48dp">48dp</dimen>
+    <dimen name="margin_56dp">56dp</dimen>
+    <dimen name="margin_88dp">88dp</dimen>
+    <dimen name="margin_minus_8dp">-8dp</dimen>
+    <dimen name="margin_top_fullscreen">0dp</dimen>
+
+    <!--Padding-->
+    <dimen name="padding_1dp">1dp</dimen>
+    <dimen name="padding_2dp">2dp</dimen>
+    <dimen name="padding_4dp">4dp</dimen>
+    <dimen name="padding_6dp">6dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
+    <dimen name="padding_12dp">12dp</dimen>
+    <dimen name="padding_14dp">14dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="padding_20dp">20dp</dimen>
+    <dimen name="padding_24dp">24dp</dimen>
+    <dimen name="padding_26dp">26dp</dimen>
+    <dimen name="padding_36dp">36dp</dimen>
+    <dimen name="padding_52dp">52dp</dimen>
+    <dimen name="padding_56dp">56dp</dimen>
+
+    <!--Line-->
+    <dimen name="line_thin">0.5dp</dimen>
+    <dimen name="line">1dp</dimen>
+    <dimen name="zero">0dp</dimen>
+
+    <!--Image Size-->
+    <dimen name="image_banner">200dp</dimen>
+</resources>

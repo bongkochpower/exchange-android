@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">exchange-android</string>
+
+    <!--fcm-->
+    <string name="fcm_channel_id">exchange-android</string>
+    <string name="fcm_channel_name">exchange channel</string>
+    <string name="fcm_channel_desc">$app_name</string>
+
+    <!--title-->
+    <!--<string name="title_code">Code</string>-->
+
+    <!--description-->
+    <!--<string name="desc_not_a_member">คุณยังไม่มีบัญชีใช่ไหม?</string>-->
+
+    <!--hint-->
+    <!--<string name="hint_number">หมายเลข</string>-->
+
+    <!--message-->
+    <string name="message_maintenance">ปิดปรับปรุงระบบชั่วคราว\nขออภัยในความไม่สะดวก</string>
+    <string name="message_soft_update">พร้อมให้บริการแล้ว</string>
+    <string name="message_force_update">กรุณาอัพเดทเวอร์ชั่น</string>
+    <string name="message_device_not_supported">Device not supported</string>
+    <string name="message_no_internet">Connection Lost</string>
+    <string name="message_please_check_no_internet">Please check your internet connection and then try again.</string>
+    <string name="message_error">Sorry, something went wrong</string>
+    <string name="message_confirm_logout">คุณต้องการออกจากระบบ?</string>
+    <string name="message_save_success">บันทึกสำเร็จ</string>
+    <string name="message_delete_success">ลบสำเร็จ</string>
+
+    <!--button-->
+    <string name="button_close">ปิด</string>
+    <string name="button_confirm">ยืนยัน</string>
+    <string name="button_logout">ออกจากระบบ</string>
+    <string name="button_cancel">ยกเลิก</string>
+    <string name="button_update">อัพเดท</string>
+    <string name="button_login">เข้าสู่ระบบ</string>
+
+    <!--contentDescription-->
+    <string name="cd_bg">background</string>
+    <string name="cd_banner">banner</string>
+    <string name="cd_button">button</string>
+    <string name="cd_cover">cover</string>
+    <string name="cd_icon">icon</string>
+    <string name="cd_logo">logo</string>
+    <string name="cd_profile">profile</string>
+    <string name="cd_result">result</string>
+
+    <!--menu-->
+    <!--bottom navigation-->
+    <string name="menu_home">หน้าหลัก</string>
+    <string name="menu_privilege">สิทธิพิเศษ</string>
+    <string name="menu_cart">ตะกร้าสินค้า</string>
+    <string name="menu_notification">แจ้งเตือน</string>
+    <string name="menu_account">บัญชีผู้ใช้</string>
+    <!--image picker-->
+    <string name="menu_camera">Camera</string>
+    <string name="menu_gallery">Gallery</string>
+
+    <!--validate-->
+    <!--<string name="validate_phone_number_invalid">หมายเลขโทรศัพท์ไม่ถูกต้อง</string>-->
+</resources>

@@ -1,0 +1,212 @@
+package com.startwithn.exchange_android.ext
+
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.graphics.*
+import android.graphics.drawable.Drawable
+import android.media.MediaScannerConnection
+import android.net.Uri
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.provider.MediaStore
+import android.view.PixelCopy
+import android.view.View
+import android.view.Window
+import android.webkit.MimeTypeMap
+import androidx.core.content.FileProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.startwithn.exchange_android.R
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import java.io.*
+
+const val IMAGE_RESULT_MAX_SIZE = 800
+const val IMAGE_COMPRESS_MAX_SIZE = 400
+
+private fun getFileName(): String = String.format("%s_%d.png", "Image", System.currentTimeMillis())
+
+//fun Activity.takePhoto(activityResultLauncher: ActivityResultLauncher<Intent>) {
+fun Activity.takePhoto(completionHandler: ((resultCode: Int, data: Intent?) -> Unit)? = null) {
+    ImagePicker.with(this)
+//            .crop(IMAGE_CROP_RATIO_X, IMAGE_CROP_RATIO_Y)
+        .cameraOnly()
+        .compress(IMAGE_COMPRESS_MAX_SIZE)
+        .maxResultSize(IMAGE_RESULT_MAX_SIZE, IMAGE_RESULT_MAX_SIZE)
+//        .createIntent { intent ->
+//            activityResultLauncher.launch(intent)
+//        }
+        .start(completionHandler)
+}
+
+//fun Activity.takePhoto(activityResultLauncher: ActivityResultLauncher<Intent>) {
+fun Activity.getPhotoFromGallery(completionHandler: ((resultCode: Int, data: Intent?) -> Unit)? = null) {
+    ImagePicker.with(this)
+//            .crop(IMAGE_CROP_RATIO_X, IMAGE_CROP_RATIO_Y)
+        .galleryOnly()
+        .galleryMimeTypes(  //Exclude gif images
+            mimeTypes = arrayOf(
+                "image/png",
+                "image/jpg",
+                "image/jpeg"
+            )
+        )
+        .compress(IMAGE_COMPRESS_MAX_SIZE)
+        .maxResultSize(IMAGE_RESULT_MAX_SIZE, IMAGE_RESULT_MAX_SIZE)
+//        .createIntent { intent ->
+//            activityResultLauncher.launch(intent)
+//        }
+        .start(completionHandler)
+}
+
+private fun Context.getOutputDirectory(): File {
+    val mediaDir = externalMediaDirs.firstOrNull()?.let {
+        File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
+    }
+    return if (mediaDir != null && mediaDir.exists()) {
+        mediaDir
+    } else {
+        filesDir
+    }
+}
+
+inline fun Context.saveImageFromUrl(
+    url: String,
+    crossinline callback: ((isSuccess: Boolean) -> Unit)
+) {
+    Glide.with(this)
+        .asBitmap()
+        .load(url)
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap?>?) {
+                resource.saveBitmap(this@saveImageFromUrl)
+                callback.invoke(true)
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+
+            }
+
+            override fun onLoadFailed(errorDrawable: Drawable?) {
+                super.onLoadFailed(errorDrawable)
+                callback.invoke(false)
+            }
+        })
+}
+
+fun Uri.toBitmap(context: Context): Bitmap {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val src: ImageDecoder.Source = ImageDecoder.createSource(context.contentResolver, this)
+        ImageDecoder.decodeBitmap(src)
+    } else {
+        MediaStore.Images.Media.getBitmap(context.contentResolver, this)
+    }
+}
+
+fun Bitmap.rotate(angle: Float): Bitmap {
+    val matrix = Matrix()
+    matrix.postRotate(angle)
+    return Bitmap.createBitmap(this, 0, 0, this.width, this.height, matrix, true)
+}
+
+fun Bitmap.resizedBitmap(maxSize: Int): Bitmap {
+    var width = this.width
+    var height = this.height
+    val bitmapRatio = width.toFloat() / height.toFloat()
+    width = maxSize
+    height = (width / bitmapRatio).toInt()
+    return Bitmap.createScaledBitmap(this, width, height, true)
+}
+
+fun Bitmap.shareImage(context: Context) {
+    //---Save bitmap to external cache directory---//
+    //get cache directory
+    val cachePath = File(context.cacheDir, "images")
+    cachePath.mkdirs()
+
+    //create file
+    val file = File(cachePath, "share_image.png")
+    val fileOutputStream: FileOutputStream
+
+    try {
+        fileOutputStream = FileOutputStream(file)
+        compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+        fileOutputStream.flush()
+        fileOutputStream.close()
+    } catch (e: FileNotFoundException) {
+        e.printStackTrace()
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+
+    //---Share File---//
+    //get file uri
+    val uri = FileProvider.getUriForFile(context, context.packageName + ".provider", file)
+
+    //create a intent
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        putExtra(Intent.EXTRA_STREAM, uri)
+        type = "image/png"
+    }
+    context.startActivity(Intent.createChooser(intent, "Share with"))
+}
+
+fun Bitmap.saveBitmap(
+    context: Context,
+    outputFile: File = File(context.getOutputDirectory().absolutePath + File.separator + getFileName())
+): File {
+    val bytes = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.PNG, 100, bytes)
+    outputFile.createNewFile()
+    val fileOutputStream = FileOutputStream(outputFile)
+    fileOutputStream.write(bytes.toByteArray())
+    fileOutputStream.close()
+    outputFile.scanImageToGallery(context)
+    return outputFile
+}
+
+private fun File.scanImageToGallery(context: Context) {
+    MediaScannerConnection.scanFile(context, arrayOf(this.toString()), null, null)
+}
+
+inline fun View.captureView(window: Window, crossinline bitmapCallback: (Bitmap) -> Unit) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        // Above Android O, use PixelCopy
+        val bitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888)
+        val location = IntArray(2)
+        this.getLocationInWindow(location)
+        PixelCopy.request(
+            window,
+            Rect(location[0], location[1], location[0] + this.width, location[1] + this.height),
+            bitmap,
+            {
+                if (it == PixelCopy.SUCCESS) {
+                    bitmapCallback.invoke(bitmap)
+                }
+            },
+            Handler(Looper.getMainLooper())
+        )
+    } else {
+        val tBitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.RGB_565)
+        val canvas = Canvas(tBitmap)
+        this.draw(canvas)
+        canvas.setBitmap(null)
+        bitmapCallback.invoke(tBitmap)
+    }
+}
+
+fun String?.getMimeType(): MediaType? {
+    var type: String? = "image/png"
+    val extension = MimeTypeMap.getFileExtensionFromUrl(this)
+    if (extension != null) {
+        MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)?.let {
+            type = it
+        }
+    }
+    return type?.toMediaTypeOrNull()
+}

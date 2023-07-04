@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="widget"
+            type="com.startwithn.exchange_android.ui.widget.AppToolbar" />
+        <variable
+            name="title"
+            type="String" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        android:paddingStart="@dimen/padding_8dp"
+        android:paddingEnd="@dimen/padding_8dp">
+
+        <!--close-->
+        <ImageView
+            android:onClick="@{(view)->widget.onBackPressed()}"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cd_button"
+            android:padding="@dimen/padding_4dp"
+             />
+
+        <!--title-->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_48dp"
+            android:layout_marginEnd="@dimen/margin_48dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{title}"
+            android:textColor="@color/black" />
+
+    </FrameLayout>
+
+</layout>

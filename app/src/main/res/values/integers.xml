@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--length-->
+    <integer name="length_phone_number">10</integer>
+    <integer name="length_otp">4</integer>
+    <integer name="length_auto_search">3</integer>
+    <integer name="length_postal_code">5</integer>
+    <integer name="length_card_cvv">3</integer>
+    <integer name="length_card_expired">5</integer>
+    <integer name="length_card_number">16</integer>
+
+    <!--max line-->
+    <integer name="max_line_desc">2</integer>
+    <integer name="max_line_product_desc">5</integer>
+    <integer name="max_line_address">5</integer>
+
+    <!--interval-->
+    <integer name="interval_intro">2000</integer>
+    <integer name="interval_corousel">6000</integer>
+    <integer name="interval_payment_trace">5000</integer>
+    <integer name="interval_otp">120000</integer>
+
+    <integer name="zero">0</integer>
+
+</resources>

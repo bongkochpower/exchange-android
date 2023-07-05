@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import com.startwithn.exchange_android.R
+import com.startwithn.exchange_android.ui.page.login.LoginActivity
 import com.startwithn.exchange_android.ui.page.main.activity.MainActivity
 
 class AppNavigator(private val activity: Activity) {
@@ -17,6 +18,10 @@ class AppNavigator(private val activity: Activity) {
 
     fun goToMain() {
         MainActivity.open(activity)
+    }
+
+    fun goToLogin() {
+        LoginActivity.open(activity)
     }
 
     /*other*/

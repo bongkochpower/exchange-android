@@ -3,4 +3,10 @@
     <declare-styleable name="AppToolbar">
         <attr name="title" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="ButtonLogin">
+        <attr name="buttonTitle" format="string" />
+        <attr name="buttonIconSrc" format="reference" />
+        <attr name="buttonBgSrc" format="reference" />
+    </declare-styleable>
 </resources>

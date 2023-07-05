@@ -12,13 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Exchangeandroid"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.page.login.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.page.intro.IntroActivity"
             android:exported="true"
-            android:theme="@style/Theme.Starting"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Starting"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +30,7 @@
         </activity>
         <activity
             android:name=".ui.page.main.activity.MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

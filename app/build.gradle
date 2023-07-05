@@ -21,7 +21,20 @@ android {
 
     buildTypes {
         release {
+            //signingConfig signingConfigs.release
+            manifestPlaceholders = [crashlyticsCollectionEnabled: "true"]
+            minifyEnabled true
+            debuggable false
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            manifestPlaceholders = [crashlyticsCollectionEnabled: "false"]
+            ext.enableCrashlytics = false
             minifyEnabled false
+            debuggable true
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -64,6 +77,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
+
 
     // Splash Screen
     implementation 'androidx.core:core-splashscreen:1.0.0-rc01'

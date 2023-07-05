@@ -2,9 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="widget"
             type="com.startwithn.exchange_android.ui.widget.AppToolbar" />
+
         <variable
             name="title"
             type="String" />
@@ -13,35 +15,66 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/white"
-        android:paddingStart="@dimen/padding_8dp"
-        android:paddingEnd="@dimen/padding_8dp">
+        android:background="@android:color/transparent"
+        >
 
-        <!--close-->
-        <ImageView
-            android:onClick="@{(view)->widget.onBackPressed()}"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/btn_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:background="?selectableItemBackgroundBorderless"
-            android:contentDescription="@string/cd_button"
-            android:padding="@dimen/padding_4dp"
-             />
+        <FrameLayout
+            android:paddingStart="@dimen/padding_8dp"
+            android:paddingEnd="@dimen/padding_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <!--title-->
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/margin_48dp"
-            android:layout_marginEnd="@dimen/margin_48dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="@{title}"
-            android:textColor="@color/black" />
+
+            <!--close-->
+            <ImageView
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:adjustViewBounds="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_button"
+                android:onClick="@{(view)->widget.onBackPressed()}"
+                android:padding="@dimen/padding_4dp" />
+
+            <!--title-->
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_48dp"
+                android:layout_marginEnd="@dimen/margin_48dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{title}"
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/logo_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_toolbar" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8dp"
+                    android:src="@drawable/ic_txt_exchange" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line"
+            android:layout_gravity="bottom"
+            android:background="@color/colorSecondary" />
 
     </FrameLayout>
 

@@ -7,7 +7,8 @@
     <string name="fcm_channel_desc">$app_name</string>
 
     <!--title-->
-    <!--<string name="title_code">Code</string>-->
+    <string name="title_login">เข้าสู่ระบบ</string>
+    <string name="title_new_account">สร้างบัญชีใหม่</string>
 
     <!--description-->
     <!--<string name="desc_not_a_member">คุณยังไม่มีบัญชีใช่ไหม?</string>-->
@@ -34,6 +35,10 @@
     <string name="button_cancel">ยกเลิก</string>
     <string name="button_update">อัพเดท</string>
     <string name="button_login">เข้าสู่ระบบ</string>
+    <string name="button_apple_login">เข้าใช้งานด้วย Apple</string>
+    <string name="button_facebook_login">เข้าใช้งานด้วย Facebook</string>
+    <string name="button_line_login">เข้าใช้งานด้วย Line</string>
+    <string name="button_app_login">Login</string>
 
     <!--contentDescription-->
     <string name="cd_bg">background</string>
@@ -55,6 +60,8 @@
     <!--image picker-->
     <string name="menu_camera">Camera</string>
     <string name="menu_gallery">Gallery</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--validate-->
     <!--<string name="validate_phone_number_invalid">หมายเลขโทรศัพท์ไม่ถูกต้อง</string>-->

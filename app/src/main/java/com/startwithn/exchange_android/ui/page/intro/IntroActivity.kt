@@ -59,7 +59,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            goToMain()
+            goToLogin()
             finish()
         }, resources.getInteger(R.integer.interval_intro).toLong())
     }
@@ -86,5 +86,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
     //private fun goToPinPassword() = pinPasswordLauncher.launch(PinPasswordActivity.get(this, PinModeEnum.VERIFY))
 
     private fun goToMain() = AppNavigator(this).goToMain()
+    private fun goToLogin() = AppNavigator(this).goToLogin()
 
 }

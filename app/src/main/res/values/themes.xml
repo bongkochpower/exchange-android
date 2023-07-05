@@ -14,6 +14,8 @@
         <!-- Customize your theme here. -->
         <item name="android:windowContentTransitions">true</item>
 
+        <item name="fontFamily">@font/prompt_regular</item>
+
     </style>
 
     <style name="Theme.Exchangeandroid.NoActionBar">
@@ -49,9 +51,57 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
+
     <!--CardView-->
     <style name="CardViewStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">@dimen/margin_8dp</item>
         <item name="cardUseCompatPadding">false</item>
     </style>
+
+    <!--TextView-->
+    <style name="TextViewExtraLarge5">
+        <item name="android:textSize">@dimen/text_size_default_xxxl</item>
+    </style>
+
+    <style name="TextViewExtraLarge4">
+        <item name="android:textSize">@dimen/text_size_default_xxl</item>
+    </style>
+
+    <style name="TextViewExtraLarge3">
+        <item name="android:textSize">@dimen/text_size_default_xl</item>
+    </style>
+
+    <style name="TextViewExtraLarge">
+        <item name="android:textSize">@dimen/text_size_default_l</item>
+    </style>
+
+    <style name="TextViewLarge2">
+        <item name="android:textSize">@dimen/text_size_default_mm</item>
+    </style>
+
+    <style name="TextViewLarge">
+        <item name="android:textSize">@dimen/text_size_default_m</item>
+    </style>
+
+    <style name="TextViewRegularPlus">
+        <item name="android:textSize">@dimen/text_size_default_sm</item>
+    </style>
+
+    <style name="TextViewRegular">
+        <item name="android:textSize">@dimen/text_size_default_s</item>
+    </style>
+
+    <style name="TextViewSmall">
+        <item name="android:textSize">@dimen/text_size_default_ss</item>
+    </style>
+
+    <style name="TextViewMini">
+        <item name="android:textSize">@dimen/text_size_default_sss</item>
+    </style>
+
+    <style name="TextViewExtraMini">
+        <item name="android:textSize">@dimen/text_size_default_ssss</item>
+    </style>
+
+
 </resources>

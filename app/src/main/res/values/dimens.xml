@@ -44,6 +44,7 @@
     <dimen name="margin_18dp">18dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_28dp">28dp</dimen>
     <dimen name="margin_30dp">30dp</dimen>
     <dimen name="margin_36dp">36dp</dimen>
     <dimen name="margin_40dp">40dp</dimen>
@@ -66,6 +67,7 @@
     <dimen name="padding_20dp">20dp</dimen>
     <dimen name="padding_24dp">24dp</dimen>
     <dimen name="padding_26dp">26dp</dimen>
+    <dimen name="padding_30dp">30dp</dimen>
     <dimen name="padding_36dp">36dp</dimen>
     <dimen name="padding_52dp">52dp</dimen>
     <dimen name="padding_56dp">56dp</dimen>
@@ -77,4 +79,5 @@
 
     <!--Image Size-->
     <dimen name="image_banner">200dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
 </resources>

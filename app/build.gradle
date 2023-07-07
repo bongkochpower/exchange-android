@@ -3,10 +3,13 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    //id 'com.google.gms.google-services'
+    //id 'com.google.firebase.crashlytics'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
-    namespace 'com.startwithn.exchange_android'
+    //namespace 'com.startwithn.exchange_android'
     compileSdk 33
 
     defaultConfig {
@@ -149,6 +152,9 @@ dependencies {
     
     // Skeleton Loading
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    // Pin
+    implementation 'com.github.poovamraj:PinEditTextField:1.2.6'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

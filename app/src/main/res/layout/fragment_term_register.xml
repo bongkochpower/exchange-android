@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.page.login.register.TermRegisterFragment">
+
+        <androidx.cardview.widget.CardView
+            app:cardElevation="@dimen/zero"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_30dp"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_26dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_16dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/title_tern_and_con"
+                    android:textColor="@color/black"
+                    app:fontFamily="@font/prompt_semibold" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/text_back"
+                        app:fontFamily="@font/prompt_regular"
+                        tools:text="@tools:sample/lorem/random" />
+                </androidx.core.widget.NestedScrollView>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line"
+                        android:layout_marginVertical="@dimen/margin_24dp"
+                        android:background="@color/green_yellow" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        style="@style/TextViewSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/green_yellow"
+                        android:gravity="top"
+                        android:text="@string/chk_term_and_con"
+                        android:textColor="@color/green_yellow" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        style="@style/TextViewRegularPlus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin_24dp"
+                        android:background="@drawable/bg_confirm"
+                        android:text="@string/button_register"
+                        android:onClick="goToRegister"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+</layout>

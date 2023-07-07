@@ -2,7 +2,7 @@
 <resources>
     <!--length-->
     <integer name="length_phone_number">10</integer>
-    <integer name="length_otp">4</integer>
+    <integer name="length_otp">6</integer>
     <integer name="length_auto_search">3</integer>
     <integer name="length_postal_code">5</integer>
     <integer name="length_card_cvv">3</integer>

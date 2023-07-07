@@ -8,13 +8,38 @@
 
     <!--title-->
     <string name="title_login">เข้าสู่ระบบ</string>
+    <string name="title_login_en">LOGIN</string>
     <string name="title_new_account">สร้างบัญชีใหม่</string>
+    <string name="title_forgot_password">ลืมรหัสผ่าน</string>
+    <string name="title_back_to_main_login">กลับไปหน้าเข้าสู่ระบบ</string>
+    <string name="title_login_not_success">การ Login ไม่สำเร็จ</string>
+    <string name="title_tern_and_con">ข้อตกลงและเงื่อนไข</string>
+    <string name="title_register_form">ลงทะเบียนสมาชิก</string>
+
 
     <!--description-->
-    <!--<string name="desc_not_a_member">คุณยังไม่มีบัญชีใช่ไหม?</string>-->
+
 
     <!--hint-->
-    <!--<string name="hint_number">หมายเลข</string>-->
+    <string name="hint_phone">เบอร์โทรศัพท์</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">ชื่อ</string>
+    <string name="hint_lastname">นามสกุล</string>
+    <string name="hint_email">อีเมล</string>
+    <string name="hint_dob">วัน/เดือน/ปีเกิด</string>
+    <string name="hint_id_card">แนบไฟล์สำเนาบัตรประชาชน</string>
+    <string name="hint_id_card_size_25mb">ขนาดไม่เกิน 25 mb</string>
+    <string name="hint_house_no">เลขที่บ้าน</string>
+    <string name="hint_village">หมู่บ้าน</string>
+    <string name="hint_village_no">หมู่</string>
+    <string name="hint_alley">ซอย</string>
+    <string name="hint_street">ถนน</string>
+    <string name="hint_sub_district">ตำบล/แขวง</string>
+    <string name="hint_district">อำเภอ/เขต</string>
+    <string name="hint_province">จังหวัด</string>
+    <string name="hint_reg_password">Password</string>
+    <string name="hint_reg_confirm_password">Confirm Password</string>
+    <string name="hint_resend_otp">ขอรหัส OTP ใหม่อีกครั้ง</string>
 
     <!--message-->
     <string name="message_maintenance">ปิดปรับปรุงระบบชั่วคราว\nขออภัยในความไม่สะดวก</string>
@@ -27,6 +52,7 @@
     <string name="message_confirm_logout">คุณต้องการออกจากระบบ?</string>
     <string name="message_save_success">บันทึกสำเร็จ</string>
     <string name="message_delete_success">ลบสำเร็จ</string>
+    <string name="message_register_success">คุณสมัครสมาชิกสำเร็จ</string>
 
     <!--button-->
     <string name="button_close">ปิด</string>
@@ -39,6 +65,9 @@
     <string name="button_facebook_login">เข้าใช้งานด้วย Facebook</string>
     <string name="button_line_login">เข้าใช้งานด้วย Line</string>
     <string name="button_app_login">Login</string>
+    <string name="button_register">สมัครสมาชิก</string>
+    <string name="button_start_working">เริ่มต้นใช้งาน</string>
+    <string name="button_confirm_phone_number">ยืนยันเบอร์โทรศัพท์</string>
 
     <!--contentDescription-->
     <string name="cd_bg">background</string>
@@ -60,9 +89,16 @@
     <!--image picker-->
     <string name="menu_camera">Camera</string>
     <string name="menu_gallery">Gallery</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--validate-->
-    <!--<string name="validate_phone_number_invalid">หมายเลขโทรศัพท์ไม่ถูกต้อง</string>-->
+    <string name="validate_phone_and_pass_invalid">กรุณาตรวจสอบ เบอร์โทรศัพท์ และ Password อีกครั้ง</string>
+    <string name="validate_phone_number_invalid">กรุณาตรวจสอบ เบอร์โทรศัพท์</string>
+    <string name="validate_password_invalid">กรุณาตรวจสอบ Password</string>
+    <string name="validate_not_found_phone_forgot_password">กรุณาใส่เบอร์โทรศัพท์ที่ลงทะเบียนไว้</string>
+    <string name="validate_enter_otp_within_60_sec">กรุณาใส่หมายเลข OTP ภายใน 60 วินาที</string>
+    <string name="validate_otp_invalid">รหัส OTP ไม่ถูกต้อง</string>
+
+    <!--checkbox-->
+    <string name="chk_term_and_con">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการใช้บริการ</string>
+    <string name="chk_term_and_con_register">การสร้างบัญชีแสดงว่าคุณยอมรับเงื่อนไขในการใช้บริการ</string>
 </resources>

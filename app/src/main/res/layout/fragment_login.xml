@@ -6,63 +6,55 @@
     <data>
 
     </data>
-    <LinearLayout
-        tools:context=".ui.page.login.LoginFragment"
-        android:paddingVertical="@dimen/margin_28dp"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:paddingHorizontal="@dimen/padding_30dp"
+        android:layout_height="match_parent"
+        tools:context=".ui.page.login.LoginFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <!--<com.startwithn.exchange_android.ui.widget.AppToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:text="@string/title_login"
-            android:textColor="@color/black"
-            android:layout_marginBottom="@dimen/margin_28dp"
-            style="@style/TextViewLarge"
-            app:fontFamily="@font/prompt_semibold"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content"/>
+            android:layout_height="?attr/actionBarSize"
+            app:elevation="@dimen/zero"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.startwithn.exchange_android.ui.widget.ButtonLogin
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_16dp"
-            app:buttonIconSrc="@drawable/icon_apple"
-            app:buttonTitle="@string/button_apple_login"
-            app:buttonBgSrc="@drawable/button_apple"
-            />
-        <com.startwithn.exchange_android.ui.widget.ButtonLogin
-            android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/margin_16dp"
-            android:layout_height="wrap_content"
-            app:buttonIconSrc="@drawable/icon_facebook"
-            app:buttonTitle="@string/button_facebook_login"
-            app:buttonBgSrc="@drawable/button_facebook"/>
-        <com.startwithn.exchange_android.ui.widget.ButtonLogin
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:buttonIconSrc="@drawable/icon_line"
-            android:layout_marginBottom="@dimen/margin_16dp"
-            app:buttonTitle="@string/button_line_login"
-            app:buttonBgSrc="@drawable/button_line"
-            />
-        <com.startwithn.exchange_android.ui.widget.ButtonLogin
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:buttonIconSrc="@drawable/icon_line"
-            android:layout_marginBottom="@dimen/margin_16dp"
-            app:buttonTitle="@string/button_app_login"
-            app:buttonBgSrc="@drawable/button_login"
-            />
+        </com.startwithn.exchange_android.ui.widget.AppToolbar>-->
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:text="@string/title_new_account"
-            android:textColor="@color/color_error_text"
-            style="@style/TextViewRegular"
-            app:fontFamily="@font/prompt_regular"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.65"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.40"
+            >
 
-    </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:padding="@dimen/padding_26dp"
+                >
+
+                <include
+                    android:id="@+id/layout_login_1"
+                    layout="@layout/layout_login_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/layout_login_2"
+                    layout="@layout/layout_login_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

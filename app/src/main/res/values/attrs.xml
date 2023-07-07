@@ -8,5 +8,6 @@
         <attr name="buttonTitle" format="string" />
         <attr name="buttonIconSrc" format="reference" />
         <attr name="buttonBgSrc" format="reference" />
+        <attr name="buttonTextColorRes" format="color" />
     </declare-styleable>
 </resources>

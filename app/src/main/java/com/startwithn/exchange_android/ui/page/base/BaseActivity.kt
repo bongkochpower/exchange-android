@@ -1,5 +1,6 @@
 package com.startwithn.exchange_android.ui.page.base
 
+import android.app.ProgressDialog.show
 import android.content.res.Configuration
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.startwithn.exchange_android.common.enum.AppEventEnum
 import com.startwithn.exchange_android.common.rx.RxBus
 import com.startwithn.exchange_android.common.rx.RxEvent
 import com.startwithn.exchange_android.R
+import com.startwithn.exchange_android.ui.dialog.popup.AlertSuccessDialog
 import com.startwithn.exchange_android.ui.dialog.popup.ProgressDialog
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
@@ -36,6 +38,7 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
     protected val progressDialog: ProgressDialog by lazy { ProgressDialog.newInstance() }
 
     private var alertMessageDialog: AlertMessageDialog? = null
+    private var alertSuccessDialog: AlertSuccessDialog? = null
 
     /*for rx bus listener*/
     private val disposable: CompositeDisposable by lazy { CompositeDisposable() }
@@ -221,6 +224,25 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
         }
     }
 
+    fun showAlertSuccessDialog(
+        title: String? = null,
+        textButtonRight: String? = null,
+        onRightClick: (() -> Unit)? = null
+    ) {
+        alertSuccessDialog?.dismiss()
+        alertSuccessDialog = AlertSuccessDialog.newInstance(
+            title = title,
+            textButtonRight = textButtonRight
+        )
+        alertSuccessDialog?.apply {
+            setOnButtonConfirmClick {
+                onRightClick?.invoke()
+                it.dismiss()
+            }
+            show(supportFragmentManager)
+        }
+    }
+
     fun initFullScreenWithStatusBar(isAddMargin: Boolean = true) {
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
@@ -236,6 +258,7 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
                             Configuration.ORIENTATION_PORTRAIT -> {
                                 layoutParams.bottomMargin = getNavigationBarHeight()
                             }
+
                             else -> {
                                 /*none*/
                             }

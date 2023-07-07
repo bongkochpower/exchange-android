@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:paddingVertical="@dimen/margin_52dp"
+            android:id="@+id/ll_register_form"
+            android:paddingHorizontal="@dimen/padding_26dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:context=".ui.page.login.register.RegisterFragment">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:gravity="center_horizontal"
+                android:text="@string/title_register_form"
+                android:textColor="@color/black"
+                app:fontFamily="@font/prompt_semibold" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_42dp"
+                android:background="@drawable/bg_circle_placeholder">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_4dp"
+                        android:src="@drawable/icon_empty_profile_2" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_empty_profile_1" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:background="@drawable/bg_circle_red"
+                    android:padding="@dimen/padding_8dp"
+                    android:src="@drawable/icon_edit"
+                    tools:ignore="RtlHardcoded" />
+            </FrameLayout>
+
+            <!--data form-->
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_name"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_lastname"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_phone"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_email"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_dob"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_id_card"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    style="@style/AppEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:background="@drawable/bg_edittext_small"
+                    android:hint="@string/hint_house_no"
+                    android:importantForAutofill="no"
+                    tools:ignore="RtlSymmetry" />
+                <EditText
+                    style="@style/AppEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:background="@drawable/bg_edittext_small"
+                    android:hint="@string/hint_village"
+                    android:importantForAutofill="no"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    style="@style/AppEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:background="@drawable/bg_edittext_small"
+                    android:hint="@string/hint_village_no"
+                    android:importantForAutofill="no"
+                    tools:ignore="RtlSymmetry" />
+                <EditText
+                    style="@style/AppEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:background="@drawable/bg_edittext_small"
+                    android:hint="@string/hint_alley"
+                    android:importantForAutofill="no"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_street"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_sub_district"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_district"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_province"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_reg_password"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_reg_confirm_password"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
+
+            <!--term-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line"
+                android:layout_marginVertical="@dimen/margin_24dp"
+                android:background="@color/green_yellow" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/green_yellow"
+                android:text="@string/chk_term_and_con"
+                android:textColor="@color/green_yellow" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/TextViewRegularPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:background="@drawable/bg_confirm"
+                android:text="@string/button_register"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

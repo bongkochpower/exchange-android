@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_login_main"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:text="@string/title_login"
+            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/margin_28dp"
+            style="@style/TextViewLarge"
+            app:fontFamily="@font/prompt_semibold"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content" />
+
+        <com.startwithn.exchange_android.ui.widget.ButtonLogin
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            app:buttonIconSrc="@drawable/icon_apple"
+            app:buttonTitle="@string/button_apple_login"
+            app:buttonTextColorRes="@color/white"
+            app:buttonBgSrc="@drawable/button_apple" />
+
+        <com.startwithn.exchange_android.ui.widget.ButtonLogin
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            android:layout_height="wrap_content"
+            app:buttonTextColorRes="@color/white"
+            app:buttonIconSrc="@drawable/icon_facebook"
+            app:buttonTitle="@string/button_facebook_login"
+            app:buttonBgSrc="@drawable/button_facebook" />
+
+        <com.startwithn.exchange_android.ui.widget.ButtonLogin
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="testShowAlert"
+            app:buttonIconSrc="@drawable/icon_line"
+            app:buttonTextColorRes="@color/white"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            app:buttonTitle="@string/button_line_login"
+            app:buttonBgSrc="@drawable/button_line" />
+
+        <com.startwithn.exchange_android.ui.widget.ButtonLogin
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_login"
+            app:buttonIconSrc="@null"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            app:buttonTitle="@string/button_app_login"
+            app:buttonTextColorRes="@color/colorPrimary"
+            app:buttonBgSrc="@drawable/button_login" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:text="@string/title_new_account"
+            android:onClick="goToRegisterTerm"
+            android:textColor="@color/color_error_text"
+            style="@style/TextViewRegular"
+            app:fontFamily="@font/prompt_regular"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>

@@ -15,36 +15,48 @@
 
         <com.startwithn.exchange_android.ui.widget.AppToolbar
             android:id="@+id/app_bar_layout"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:elevation="@dimen/zero">
+            app:elevation="@dimen/zero"
+            app:layout_constraintTop_toTopOf="parent">
 
         </com.startwithn.exchange_android.ui.widget.AppToolbar>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_content"
+        <!-- <androidx.cardview.widget.CardView
+             android:id="@+id/cv_content"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginHorizontal="@dimen/padding_30dp"
+             app:cardCornerRadius="@dimen/card_radius"
+             app:contentPaddingLeft="@dimen/padding_26dp"
+             app:contentPaddingRight="@dimen/padding_26dp"
+             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
+             app:layout_constraintVertical_bias="0.40"
+             tools:layout_editor_absoluteX="30dp">
+
+             <androidx.fragment.app.FragmentContainerView
+             android:id="@+id/fragment_container_view"
+             android:name="androidx.navigation.fragment.NavHostFragment"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             app:defaultNavHost="true"
+             app:navGraph="@navigation/nav_login" />
+
+         </androidx.cardview.widget.CardView>-->
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/padding_30dp"
-            app:cardCornerRadius="@dimen/card_radius"
-            app:contentPaddingLeft="@dimen/padding_26dp"
-            app:contentPaddingRight="@dimen/padding_26dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
-            app:layout_constraintVertical_bias="0.40"
-            tools:layout_editor_absoluteX="30dp">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container_view"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/nav_login" />
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+            app:navGraph="@navigation/nav_login" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

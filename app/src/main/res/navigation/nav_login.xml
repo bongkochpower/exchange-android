@@ -10,5 +10,31 @@
         android:id="@+id/loginFragment"
         android:name="com.startwithn.exchange_android.ui.page.login.LoginFragment"
         tools:layout="@layout/fragment_login"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_termRegisterFragment"
+            app:destination="@id/termRegisterFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_register"
+        android:id="@+id/registerFragment"
+        android:name="com.startwithn.exchange_android.ui.page.login.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
+        tools:layout="@layout/fragment_term_register"
+        android:id="@+id/termRegisterFragment"
+        android:name="com.startwithn.exchange_android.ui.page.login.register.TermRegisterFragment"
+        android:label="TermRegisterFragment" >
+        <action
+            android:id="@+id/action_termRegisterFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_forgot_password"
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.startwithn.exchange_android.ui.page.login.forgot.verify_phone_number.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" />
 </navigation>

@@ -29,6 +29,7 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
+import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
@@ -584,4 +585,12 @@ fun WebView.loadHtmlView(data : String){
         }
         loadDataWithBaseURL(null, data, "text/html", "UTF-8", null)
     }
+}
+
+
+fun View.show(){
+    this.visibility = View.VISIBLE
+}
+fun View.gone() {
+    this.visibility = View.GONE
 }

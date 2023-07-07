@@ -13,6 +13,9 @@ import com.startwithn.exchange_android.databinding.ActivityLoginBinding
 import com.startwithn.exchange_android.ext.getCurrentFragment
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import com.startwithn.exchange_android.ui.page.base.OnBackPressedFragment
+import com.startwithn.exchange_android.ui.page.login.forgot.verify_phone_number.ForgotPasswordFragment
+import com.startwithn.exchange_android.ui.page.login.register.RegisterFragment
+import com.startwithn.exchange_android.ui.page.login.register.TermRegisterFragment
 import com.startwithn.exchange_android.ui.page.main.activity.MainActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -40,10 +43,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         supportFragmentManager.getCurrentFragment(R.id.fragment_container_view)
 
     fun goToRegister(v: View) {
-        //RegisterFragment.navigate(getCurrentFragment())
+        RegisterFragment.navigate(getCurrentFragment())
+    }
+
+    fun goToLogin(v : View){
+        onBackPressed()
+    }
+
+    fun goToRegisterTerm(v : View){
+        TermRegisterFragment.navigate(getCurrentFragment())
     }
 
     fun goToForgotPassword(v: View) {
-        //ForgotPasswordFragment.navigate(getCurrentFragment())
+        ForgotPasswordFragment.navigate(getCurrentFragment())
+    }
+
+    fun testShowAlert(v :View){
+        showAlertSuccessDialog {  }
     }
 }

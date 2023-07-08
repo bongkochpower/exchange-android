@@ -8,68 +8,71 @@
 
     <LinearLayout
         android:id="@+id/ll_login_main"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextViewLarge"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_28dp"
+            android:gravity="center_horizontal"
             android:text="@string/title_login"
             android:textColor="@color/black"
-            android:layout_marginBottom="@dimen/margin_28dp"
-            style="@style/TextViewLarge"
-            app:fontFamily="@font/prompt_semibold"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content" />
+            app:fontFamily="@font/prompt_semibold" />
 
         <com.startwithn.exchange_android.ui.widget.ButtonLogin
+            android:id="@+id/btn_login_apple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_16dp"
+            app:buttonBgSrc="@drawable/button_apple"
             app:buttonIconSrc="@drawable/icon_apple"
-            app:buttonTitle="@string/button_apple_login"
             app:buttonTextColorRes="@color/white"
-            app:buttonBgSrc="@drawable/button_apple" />
+            app:buttonTitle="@string/button_apple_login" />
 
         <com.startwithn.exchange_android.ui.widget.ButtonLogin
+            android:id="@+id/btn_login_facebook"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_16dp"
-            android:layout_height="wrap_content"
-            app:buttonTextColorRes="@color/white"
+            app:buttonBgSrc="@drawable/button_facebook"
             app:buttonIconSrc="@drawable/icon_facebook"
-            app:buttonTitle="@string/button_facebook_login"
-            app:buttonBgSrc="@drawable/button_facebook" />
+            app:buttonTextColorRes="@color/white"
+            app:buttonTitle="@string/button_facebook_login" />
 
         <com.startwithn.exchange_android.ui.widget.ButtonLogin
+            android:id="@+id/btn_login_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="testShowAlert"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            app:buttonBgSrc="@drawable/button_line"
             app:buttonIconSrc="@drawable/icon_line"
             app:buttonTextColorRes="@color/white"
-            android:layout_marginBottom="@dimen/margin_16dp"
-            app:buttonTitle="@string/button_line_login"
-            app:buttonBgSrc="@drawable/button_line" />
+            app:buttonTitle="@string/button_line_login" />
 
         <com.startwithn.exchange_android.ui.widget.ButtonLogin
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_login"
-            app:buttonIconSrc="@null"
             android:layout_marginBottom="@dimen/margin_16dp"
-            app:buttonTitle="@string/button_app_login"
+            app:buttonBgSrc="@drawable/button_login"
+            app:buttonIconSrc="@null"
             app:buttonTextColorRes="@color/colorPrimary"
-            app:buttonBgSrc="@drawable/button_login" />
+            app:buttonTitle="@string/button_app_login" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:text="@string/title_new_account"
-            android:onClick="goToRegisterTerm"
-            android:textColor="@color/color_error_text"
+            android:id="@+id/tv_register"
             style="@style/TextViewRegular"
-            app:fontFamily="@font/prompt_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_height="wrap_content" />
+            android:onClick="goToRegisterTerm"
+            android:text="@string/title_new_account"
+            android:textColor="@color/color_error_text"
+            app:fontFamily="@font/prompt_regular" />
 
     </LinearLayout>
 </layout>

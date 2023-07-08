@@ -1,4 +1,4 @@
-package com.startwithn.exchange_android.model
+package com.startwithn.exchange_android.model.response
 
 import com.google.gson.annotations.SerializedName
 

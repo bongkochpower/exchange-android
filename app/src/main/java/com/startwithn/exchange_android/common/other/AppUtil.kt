@@ -1,4 +1,4 @@
-package com.startwithn.exchange_android.common
+package com.startwithn.exchange_android.common.other
 
 import android.content.Context
 import android.graphics.Bitmap

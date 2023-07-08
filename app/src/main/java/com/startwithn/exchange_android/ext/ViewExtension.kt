@@ -146,6 +146,16 @@ fun View.fadeIn() {
     }
 //    startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in))
 }
+fun View.fadeOut() {
+    alpha = 1f
+    animate().apply {
+        interpolator = LinearInterpolator()
+        duration = resources.getInteger(android.R.integer.config_longAnimTime).toLong()
+        alpha(0.5f)
+        startDelay = 400
+        start()
+    }
+}
 
 fun View.slideUp() {
     startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_up))

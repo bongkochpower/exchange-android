@@ -7,6 +7,7 @@
     <string name="fcm_channel_desc">$app_name</string>
 
     <!--title-->
+    <string name="title_code">Code</string>
     <string name="title_login">เข้าสู่ระบบ</string>
     <string name="title_login_en">LOGIN</string>
     <string name="title_new_account">สร้างบัญชีใหม่</string>

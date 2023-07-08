@@ -3,19 +3,17 @@ package com.startwithn.exchange_android.di
 import android.content.Context
 import com.startwithn.exchange_android.BuildConfig
 import com.startwithn.exchange_android.network.builder.RetrofitBuilder
+import com.startwithn.exchange_android.repository.remote.UserRemoteRepository
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 var factoryModule = module {
 
     /*api*/
-    factory { provideRetrofitBuilder(get()).getAppAPI() }
+    factory { RetrofitBuilder(get()).api() }
 
-//    /*repository*/
-//    /*local*/
-
+    /*repository*/
     /*remote*/
-    //factory { AuthorizationRemoteRepository(get(), get()) }
+    factory { UserRemoteRepository(androidContext(), get()) }
 
 }
-
-fun provideRetrofitBuilder(context: Context):RetrofitBuilder= RetrofitBuilder(context, BuildConfig.BASE_URL,BuildConfig.APPLICATION_ID,BuildConfig.VERSION_NAME)

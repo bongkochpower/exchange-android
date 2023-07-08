@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="isLoginFail"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,11 +35,13 @@
 
             <LinearLayout
 
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextViewRegular"
+                    android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -44,6 +51,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextViewExtraMini"
+                    android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -56,9 +64,10 @@
                 android:id="@+id/edt_phone_number"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
+                android:maxLength="@integer/length_phone_number"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_28dp"
-                android:background="@drawable/bg_edittext_login"
+                android:background="@{isLoginFail ? @drawable/bg_edittext_login_error : @drawable/bg_edittext_login , default = @drawable/bg_edittext_login}"
                 android:hint="@string/hint_phone"
                 android:importantForAutofill="no"
                 android:inputType="phone"
@@ -68,6 +77,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewExtraMini"
                 android:layout_width="250dp"
+                android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:paddingStart="@dimen/padding_16dp"
@@ -81,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16dp"
-                android:background="@drawable/bg_edittext_login"
+                android:background="@{isLoginFail ? @drawable/bg_edittext_login_error : @drawable/bg_edittext_login , default = @drawable/bg_edittext_login}"
                 android:hint="@string/hint_password"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
@@ -93,6 +103,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
+                android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                 android:paddingStart="@dimen/padding_16dp"
                 android:text="@string/validate_password_invalid"
                 android:textColor="@color/color_error_text"
@@ -104,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16dp"
-                android:background="@drawable/bg_confirm"
+                android:background="@{isLoginFail ? @drawable/bg_confirm_disable : @drawable/bg_confirm , default=@drawable/bg_confirm}"
                 android:text="@string/button_app_login"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
@@ -121,6 +132,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="goToForgotPassword"
                     android:text="@string/title_forgot_password"
+                    android:id="@+id/tv_forgot_password"
                     android:textColor="@color/color_error_text"
                     app:fontFamily="@font/prompt_regular"
                     app:layout_constraintStart_toStartOf="parent"

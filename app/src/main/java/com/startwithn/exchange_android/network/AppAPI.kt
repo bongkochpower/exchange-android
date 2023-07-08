@@ -1,15 +1,25 @@
 package com.startwithn.exchange_android.network
 
 import com.startwithn.exchange_android.common.constant.AppConstant
-import com.startwithn.exchange_android.model.MessageModel
-import okhttp3.MultipartBody
-import okhttp3.ResponseBody
+import com.startwithn.exchange_android.model.base.BaseResponseModel
+import com.startwithn.exchange_android.model.response.UserModel
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Header
+import retrofit2.http.POST
 
 interface AppAPI {
 
     //region authorization
+    @FormUrlEncoded
+    @POST("api/v1/customer/login")
+    suspend fun login(
+        @Field("mobile") phoneNumber: String?,
+        @Field("password") password: String?,
+    ): Response<BaseResponseModel<UserModel>>
+
+    //endregion
     /*@FormUrlEncoded
     @POST("api/v1/send-otp")
     suspend fun sendOtp(
@@ -51,17 +61,7 @@ interface AppAPI {
         @Header("client-id") clientId: String = AppConstant.CLIENT_ID
     ): Response<DataTokenModel<UserModel>>
 
-    @FormUrlEncoded
-    @POST("api/v1/login")
-    suspend fun login(
-        @Field("phone_number") phoneNumber: String?,
-        @Field("password") password: String?,
-        @Field("fcm_token") fcmToken: String?,
-        @Field("email") email: String?,
-        @Header("client-secret") clientSecret: String = AppConstant.CLIENT_SECRET,
-        @Header("client-id") clientId: String = AppConstant.CLIENT_ID
-    ): Response<DataTokenModel<UserModel>>
-    //endregion
+
 
     //region product
     @GET("api/v1/banners")

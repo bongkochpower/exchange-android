@@ -9,7 +9,7 @@ import com.startwithn.exchange_android.common.enum.AppEventEnum
 import com.startwithn.exchange_android.common.rx.RxBus
 import com.startwithn.exchange_android.common.rx.RxEvent
 import com.startwithn.exchange_android.R
-import com.startwithn.exchange_android.model.MessageModel
+import com.startwithn.exchange_android.model.response.MessageModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -19,8 +19,8 @@ import java.io.IOException
 
 open class BaseRemoteRepository(private val context: Context) {
     suspend fun <T : Any> safeApiCall(
-        call: suspend () -> Response<T>,
-        dispatcher: CoroutineDispatcher = Dispatchers.IO
+        dispatcher: CoroutineDispatcher = Dispatchers.IO,
+        call: suspend () -> Response<T>
     ): ResultWrapper<T> {
         return withContext(dispatcher) {
             try {

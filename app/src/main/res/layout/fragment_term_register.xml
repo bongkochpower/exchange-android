@@ -51,7 +51,8 @@
                         android:gravity="center_horizontal"
                         android:textColor="@color/text_back"
                         app:fontFamily="@font/prompt_regular"
-                        tools:text="@tools:sample/lorem/random" />
+                        android:text="@string/message_dummy_term"
+                         />
                 </androidx.core.widget.NestedScrollView>
 
                 <LinearLayout
@@ -67,6 +68,7 @@
                     <com.google.android.material.checkbox.MaterialCheckBox
                         style="@style/TextViewSmall"
                         android:layout_width="match_parent"
+                        android:id="@+id/chk_term"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/green_yellow"
                         android:gravity="top"
@@ -81,7 +83,7 @@
                         android:layout_marginTop="@dimen/margin_24dp"
                         android:background="@drawable/bg_confirm"
                         android:text="@string/button_register"
-                        android:onClick="goToRegister"
+                        android:id="@+id/btn_register"
                         android:textAllCaps="false"
                         android:textColor="@color/white" />
                 </LinearLayout>

@@ -106,7 +106,7 @@
     <!--Edittext-->
     <style name="AppEditText" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/prompt_regular</item>
-        <item name="android:textSize">@dimen/text_size_default_ss</item>
+        <item name="android:textSize">@dimen/text_size_default_sss</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">textPersonName</item>

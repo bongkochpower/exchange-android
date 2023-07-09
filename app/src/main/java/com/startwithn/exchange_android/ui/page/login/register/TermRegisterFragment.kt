@@ -2,15 +2,15 @@ package com.startwithn.exchange_android.ui.page.login.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.startwithn.exchange_android.R
-import com.startwithn.exchange_android.databinding.FragmentRegisterBinding
+import com.startwithn.exchange_android.common.alert.AppAlert
 import com.startwithn.exchange_android.databinding.FragmentTermRegisterBinding
+import com.startwithn.exchange_android.ext.setOnTouchAnimation
 import com.startwithn.exchange_android.ui.page.base.BaseFragment
 import com.startwithn.exchange_android.ui.page.login.LoginFragmentDirections
+import com.startwithn.exchange_android.ui.page.login.register.register.RegisterFragment
 
 class TermRegisterFragment : BaseFragment<FragmentTermRegisterBinding>(R.layout.fragment_term_register) {
     companion object {
@@ -30,10 +30,29 @@ class TermRegisterFragment : BaseFragment<FragmentTermRegisterBinding>(R.layout.
 
     }
 
+    override fun listener() {
+        with(binding){
+            btnRegister.apply {
+                setOnTouchAnimation()
+                setOnClickListener {
+                    if(isValidateTerm()){
+                        RegisterFragment.navigate(this@TermRegisterFragment)
+                    }else{
+                        AppAlert.alert(requireContext(),"กรุณายอมรับ term & con").show(childFragmentManager)
+                    }
+                }
+            }
+        }
+    }
+
+
     private fun fadeIn() {
         with(binding) {
             //llLogin.slideUp()
         }
+    }
+    private fun isValidateTerm() : Boolean{
+        return binding.chkTerm.isChecked
     }
 
 }

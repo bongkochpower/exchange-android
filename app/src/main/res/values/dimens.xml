@@ -13,6 +13,7 @@
     <dimen name="edit_text_height">56dp</dimen>
     <dimen name="edit_text_small_height">48dp</dimen>
     <dimen name="edit_text_large_height">100dp</dimen>
+    <dimen name="edit_text_reg_size">300dp</dimen>
 
     <!--Text-->
     <dimen name="text_size_default_xxxl">44sp</dimen>
@@ -83,4 +84,6 @@
     <!--Image Size-->
     <dimen name="image_banner">200dp</dimen>
     <dimen name="card_radius">8dp</dimen>
+    <dimen name="image_profile_size">100dp</dimen>
+
 </resources>

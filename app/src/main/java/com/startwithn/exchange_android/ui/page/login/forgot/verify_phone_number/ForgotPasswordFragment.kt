@@ -27,6 +27,10 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>(R.lay
 
     }
 
+    override fun listener() {
+
+    }
+
     private fun fadeIn() {
         with(binding) {
             //llLogin.slideUp()

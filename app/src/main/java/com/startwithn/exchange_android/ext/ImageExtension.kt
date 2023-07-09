@@ -15,8 +15,11 @@ import android.view.PixelCopy
 import android.view.View
 import android.view.Window
 import android.webkit.MimeTypeMap
+import android.widget.ImageView
 import androidx.core.content.FileProvider
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -209,4 +212,48 @@ fun String?.getMimeType(): MediaType? {
         }
     }
     return type?.toMediaTypeOrNull()
+}
+
+/*image view*/
+fun ImageView.loadImage(resId: Int?) {
+    try {
+        Glide.with(context).load(resId).into(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+fun ImageView.loadImage(uri: Uri?) {
+    try {
+        Glide.with(context).load(uri).into(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+@BindingAdapter(value = ["setImageUrl"])
+fun ImageView.loadImage(url: String?) {
+    try {
+        Glide.with(context).load(url).into(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+fun ImageView.loadImageCircle(uri: Uri?) {
+    try {
+        Glide.with(context).load(uri).apply(RequestOptions().circleCrop()).into(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+@BindingAdapter(value = ["setImageCircleUrl"])
+fun ImageView.loadImageCircle(url: String?) {
+    try {
+        Glide.with(context).load(url).apply(RequestOptions().circleCrop())
+            .error(R.drawable.bg_circle_placeholder).into(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 }

@@ -5,42 +5,71 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="fragment"
+            type="com.startwithn.exchange_android.ui.page.login.register.register.RegisterFragment" />
+
+        <variable
+            name="isPhoneEmpty"
+            type="Boolean" />
+        <variable
+            name="isConfirmPwNotMatch"
+            type="Boolean" />
     </data>
 
     <androidx.core.widget.NestedScrollView
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/nsv"
+        android:background="@color/white"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
-            android:paddingVertical="@dimen/margin_52dp"
             android:id="@+id/ll_register_form"
-            android:paddingHorizontal="@dimen/padding_26dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            tools:context=".ui.page.login.register.RegisterFragment">
+            android:paddingHorizontal="@dimen/padding_26dp"
+            android:paddingVertical="@dimen/margin_52dp"
+            tools:context=".ui.page.login.register.register.RegisterFragment">
 
+            <!--image profile-->
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_16dp"
                 android:gravity="center_horizontal"
                 android:text="@string/title_register_form"
                 android:textColor="@color/black"
                 app:fontFamily="@font/prompt_semibold" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/validate_reg_title"
+                android:textColor="@color/color_error_text"
+                app:fontFamily="@font/prompt_regular" />
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_42dp"
-                android:background="@drawable/bg_circle_placeholder">
+                android:layout_marginTop="@dimen/margin_16dp"
+                tools:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="@dimen/image_profile_size"
+                    android:layout_height="@dimen/image_profile_size"
+                    android:src="@drawable/bg_circle_placeholder" />
 
                 <LinearLayout
+                    android:id="@+id/ll_profile_dummy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -60,6 +89,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/img_select_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
@@ -70,79 +100,169 @@
             </FrameLayout>
 
             <!--data form-->
-            <EditText
-                style="@style/AppEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_name"
                 android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_name"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:edtTitle="@string/hint_name" />
 
-            <EditText
-                style="@style/AppEditText"
-                android:layout_width="wrap_content"
+            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_lastname"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_lastname"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                app:edtTitle="@string/hint_lastname" />
 
+            <!--password-->
             <EditText
+                android:maxLength="@integer/length_phone_number"
+                android:id="@+id/edt_reg_phone"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
+                android:background="@{isPhoneEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
                 android:hint="@string/hint_phone"
                 android:importantForAutofill="no"
+                android:inputType="phone"
+                android:textColorHint="@{isPhoneEmpty ? @color/color_error_text : @color/text_edittext_gray}"
                 tools:ignore="RtlSymmetry" />
 
-            <EditText
-                style="@style/AppEditText"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewExtraMini"
+                android:layout_width="300dp"
+                android:id="@+id/tv_error_phone"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_email"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                android:layout_marginVertical="@dimen/margin_2dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:gravity="start"
+                android:text="@string/validate_reg_phone_10_digit"
+                android:textColor="@color/color_error_text"
+                android:visibility="@{isPhoneEmpty ? View.VISIBLE : View.INVISIBLE , default= visible}"
+                app:fontFamily="@font/prompt_regular" />
 
-            <EditText
-                style="@style/AppEditText"
-                android:layout_width="wrap_content"
+            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_email"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_dob"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                app:edtTitle="@string/hint_email" />
 
-            <EditText
+            <!--dob-->
+            <RelativeLayout
+                android:layout_width="@dimen/edit_text_reg_size"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_reg_dob"
+                    style="@style/AppEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edittext"
+                    android:enabled="false"
+                    android:hint="@string/hint_dob"
+                    android:importantForAutofill="no"
+                    tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:background="@drawable/bg_circle_green"
+                    android:padding="@dimen/padding_10dp"
+                    android:src="@drawable/icon_select_date" />
+            </RelativeLayout>
+
+            <!--id card-->
+            <RelativeLayout
                 style="@style/AppEditText"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/edit_text_reg_size"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_24dp"
                 android:background="@drawable/bg_edittext"
                 android:hint="@string/hint_id_card"
                 android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                android:paddingHorizontal="@dimen/padding_8dp"
+                tools:ignore="RtlSymmetry">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewMini"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@string/hint_id_card"
+                        android:textColor="@color/text_edittext_gray"
+                        app:fontFamily="@font/prompt_regular" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewExtraMini"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_id_card_size_25mb"
+                        android:textColor="@color/gray_nevada"
+                        app:fontFamily="@font/prompt_regular" />
+                </LinearLayout>
+
+                <!--upload file event-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewMini"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@string/hint_attach_file"
+                        android:textColor="@color/text_edittext_gray"
+                        app:fontFamily="@font/prompt_regular" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewExtraMini"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/icon_attach_success"
+                        android:drawablePadding="@dimen/margin_8dp"
+                        android:text="@string/validate_reg_attach_file_success"
+                        android:textColor="@color/gray_nevada"
+                        app:fontFamily="@font/prompt_regular" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/bg_circle_green"
+                    android:padding="@dimen/padding_10dp"
+                    android:src="@drawable/icon_attachfile" />
+
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <EditText
-                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:id="@+id/edt_reg_house_no"
                     style="@style/AppEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_24dp"
+                    android:layout_marginEnd="@dimen/margin_8dp"
                     android:background="@drawable/bg_edittext_small"
                     android:hint="@string/hint_house_no"
                     android:importantForAutofill="no"
                     tools:ignore="RtlSymmetry" />
+
                 <EditText
+                    android:id="@+id/edt_reg_village"
                     style="@style/AppEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -156,17 +276,21 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <EditText
-                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:id="@+id/edt_reg_village_no"
                     style="@style/AppEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_24dp"
+                    android:layout_marginEnd="@dimen/margin_8dp"
                     android:background="@drawable/bg_edittext_small"
                     android:hint="@string/hint_village_no"
                     android:importantForAutofill="no"
                     tools:ignore="RtlSymmetry" />
+
                 <EditText
+                    android:id="@+id/edt_reg_alley"
                     style="@style/AppEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -177,65 +301,82 @@
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
 
-            <EditText
-                style="@style/AppEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <!--road-->
+            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_street"
+                android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_street"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                android:layout_height="wrap_content"
+                app:edtTitle="@string/hint_street" />
 
-            <EditText
-                style="@style/AppEditText"
-                android:layout_width="wrap_content"
+            <!--sub district-->
+            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_sub_district"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_sub_district"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                app:edtTitle="@string/hint_sub_district" />
 
-            <EditText
-                style="@style/AppEditText"
-                android:layout_width="wrap_content"
+            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_district"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_district"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                app:edtTitle="@string/hint_district" />
 
-            <EditText
-                style="@style/AppEditText"
-                android:layout_width="wrap_content"
+            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_province"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_province"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                app:edtTitle="@string/hint_province" />
 
+            <!--pw-->
             <EditText
+                android:id="@+id/edt_reg_password"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
+                android:background="@{isConfirmPwNotMatch ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
                 android:hint="@string/hint_reg_password"
                 android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:textColorHint="@{isConfirmPwNotMatch ? @color/color_error_text : @color/text_edittext_gray}"
                 tools:ignore="RtlSymmetry" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewExtraMini"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_2dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:gravity="start"
+                android:text="@string/validate_reg_confirm_password"
+                android:textColor="@color/color_error_text"
+                android:visibility="@{isConfirmPwNotMatch ? View.VISIBLE : View.INVISIBLE , default= invisible}"
+                app:fontFamily="@font/prompt_regular" />
+
+            <!--confirm pw-->
             <EditText
+                android:id="@+id/edt_reg_confirm_password"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
+                android:background="@{isConfirmPwNotMatch ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
                 android:hint="@string/hint_reg_confirm_password"
                 android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:textColorHint="@{isConfirmPwNotMatch ? @color/color_error_text : @color/text_edittext_gray}"
                 tools:ignore="RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewExtraMini"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_4dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:gravity="start"
+                android:text="@string/validate_reg_confirm_password"
+                android:textColor="@color/color_error_text"
+                android:visibility="@{isConfirmPwNotMatch ? View.VISIBLE : View.GONE , default= gone}"
+                app:fontFamily="@font/prompt_regular" />
 
             <!--term-->
             <View
@@ -245,12 +386,16 @@
                 android:background="@color/green_yellow" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/chk_reg_term"
                 style="@style/TextViewSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/green_yellow"
+                android:button="@drawable/selector_chk_term"
+                android:checked="false"
+                android:padding="10dp"
                 android:text="@string/chk_term_and_con"
-                android:textColor="@color/green_yellow" />
+                android:textColor="@color/green_yellow"
+                app:useMaterialThemeColors="false" />
 
             <androidx.appcompat.widget.AppCompatButton
                 style="@style/TextViewRegularPlus"
@@ -259,6 +404,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_30dp"
                 android:background="@drawable/bg_confirm"
+                android:onClick="@{(view) -> fragment.onRegister(view)}"
                 android:text="@string/button_register"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="isErrorValidate"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edt_register"
+            style="@style/AppEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{isErrorValidate ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+            android:textColorHint="@{isErrorValidate ? @color/color_error_text : @color/text_edittext_gray , default = @color/text_edittext_gray }"
+            android:hint="@string/hint_name"
+            android:importantForAutofill="no"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:visibility="@{isErrorValidate ? View.VISIBLE : View.INVISIBLE}"
+            style="@style/TextViewExtraMini"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_2dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:gravity="start"
+            android:text="@string/validate_reg_name"
+            android:textColor="@color/color_error_text"
+            app:fontFamily="@font/prompt_regular" />
+    </LinearLayout>
+</layout>

@@ -43,6 +43,7 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layout: 
 
 
         setUp()
+        listener()
 
         subscribe()
 
@@ -52,6 +53,7 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layout: 
     open fun getExtra(bundle: Bundle){}
 
     abstract fun setUp()
+    abstract fun listener()
 
     open fun subscribe() {}
 

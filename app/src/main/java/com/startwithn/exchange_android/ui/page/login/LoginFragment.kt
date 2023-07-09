@@ -51,7 +51,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         listener()
     }
 
-    private fun listener() {
+    override fun listener() {
         with(binding) {
             layoutLogin1.apply {
                 btnLoginApple.apply {
@@ -134,11 +134,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
 
                 is ResultWrapper.GenericError -> {
-                    AppAlert.alert(requireContext(), it.message)
+                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
                 }
 
                 is ResultWrapper.NetworkError -> {
-                    AppAlert.alert(requireContext(), it.message)
+                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
                 }
 
                 else -> {

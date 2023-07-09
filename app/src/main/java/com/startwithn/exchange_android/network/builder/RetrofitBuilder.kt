@@ -6,6 +6,7 @@ import com.startwithn.exchange_android.network.interceptor.AuthorizationIntercep
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.startwithn.exchange_android.BuildConfig
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,6 +18,7 @@ class RetrofitBuilder(
 
     companion object {
         private const val TIME_OUT: Long = 60L
+        val MEDIA_TYPE_FILE = "multipart/form-result".toMediaTypeOrNull()
     }
 
     fun api(): AppAPI {

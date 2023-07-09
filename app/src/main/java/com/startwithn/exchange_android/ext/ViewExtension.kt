@@ -256,39 +256,6 @@ fun TextView.removeMaxLines() {
     maxLines = Integer.MAX_VALUE
 }
 
-/*image view*/
-fun ImageView.loadImage(resId: Int?) {
-    try {
-        Glide.with(context).load(resId).into(this)
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-}
-
-fun ImageView.loadImage(uri: Uri?) {
-    try {
-        Glide.with(context).load(uri).into(this)
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-}
-
-@BindingAdapter(value = ["setImageUrl"])
-fun ImageView.loadImage(url: String?) {
-    try {
-        Glide.with(context).load(url).into(this)
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-}
-
-fun ImageView.loadImageCircle(uri: Uri?) {
-    try {
-        Glide.with(context).load(uri).apply(RequestOptions().circleCrop()).into(this)
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-}
 
 /*edit text*/
 fun isActionDone(actionId: Int): Boolean =

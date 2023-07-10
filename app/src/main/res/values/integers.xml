@@ -8,6 +8,7 @@
     <integer name="length_card_cvv">3</integer>
     <integer name="length_card_expired">5</integer>
     <integer name="length_card_number">16</integer>
+    <integer name="length_edt_small">17</integer>
 
     <!--max line-->
     <integer name="max_line_desc">2</integer>

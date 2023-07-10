@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.startwithn.exchange_android.common.other.SingleLiveEvent
 import com.startwithn.exchange_android.model.base.BaseResponseModel
 import com.startwithn.exchange_android.model.body.RegisterRequestModel
+import com.startwithn.exchange_android.model.response.RegisterResponseModel
 import com.startwithn.exchange_android.model.response.UploadResponseModel
 import com.startwithn.exchange_android.model.response.UserModel
 import com.startwithn.exchange_android.network.ResultWrapper
@@ -21,9 +22,13 @@ class RegisterViewModel(private val userRemoteRepository: UserRemoteRepository, 
     /*var selectedLocation: Location?
         get() = state["selected_location"]
         set(value) = state.set("selected_location", value)*/
+    var selectedIdCardImage : String?
+        get() = state["selected_id_card"]
+        set(value) = state.set("selected_id_card",value)
 
-    private val registerLiveData = SingleLiveEvent<ResultWrapper<RegisterRequestModel>>()
+    private val registerLiveData = SingleLiveEvent<ResultWrapper<RegisterResponseModel>>()
     private val uploadProfile: MutableLiveData<ResultWrapper<UploadResponseModel>> = MutableLiveData()
+    val uploadIdCardImage: SingleLiveEvent<ResultWrapper<UploadResponseModel>> = SingleLiveEvent()
 
     fun register(request: RegisterRequestModel) {
         viewModelScope.launch {
@@ -37,9 +42,15 @@ class RegisterViewModel(private val userRemoteRepository: UserRemoteRepository, 
         uploadProfile.value = ResultWrapper.Loading
         viewModelScope.launch {
             uploadProfile.value = userRemoteRepository.uploadAvatar(avatar)
-            //uploadProfile.postValue(null)
         }
     }
     fun updateProfileResult() = uploadProfile
+
+    fun uploadIdCardImage(image : MultipartBody.Part){
+        uploadProfile.value = ResultWrapper.Loading
+        viewModelScope.launch {
+            uploadIdCardImage.value = userRemoteRepository.uploadAvatar(image)
+        }
+    }
 
 }

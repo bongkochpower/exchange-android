@@ -7,6 +7,7 @@ import com.startwithn.exchange_android.common.other.SingleLiveEvent
 import com.startwithn.exchange_android.model.base.BaseResponseModel
 import com.startwithn.exchange_android.model.body.LoginRequestModel
 import com.startwithn.exchange_android.model.body.RegisterRequestModel
+import com.startwithn.exchange_android.model.response.AccessTokenModel
 import com.startwithn.exchange_android.model.response.UserModel
 import com.startwithn.exchange_android.network.ResultWrapper
 import com.startwithn.exchange_android.repository.remote.UserRemoteRepository
@@ -17,22 +18,18 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
                      private val appManager: AppManager
 ) : ViewModel() {
 
-    val loginLiveData = SingleLiveEvent<ResultWrapper<BaseResponseModel<UserModel>>>()
-    /*
-
-
-
-    val customerIdFromRegisterLiveData = SingleLiveEvent<String>()
-
-    fun setCustomerId(customerId:String?){
-        customerIdFromRegisterLiveData.value =customerId
-    }*/
+    val loginLiveData = SingleLiveEvent<ResultWrapper<BaseResponseModel<AccessTokenModel>>>()
 
     fun login(request: LoginRequestModel) {
         viewModelScope.launch {
             loginLiveData.value = ResultWrapper.Loading
-            loginLiveData.value = userRemoteRepository.login(request)
+            val result = userRemoteRepository.login(request)
+            if(result is ResultWrapper.Success){
+                result.response.data?.let { token ->
+                    appManager.setAuthToken(token.accessToken)
+                }
+            }
+            loginLiveData.value = result
         }
     }
-
 }

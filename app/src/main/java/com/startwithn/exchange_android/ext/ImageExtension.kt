@@ -66,6 +66,18 @@ fun Activity.getPhotoFromGallery(completionHandler: ((resultCode: Int, data: Int
         .start(completionHandler)
 }
 
+fun Activity.getFile(completionHandler: ((resultCode: Int, data: Intent?) -> Unit)? = null) {
+    ImagePicker.with(this)
+        .galleryOnly()
+        .galleryMimeTypes(  //Exclude gif images
+            mimeTypes = arrayOf(
+                "application/pdf"
+            )
+        )
+        .compress(IMAGE_COMPRESS_MAX_SIZE)
+        .start(completionHandler)
+}
+
 private fun Context.getOutputDirectory(): File {
     val mediaDir = externalMediaDirs.firstOrNull()?.let {
         File(it, resources.getString(R.string.app_name)).apply { mkdirs() }

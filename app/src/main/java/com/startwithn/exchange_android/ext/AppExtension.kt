@@ -191,17 +191,6 @@ fun String.toHtmlWebViewFormat() : String{
     return "$text$this$pas"
 }
 
-fun String?.reDateFormat(sourceFormat: String, destinationFormat: String): String? {
-    val sdfSource = SimpleDateFormat(sourceFormat, Locale.US)
-    val sdfDestination = SimpleDateFormat(destinationFormat, Locale.US)
-    return try {
-        sdfDestination.format(sdfSource.parse(this!!)!!)
-    } catch (e: Exception) {
-        e.printStackTrace()
-        this
-    }
-}
-
 fun String.toSHA256(): String? {
     val md = MessageDigest.getInstance("SHA-256")
     md.update(this.toByteArray())

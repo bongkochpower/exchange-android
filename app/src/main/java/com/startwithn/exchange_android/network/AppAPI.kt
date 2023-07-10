@@ -3,6 +3,8 @@ package com.startwithn.exchange_android.network
 import com.startwithn.exchange_android.common.constant.AppConstant
 import com.startwithn.exchange_android.model.base.BaseResponseModel
 import com.startwithn.exchange_android.model.body.RegisterRequestModel
+import com.startwithn.exchange_android.model.response.AccessTokenModel
+import com.startwithn.exchange_android.model.response.RegisterResponseModel
 import com.startwithn.exchange_android.model.response.UploadResponseModel
 import com.startwithn.exchange_android.model.response.UserModel
 import okhttp3.MultipartBody
@@ -23,10 +25,10 @@ interface AppAPI {
     suspend fun login(
         @Field("mobile") phoneNumber: String?,
         @Field("password") password: String?,
-    ): Response<BaseResponseModel<UserModel>>
+    ): Response<BaseResponseModel<AccessTokenModel>>
 
     @POST("api/v1/customer")
-    suspend fun register(@Body request: RegisterRequestModel): Response<RegisterRequestModel>
+    suspend fun register(@Body request: RegisterRequestModel): Response<RegisterResponseModel>
 
 
     @Multipart

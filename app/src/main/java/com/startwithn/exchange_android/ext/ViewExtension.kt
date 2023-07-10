@@ -240,11 +240,6 @@ fun Any.addTextUnderlines(vararg textViews: TextView) {
     }
 }
 
-@BindingAdapter(value = ["setUIDate"])
-fun TextView.setUIDate(value: String?) {
-    text = value.reDateFormat(AppConstant.FORMAT_SERVICE_DATE, AppConstant.FORMAT_UI_DATE)
-}
-
 fun TextView.isEllipsize(): Boolean {
     val layout: Layout = layout
     val lines: Int = layout.lineCount
@@ -305,34 +300,6 @@ inline fun RecyclerView.setOnLoadMoreListener(crossinline isLoading: (() -> Bool
         }
     })
 }
-
-//fun RecyclerView.hideSkeleton() {
-//    if (this.tag is RecyclerViewSkeletonScreen) {
-//        val sk = this.tag as RecyclerViewSkeletonScreen
-//        sk.hide()
-//        this.tag = null
-//    }
-//}
-//
-//fun RecyclerView.showSkeleton(@LayoutRes layoutResId: Int, itemCount: Int): SkeletonScreen {
-//    val sk = Skeleton.bind(this)
-//        .load(layoutResId)
-//        .adapter(this.adapter)
-//        .count(itemCount)
-//        .frozen(false)
-//        .color(R.color.color_sk)
-//        .show()
-//    this.tag = sk
-//    return sk
-//}
-//
-//fun RecyclerView.isShowSkeleton(): Boolean {
-//    var isShow = false
-//    if (this.tag is RecyclerViewSkeletonScreen) {
-//        isShow = true
-//    }
-//    return isShow
-//}
 
 fun RecyclerView.setItemPadding(spacing: Float, displayMode: Int = -1) {
     if (itemDecorationCount == 0) {
@@ -412,33 +379,6 @@ fun RecyclerView.Adapter<*>.handleStateLoading(
     }
     return isLoading
 }
-
-/*view group*/
-//fun ViewGroup.hideSkeleton() {
-//    if (this.tag is SkeletonScreen) {
-//        val sk = this.tag as SkeletonScreen
-//        sk.hide()
-//        this.tag = null
-//    }
-//}
-//
-//fun ViewGroup.showSkeleton(@LayoutRes layoutResId: Int): SkeletonScreen {
-//    hideSkeleton()
-//    val sk = Skeleton.bind(this)
-//        .load(layoutResId)
-//        .color(R.color.color_sk)
-//        .show()
-//    this.tag = sk
-//    return sk
-//}
-//
-//fun ViewGroup.isShowSkeleton(): Boolean {
-//    var isShow = false
-//    if (this.tag is SkeletonScreen) {
-//        isShow = true
-//    }
-//    return isShow
-//}
 
 /*ViewPager*/
 fun ViewPager.getCurrentView(): View? {

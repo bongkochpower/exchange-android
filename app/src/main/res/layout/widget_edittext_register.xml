@@ -32,6 +32,7 @@
             android:visibility="@{isErrorValidate ? View.VISIBLE : View.INVISIBLE}"
             style="@style/TextViewExtraMini"
             android:layout_width="300dp"
+            android:id="@+id/tv_error_validate"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/margin_2dp"
             android:layout_marginStart="@dimen/margin_16dp"

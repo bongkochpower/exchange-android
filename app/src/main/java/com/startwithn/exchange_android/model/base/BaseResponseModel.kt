@@ -14,9 +14,6 @@ data class BaseResponseModel<T>(
 
     @SerializedName("total")
     var total: Int? = null,
-
-    //    @SerializedName("checkSystem")
-//    var checkSystemModel: CheckSystemModel? = null,
 ) {
     private fun isCanNextPage(): Boolean =
         if (total != null && limit != null) {

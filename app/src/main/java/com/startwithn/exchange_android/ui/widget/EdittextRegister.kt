@@ -44,10 +44,14 @@ class EdittextRegister(context: Context, attrs: AttributeSet) : FrameLayout(cont
     fun getText() : String{
         return binding.edtRegister.text.toString().trim()
     }
+    fun getHintText() : String{
+        return binding.edtRegister.hint.toString().trim()
+    }
 
-    fun setValidation(isError : Boolean){
+    fun setValidation(isError : Boolean, msg : String = ""){
         with(binding) {
             isErrorValidate = isError
+            tvErrorValidate.text = msg
         }
     }
 

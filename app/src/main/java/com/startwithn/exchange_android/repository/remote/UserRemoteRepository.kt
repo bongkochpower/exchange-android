@@ -6,7 +6,9 @@ import com.startwithn.exchange_android.ext.toSHA256
 import com.startwithn.exchange_android.model.base.BaseResponseModel
 import com.startwithn.exchange_android.model.body.LoginRequestModel
 import com.startwithn.exchange_android.model.body.RegisterRequestModel
+import com.startwithn.exchange_android.model.response.AccessTokenModel
 import com.startwithn.exchange_android.model.response.MessageModel
+import com.startwithn.exchange_android.model.response.RegisterResponseModel
 import com.startwithn.exchange_android.model.response.UploadResponseModel
 import com.startwithn.exchange_android.model.response.UserModel
 import com.startwithn.exchange_android.network.AppAPI
@@ -23,7 +25,7 @@ class UserRemoteRepository(
 ) : BaseRemoteRepository(context) {
     suspend fun login(
         request: LoginRequestModel
-    ): ResultWrapper<BaseResponseModel<UserModel>> {
+    ): ResultWrapper<BaseResponseModel<AccessTokenModel>> {
         return safeApiCall(
             dispatcher,
             call = {
@@ -36,7 +38,7 @@ class UserRemoteRepository(
 
     suspend fun register(
         request: RegisterRequestModel
-    ): ResultWrapper<RegisterRequestModel>{
+    ): ResultWrapper<RegisterResponseModel>{
         return safeApiCall(
             dispatcher,
             call = {
@@ -47,4 +49,5 @@ class UserRemoteRepository(
     suspend fun uploadAvatar(avatar: MultipartBody.Part): ResultWrapper<UploadResponseModel> {
         return safeApiCall(dispatcher, call = { api.uploadProfile(avatar) })
     }
+
 }

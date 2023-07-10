@@ -1,8 +1,10 @@
-package com.startwithn.exchange_android.model.body
+package com.startwithn.exchange_android.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterRequestModel(
+data class RegisterResponseModel(
+    @field:SerializedName("id") var id: Int? = null,
+    @field:SerializedName("is_activate") var isActivate: Boolean? = null,
     @field:SerializedName("first_name") var firstname: String? = null,
     @field:SerializedName("last_name") var lastname: String? = null,
     @field:SerializedName("birth_date") var birtDate: String? = null, //2023-01-01
@@ -10,7 +12,7 @@ data class RegisterRequestModel(
     @field:SerializedName("email") var email: String? = null,
     @field:SerializedName("password") var password: String? = null,
     @field:SerializedName("id_card_image") var idCardImagePath: String? = null,
-    @field:SerializedName("profile_image") var profileImagePath: String? = null,
+    @field:SerializedName("address") var address: String? = null,
     @field:SerializedName("post_code") var postCode: String? = null,
     @field:SerializedName("moo") var moo: String? = null,
     @field:SerializedName("soi") var soi: String? = null,

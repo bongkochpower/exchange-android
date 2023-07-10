@@ -53,8 +53,4 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     fun goToForgotPassword(v: View) {
         ForgotPasswordFragment.navigate(getCurrentFragment())
     }
-
-    fun testShowAlert(v :View){
-        showAlertSuccessDialog {  }
-    }
 }

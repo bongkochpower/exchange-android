@@ -1,5 +1,6 @@
 package com.startwithn.exchange_android.ui.page.base
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.startwithn.exchange_android.ext.fixFontScale
 import com.startwithn.exchange_android.ext.hideKeyboard
+import com.startwithn.exchange_android.ui.dialog.popup.AlertSuccessDialog
 import com.startwithn.exchange_android.ui.dialog.popup.ProgressDialog
 
 abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layout: Int) : Fragment() {
@@ -56,5 +58,24 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layout: 
     abstract fun listener()
 
     open fun subscribe() {}
+
+    fun showAlertSuccessDialog(
+        title: String? = null,
+        textButtonRight: String? = null,
+        onRightClick: (() -> Unit)? = null
+    ) {
+        var alertSuccessDialog: AlertSuccessDialog? = null
+        alertSuccessDialog = AlertSuccessDialog.newInstance(
+            title = title,
+            textButtonRight = textButtonRight
+        )
+        alertSuccessDialog.apply {
+            setOnButtonConfirmClick {
+                onRightClick?.invoke()
+                it.dismiss()
+            }
+            show(childFragmentManager)
+        }
+    }
 
 }

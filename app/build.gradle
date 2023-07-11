@@ -158,6 +158,12 @@ dependencies {
     // Pin
     implementation 'com.github.poovamraj:PinEditTextField:1.2.6'
 
+    //swipe refreshlayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    //slide confirm
+    implementation "com.ncorti:slidetoact:0.10.0"
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

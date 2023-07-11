@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="AppToolbar">
         <attr name="title" format="string" />
+        <attr name="iconBackSrc" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="ButtonLogin">
@@ -14,5 +15,8 @@
     <declare-styleable name="EdittextRegister">
         <attr name="edtTitle" format="string" />
         <attr name="isValidateError" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="NumberPad">
     </declare-styleable>
 </resources>

@@ -32,6 +32,10 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         initFullScreenWithStatusBar(false)
     }
 
+    override fun listener() {
+
+    }
+
     override fun subscribe() {
         super.subscribe()
 
@@ -57,33 +61,26 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
     private fun loadMasterData() {
         //introViewModel.getCategories()
 
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            goToLogin()
-            finish()
-        }, resources.getInteger(R.integer.interval_intro).toLong())
+        Handler(mainLooper).postDelayed({ goToNextPage() }, 2000)
     }
 
     private fun goToNextPage() {
         val isRequiredLogin = appManager.getAuthToken() == null
         when {
             isRequiredLogin -> {
-                //goToLogin()
+                goToLogin()
             }
             else -> {
-//                val isHasPin = appManager.getPin() != null
-//                if (isHasPin) {
-//                    goToPinPassword()
-//                } else {
-//                    goToMain()
-//                }
+                /*val isHasPin = appManager.getPin() != null
+                if (isHasPin) {
+                    goToPinPassword()
+                } else {
+                    goToMain()
+                }*/
+                goToMain()
             }
         }
     }
-
-    //private fun goToLogin() = AppNavigator(this).goToLogin(true)
-
-    //private fun goToPinPassword() = pinPasswordLauncher.launch(PinPasswordActivity.get(this, PinModeEnum.VERIFY))
 
     private fun goToMain() = AppNavigator(this).goToMain()
     private fun goToLogin() = AppNavigator(this).goToLogin()

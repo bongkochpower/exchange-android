@@ -25,6 +25,7 @@ import com.startwithn.exchange_android.ext.slideUp
 import com.startwithn.exchange_android.model.body.LoginRequestModel
 import com.startwithn.exchange_android.network.ResultWrapper
 import com.startwithn.exchange_android.ui.page.base.BaseFragment
+import com.startwithn.exchange_android.ui.page.login.register.TermRegisterFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -104,11 +105,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     }
                 })
 
+                btnLoginApp.setOnTouchAnimation()
                 btnLoginApp.setOnClickListener {
                     if (isValidateLoginForm()) {
                         loginViewModel.login(
                             LoginRequestModel(
-                                email = edtPhoneNumber.text.toString(),
+                                mobile = edtPhoneNumber.text.toString(),
                                 password = edtPassword.text.toString()
                             )
                         )
@@ -130,11 +132,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
 
                 is ResultWrapper.Success -> {
-                    Toast.makeText(requireContext(), "login sucess", Toast.LENGTH_SHORT).show()
+                    AppNavigator(requireActivity()).goToMain()
                 }
 
                 is ResultWrapper.GenericError -> {
-                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
+                    //AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
+                    binding.layoutLogin2.isLoginFail = true
                 }
 
                 is ResultWrapper.NetworkError -> {
@@ -188,6 +191,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
         return isValidate
     }
-
 
 }

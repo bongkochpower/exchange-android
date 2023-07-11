@@ -1,4 +1,4 @@
-package com.startwithn.exchange_android.ui.page.main.activity
+package com.startwithn.exchange_android.ui.page.main
 
 import android.app.Activity
 import android.content.Intent
@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.startwithn.exchange_android.R
+import com.startwithn.exchange_android.common.navigator.AppNavigator
 import com.startwithn.exchange_android.databinding.ActivityMainBinding
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 
@@ -66,7 +67,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun setUp() {
-        initFullScreenWithStatusBar(false)
+        binding.apply {
+            activity = this@MainActivity
+        }
+    }
+
+    override fun listener() {
         binding.apply {
         }
     }
@@ -74,6 +80,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun subscribe() {
         super.subscribe()
 
+    }
+
+    fun gotoTopUp(){
+        AppNavigator(this).goToTopUp()
+    }
+
+    fun gotoExchange(){
+        AppNavigator(this).goToExchange()
+    }
+    fun gotoHistory(){
+        AppNavigator(this).goToHistory()
     }
 
 

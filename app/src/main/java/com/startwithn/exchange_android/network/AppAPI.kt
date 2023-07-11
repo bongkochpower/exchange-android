@@ -2,6 +2,7 @@ package com.startwithn.exchange_android.network
 
 import com.startwithn.exchange_android.common.constant.AppConstant
 import com.startwithn.exchange_android.model.base.BaseResponseModel
+import com.startwithn.exchange_android.model.body.LoginRequestModel
 import com.startwithn.exchange_android.model.body.RegisterRequestModel
 import com.startwithn.exchange_android.model.response.AccessTokenModel
 import com.startwithn.exchange_android.model.response.RegisterResponseModel
@@ -20,11 +21,9 @@ import retrofit2.http.Part
 interface AppAPI {
 
     //region authorization
-    @FormUrlEncoded
     @POST("api/v1/customer/login")
     suspend fun login(
-        @Field("mobile") phoneNumber: String?,
-        @Field("password") password: String?,
+        @Body loginRequest : LoginRequestModel
     ): Response<BaseResponseModel<AccessTokenModel>>
 
     @POST("api/v1/customer")

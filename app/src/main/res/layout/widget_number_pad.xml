@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:padding="@dimen/padding_8dp"
+        android:background="@color/gray_tasman"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--1-3-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/btn_one"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/black_thunder" />
+
+            <TextView
+                android:layout_marginHorizontal="@dimen/margin_8dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/btn_two"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/black_thunder" />
+
+            <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/btn_three"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/black_thunder" />
+
+        </LinearLayout>
+
+        <!--4-6-->
+        <LinearLayout
+            android:layout_marginVertical="@dimen/margin_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_four"
+                android:foreground="?attr/selectableItemBackground"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/black_thunder" />
+
+            <TextView
+                android:layout_marginHorizontal="@dimen/margin_8dp"
+                android:id="@+id/btn_five"
+                style="@style/TextViewExtraLarge3"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/black_thunder" />
+
+            <TextView
+                android:id="@+id/btn_six"
+                style="@style/TextViewExtraLarge3"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="6"
+                android:textColor="@color/black_thunder" />
+
+        </LinearLayout>
+
+        <!--7-9-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_seven"
+                style="@style/TextViewExtraLarge3"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="7"
+                android:textColor="@color/black_thunder" />
+
+            <TextView
+                android:layout_marginHorizontal="@dimen/margin_8dp"
+                android:id="@+id/btn_eight"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="@color/black_thunder" />
+
+            <TextView
+                android:id="@+id/btn_nine"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="9"
+                android:textColor="@color/black_thunder" />
+
+        </LinearLayout>
+
+        <!--0-->
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_dot"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="."
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/black_thunder" />
+
+            <TextView
+                android:layout_marginHorizontal="@dimen/margin_8dp"
+                android:id="@+id/btn_zero"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="0"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/black_thunder" />
+
+            <TextView
+                android:id="@+id/btn_delete"
+                style="@style/TextViewExtraLarge3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/prompt_regular"
+                android:gravity="center"
+                android:text="x"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/black_thunder" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

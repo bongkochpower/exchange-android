@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,6 +14,7 @@
     </data>
 
     <FrameLayout
+        tools:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@android:color/transparent"
@@ -34,11 +36,11 @@
                 android:adjustViewBounds="true"
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cd_button"
-                android:onClick="@{(view)->widget.onBackPressed()}"
                 android:padding="@dimen/padding_4dp" />
 
             <!--title-->
             <TextView
+                style="@style/TextViewRegular"
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +50,8 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="@{title}"
-                android:textColor="@color/black" />
+                android:fontFamily="@font/prompt_bold"
+                android:textColor="@color/white" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/logo_app"

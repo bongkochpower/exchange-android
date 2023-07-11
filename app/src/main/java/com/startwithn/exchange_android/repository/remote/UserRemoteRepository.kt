@@ -29,10 +29,7 @@ class UserRemoteRepository(
         return safeApiCall(
             dispatcher,
             call = {
-                api.login(
-                    phoneNumber = request.email,
-                    password = request.password.toSHA256()
-                )
+                api.login(request)
             })
     }
 

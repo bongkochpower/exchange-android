@@ -5,10 +5,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.startwithn.exchange_android.common.manager.AppManager
 import com.startwithn.exchange_android.R
 import com.startwithn.exchange_android.databinding.WidgetAppToolbarBinding
+import com.startwithn.exchange_android.ext.gone
 
 class AppToolbar(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
     private val binding: WidgetAppToolbarBinding = DataBindingUtil.inflate(
@@ -28,12 +30,19 @@ class AppToolbar(context: Context, attrs: AttributeSet) : FrameLayout(context, a
         )
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.AppToolbar)
+        val iconBackResId = attributes.getResourceId(R.styleable.AppToolbar_iconBackSrc, 0)
+        val title =  attributes.getString(R.styleable.AppToolbar_title)
 
         binding.apply {
             widget = this@AppToolbar
-            title = attributes.getString(R.styleable.AppToolbar_title)
+            this.title = title
         }
 
+        if(title?.isNotEmpty() == true){
+            binding.logoApp.gone()
+        }
+
+        setIcon(iconBackResId)
         attributes.recycle()
 
     }
@@ -44,6 +53,12 @@ class AppToolbar(context: Context, attrs: AttributeSet) : FrameLayout(context, a
 
     fun setOnBackListener(cb: () -> Unit) {
         callBack = cb
+    }
+
+    fun setTitle(title: String?) {
+        with(binding) {
+            tvTitle.text = title
+        }
     }
 
     fun onBackPressed(){

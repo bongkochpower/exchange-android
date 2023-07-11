@@ -4,16 +4,200 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<variable
+    name="activity"
+    type="com.startwithn.exchange_android.ui.page.main.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
-        android:background="@drawable/bg_app"
         android:layout_height="match_parent"
-        tools:context=".ui.page.main.activity.MainActivity">
+        tools:context=".ui.page.main.MainActivity">
 
+        <LinearLayout
+            android:id="@+id/ll_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_main"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.startwithn.exchange_android.ui.widget.AppToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:iconBackSrc="@drawable/icon_hamburger" />
+
+            <!--menu-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/padding_34dp"
+                android:paddingTop="@dimen/padding_30dp"
+                android:paddingBottom="@dimen/padding_26dp">
+
+                <ImageView
+                    android:onClick="@{() -> activity.gotoTopUp()}"
+                    android:id="@+id/img_topup"
+                    android:layout_width="135dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/selector_topup"
+                    app:layout_constraintEnd_toStartOf="@+id/img_exchange"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_main_topup"
+                    android:textColor="@color/white"
+                    app:fontFamily="@font/prompt_bold"
+                    app:layout_constraintEnd_toEndOf="@id/img_topup"
+                    app:layout_constraintStart_toStartOf="@id/img_topup"
+                    app:layout_constraintTop_toBottomOf="@+id/img_topup" />
+
+                <ImageView
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:id="@+id/img_exchange"
+                    android:layout_width="136dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/selector_exchange"
+                    app:layout_constraintEnd_toStartOf="@+id/img_topup"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/img_history"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_main_exchange"
+                    android:textColor="@color/white"
+                    app:fontFamily="@font/prompt_bold"
+                    app:layout_constraintEnd_toEndOf="@id/img_exchange"
+                    app:layout_constraintStart_toStartOf="@id/img_exchange"
+                    app:layout_constraintTop_toBottomOf="@+id/img_exchange" />
+
+                <ImageView
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:id="@+id/img_history"
+                    android:layout_width="136dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/selector_history"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/img_exchange"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_main_history"
+                    android:textColor="@color/white"
+                    app:fontFamily="@font/prompt_bold"
+                    app:layout_constraintEnd_toEndOf="@id/img_history"
+                    app:layout_constraintStart_toStartOf="@id/img_history"
+                    app:layout_constraintTop_toBottomOf="@+id/img_history" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_header">
+
+            <!--balance-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/padding_30dp"
+                android:paddingTop="@dimen/margin_14dp"
+                tools:ignore="RtlSymmetry">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_main_balance"
+                    android:textColor="@color/black_thunder"
+                    app:fontFamily="@font/prompt_semibold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginBottom="@dimen/margin_30dp"
+                    android:orientation="horizontal"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_rv_balance" />
+
+            </LinearLayout>
+
+            <!--recent-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_tasman"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/padding_20dp"
+                android:paddingTop="@dimen/padding_14dp"
+                android:paddingBottom="@dimen/margin_40dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_main_recent_list"
+                    android:textColor="@color/black_thunder"
+                    app:fontFamily="@font/prompt_semibold" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_14dp">
+
+                    <include
+                        android:id="@+id/layout_empty"
+                        layout="@layout/layout_empty_main_recent" />
+
+                    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                        android:id="@+id/swipe_refresh_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="700dp"
+                        android:layout_marginTop="@dimen/padding_14dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scrollbars="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@android:layout/simple_dropdown_item_1line" />
+
+                    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

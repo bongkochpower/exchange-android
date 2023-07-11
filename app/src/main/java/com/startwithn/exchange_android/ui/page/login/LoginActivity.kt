@@ -35,6 +35,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     }
 
+    override fun listener() {
+
+    }
+
     private fun getCurrentFragment(): Fragment =
         supportFragmentManager.getCurrentFragment(R.id.fragment_container_view)
 

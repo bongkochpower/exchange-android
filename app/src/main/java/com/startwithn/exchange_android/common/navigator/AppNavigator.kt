@@ -3,12 +3,10 @@ package com.startwithn.exchange_android.common.navigator
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.widget.Toast
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import com.startwithn.exchange_android.R
 import com.startwithn.exchange_android.ui.page.login.LoginActivity
-import com.startwithn.exchange_android.ui.page.main.activity.MainActivity
+import com.startwithn.exchange_android.ui.page.main.MainActivity
+import com.startwithn.exchange_android.ui.page.main.topup.TopUpActivity
 
 class AppNavigator(private val activity: Activity) {
     /*in-app*/
@@ -21,6 +19,18 @@ class AppNavigator(private val activity: Activity) {
     }
 
     fun goToLogin() {
+        LoginActivity.open(activity)
+    }
+
+    fun goToTopUp() {
+        TopUpActivity.open(activity)
+    }
+
+    fun goToExchange() {
+        LoginActivity.open(activity)
+    }
+
+    fun goToHistory() {
         LoginActivity.open(activity)
     }
 

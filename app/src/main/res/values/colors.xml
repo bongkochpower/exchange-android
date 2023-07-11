@@ -11,9 +11,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#8E8E8E</color>
     <color name="gray_nevada">#8E8E8E</color>
+    <color name="gray_tasman">#D9E1DC</color>
 
     <color name="text_edittext_gray">#414042</color>
     <color name="text_back">#7D7E7F</color>
+    <color name="black_thunder">#231F20</color>
+
 
     <color name="green_yellow">#8DC63F</color>
     <color name="green_dartmouth">#9900723B</color>

@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.startwithn.exchange_android"
-    >
+    package="com.startwithn.exchange_android">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".config.AppApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:name=".config.AppApplication"
         android:supportsRtl="true"
         android:theme="@style/Theme.Exchangeandroid"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.page.main.exchange.ExchangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.page.main.history.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.page.main.topup.TopUpActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false" />
         <activity
             android:name=".ui.page.login.LoginActivity"
             android:exported="false" />
@@ -35,8 +44,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.page.main.activity.MainActivity"
-            android:exported="true"></activity>
+            android:name=".ui.page.main.MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

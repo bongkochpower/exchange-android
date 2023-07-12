@@ -58,6 +58,10 @@
     <string name="hint_main_empty_item">กรุณาเติมเงินก่อนการใช้งาน</string>
     <string name="hint_topup_max">เติมเงินได้สูงสุด 500,000.00 THB</string>
     <string name="hint_history_transaction_empty">ไม่พบรายการ</string>
+    <string name="hint_transaction_title">แลกเงิน</string>
+    <string name="hint_transaction_money">900.00 THB (30.24 USD)</string>
+    <string name="hint_transaction_time">18 ชั่วโมงที่แล้ว</string>
+    <string name="hint_transaction_status_text">Done</string>
 
     <!--message-->
     <string name="message_maintenance">ปิดปรับปรุงระบบชั่วคราว\nขออภัยในความไม่สะดวก</string>

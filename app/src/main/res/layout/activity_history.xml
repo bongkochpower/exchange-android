@@ -174,7 +174,9 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
+                    android:visibility="@{!isEmpty ? View.VISIBLE : View.GONE}"
                     android:id="@+id/rv_history"
+                    tools:listitem="@layout/item_rv_transaction"
                     android:layout_height="match_parent"/>
 
             </FrameLayout>

@@ -1,5 +1,6 @@
 package com.startwithn.exchange_android.ui.widget
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -42,9 +43,20 @@ class AppToolbar(context: Context, attrs: AttributeSet) : FrameLayout(context, a
             binding.logoApp.gone()
         }
 
+        initView()
+
         setIcon(iconBackResId)
         attributes.recycle()
 
+    }
+
+    private fun initView(){
+        binding.apply {
+            btnClose.setOnClickListener {
+                //(context as Activity).onBackPressed()
+                callBack?.invoke()
+            }
+        }
     }
 
     fun setIcon(@DrawableRes resourceID: Int) {
@@ -61,7 +73,4 @@ class AppToolbar(context: Context, attrs: AttributeSet) : FrameLayout(context, a
         }
     }
 
-    fun onBackPressed(){
-        callBack?.invoke()
-    }
 }

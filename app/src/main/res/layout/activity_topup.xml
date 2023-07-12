@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="isTopupInvalid"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,16 +42,55 @@
                 android:paddingHorizontal="@dimen/padding_34dp"
                 android:paddingBottom="@dimen/padding_20dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_topup_amount"
-                    style="@style/TextViewLarge"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/margin_6dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/title_topup_amount"
-                    android:textColor="@color/white"
-                    app:fontFamily="@font/prompt_semibold" />
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_topup_amount"
+                        android:textColor="@color/green_yellow"
+                        app:fontFamily="@font/prompt_semibold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:text="@string/title_topup_amount_th"
+                        android:textColor="@color/white"
+                        app:fontFamily="@font/prompt_semibold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="@{isTopupInvalid ? View.VISIBLE : View.GONE}"
+                    android:layout_marginBottom="@dimen/margin_20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/validate_money_incorrect"
+                        android:textColor="@color/yellow_sea_buckthorn"
+                        app:fontFamily="@font/prompt_regular" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewMini"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/validate_enter_money_again"
+                        android:textColor="@color/yellow_sea_buckthorn"
+                        app:fontFamily="@font/prompt_regular" />
+
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/TextViewExtraLarge3"
@@ -59,7 +101,7 @@
                     android:gravity="center_horizontal"
                     android:inputType="number"
                     android:text="10000"
-                    android:textColor="@color/white" />
+                    android:textColor="@{isTopupInvalid ? @color/yellow_sea_buckthorn : @color/white , default=@color/white}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextViewMini"
@@ -76,6 +118,7 @@
             </LinearLayout>
         </LinearLayout>
 
+        <!--body-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -95,18 +138,15 @@
                 android:textColor="@color/black_thunder" />
 
             <FrameLayout
+                android:layout_marginHorizontal="@dimen/padding_26dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <!--<com.ncorti.slidetoact.SlideToActView
-                    android:id="@+id/example"
-                    android:background="@drawable/bg_slide_confirm"
-                    app:state_complete="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:text="@string/button_slide_to_topup" />-->
+                <Button
+                    android:layout_width="wrap_content"
+                    android:id="@+id/slide_confirm"
+                    android:layout_height="wrap_content"/>
 
             </FrameLayout>
 

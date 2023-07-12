@@ -63,6 +63,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/img_topup" />
 
                 <ImageView
+                    android:onClick="@{() -> activity.gotoExchange()}"
                     android:clickable="true"
                     android:focusable="true"
                     android:id="@+id/img_exchange"
@@ -86,6 +87,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/img_exchange" />
 
                 <ImageView
+                    android:onClick="@{() -> activity.gotoHistory()}"
                     android:clickable="true"
                     android:focusable="true"
                     android:id="@+id/img_history"

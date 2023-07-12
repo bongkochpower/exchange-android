@@ -14,7 +14,7 @@
     </data>
 
     <FrameLayout
-        tools:background="@color/black"
+        tools:background="@drawable/bg_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@android:color/transparent"
@@ -40,7 +40,7 @@
 
             <!--title-->
             <TextView
-                style="@style/TextViewRegular"
+                style="@style/TextViewLarge"
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

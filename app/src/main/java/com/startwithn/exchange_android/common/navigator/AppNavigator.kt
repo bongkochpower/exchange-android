@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.core.content.ContextCompat
 import com.startwithn.exchange_android.ui.page.login.LoginActivity
 import com.startwithn.exchange_android.ui.page.main.MainActivity
+import com.startwithn.exchange_android.ui.page.main.history.HistoryActivity
 import com.startwithn.exchange_android.ui.page.main.topup.TopUpActivity
 
 class AppNavigator(private val activity: Activity) {
@@ -31,7 +32,7 @@ class AppNavigator(private val activity: Activity) {
     }
 
     fun goToHistory() {
-        LoginActivity.open(activity)
+        HistoryActivity.open(activity)
     }
 
     /*other*/

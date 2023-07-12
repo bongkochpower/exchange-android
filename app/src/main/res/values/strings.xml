@@ -24,6 +24,9 @@
     <string name="title_topup_amount">จำนวนเงิน</string>
     <string name="title_topup_amount_th">(THB)</string>
     <string name="title_topup_by_k_plus">เติมเงินด้วย K PLUS</string>
+    <string name="title_history_transaction">เลือกดูประวัติการทำรายการ</string>
+    <string name="title_history_transactino_list">รายการ</string>
+    <string name="title_history_date_select">ตั้งแต่วันที่ #start - #end</string>
 
 
     <!--description-->
@@ -54,6 +57,7 @@
     <string name="hint_zero_with_point">0.00</string>
     <string name="hint_main_empty_item">กรุณาเติมเงินก่อนการใช้งาน</string>
     <string name="hint_topup_max">เติมเงินได้สูงสุด 500,000.00 THB</string>
+    <string name="hint_history_transaction_empty">ไม่พบรายการ</string>
 
     <!--message-->
     <string name="message_maintenance">ปิดปรับปรุงระบบชั่วคราว\nขออภัยในความไม่สะดวก</string>

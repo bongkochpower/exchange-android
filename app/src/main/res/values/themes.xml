@@ -119,5 +119,9 @@
 <!--        <item name="android:paddingBottom">@dimen/zero</item>-->
     </style>
 
+    <style name="CurrencyEditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/green_yellow</item>
+    </style>
+
 
 </resources>

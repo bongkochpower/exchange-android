@@ -15,6 +15,7 @@
         <item name="android:windowContentTransitions">true</item>
 
         <item name="fontFamily">@font/prompt_regular</item>
+        <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
 
     </style>
 
@@ -49,6 +50,17 @@
     <style name="DialogSlideAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_up</item>
         <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/TitleTextStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/BodyTextStyle</item>
+    </style>
+    <style name="TitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:fontFamily">@font/prompt_medium</item>
+    </style>
+    <style name="BodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:fontFamily">@font/prompt_regular</item>
     </style>
 
 

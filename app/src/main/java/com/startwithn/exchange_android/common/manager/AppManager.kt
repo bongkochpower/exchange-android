@@ -68,14 +68,13 @@ class AppManager(private val context: Context) {
     //endregion
     //endregion
 
-    fun removeAll() {
+    fun removeAll(cb : () -> Unit) {
         AppApplication.getSecureSharePreferences(context).edit().apply {
             remove(KeyConstant.FCM_TOKEN)
             remove(KeyConstant.AUTH_TOKEN)
-            remove(KeyConstant.DEFAULT_ADDRESS)
-            remove(KeyConstant.DEFAULT_PAYMENT_CARD)
-            remove(KeyConstant.CART)
         }.apply()
-        removeNotificationCount()
+        //removeNotificationCount()
+
+        cb.invoke()
     }
 }

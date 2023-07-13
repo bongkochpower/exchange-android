@@ -86,7 +86,12 @@
 
     <!--Image Size-->
     <dimen name="image_banner">200dp</dimen>
-    <dimen name="card_radius">8dp</dimen>
     <dimen name="image_profile_size">100dp</dimen>
+    <dimen name="image_item_drawer_nav">22dp</dimen>
+
+    <!--cardview-->
+    <dimen name="card_radius">8dp</dimen>
+
+    <dimen name="drawer_nav_width_size">180dp</dimen>
 
 </resources>

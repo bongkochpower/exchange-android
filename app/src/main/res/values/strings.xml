@@ -86,6 +86,7 @@
     <string name="message_policy">การเก็งกำไรค่าเงินถือเป็นการปฏิบัติที่ไม่เป็นไปตามเงื่อนไข และอาจ
 ไม่ชอบด้วยกฎหมาย หากฝ่าฝืน ผู้ให้บริการ ขอสงวนสิทธิ์ในการ
 ยกเลิกบัตร และเรียกค่าเสียหายที่เกิดขึ้น</string>
+    <string name="message_logout">คุณต้องการออกจากระบบหรือไม่ ?</string>
 
     <!--button-->
     <string name="button_close">ปิด</string>
@@ -117,11 +118,11 @@
 
     <!--menu-->
     <!--bottom navigation-->
-    <string name="menu_home">หน้าหลัก</string>
-    <string name="menu_privilege">สิทธิพิเศษ</string>
-    <string name="menu_cart">ตะกร้าสินค้า</string>
-    <string name="menu_notification">แจ้งเตือน</string>
-    <string name="menu_account">บัญชีผู้ใช้</string>
+    <string name="menu_setting">การตั้งค่า</string>
+    <string name="menu_edit_profile">แก้ไขข้อมูลส่วนบุคคล</string>
+    <string name="menu_help">ต้องการความช่วยเหลือ</string>
+    <string name="menu_logout">Logout</string>
+
     <!--image picker-->
     <string name="menu_camera">Camera</string>
     <string name="menu_gallery">Gallery</string>
@@ -146,4 +147,8 @@
     <!--checkbox-->
     <string name="chk_term_and_con">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการใช้บริการ</string>
     <string name="chk_term_and_con_register">การสร้างบัญชีแสดงว่าคุณยอมรับเงื่อนไขในการใช้บริการ</string>
+
+    <!--drawer nav-->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

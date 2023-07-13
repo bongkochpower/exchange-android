@@ -20,8 +20,11 @@ class AppNavigator(private val activity: Activity) {
         MainActivity.open(activity)
     }
 
-    fun goToLogin() {
+    fun goToLogin(isClearTask: Boolean = false) {
         LoginActivity.open(activity)
+        if (isClearTask) {
+            activity.finishAffinity()
+        }
     }
 
     fun goToTopUp() {

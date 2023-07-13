@@ -15,6 +15,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.util.Base64Utils
+import com.startwithn.exchange_android.common.manager.AppManager
+import com.startwithn.exchange_android.common.navigator.AppNavigator
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.text.DecimalFormat
@@ -59,12 +61,9 @@ fun Activity.overrideOnViewTouchHideKeyBoard(view: View) {
 }
 
 fun Activity.logout() {
-/*    AppManager(this).getUser()?.let {
-        AppFCM.unSubscribeTopicNotification(it.customerId ?: "")
-    }
-    AppManager(this).clear {
+    AppManager(this).removeAll {
         AppNavigator(this).goToLogin(true)
-    }*/
+    }
 }
 
 fun Activity.finishWithOutAnimation() {
@@ -185,7 +184,7 @@ fun String.hexDecimalToString(): String {
     return output.toString().trim()
 }
 
-fun String.toHtmlWebViewFormat() : String{
+fun String.toHtmlWebViewFormat(): String {
     val text = "<html><head><style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/fonts/db_heavent_regular.ttf\")}body {font-family: MyFont;font-size: medium;text-align: justify;} ul { margin-left:-12px;} ol { margin-left:-12px;}</style><meta name=\"viewport\" content=\"width=device-width\"></head><body>"
     val pas = "</body></html>"
     return "$text$this$pas"

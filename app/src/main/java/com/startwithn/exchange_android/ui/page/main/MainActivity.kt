@@ -1,14 +1,19 @@
 package com.startwithn.exchange_android.ui.page.main
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.startwithn.exchange_android.R
+import com.startwithn.exchange_android.common.alert.AppAlert
 import com.startwithn.exchange_android.common.navigator.AppNavigator
 import com.startwithn.exchange_android.databinding.ActivityMainBinding
+import com.startwithn.exchange_android.ext.logout
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -74,6 +79,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun listener() {
         binding.apply {
+            toolbar.setOnBackListener {
+                open()
+            }
+        }
+        binding.layoutNavigation.apply {
+            btnClose.setOnClickListener {
+                close()
+            }
+            btnSetting.setOnClickListener {
+
+            }
+            btnEditProfile.setOnClickListener{
+
+            }
+            btnHelp.setOnClickListener {  }
+            btnLogout.setOnClickListener {
+                val msg = resources.getString(R.string.message_logout)
+                val confirm = resources.getString(R.string.button_confirm)
+                val cancel = resources.getString(R.string.button_cancel)
+
+                AppAlert.confirm(this@MainActivity,msg,confirm,{
+                    logout()
+                },cancel,{}).show(supportFragmentManager)
+            }
         }
     }
 
@@ -82,15 +111,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     }
 
-    fun gotoTopUp(){
+    fun gotoTopUp() {
         AppNavigator(this).goToTopUp()
     }
 
-    fun gotoExchange(){
+    fun gotoExchange() {
         AppNavigator(this).goToExchange()
     }
-    fun gotoHistory(){
+
+    fun gotoHistory() {
         AppNavigator(this).goToHistory()
+    }
+
+    private fun open() {
+        binding.drawerLayout.openDrawer(GravityCompat.START)
+    }
+
+    private fun close() {
+        binding.drawerLayout.closeDrawers()
     }
 
 

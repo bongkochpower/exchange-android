@@ -2,10 +2,13 @@ package com.startwithn.exchange_android.ui.page.login.forgot.verify_phone_number
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.startwithn.exchange_android.R
 import com.startwithn.exchange_android.databinding.FragmentForgotPasswordBinding
+import com.startwithn.exchange_android.ext.isEmail
+import com.startwithn.exchange_android.ext.setOnTouchAnimation
 import com.startwithn.exchange_android.ui.page.base.BaseFragment
 import com.startwithn.exchange_android.ui.page.login.LoginFragmentDirections
 
@@ -24,10 +27,29 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>(R.lay
     }
 
     override fun setUp() {
-
+        binding.apply {
+            isVerifyPhone = true
+            isPhoneEmpty = false
+        }
     }
 
     override fun listener() {
+        binding.apply {
+            btnConfirmTel.apply {
+                setOnTouchAnimation()
+                setOnClickListener {
+                    if (isValidateForm()) {
+                        gotoVerifyOtp()
+                    }
+                }
+            }
+
+            edtPhoneNumber.doAfterTextChanged {
+                if(it.toString().length > 1){
+                    isPhoneEmpty = false
+                }
+            }
+        }
 
     }
 
@@ -37,6 +59,30 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>(R.lay
         }
     }
 
+    private fun isValidateForm(): Boolean {
+        var isValidate = false
+        with(binding) {
+            val phone = edtPhoneNumber.text.toString()
+
+            when {
+                phone.isEmpty() -> {
+                    isValidate = false
+                    isPhoneEmpty = true
+                }
+                else -> {
+                    isValidate = true
+                }
+            }
+        }
+        return isValidate
+
+    }
+
+    private fun gotoVerifyOtp(){
+        binding.apply {
+            isVerifyPhone = false
+        }
+    }
 
 
 }

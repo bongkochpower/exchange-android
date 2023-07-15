@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat
+import com.startwithn.exchange_android.ui.page.hamburger_menu.help.HelpActivity
+import com.startwithn.exchange_android.ui.page.hamburger_menu.setting.SettingsActivity
 import com.startwithn.exchange_android.ui.page.login.LoginActivity
 import com.startwithn.exchange_android.ui.page.main.MainActivity
 import com.startwithn.exchange_android.ui.page.main.exchange.ExchangeActivity
@@ -38,6 +40,15 @@ class AppNavigator(private val activity: Activity) {
     fun goToHistory() {
         HistoryActivity.open(activity)
     }
+
+    fun goToSettings() {
+        SettingsActivity.open(activity)
+    }
+
+    fun goToHelp() {
+        HelpActivity.open(activity)
+    }
+
 
     /*other*/
     fun goToLine(lineId: String = "Hipowershot") {

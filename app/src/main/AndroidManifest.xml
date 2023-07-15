@@ -18,17 +18,23 @@
         android:theme="@style/Theme.Exchangeandroid"
         tools:targetApi="31">
         <activity
-            android:name=".ui.page.main.exchange.ExchangeActivity"
-            android:windowSoftInputMode="stateHidden"
+            android:name=".ui.page.hamburger_menu.setting.SettingsActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.page.hamburger_menu.help.HelpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.page.main.exchange.ExchangeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.page.main.history.HistoryActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.page.main.topup.TopUpActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.page.login.LoginActivity"
             android:exported="false" />

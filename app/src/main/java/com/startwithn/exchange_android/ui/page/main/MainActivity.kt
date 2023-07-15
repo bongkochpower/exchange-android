@@ -88,12 +88,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 close()
             }
             btnSetting.setOnClickListener {
-
+                AppNavigator(this@MainActivity).goToSettings()
             }
             btnEditProfile.setOnClickListener{
 
             }
-            btnHelp.setOnClickListener {  }
+            btnHelp.setOnClickListener {
+                AppNavigator(this@MainActivity).goToHelp()
+            }
             btnLogout.setOnClickListener {
                 val msg = resources.getString(R.string.message_logout)
                 val confirm = resources.getString(R.string.button_confirm)

@@ -5,11 +5,13 @@ import android.os.Handler
 import android.os.Looper
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.startwithn.exchange_android.R
+import com.startwithn.exchange_android.common.manager.AppManager
 import com.startwithn.exchange_android.common.navigator.AppNavigator
 import com.startwithn.exchange_android.databinding.ActivityIntroBinding
 import com.startwithn.exchange_android.ext.fadeIn
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro) {
 
@@ -41,6 +43,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
 
         loadMasterData()
 
+
 //        firebaseViewModel.isFcmSuccess.observe(this) {
 //            loadMasterData()
 //        }
@@ -69,6 +72,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         when {
             isRequiredLogin -> {
                 goToLogin()
+                Timber.d("token -> ${AppManager(this).getAuthToken()}")
             }
             else -> {
                 /*val isHasPin = appManager.getPin() != null

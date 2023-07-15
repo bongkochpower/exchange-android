@@ -152,6 +152,7 @@
                         android:layout_marginBottom="@dimen/margin_30dp"
                         android:orientation="horizontal"
                         android:scrollbars="none"
+                        android:id="@+id/rv_balance"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="10"
                         tools:listitem="@layout/item_rv_balance" />

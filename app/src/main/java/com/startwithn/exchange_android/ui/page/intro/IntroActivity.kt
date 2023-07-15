@@ -72,7 +72,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         when {
             isRequiredLogin -> {
                 goToLogin()
-                Timber.d("token -> ${AppManager(this).getAuthToken()}")
             }
             else -> {
                 /*val isHasPin = appManager.getPin() != null
@@ -81,6 +80,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
                 } else {
                     goToMain()
                 }*/
+                Timber.d("token -> ${AppManager(this).getAuthToken()}")
                 goToMain()
             }
         }

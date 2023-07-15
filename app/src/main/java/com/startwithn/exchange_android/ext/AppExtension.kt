@@ -123,9 +123,56 @@ fun Double.toStringFormat(isDecimal: Boolean = true): String {
     }
 }
 
+fun Double.toStringFormat(): String = DecimalFormat("#,##0.00").format(this)
+
 fun Double.toPointStringFormat(): String = DecimalFormat("#,##0.#").format(this)
 
 fun Double.toThaiCurrencyStringFormat(): String = String.format("฿%s", toStringFormat(true))
+
+fun String.toTimeAgo(format: String): String {
+    val offerTime = this.toCalendar(format)
+    val now = getCalendar()
+
+    val value: Int
+    val unit: String
+
+    val year = now.get(Calendar.YEAR) - offerTime.get(Calendar.YEAR)
+    val month = now.get(Calendar.MONTH) - offerTime.get(Calendar.MONTH)
+    val day = now.get(Calendar.DATE) - offerTime.get(Calendar.DATE)
+//    val hour = now.get(Calendar.HOUR) - offerTime.get(Calendar.HOUR)
+//    val minute = now.get(Calendar.MINUTE) - offerTime.get(Calendar.MINUTE)
+
+    when {
+        year > 0 -> {
+            value = year
+//            unit = "year ago"
+            unit = "ปีที่แล้ว"
+        }
+        month > 0 -> {
+            value = month
+//            unit = "month ago"
+            unit = "เดือนที่แล้ว"
+        }
+        day > 0 -> {
+            value = day
+//            unit = "day ago"
+            unit = "วันที่แล้ว"
+        }
+//        hour > 0 -> {
+//            value = hour
+//            unit = "hour ago"
+//        }
+//        minute > 0 -> {
+//            value = minute
+//            unit = "minute ago"
+//        }
+//        else -> return "just now"
+        else -> return ""
+    }
+    return String.format("%s %s", value.toDouble().toStringFormat(), unit)
+}
+
+
 
 fun String?.toDashWhenNullOrEmpty(): String =
     if (!this.isNullOrEmpty()) {

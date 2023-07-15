@@ -47,4 +47,8 @@ class UserRemoteRepository(
         return safeApiCall(dispatcher, call = { api.uploadProfile(avatar) })
     }
 
+    suspend fun me() : ResultWrapper<BaseResponseModel<UserModel>>{
+        return safeApiCall(dispatcher, call = { api.me() })
+    }
+
 }

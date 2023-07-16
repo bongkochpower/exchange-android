@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="isEmpty"
             type="Boolean" />
@@ -18,9 +20,9 @@
 
         <com.startwithn.exchange_android.ui.widget.AppToolbar
             android:id="@+id/toolbar"
-            android:background="@drawable/bg_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/bg_toolbar"
             app:iconBackSrc="@drawable/icon_close"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/title_main_history" />
@@ -63,15 +65,17 @@
                         android:gravity="center">
 
                         <EditText
+                            android:enabled="false"
                             android:id="@+id/edt_start_date"
                             style="@style/AppEditText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_edittext_date"
                             android:inputType="date"
-                            tools:text="10/10/2000" />
+                            android:hint="@string/hint_date_from" />
 
                         <ImageView
+                            android:id="@+id/img_date_from"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignEnd="@id/edt_start_date"
@@ -89,15 +93,17 @@
                         android:gravity="center">
 
                         <EditText
+                            android:enabled="false"
                             android:id="@+id/edt_end_date"
                             style="@style/AppEditText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_edittext_date"
                             android:inputType="date"
-                            tools:text="10/10/2000" />
+                            android:hint="@string/hint_date_to" />
 
                         <ImageView
+                            android:id="@+id/img_date_to"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignEnd="@id/edt_end_date"
@@ -111,73 +117,83 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!--slide confirm-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
+            <!--slide to confirm-->
+            <com.google.android.material.button.MaterialButton
+                style="@style/TextViewRegularPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_16dp"
-                android:background="@color/black"
-                android:drawableStart="@drawable/button_slide_confirm" />
+                android:background="@drawable/bg_slide_confirm"
+                android:text="@string/button_next"
+                android:id="@+id/btn_slide_confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textFontWeight="600" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingTop="@dimen/padding_14dp"
-            android:paddingHorizontal="@dimen/padding_20dp"
             android:background="@color/gray_tasman"
+            android:paddingHorizontal="@dimen/padding_20dp"
+            android:paddingTop="@dimen/padding_14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_select_date">
 
             <androidx.appcompat.widget.AppCompatTextView
-                style="@style/TextViewLarge"
                 android:id="@+id/tv_transaction_list"
+                style="@style/TextViewLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_history_transactino_list"
                 android:textColor="@color/black_thunder"
+                android:visibility="invisible"
                 app:fontFamily="@font/prompt_semibold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                style="@style/TextViewMini"
                 android:id="@+id/tv_selected_date"
+                style="@style/TextViewMini"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_history_date_select"
                 android:textColor="@color/green_fun_green"
+                android:visibility="invisible"
                 app:fontFamily="@font/prompt_regular"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBaseline_toBaselineOf="@id/tv_transaction_list"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible" />
 
             <FrameLayout
-                android:layout_marginTop="@dimen/margin_14dp"
-                app:layout_constraintTop_toBottomOf="@id/tv_transaction_list"
+                android:id="@+id/layout_history_list"
                 android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_height="0dp">
+                app:layout_constraintTop_toBottomOf="@id/tv_transaction_list">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextViewRegular"
-                    android:visibility="@{isEmpty ? View.VISIBLE : View.GONE}"
-                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:text="@string/hint_history_transaction_empty"
                     android:textColor="@color/color_error_text"
+                    android:visibility="@{isEmpty ? View.VISIBLE : View.GONE}"
                     app:fontFamily="@font/prompt_regular"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBaseline_toBaselineOf="@id/tv_transaction_list"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:visibility="@{!isEmpty ? View.VISIBLE : View.GONE}"
                     android:id="@+id/rv_history"
-                    tools:listitem="@layout/item_rv_transaction"
-                    android:layout_height="match_parent"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{!isEmpty ? View.VISIBLE : View.GONE}"
+                    tools:listitem="@layout/item_rv_transaction" />
 
             </FrameLayout>
 

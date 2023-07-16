@@ -67,6 +67,8 @@
     <string name="hint_exchange_to_other_currency">1 EUR แลกได้ 33.365808 THB</string>
     <string name="hint_exchange_to">เป็น</string>
     <string name="hint_exchange_your_balance_to">คุณมีเงินอยู่ 0.00 EUR</string>
+    <string name="hint_date_from">ตั้งแต่วันที่</string>
+    <string name="hint_date_to">ถึงวันที่</string>
 
     <!--message-->
     <string name="message_maintenance">ปิดปรับปรุงระบบชั่วคราว\nขออภัยในความไม่สะดวก</string>

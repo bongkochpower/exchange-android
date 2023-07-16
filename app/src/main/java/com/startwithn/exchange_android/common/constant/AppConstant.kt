@@ -12,9 +12,10 @@ object AppConstant {
 
     const val FORMAT_SERVICE_DATE = "yyyy-MM-dd"
     const val FORMAT_SERVICE_DATE_TIME = "yyyy-MM-dd hh:mm:ss"
+    const val FORMAT_SERVICE_DATE_TIME_FULL = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
     const val FORMAT_UI_DATE_MONTH_2 = "dd/MM"
     const val FORMAT_UI_DATE = "dd/MM/yyyy"
-    const val FORMAT_UI_TIME = "hh:mm"
+    const val FORMAT_UI_TIME = "HH:mm"
 
 }

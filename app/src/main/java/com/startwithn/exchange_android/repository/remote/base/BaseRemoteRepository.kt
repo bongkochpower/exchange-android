@@ -33,7 +33,7 @@ open class BaseRemoteRepository(private val context: Context) {
                         context.getString(R.string.message_no_internet),
                         context.getString(R.string.message_please_check_no_internet)
                     )
-                    else -> ResultWrapper.GenericError(0, context.getString(R.string.message_error))
+                    else -> ResultWrapper.GenericError(0, throwable.message)
                 }
             }
         }

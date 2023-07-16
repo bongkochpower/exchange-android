@@ -81,8 +81,16 @@ fun String?.toDate(format: String): Date? {
 }
 
 fun String?.toServiceFormat() : String{
-    return reDateFormat(AppConstant.FORMAT_UI_DATE, AppConstant.FORMAT_SERVICE_DATE).orEmpty()
+    return reDateFormat(AppConstant.FORMAT_UI_DATE, AppConstant.FORMAT_SERVICE_DATE).toDashWhenNullOrEmpty()
 }
+fun String?.toDisplayFormat() : String{
+    return reDateFormat(AppConstant.FORMAT_SERVICE_DATE,AppConstant.FORMAT_UI_DATE).toDashWhenNullOrEmpty()
+}
+/*@JvmStatic
+    fun convertStringToDateFormat(value: String?): String = value.reDateFormat(
+        AppConstant.FORMAT_SERVICE_DATE,
+        AppConstant.FORMAT_UI_DATE
+    ) ?: ""*/
 
 private const val diffYear: Int = 543
 fun Int?.convertToBuddhistYear(): Int? = this?.plus(diffYear) ?: run { this }

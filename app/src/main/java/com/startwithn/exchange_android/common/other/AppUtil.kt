@@ -47,12 +47,6 @@ object AppUtil {
     fun convertStringIsNullOrEmptyToDash(value: String?): String = value.toDashWhenNullOrEmpty()
 
     /*@JvmStatic
-    fun convertStringToDateFormat(value: String?): String = value.reDateFormat(
-        AppConstant.FORMAT_SERVICE_DATE,
-        AppConstant.FORMAT_UI_DATE
-    ) ?: ""*/
-
-    /*@JvmStatic
     fun convertStringToTimeFormat(value: String?): String = value.reDateFormat(
         AppConstant.FORMAT_SERVICE_DATE_TIME,
         AppConstant.FORMAT_UI_TIME

@@ -18,6 +18,7 @@ import com.startwithn.exchange_android.common.navigator.AppNavigator
 import com.startwithn.exchange_android.databinding.ActivityMainBinding
 import com.startwithn.exchange_android.databinding.ItemRvBalanceBinding
 import com.startwithn.exchange_android.databinding.ItemRvTransactionBinding
+import com.startwithn.exchange_android.ext.goToGoogleStore
 import com.startwithn.exchange_android.ext.logout
 import com.startwithn.exchange_android.ext.setItemPadding
 import com.startwithn.exchange_android.ext.setOnLoadMoreListener
@@ -183,7 +184,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
                 is ResultWrapper.GenericError -> {
                     AppAlert.alertGenericError(this,it.code, it.message).show(supportFragmentManager)
-
                 }
 
                 is ResultWrapper.NetworkError -> {
@@ -264,6 +264,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //        val diffResult = DiffUtil.calculateDiff(LastTransactionDiffUtilCallback(oldList, transactions))
 //        diffResult.dispatchUpdatesTo(lastTransactionAdapter)
         lastTransactionAdapter.updateList(transactions)
+
+        binding.isTransactionEmpty = transactions.size == 0
     }
 
 

@@ -5,9 +5,16 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="activity"
             type="com.startwithn.exchange_android.ui.page.main.MainActivity" />
+
+        <variable
+            name="isTransactionEmpty"
+            type="Boolean" />
+
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -20,7 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".presentation.page.news.detail.NewsDetailActivity">
-
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/app_bar_layout"
@@ -46,10 +52,10 @@
 
                         <com.startwithn.exchange_android.ui.widget.AppToolbar
                             android:id="@+id/toolbar"
-                            app:layout_collapseMode="pin"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
-                            app:iconBackSrc="@drawable/icon_hamburger" />
+                            app:iconBackSrc="@drawable/icon_hamburger"
+                            app:layout_collapseMode="pin" />
 
                         <!--menu-->
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,14 +144,13 @@
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
-
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_header">
+                android:background="@color/gray_tasman"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
 
                 <!--balance-->
                 <LinearLayout
@@ -182,7 +187,7 @@
                 <!--recent-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@color/gray_tasman"
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/padding_20dp"
@@ -204,7 +209,8 @@
 
                         <include
                             android:id="@+id/layout_empty"
-                            layout="@layout/layout_empty_main_recent" />
+                            layout="@layout/layout_empty_main_recent"
+                            android:visibility="@{isTransactionEmpty ? View.VISIBLE : View.GONE}" />
 
                         <!--<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                             android:id="@+id/swipe_refresh_layout"
@@ -212,11 +218,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/padding_14dp">
                         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_transactions"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scrollbars="vertical"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@android:layout/simple_dropdown_item_1line" />
                     </FrameLayout>
@@ -225,6 +231,8 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -247,7 +255,7 @@
 </layout>
 
 
-<!--old design-->
+    <!--old design-->
     <!--<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"

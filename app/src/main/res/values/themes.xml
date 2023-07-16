@@ -53,16 +53,9 @@
     </style>
 
     <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="materialAlertDialogTitleTextStyle">@style/TitleTextStyle</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/BodyTextStyle</item>
+<!--        <item name="materialAlertDialogTitleTextStyle">@font/prompt_medium</item>-->
+        <item name="materialAlertDialogBodyTextStyle">@font/prompt_medium</item>
     </style>
-    <style name="TitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
-        <item name="android:fontFamily">@font/prompt_medium</item>
-    </style>
-    <style name="BodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
-        <item name="android:fontFamily">@font/prompt_regular</item>
-    </style>
-
 
     <!--CardView-->
     <style name="CardViewStyle" parent="Widget.MaterialComponents.CardView">

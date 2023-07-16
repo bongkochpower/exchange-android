@@ -41,8 +41,12 @@ interface AppAPI {
     suspend fun uploadProfile(@Part image: MultipartBody.Part): Response<UploadResponseModel>
 
     //region app func
-    @GET("api/v1/transaction/lastest")
-    suspend fun transactionLast(): Response<BaseResponseModel<List<TransactionsModel>>>
+
+    @GET("api/v1/transaction/customer")
+    suspend fun lastTransactions(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+    ): Response<BaseResponseModel<List<TransactionsModel>>>
 
     @GET("api/v1/transaction/customer")
     suspend fun historyTransactions(

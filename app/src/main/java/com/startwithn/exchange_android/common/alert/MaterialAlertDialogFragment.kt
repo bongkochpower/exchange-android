@@ -55,6 +55,7 @@ class AlertDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val overrideThemeRes = arguments?.getInt(KEY_THEME_RES)
+        val title = arguments?.getString(KEY_TITLE)
         val message = arguments?.getString(KEY_MESSAGE)
         val confirmButton = arguments?.getString(KEY_CONFIRM_BUTTON)
         val cancelButton = arguments?.getString(KEY_CANCEL_BUTTON)
@@ -68,6 +69,7 @@ class AlertDialogFragment : DialogFragment() {
             } else {
                 MaterialAlertDialogBuilder(requireContext())
             }
+            dialog.setTitle(title)
             dialog.setMessage(message)
             dialog.setPositiveButton(
                 confirmButton

@@ -1,8 +1,11 @@
 package com.startwithn.exchange_android.common.manager
 
 import android.content.Context
+import com.google.gson.Gson
 import com.startwithn.exchange_android.common.constant.KeyConstant
 import com.startwithn.exchange_android.config.AppApplication
+import com.startwithn.exchange_android.config.AppApplication.Companion.getSecureSharePreferences
+import com.startwithn.exchange_android.model.response.UserModel
 import me.leolin.shortcutbadger.ShortcutBadger
 import timber.log.Timber
 
@@ -33,6 +36,17 @@ class AppManager(private val context: Context) {
         return AppApplication.getSecureSharePreferences(context)
             .getString(KeyConstant.AUTH_TOKEN, null)
     }
+    //endregion
+
+    //region user
+    fun setUser(userModel: UserModel?) =
+        getSecureSharePreferences(context).edit().putString(KeyConstant.USER, Gson().toJson(userModel))
+            .apply()
+
+    fun getUser(): UserModel? = Gson().fromJson(
+        getSecureSharePreferences(context).getString(KeyConstant.USER, null),
+        UserModel::class.java
+    )
     //endregion
 
     //region notification
@@ -68,10 +82,11 @@ class AppManager(private val context: Context) {
     //endregion
     //endregion
 
-    fun removeAll(cb : () -> Unit) {
+    fun removeAll(cb: () -> Unit) {
         AppApplication.getSecureSharePreferences(context).edit().apply {
             remove(KeyConstant.FCM_TOKEN)
             remove(KeyConstant.AUTH_TOKEN)
+            remove(KeyConstant.USER)
         }.apply()
         //removeNotificationCount()
 

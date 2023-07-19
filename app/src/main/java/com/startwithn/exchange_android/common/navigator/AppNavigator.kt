@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat
+import com.startwithn.exchange_android.ui.page.hamburger_menu.edit_profile.EditProfileActivity
 import com.startwithn.exchange_android.ui.page.hamburger_menu.help.HelpActivity
 import com.startwithn.exchange_android.ui.page.hamburger_menu.setting.SettingsActivity
 import com.startwithn.exchange_android.ui.page.login.LoginActivity
@@ -43,6 +44,10 @@ class AppNavigator(private val activity: Activity) {
 
     fun goToSettings() {
         SettingsActivity.open(activity)
+    }
+
+    fun goToEditProfile() {
+        EditProfileActivity.open(activity)
     }
 
     fun goToHelp() {

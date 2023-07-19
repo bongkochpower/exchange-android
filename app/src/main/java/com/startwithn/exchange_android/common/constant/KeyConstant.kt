@@ -3,14 +3,9 @@ package com.startwithn.exchange_android.common.constant
 object KeyConstant {
     /*secure*/
     const val FCM_TOKEN = "fcm_token"
-
     const val AUTH_TOKEN = "auth_token"
+    const val USER = "user"
 
-    const val DEFAULT_ADDRESS = "default_address"
-
-    const val DEFAULT_PAYMENT_CARD = "default_card"
-
-    const val CART = "cart"
 
     /*general*/
     const val LANGUAGE = "language"

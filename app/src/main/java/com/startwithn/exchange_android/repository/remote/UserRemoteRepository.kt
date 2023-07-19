@@ -43,6 +43,17 @@ class UserRemoteRepository(
             })
     }
 
+    suspend fun updateProfile(
+        userId : Int,
+        request: RegisterRequestModel
+    ): ResultWrapper<Any>{
+        return safeApiCall(
+            dispatcher,
+            call = {
+                api.updateProfile(userId,request)
+            })
+    }
+
     suspend fun uploadAvatar(avatar: MultipartBody.Part): ResultWrapper<UploadResponseModel> {
         return safeApiCall(dispatcher, call = { api.uploadProfile(avatar) })
     }

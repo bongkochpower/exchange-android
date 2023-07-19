@@ -16,6 +16,10 @@
             type="Boolean" />
 
         <variable
+            name="isIdCardUploading"
+            type="Boolean" />
+
+        <variable
             name="isPhoneEmpty"
             type="Boolean" />
 
@@ -28,6 +32,9 @@
             type="Boolean" />
 
         <variable
+            name="isPostcodeEmpty"
+            type="Boolean" />
+        <variable
             name="isPasswordEmpty"
             type="Boolean" />
 
@@ -38,6 +45,11 @@
         <variable
             name="isSelectIdCardImage"
             type="Boolean" />
+
+        <variable
+            name="user"
+            type="com.startwithn.exchange_android.model.response.UserModel" />
+
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -62,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/title_register_form"
+                android:text="@{user != null ? @string/title_register_edit_form : @string/title_register_form,default=@string/title_register_form}"
                 android:textColor="@color/black"
                 app:fontFamily="@font/prompt_semibold" />
 
@@ -143,6 +155,7 @@
 
             <!--password-->
             <EditText
+                android:backgroundTint="@{user != null ? @color/gray_alto : null}"
                 android:id="@+id/edt_reg_phone"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
@@ -214,6 +227,15 @@
                 android:importantForAutofill="no"
                 android:paddingHorizontal="@dimen/padding_8dp"
                 tools:ignore="RtlSymmetry">
+
+                <include
+                    android:layout_centerHorizontal="true"
+                    layout="@layout/layout_progress"
+                    android:visibility="@{isIdCardUploading?View.VISIBLE:View.GONE,default=gone}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    />
 
                 <!--normal event-->
                 <LinearLayout
@@ -376,6 +398,33 @@
                 android:layout_height="wrap_content"
                 app:edtTitle="@string/hint_province" />
 
+            <!--postcode-->
+            <EditText
+                android:id="@+id/edt_reg_postcode"
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{isPostcodeEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:hint="@string/hint_postcode"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:maxLength="@integer/length_postal_code"
+                android:textColorHint="@{isPostcodeEmpty ? @color/color_error_text : @color/text_edittext_gray}"
+                tools:ignore="RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_error_postcode"
+                style="@style/TextViewExtraMini"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_2dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:gravity="start"
+                android:text="@string/validate_reg_postcode"
+                android:textColor="@color/color_error_text"
+                android:visibility="@{isPostcodeEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}"
+                app:fontFamily="@font/prompt_regular" />
+
             <!--pw-->
             <EditText
                 android:id="@+id/edt_reg_password"
@@ -454,8 +503,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_30dp"
                 android:background="@drawable/bg_confirm"
-
-                android:text="@string/button_register"
+                android:text="@{user != null ? @string/title_register_edit_form : @string/button_register,default = @string/button_register}"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

@@ -59,6 +59,14 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layout: 
 
     open fun subscribe() {}
 
+    fun showLoading(){
+        if(progressDialog.isShow) return
+        progressDialog.show(childFragmentManager)
+    }
+    fun hideLoading(){
+        progressDialog.dismissAllowingStateLoss()
+    }
+
     fun showAlertSuccessDialog(
         title: String? = null,
         textButtonRight: String? = null,

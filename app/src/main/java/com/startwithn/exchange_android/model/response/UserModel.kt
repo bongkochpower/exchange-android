@@ -23,6 +23,8 @@ data class UserModel(
     var id: Int?,
     @field:SerializedName("id_card_image")
     var idCardImage: String?,
+    @field:SerializedName("profile_image")
+    var profileImage: String?,
     @field:SerializedName("is_active")
     var isActive: Boolean?,
     @field:SerializedName("is_consent")

@@ -147,7 +147,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     AppNavigator(this@MainActivity).goToSettings()
                 }
                 btnEditProfile.setOnClickListener {
-
+                    AppNavigator(this@MainActivity).goToEditProfile()
+                    btnClose.performClick()
                 }
                 btnHelp.setOnClickListener {
                     AppNavigator(this@MainActivity).goToHelp()
@@ -184,7 +185,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
 
                 is ResultWrapper.GenericError -> {
-                    AppAlert.alertGenericError(this,it.code, it.message).show(supportFragmentManager)
+                    AppAlert.alertGenericError(this, it.code, it.message).show(supportFragmentManager)
                 }
 
                 is ResultWrapper.NetworkError -> {
@@ -201,12 +202,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 is ResultWrapper.Loading -> {
                     lastTransactionAdapter.isLoading = true
                 }
+
                 is ResultWrapper.GenericError -> {
-                    AppAlert.alertGenericError(this,it.code, it.message).show(supportFragmentManager)
+                    AppAlert.alertGenericError(this, it.code, it.message).show(supportFragmentManager)
                 }
+
                 is ResultWrapper.NetworkError -> {
                     AppAlert.alertNetworkError(this).show(supportFragmentManager)
                 }
+
                 else -> {
                     /*none*/
                 }
@@ -244,22 +248,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         mainViewModel.getMe()
     }
 
-    private fun getLastTransaction(){
+    private fun getLastTransaction() {
         lastTransactionAdapter.submitList(true, mutableListOf())
         mainViewModel.getLastTransaction()
     }
 
-    private fun setUserBalance(userModel: UserModel?){
+    private fun setUserBalance(userModel: UserModel?) {
         userModel?.customerBalances?.let { balance ->
 //            val oldList = balanceAdapter.getOriginalList()
 //            val diffResult = DiffUtil.calculateDiff(BalanceDiffUtilCallback(oldList, balance))
 //            diffResult.dispatchUpdatesTo(balanceAdapter)
-            balanceAdapter.submitList(false,balance)
+            balanceAdapter.submitList(false, balance)
 
         }
     }
 
-    private fun setLastTransactions(transactions : MutableList<TransactionsModel>){
+    private fun setLastTransactions(transactions: MutableList<TransactionsModel>) {
         //lastTransactionAdapter.submitList(false,transactions)
 //        val oldList = lastTransactionAdapter.getOriginalList()
 //        val diffResult = DiffUtil.calculateDiff(LastTransactionDiffUtilCallback(oldList, transactions))

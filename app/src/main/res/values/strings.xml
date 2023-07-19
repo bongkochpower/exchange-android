@@ -16,6 +16,7 @@
     <string name="title_login_not_success">การ Login ไม่สำเร็จ</string>
     <string name="title_tern_and_con">ข้อตกลงและเงื่อนไข</string>
     <string name="title_register_form">ลงทะเบียนสมาชิก</string>
+    <string name="title_register_edit_form">แก้ไขข้อมูลสมาชิก</string>
     <string name="title_main_topup">เติมเงิน</string>
     <string name="title_main_exchange">แลกเงิน</string>
     <string name="title_main_history">ประวัติ</string>
@@ -26,11 +27,10 @@
     <string name="title_topup_by_k_plus">เติมเงินด้วย K PLUS</string>
     <string name="title_history_transaction">เลือกดูประวัติการทำรายการ</string>
     <string name="title_history_transactino_list">รายการ</string>
-    <string name="title_history_date_select">ตั้งแต่วันที่ #start - #end</string>
+    <string name="title_history_date_select">ตั้งแต่วันที่ %1$s - %2$s</string>
 
 
     <!--description-->
-
 
     <!--hint-->
     <string name="hint_phone">เบอร์โทรศัพท์</string>
@@ -49,6 +49,7 @@
     <string name="hint_sub_district">ตำบล/แขวง</string>
     <string name="hint_district">อำเภอ/เขต</string>
     <string name="hint_province">จังหวัด</string>
+    <string name="hint_postcode">รหัสไปรษณีย์</string>
     <string name="hint_reg_password">Password</string>
     <string name="hint_reg_confirm_password">Confirm Password</string>
     <string name="hint_resend_otp">ขอรหัส OTP ใหม่อีกครั้ง</string>
@@ -139,6 +140,7 @@
     <string name="validate_reg_title">กรุณาใส่ข้อมูลให้ครบถ้วน</string>
     <string name="validate_reg_name">กรุณาใส่ชื่อ</string>
     <string name="validate_reg_lastname">กรุณาใส่นามสกุล</string>
+    <string name="validate_reg_postcode">กรุณาใส่รหัสไปรษณีย์</string>
     <string name="validate_reg_phone_10_digit">กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 หลัก</string>
     <string name="validate_reg_confirm_password">Confirm Password ไม่ถูกต้อง</string>
     <string name="validate_reg_attach_file_fail">แนบไฟล์ไม่สำเร็จ ขนาดเกิน 25 mb</string>

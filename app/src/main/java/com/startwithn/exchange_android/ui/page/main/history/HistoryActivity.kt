@@ -149,7 +149,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
             if(isShow){
                 val dateFrom = edtStartDate.text.toString()
                 val dateTo = edtEndDate.text.toString()
-                val textDateSelected = resources.getString(R.string.title_history_date_select).replace("#start",dateFrom).replace("#end",dateTo)
+                val textDateSelected = resources.getString(R.string.title_history_date_select,dateFrom,dateTo)
                 tvSelectedDate.text = textDateSelected
             }
         }

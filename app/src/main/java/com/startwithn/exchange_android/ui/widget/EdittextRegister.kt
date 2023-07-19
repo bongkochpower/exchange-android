@@ -44,6 +44,9 @@ class EdittextRegister(context: Context, attrs: AttributeSet) : FrameLayout(cont
     fun getText() : String{
         return binding.edtRegister.text.toString().trim()
     }
+    fun setText(text : String){
+        binding.edtRegister.setText(text)
+    }
     fun getHintText() : String{
         return binding.edtRegister.hint.toString().trim()
     }
@@ -54,6 +57,7 @@ class EdittextRegister(context: Context, attrs: AttributeSet) : FrameLayout(cont
             tvErrorValidate.text = msg
         }
     }
+    fun getValidation() = binding.isErrorValidate ?: true
 
     fun addOnTextChangeListener(textWatcher: TextWatcher){
         binding.edtRegister.addTextChangedListener(textWatcher)

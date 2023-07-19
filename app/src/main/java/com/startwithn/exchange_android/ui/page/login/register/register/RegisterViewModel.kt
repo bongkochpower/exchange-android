@@ -29,6 +29,7 @@ class RegisterViewModel(private val userRemoteRepository: UserRemoteRepository, 
     private val registerLiveData = SingleLiveEvent<ResultWrapper<RegisterResponseModel>>()
     private val uploadProfile: MutableLiveData<ResultWrapper<UploadResponseModel>> = MutableLiveData()
     val uploadIdCardImage: SingleLiveEvent<ResultWrapper<UploadResponseModel>> = SingleLiveEvent()
+    val updateProfileLiveData = SingleLiveEvent<ResultWrapper<Any>>()
 
     fun register(request: RegisterRequestModel) {
         viewModelScope.launch {
@@ -38,18 +39,25 @@ class RegisterViewModel(private val userRemoteRepository: UserRemoteRepository, 
     }
     fun registerResult() = registerLiveData
 
-    fun updateProfile(avatar: MultipartBody.Part) {
+    fun uploadImageProfile(avatar: MultipartBody.Part) {
         uploadProfile.value = ResultWrapper.Loading
         viewModelScope.launch {
             uploadProfile.value = userRemoteRepository.uploadAvatar(avatar)
         }
     }
-    fun updateProfileResult() = uploadProfile
+    fun uploadImageProfileResult() = uploadProfile
 
     fun uploadIdCardImage(image : MultipartBody.Part){
-        uploadProfile.value = ResultWrapper.Loading
+        uploadIdCardImage.value = ResultWrapper.Loading
         viewModelScope.launch {
             uploadIdCardImage.value = userRemoteRepository.uploadAvatar(image)
+        }
+    }
+
+    fun updateProfile(userId : Int , request: RegisterRequestModel){
+        updateProfileLiveData.value = ResultWrapper.Loading
+        viewModelScope.launch {
+            updateProfileLiveData.value = userRemoteRepository.updateProfile(userId, request)
         }
     }
 

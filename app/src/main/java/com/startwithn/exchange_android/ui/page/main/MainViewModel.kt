@@ -35,7 +35,11 @@ class MainViewModel(
     fun getMe() {
         me.value = ResultWrapper.Loading
         viewModelScope.launch {
-            me.value = userRemoteRepository.me()
+            val result = userRemoteRepository.me()
+            if(result is ResultWrapper.Success){
+                appManager.setUser(result.response.data)
+            }
+            me.value = result
         }
     }
 

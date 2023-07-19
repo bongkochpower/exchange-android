@@ -19,7 +19,9 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AppAPI {
@@ -32,6 +34,12 @@ interface AppAPI {
 
     @POST("api/v1/customer")
     suspend fun register(@Body request: RegisterRequestModel): Response<RegisterResponseModel>
+
+    @PUT("api/v1/customer/{id}")
+    suspend fun updateProfile(
+        @Path("id") id : Int,
+        @Body request: RegisterRequestModel): Response<Any>
+
 
     @GET("api/v1/customer/me")
     suspend fun me(): Response<BaseResponseModel<UserModel>>

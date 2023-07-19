@@ -3,7 +3,9 @@ package com.startwithn.exchange_android.ui.page.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -34,6 +36,7 @@ import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHel
 import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHelper.initTransactions
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import com.startwithn.exchange_android.ui.page.login.LoginViewModel
+import com.startwithn.exchange_android.ui.page.main.history.HistoryActivity
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,14 +48,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val balanceAdapter by lazy {
         SimpleRecyclerViewAdapter<UserModel.CustomerBalance, ItemRvBalanceBinding>(
             layout = R.layout.item_rv_balance,
-            isRunAnimation = true
+            isRunAnimation = true,
+            loadingStyleEnum = LoadingStyleEnum.SK_BALANCE
         )
     }
 
     private val lastTransactionAdapter by lazy {
         SimpleRecyclerViewAdapter<TransactionsModel, ItemRvTransactionBinding>(
             layout = R.layout.item_rv_transaction,
-            isRunAnimation = true
+            isRunAnimation = true,
+            loadingStyleEnum = LoadingStyleEnum.SK_TRANSACTION
         )
     }
 
@@ -165,8 +170,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
 
         }
-
-
     }
 
     override fun subscribe() {

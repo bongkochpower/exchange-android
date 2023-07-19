@@ -22,6 +22,7 @@ import com.startwithn.exchange_android.ext.slideUp
 import com.startwithn.exchange_android.ext.toServiceFormat
 import com.startwithn.exchange_android.model.response.TransactionsModel
 import com.startwithn.exchange_android.network.ResultWrapper
+import com.startwithn.exchange_android.ui.list.LoadingStyleEnum
 import com.startwithn.exchange_android.ui.list.adapter.SimpleRecyclerViewAdapter
 import com.startwithn.exchange_android.ui.list.itemdecoration.EqualSpacingItemDecoration
 import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHelper.initTransactions
@@ -37,16 +38,15 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
     private val historyAdapter by lazy {
         SimpleRecyclerViewAdapter<TransactionsModel, ItemRvTransactionBinding>(
             layout = R.layout.item_rv_transaction,
-            isRunAnimation = true
+            isRunAnimation = true,
+            loadingStyleEnum = LoadingStyleEnum.SK_TRANSACTION
         )
     }
 
     companion object {
 
         fun open(activity: Activity) {
-            val intent = Intent(activity, HistoryActivity::class.java).apply {
-
-            }
+            val intent = Intent(activity, HistoryActivity::class.java).apply {}
             ContextCompat.startActivity(activity, intent, null)
         }
     }
@@ -61,6 +61,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                     //contactUsViewModel.getContact(contactUsViewModel.page)
                 })
             }
+
+            historyAdapter.submitList(true, mutableListOf())
             historyAdapter.initTransactions(this@HistoryActivity)
         }
     }
@@ -68,7 +70,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
     override fun listener() {
         with(binding) {
             toolbar.setOnBackListener {
-                onBackPressed()
+                onClose()
             }
 
             imgDateFrom.apply {
@@ -123,7 +125,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         }
         historyViewModel.historyResultLiveData.observe(this) {
             it?.let {
-                historyAdapter.submitList(true, it)
+                showTransactionListView(true)
+                historyAdapter.updateList(it,true)
                 binding.isEmpty = historyAdapter.itemCount == 0
             }
         }
@@ -150,6 +153,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                 val dateFrom = edtStartDate.text.toString()
                 val dateTo = edtEndDate.text.toString()
                 val textDateSelected = resources.getString(R.string.title_history_date_select,dateFrom,dateTo)
+                val isSelected = (dateFrom.isNotEmpty() && dateTo.isNotEmpty())
+                tvSelectedDate.isVisible = isSelected
                 tvSelectedDate.text = textDateSelected
             }
         }
@@ -174,7 +179,13 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
     }
 
     private fun getHistory(dateFrom: String, dateTo: String) {
+
         historyViewModel.getHistory(dateForm = dateFrom.toServiceFormat(), dateTo = dateTo.toServiceFormat())
+    }
+
+    private fun onClose(){
+        setResult(Activity.RESULT_OK, Intent())
+        finish()
     }
 
 }

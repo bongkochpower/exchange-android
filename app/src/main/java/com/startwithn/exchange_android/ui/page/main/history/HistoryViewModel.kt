@@ -16,8 +16,7 @@ class HistoryViewModel(
     private val state: SavedStateHandle
 ) : ViewModel() {
 
-    val historyRequestLiveData =
-        SingleLiveEvent<ResultWrapper<BaseResponseModel<List<TransactionsModel>>>>()
+    val historyRequestLiveData = MutableLiveData<ResultWrapper<BaseResponseModel<List<TransactionsModel>>>>()
 
     val historyResultLiveData: MutableLiveData<MutableList<TransactionsModel>>
         get() = state.getLiveData("history_list")
@@ -32,6 +31,10 @@ class HistoryViewModel(
 
     private val rowsPerPage: Int = 30
 
+    init {
+        getLastHistory()
+    }
+
     fun getHistory(nextPage: Int? = 1, dateForm: String, dateTo: String) {
         page = nextPage
         page?.let {
@@ -45,6 +48,7 @@ class HistoryViewModel(
                         1 -> {
                             list
                         }
+
                         else -> {
                             val cloneList: MutableList<TransactionsModel> = historyList
                             cloneList.addAll(list)
@@ -56,4 +60,18 @@ class HistoryViewModel(
             }
         }
     }
+
+    private fun getLastHistory() {
+        viewModelScope.launch {
+            historyRequestLiveData.value = ResultWrapper.Loading
+            val result = appRemoteRepository.getLastTransactions()
+            historyRequestLiveData.value = result
+            if(result is ResultWrapper.Success){
+                val list = result.response.data?.toMutableList() ?: mutableListOf()
+                historyList = list
+            }
+        }
+    }
+
+
 }

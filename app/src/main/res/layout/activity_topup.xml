@@ -146,7 +146,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:paddingTop="@dimen/padding_48dp"
+                android:paddingTop="@dimen/margin_40dp"
                 android:layout_marginHorizontal="@dimen/padding_30dp"
                 android:layout_weight="1">
 
@@ -154,7 +154,7 @@
                     style="@style/TextViewRegularPlus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_horizontal"
                     android:background="@drawable/bg_slide_confirm"
                     android:text="@string/button_next"
                     android:id="@+id/btn_slide_confirm"

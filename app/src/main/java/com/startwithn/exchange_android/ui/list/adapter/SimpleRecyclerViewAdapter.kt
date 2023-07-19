@@ -18,8 +18,10 @@ import com.startwithn.exchange_android.ui.list.ItemViewType
 import com.startwithn.exchange_android.ui.list.LoadingStyleEnum
 import com.startwithn.exchange_android.ui.list.SpaceIVT
 import com.startwithn.exchange_android.ui.list.ViewType
+import com.startwithn.exchange_android.ui.list.createBalanceLoadingViewHolder
 import com.startwithn.exchange_android.ui.list.createBannerLoadingViewHolder
 import com.startwithn.exchange_android.ui.list.createLoadingViewHolder
+import com.startwithn.exchange_android.ui.list.createTransactionLoadingViewHolder
 
 class SimpleRecyclerViewAdapter<T, B : ViewDataBinding>(
     @LayoutRes private val layout: Int,
@@ -67,6 +69,10 @@ class SimpleRecyclerViewAdapter<T, B : ViewDataBinding>(
                     LoadingStyleEnum.SK_BANNER -> {
                         parent.createBannerLoadingViewHolder()
                     }
+                    LoadingStyleEnum.SK_BALANCE -> {
+                        parent.createBalanceLoadingViewHolder()
+                    }
+                    LoadingStyleEnum.SK_TRANSACTION -> parent.createTransactionLoadingViewHolder()
                     else -> {
                         parent.createLoadingViewHolder()
                     }

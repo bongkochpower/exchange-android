@@ -55,7 +55,6 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
             rvHistory.apply {
                 adapter = historyAdapter
-                setItemPadding(16f, EqualSpacingItemDecoration.VERTICAL)
                 setOnLoadMoreListener({ historyAdapter.isLoading }, {
                     //contactUsViewModel.getContact(contactUsViewModel.page)
                 })
@@ -122,8 +121,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         }
         historyViewModel.historyResultLiveData.observe(this) {
             it?.let {
-                binding.isEmpty = historyAdapter.itemCount == 0
                 historyAdapter.submitList(true, it)
+                binding.isEmpty = historyAdapter.itemCount == 0
             }
         }
     }

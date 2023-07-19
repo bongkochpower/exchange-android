@@ -150,12 +150,17 @@
                 android:layout_marginHorizontal="@dimen/padding_30dp"
                 android:layout_weight="1">
 
-                <Button
-                    android:layout_gravity="center_horizontal"
-                    android:text="topup"
-                    android:id="@+id/slide_confirm"
+                <com.google.android.material.button.MaterialButton
+                    style="@style/TextViewRegularPlus"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_slide_confirm"
+                    android:text="@string/button_next"
+                    android:id="@+id/btn_slide_confirm"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textFontWeight="600" />
 
             </FrameLayout>
 

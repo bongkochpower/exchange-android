@@ -71,7 +71,7 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
             }
 
 
-            slideConfirm.setOnClickListener {
+            btnSlideConfirm.setOnClickListener {
                 if (isValidate()) {
                     val amount = edtMoneyAmount.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
                     viewModel.topUp(amount = amount)

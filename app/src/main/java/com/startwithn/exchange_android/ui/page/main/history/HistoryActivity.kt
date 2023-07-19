@@ -12,11 +12,13 @@ import com.startwithn.exchange_android.common.alert.AppAlert
 import com.startwithn.exchange_android.databinding.ActivityHistoryBinding
 import com.startwithn.exchange_android.databinding.ActivityTopupBinding
 import com.startwithn.exchange_android.databinding.ItemRvTransactionBinding
+import com.startwithn.exchange_android.ext.fadeIn
 import com.startwithn.exchange_android.ext.getDatePickerDialog
 import com.startwithn.exchange_android.ext.gone
 import com.startwithn.exchange_android.ext.setItemPadding
 import com.startwithn.exchange_android.ext.setOnLoadMoreListener
 import com.startwithn.exchange_android.ext.setOnTouchAnimation
+import com.startwithn.exchange_android.ext.slideUp
 import com.startwithn.exchange_android.ext.toServiceFormat
 import com.startwithn.exchange_android.model.response.TransactionsModel
 import com.startwithn.exchange_android.network.ResultWrapper

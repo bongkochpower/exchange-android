@@ -26,5 +26,5 @@ data class TransactionsModel(
     @field:SerializedName("type_text")
     var typeText: String?,
     @field:SerializedName("value")
-    var value: Int?
+    var value: Double?
 ) : Parcelable

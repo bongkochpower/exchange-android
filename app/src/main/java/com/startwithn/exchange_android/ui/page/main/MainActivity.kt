@@ -31,6 +31,7 @@ import com.startwithn.exchange_android.ui.list.adapter.SimpleRecyclerViewAdapter
 import com.startwithn.exchange_android.ui.list.diffutil.BalanceDiffUtilCallback
 import com.startwithn.exchange_android.ui.list.itemdecoration.EqualSpacingItemDecoration
 import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHelper.initBalance
+import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHelper.initTransactions
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import com.startwithn.exchange_android.ui.page.login.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
@@ -128,7 +129,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
 
             balanceAdapter.initBalance(this@MainActivity)
-            //lastTransactionAdapter.initLastTransaction(this@MainActivity)
+            lastTransactionAdapter.initTransactions(this@MainActivity)
         }
     }
 

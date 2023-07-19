@@ -6,6 +6,7 @@ import com.startwithn.exchange_android.model.body.LoginRequestModel
 import com.startwithn.exchange_android.model.body.RegisterRequestModel
 import com.startwithn.exchange_android.model.response.AccessTokenModel
 import com.startwithn.exchange_android.model.response.RegisterResponseModel
+import com.startwithn.exchange_android.model.response.TopUpResponse
 import com.startwithn.exchange_android.model.response.TransactionsModel
 import com.startwithn.exchange_android.model.response.UploadResponseModel
 import com.startwithn.exchange_android.model.response.UserModel
@@ -26,7 +27,7 @@ interface AppAPI {
     //region authorization
     @POST("api/v1/customer/login")
     suspend fun login(
-        @Body loginRequest : LoginRequestModel
+        @Body loginRequest: LoginRequestModel
     ): Response<BaseResponseModel<AccessTokenModel>>
 
     @POST("api/v1/customer")
@@ -55,6 +56,13 @@ interface AppAPI {
         @Query("dateFrom") dateFrom: String,
         @Query("dateTo") dateTo: String,
     ): Response<BaseResponseModel<List<TransactionsModel>>>
+
+    @FormUrlEncoded
+    @POST("api/v1/transaction/topup")
+    suspend fun topUp(
+        @Field("currency_id") currencyId: Int = 1,
+        @Field("value") value: Double
+    ): Response<TopUpResponse>
 
 
     //endregion

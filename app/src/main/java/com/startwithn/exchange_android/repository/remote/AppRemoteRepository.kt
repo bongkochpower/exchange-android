@@ -9,6 +9,7 @@ import com.startwithn.exchange_android.model.body.RegisterRequestModel
 import com.startwithn.exchange_android.model.response.AccessTokenModel
 import com.startwithn.exchange_android.model.response.MessageModel
 import com.startwithn.exchange_android.model.response.RegisterResponseModel
+import com.startwithn.exchange_android.model.response.TopUpResponse
 import com.startwithn.exchange_android.model.response.TransactionsModel
 import com.startwithn.exchange_android.model.response.UploadResponseModel
 import com.startwithn.exchange_android.model.response.UserModel
@@ -34,6 +35,12 @@ class AppRemoteRepository(
             api.historyTransactions(
                 page = page, limit = limit, dateFrom = from, dateTo = to
             )
+        })
+    }
+
+    suspend fun topUp(amount  : Double) : ResultWrapper<TopUpResponse>{
+        return safeApiCall(dispatcher, call = {
+            api.topUp(value = amount)
         })
     }
 

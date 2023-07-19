@@ -52,7 +52,7 @@ data class UserModel(
 ) {
     data class CustomerBalance(
         @field:SerializedName("balance")
-        var balance: Int?,
+        var balance: Double?,
         @field:SerializedName("currency_name")
         var currencyName: String?,
         @field:SerializedName("label")

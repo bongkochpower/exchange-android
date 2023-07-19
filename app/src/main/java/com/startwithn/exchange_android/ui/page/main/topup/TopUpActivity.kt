@@ -15,11 +15,16 @@ import androidx.core.widget.doAfterTextChanged
 import com.google.firebase.crashlytics.internal.common.Utils
 import com.ncorti.slidetoact.SlideToActView
 import com.startwithn.exchange_android.R
+import com.startwithn.exchange_android.common.alert.AppAlert
 import com.startwithn.exchange_android.databinding.ActivityTopupBinding
+import com.startwithn.exchange_android.network.ResultWrapper
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import com.startwithn.exchange_android.ui.widget.NumberPad
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup) {
+
+    private val viewModel : TopUpViewModel by stateViewModel()
 
     companion object {
 
@@ -68,7 +73,35 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
 
             slideConfirm.setOnClickListener {
                 if (isValidate()) {
+                    val amount = edtMoneyAmount.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
+                    viewModel.topUp(amount = amount)
+                }
+            }
+        }
+    }
 
+    override fun subscribe() {
+        super.subscribe()
+
+        viewModel.topUpLiveData.observe(this){
+            when (it) {
+                is ResultWrapper.Loading -> {
+                    showLoading()
+                }
+                is ResultWrapper.GenericError -> {
+                    AppAlert.alertGenericError(this,it.code, it.message).show(supportFragmentManager)
+                    hideLoading()
+                }
+                is ResultWrapper.NetworkError -> {
+                    AppAlert.alertNetworkError(this).show(supportFragmentManager)
+                    hideLoading()
+                }
+                is ResultWrapper.Success -> {
+                    hideLoading()
+                    topUpSuccess()
+                }
+                else -> {
+                    /*none*/
                 }
             }
         }

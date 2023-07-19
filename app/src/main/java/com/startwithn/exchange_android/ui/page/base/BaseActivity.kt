@@ -82,6 +82,14 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
         handleAppEvent()
     }
 
+    fun showLoading(){
+        if(progressDialog.isShow) return
+        progressDialog.show(supportFragmentManager)
+    }
+    fun hideLoading(){
+        progressDialog.dismissAllowingStateLoss()
+    }
+
     private fun handleAppEvent() {
         disposable.add(RxBus.listen(RxEvent.AppEvent::class.java).subscribe {
             runOnUiThread {

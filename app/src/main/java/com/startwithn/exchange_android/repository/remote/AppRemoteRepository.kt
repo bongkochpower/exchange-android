@@ -1,12 +1,15 @@
 package com.startwithn.exchange_android.repository.remote
 
 import android.content.Context
+import android.util.Log
 import com.startwithn.exchange_android.common.manager.AppManager
 import com.startwithn.exchange_android.ext.toSHA256
 import com.startwithn.exchange_android.model.base.BaseResponseModel
+import com.startwithn.exchange_android.model.body.ExchangeRequestModel
 import com.startwithn.exchange_android.model.body.LoginRequestModel
 import com.startwithn.exchange_android.model.body.RegisterRequestModel
 import com.startwithn.exchange_android.model.response.AccessTokenModel
+import com.startwithn.exchange_android.model.response.ExchangeCalculateResponse
 import com.startwithn.exchange_android.model.response.MessageModel
 import com.startwithn.exchange_android.model.response.RegisterResponseModel
 import com.startwithn.exchange_android.model.response.TopUpResponse
@@ -27,7 +30,7 @@ class AppRemoteRepository(
 ) : BaseRemoteRepository(context) {
 
     suspend fun getLastTransactions(): ResultWrapper<BaseResponseModel<List<TransactionsModel>>> {
-        return safeApiCall(dispatcher, call = { api.lastTransactions(1,10) })
+        return safeApiCall(dispatcher, call = { api.lastTransactions(1, 10) })
     }
 
     suspend fun getHistoryTransactions(page: Int, limit: Int, from: String, to: String): ResultWrapper<BaseResponseModel<List<TransactionsModel>>> {
@@ -38,9 +41,29 @@ class AppRemoteRepository(
         })
     }
 
-    suspend fun topUp(amount  : Double) : ResultWrapper<TopUpResponse>{
+    suspend fun topUp(amount: Double): ResultWrapper<TopUpResponse> {
         return safeApiCall(dispatcher, call = {
             api.topUp(value = amount)
+        })
+    }
+
+    suspend fun exchange(requestModel: ExchangeRequestModel): ResultWrapper<TopUpResponse> {
+        return safeApiCall(dispatcher, call = {
+            api.exchange(
+                currencyFromID = requestModel.currencyFormId,
+                currencyToID = requestModel.currencyToId,
+                amount = requestModel.amount
+            )
+        })
+    }
+
+    suspend fun exchangeCalculate(requestModel: ExchangeRequestModel): ResultWrapper<ExchangeCalculateResponse> {
+        return safeApiCall(dispatcher, call = {
+            api.exchangeCalculate(
+                currencyFromID = requestModel.currencyFormId,
+                currencyToID = requestModel.currencyToId,
+                amount = requestModel.amount
+            )
         })
     }
 

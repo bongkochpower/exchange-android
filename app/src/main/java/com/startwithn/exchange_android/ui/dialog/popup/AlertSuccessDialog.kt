@@ -6,6 +6,7 @@ import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import com.startwithn.exchange_android.R
 import com.startwithn.exchange_android.databinding.DialogAlertSuccessBinding
+import com.startwithn.exchange_android.ext.setOnTouchAnimation
 import com.startwithn.exchange_android.ui.dialog.popup.base.BaseDialogFragment
 
 class AlertSuccessDialog :
@@ -60,7 +61,10 @@ class AlertSuccessDialog :
 
     override fun setUp() {
         with(binding) {
-            btnConfirm.setOnClickListener { onConfirmClick?.invoke(this@AlertSuccessDialog) }
+            btnConfirm.apply {
+                setOnTouchAnimation()
+                setOnClickListener { onConfirmClick?.invoke(this@AlertSuccessDialog) }
+            }
         }
     }
 

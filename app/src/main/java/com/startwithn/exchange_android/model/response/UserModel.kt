@@ -1,5 +1,6 @@
 package com.startwithn.exchange_android.model.response
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class UserModel(
@@ -58,7 +59,10 @@ data class UserModel(
         @field:SerializedName("currency_name")
         var currencyName: String?,
         @field:SerializedName("label")
-        var label: String?
+        var label: String?,
+
+        @Transient
+        var isSelected : Boolean = false
     )
 }
 

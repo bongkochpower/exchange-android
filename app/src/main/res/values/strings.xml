@@ -64,7 +64,7 @@
     <string name="hint_transaction_time">18 ชั่วโมงที่แล้ว</string>
     <string name="hint_transaction_status_text">Done</string>
     <string name="hint_exchange_from">จาก</string>
-    <string name="hint_exchange_your_balance_from">คุณมีเงินอยู่ 1,300.00 THB</string>
+    <string name="hint_exchange_your_balance_from">คุณมีเงินอยู่ </string>
     <string name="hint_exchange_to_other_currency">1 EUR แลกได้ 33.365808 THB</string>
     <string name="hint_exchange_to">เป็น</string>
     <string name="hint_exchange_your_balance_to">คุณมีเงินอยู่ 0.00 EUR</string>
@@ -86,6 +86,7 @@
     <string name="message_dummy_term">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas maecenas pharetra convallis posuere morbi. Praesent elementum facilisis leo vel. Dignissim cras tincidunt lobortis feugiat vivamus at augue. Odio euismod lacinia at quis. Lorem ipsum dolor sit amet consectetur adipiscing. Fermentum posuere urna nec tincidunt praesent semper. Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet consectetur. Mattis nunc sed blandit libero volutpat sed cras ornare arcu. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Tellus orci ac auctor augue mauris augue neque gravida in. Imperdiet sed euismod nisi porta lorem. Penatibus et magnis dis parturient montes nascetur. Egestas congue quisque egestas diam in. Accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu. Amet commodo nulla facilisi nullam. Sapien pellentesque habitant morbi tristique senectus et netus. Mattis ullamcorper velit sed ullamcorper morbi. Nascetur ridiculus mus mauris vitae ultricies leo. Amet porttitor eget dolor morbi non arcu. Nunc non blandit massa enim nec. Nisi scelerisque eu ultrices vitae auctor eu augue ut. In cursus turpis massa tincidunt dui ut ornare. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies. Mauris vitae ultricies leo integer. Tellus elementum sagittis vitae et leo duis ut diam quam. Tellus elementum sagittis vitae et leo duis ut diam quam.</string>
     <string name="message_main_empty">รายการล่าสุดจะแสดงที่นี่เมื่อคุณเริ่มใช้งาน</string>
     <string name="message_topup_success">คุณเติมเงินสำเร็จ</string>
+    <string name="message_exchange_success">คุณแลกเงินสำเร็จ</string>
     <string name="message_policy">การเก็งกำไรค่าเงินถือเป็นการปฏิบัติที่ไม่เป็นไปตามเงื่อนไข และอาจ
 ไม่ชอบด้วยกฎหมาย หากฝ่าฝืน ผู้ให้บริการ ขอสงวนสิทธิ์ในการ
 ยกเลิกบัตร และเรียกค่าเสียหายที่เกิดขึ้น</string>

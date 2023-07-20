@@ -2,9 +2,11 @@ package com.startwithn.exchange_android.network
 
 import com.startwithn.exchange_android.common.constant.AppConstant
 import com.startwithn.exchange_android.model.base.BaseResponseModel
+import com.startwithn.exchange_android.model.body.ExchangeRequestModel
 import com.startwithn.exchange_android.model.body.LoginRequestModel
 import com.startwithn.exchange_android.model.body.RegisterRequestModel
 import com.startwithn.exchange_android.model.response.AccessTokenModel
+import com.startwithn.exchange_android.model.response.ExchangeCalculateResponse
 import com.startwithn.exchange_android.model.response.RegisterResponseModel
 import com.startwithn.exchange_android.model.response.TopUpResponse
 import com.startwithn.exchange_android.model.response.TransactionsModel
@@ -43,14 +45,13 @@ interface AppAPI {
 
     @GET("api/v1/customer/me")
     suspend fun me(): Response<BaseResponseModel<UserModel>>
-    //endregion
 
     @Multipart
     @POST("api/v1/upload")
     suspend fun uploadProfile(@Part image: MultipartBody.Part): Response<UploadResponseModel>
+    //endregion
 
     //region app func
-
     @GET("api/v1/transaction/customer")
     suspend fun lastTransactions(
         @Query("page") page: Int,
@@ -71,6 +72,22 @@ interface AppAPI {
         @Field("currency_id") currencyId: Int = 1,
         @Field("value") value: Double
     ): Response<TopUpResponse>
+
+    @FormUrlEncoded
+    @POST("api/v1/exchange")
+    suspend fun exchange(
+        @Field("currency_main") currencyFromID: Int,
+        @Field("currency_to") currencyToID: Int,
+        @Field("amount") amount: Double
+    ): Response<TopUpResponse>
+
+    @FormUrlEncoded
+    @POST("api/v1/exchange/cal")
+    suspend fun exchangeCalculate(
+        @Field("currency_main") currencyFromID: Int,
+        @Field("currency_to") currencyToID: Int,
+        @Field("amount") amount: Double
+    ): Response<ExchangeCalculateResponse>
 
 
     //endregion

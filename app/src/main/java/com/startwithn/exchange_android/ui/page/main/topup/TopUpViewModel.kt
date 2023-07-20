@@ -1,5 +1,6 @@
 package com.startwithn.exchange_android.ui.page.main.topup
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -32,4 +33,5 @@ class TopUpViewModel(
                 topUpLiveData.value = result
             }
     }
+
 }

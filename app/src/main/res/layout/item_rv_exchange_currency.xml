@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+<import type="android.view.View"/>
+        <variable
+            name="isFrom"
+            type="Boolean" />
+    </data>
 
     <FrameLayout
-        android:layout_marginEnd="@dimen/margin_24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_item_currency_inactive" />
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:visibility="@{isFrom ? View.VISIBLE : View.GONE}"
+            android:id="@+id/tvCurrentTextFrom"
             style="@style/TextViewExtraLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:background="@drawable/selector_circle_bg_exchange_form"
+            android:button="@null"
+            android:gravity="center"
             android:text="THB"
-            android:textColor="@color/green_fun_green"
-            app:fontFamily="@font/oswald_regular" />
+            android:textColor="@color/selector_circle_text_exchange_form"
+            android:layout_marginEnd="@dimen/margin_24dp"
+            app:fontFamily="@font/oswald_regular"
+            app:useMaterialThemeColors="false" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/tvCurrentTextTo"
+            android:visibility="@{!isFrom ? View.VISIBLE : View.GONE}"
+            style="@style/TextViewExtraLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_circle_bg_exchange_to"
+            android:button="@null"
+            android:gravity="center"
+            android:text="THB"
+            android:textColor="@color/selector_circle_text_exchange_to"
+            android:layout_marginEnd="@dimen/margin_24dp"
+            app:fontFamily="@font/oswald_regular"
+            app:useMaterialThemeColors="false" />
     </FrameLayout>
 
-</FrameLayout>
+</layout>

@@ -1,7 +1,9 @@
 package com.startwithn.exchange_android.model.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class UserModel(
     @field:SerializedName("address")
@@ -53,6 +55,7 @@ data class UserModel(
     @field:SerializedName("village")
     var village: String?
 ) {
+    @Parcelize
     data class CustomerBalance(
         @field:SerializedName("balance")
         var balance: Double?,
@@ -63,6 +66,6 @@ data class UserModel(
 
         @Transient
         var isSelected : Boolean = false
-    )
+    ) : Parcelable
 }
 

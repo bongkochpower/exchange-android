@@ -3,6 +3,7 @@ package com.startwithn.exchange_android.repository.remote.base
 import android.content.Context
 import com.startwithn.exchange_android.network.ResultWrapper
 import com.google.gson.Gson
+import com.startwithn.exchange_android.BuildConfig
 
 import com.startwithn.exchange_android.common.constant.ResponseCodeConstant
 import com.startwithn.exchange_android.common.enum.AppEventEnum
@@ -25,7 +26,6 @@ open class BaseRemoteRepository(private val context: Context) {
         return withContext(dispatcher) {
             try {
                 val response = call.invoke()
-                Timber.d("call api -> $response")
                 handleEventApp(response)
             } catch (throwable: Throwable) {
                 when (throwable) {
@@ -54,6 +54,8 @@ open class BaseRemoteRepository(private val context: Context) {
         } else {
             AppEventEnum.NONE
         }
+        showDebug(response)
+
         return when {
             eventApp == AppEventEnum.NONE && response.isSuccessful -> {
                 response.body()?.let {
@@ -95,6 +97,14 @@ open class BaseRemoteRepository(private val context: Context) {
             e.printStackTrace()
         }
         return MessageModel(message)
+    }
+
+    private fun <T : Any>showDebug(response: Response<T>){
+        if (BuildConfig.DEBUG) {
+            val bodyString = Gson().toJson(response.body())
+            Timber.d("API : $response \n")
+            Timber.d("API Response Json : \n $bodyString")
+        }
     }
 
 }

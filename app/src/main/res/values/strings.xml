@@ -65,9 +65,8 @@
     <string name="hint_transaction_status_text">Done</string>
     <string name="hint_exchange_from">จาก</string>
     <string name="hint_exchange_your_balance_from">คุณมีเงินอยู่ </string>
-    <string name="hint_exchange_to_other_currency">1 EUR แลกได้ 33.365808 THB</string>
+    <string name="hint_exchange_to_other_currency">1 %1$s แลกได้ %2$s %3$s</string>
     <string name="hint_exchange_to">เป็น</string>
-    <string name="hint_exchange_your_balance_to">คุณมีเงินอยู่ 0.00 EUR</string>
     <string name="hint_date_from">ตั้งแต่วันที่</string>
     <string name="hint_date_to">ถึงวันที่</string>
 
@@ -108,6 +107,7 @@
     <string name="button_start_working">เริ่มต้นใช้งาน</string>
     <string name="button_confirm_phone_number">ยืนยันเบอร์โทรศัพท์</string>
     <string name="button_slide_to_topup">เลื่อนเพื่อเติมเงิน</string>
+    <string name="button_slide_to_exchange">เลื่อนเพื่อแลกเงิน</string>
     <string name="button_back_to_main">กลับสู่หน้าหลัก</string>
     <string name="button_next">ต่อไป</string>
 

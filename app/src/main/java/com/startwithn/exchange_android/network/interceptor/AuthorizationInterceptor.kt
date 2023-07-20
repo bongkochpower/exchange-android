@@ -1,6 +1,8 @@
 package com.startwithn.exchange_android.network.interceptor
 
 import android.content.Context
+import com.google.gson.Gson
+import com.startwithn.exchange_android.BuildConfig
 import com.startwithn.exchange_android.common.constant.AppConstant
 import com.startwithn.exchange_android.common.constant.KeyConstant
 import com.startwithn.exchange_android.common.manager.AppManager
@@ -9,7 +11,7 @@ import okhttp3.Request
 import okhttp3.Response
 import timber.log.Timber
 
-class AuthorizationInterceptor(private val context: Context, private val appId:String, private val appVersion:String) : Interceptor {
+class AuthorizationInterceptor(private val context: Context, private val appId: String, private val appVersion: String) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val token: String? = AppManager(context).getAuthToken()
@@ -29,19 +31,12 @@ class AuthorizationInterceptor(private val context: Context, private val appId:S
             .addHeader("Accept", "application/json")
             .addHeader("Authorization", "Bearer $token")
             .addHeader("Accept-Language", language)
-            .addHeader("FV-App-Version", appVersion)
-            .addHeader("FV-Client", deviceType)
-//            .addHeader("FV-Data", "$lat|$lng")
+            //.addHeader("FV-App-Version", appVersion)
+            //.addHeader("FV-Client", deviceType)
+            //.addHeader("FV-Data", "$lat|$lng")
             .addHeader("app_name", "exchange")
             .method(original.method, original.body)
             .build()
-
-        //debug log
-        val response = chain.proceed(request)
-        val bodyString = response.body.string().orEmpty()
-        Timber.d("API Response Json : \n $bodyString")
-
-
         return chain.proceed(request)
     }
 }

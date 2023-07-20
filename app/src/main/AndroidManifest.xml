@@ -29,7 +29,7 @@
         <activity
             android:name=".ui.page.main.exchange.ExchangeActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.page.main.history.HistoryActivity"
             android:exported="false"

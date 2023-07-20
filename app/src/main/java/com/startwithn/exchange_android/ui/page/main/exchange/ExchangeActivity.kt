@@ -2,47 +2,36 @@ package com.startwithn.exchange_android.ui.page.main.exchange
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.startwithn.exchange_android.R
 import com.startwithn.exchange_android.common.alert.AppAlert
 import com.startwithn.exchange_android.databinding.ActivityExchangeBinding
 import com.startwithn.exchange_android.databinding.ItemRvExchangeCurrencyBinding
-import com.startwithn.exchange_android.databinding.ItemRvTransactionBinding
+import com.startwithn.exchange_android.ext.deleteAmount
 import com.startwithn.exchange_android.ext.hideKeyboard
-import com.startwithn.exchange_android.ext.setOnLoadMoreListener
 import com.startwithn.exchange_android.ext.setOnTouchAnimation
 import com.startwithn.exchange_android.ext.toStringFormat
-import com.startwithn.exchange_android.model.response.TransactionsModel
 import com.startwithn.exchange_android.model.response.UserModel
 import com.startwithn.exchange_android.network.ResultWrapper
-import com.startwithn.exchange_android.ui.list.LoadingStyleEnum
 import com.startwithn.exchange_android.ui.list.adapter.SimpleRecyclerViewAdapter
 import com.startwithn.exchange_android.ui.list.viewholder.bind.ExchangeHolderHelper.initExchangeFrom
 import com.startwithn.exchange_android.ui.list.viewholder.bind.ExchangeHolderHelper.initExchangeTo
-import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHelper.initTransactions
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
-import com.startwithn.exchange_android.ui.page.main.topup.TopUpActivity
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
+import com.startwithn.exchange_android.ui.widget.NumberPad
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import java.util.Timer
 import kotlin.concurrent.schedule
+
 
 class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity_exchange) {
 
@@ -79,10 +68,10 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
     }
 
     override fun setUp() {
-        hideKeyboard()
         with(binding) {
             activity = this@ExchangeActivity
             isStep2 = false
+
             rvExchangeFrom.apply {
                 adapter = exchangeFromAdapter
             }
@@ -119,14 +108,14 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
                 }
 
                 override fun afterTextChanged(it: Editable?) {
-                    if(it.isNullOrEmpty()){
+                    if (it.isNullOrEmpty()) {
                         tvResultCurrency.text = "0.00"
-                    }else{
+                    } else {
                         timer.cancel()
                         timer = Timer()
                         timer.schedule(DELAY) {
-                            if(it.isNotEmpty()){
-                                val amount = it.toString().trim().replace(",","").toDoubleOrNull() ?: 0.0
+                            if (it.isNotEmpty()) {
+                                val amount = it.toString().trim().replace(",", "").toDoubleOrNull() ?: 0.0
                                 exchangeViewModel.amount = amount
                                 lifecycleScope.launch {
                                     exchangeViewModel.exchangeCalculate()
@@ -135,8 +124,27 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
                         }
                     }
 
+                    if (isExchangeInvalid == true) {
+                        isExchangeInvalid = false
+                    }
                 }
             })
+
+            npExchange.setOnNumberClickListener { type, number ->
+                when (type) {
+                    NumberPad.NumberPadEnum.NUMBER -> {
+                        edtCurrencyFrom.append(number)
+                    }
+
+                    NumberPad.NumberPadEnum.DELETE -> {
+                        edtCurrencyFrom.deleteAmount()
+                    }
+
+                    NumberPad.NumberPadEnum.DOT -> {
+                        edtCurrencyFrom.append(".")
+                    }
+                }
+            }
 
             btnContinue.apply {
                 setOnTouchAnimation()
@@ -146,8 +154,8 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
             }
 
             btnExchange.setOnClickListener {
-                if(isValidate()){
-                    exchange()
+                if (isValidate()) {
+                    //exchange()
                 }
             }
         }
@@ -162,18 +170,22 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
                 is ResultWrapper.Loading -> {
                     //showLoading()
                 }
+
                 is ResultWrapper.GenericError -> {
-                    AppAlert.alertGenericError(this,it.code, it.message).show(supportFragmentManager)
+                    AppAlert.alertGenericError(this, it.code, it.message).show(supportFragmentManager)
 //                    hideLoading()
                 }
+
                 is ResultWrapper.NetworkError -> {
                     AppAlert.alertNetworkError(this).show(supportFragmentManager)
 //                    hideLoading()
                 }
+
                 is ResultWrapper.Success -> {
 //                    hideLoading()
                     binding.tvResultCurrency.text = it.response.value?.toStringFormat()
                 }
+
                 else -> {
 //                    hideLoading()
                 }
@@ -185,18 +197,22 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
                 is ResultWrapper.Loading -> {
                     showLoading()
                 }
+
                 is ResultWrapper.GenericError -> {
-                    AppAlert.alertGenericError(this,it.code, it.message).show(supportFragmentManager)
+                    AppAlert.alertGenericError(this, it.code, it.message).show(supportFragmentManager)
                     hideLoading()
                 }
+
                 is ResultWrapper.NetworkError -> {
                     AppAlert.alertNetworkError(this).show(supportFragmentManager)
                     hideLoading()
                 }
+
                 is ResultWrapper.Success -> {
                     exchangeSuccess()
                     hideLoading()
                 }
+
                 else -> hideLoading()
             }
         }
@@ -207,30 +223,41 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
         val list = exchangeViewModel.getCurrencyForm()
         list.first().isSelected = true
         exchangeFromAdapter.submitList(true, list)
+        //date on start
+        updateCurrencyFormSelected(list.first())
 
         getCurrencyExchangeTo(list.first())
     }
 
-    private fun getCurrencyExchangeTo(selectedForm: UserModel.CustomerBalance) {
+    private fun getCurrencyExchangeTo(selectedForm: UserModel.CustomerBalance,isInit : Boolean = true) {
         val list = exchangeViewModel.getCurrencyForm()
         val listFiltered = list.filter { it.label != selectedForm.label }
         exchangeToAdapter.submitList(true, listFiltered.toMutableList())
+
+        updateCurrencyFormSelected(listFiltered.first(), false)
     }
 
     private fun updateCurrencyFormSelected(currencyModel: UserModel.CustomerBalance, isCurrencyFrom: Boolean = true) {
         val txtCurrency = "${resources.getString(R.string.hint_exchange_your_balance_from)} ${currencyModel.balance?.toStringFormat()} ${currencyModel.label}"
+
         if (isCurrencyFrom) {
             if (!exchangeFromAdapter.isLoading) {
                 binding.tvCurrencyForm.text = txtCurrency
                 lifecycleScope.launch {
-                    getCurrencyExchangeTo(currencyModel)
+                    getCurrencyExchangeTo(currencyModel,false)
                 }
+
+                exchangeViewModel.currencyFrom = currencyModel
             }
         } else {
             if (!exchangeToAdapter.isLoading) {
                 binding.tvCurrencyTo.text = txtCurrency
+                exchangeViewModel.currencyTo = currencyModel
             }
         }
+
+        val txtCurrencyValueChange = resources.getString(R.string.hint_exchange_to_other_currency, exchangeViewModel.currencyFrom?.label, "100", exchangeViewModel.currencyTo?.label)
+        binding.tvValueChangePre.text = txtCurrencyValueChange
 
     }
 
@@ -243,28 +270,35 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
     private fun gotoStep1() {
         with(binding) {
             toolbar.setIcon(R.drawable.icon_close)
+            edtCurrencyFrom.visibility = View.GONE
+            isExchangeInvalid = false
             isStep2 = false
         }
     }
 
     private fun gotoStep2() {
         with(binding) {
-            toolbar.setIcon(R.drawable.icon_back)
-            edtCurrencyFrom.text?.clear()
-            edtCurrencyFrom.requestFocus()
-            tvResultCurrency.text = "0.00"
             isStep2 = true
+            toolbar.setIcon(R.drawable.icon_back)
+            edtCurrencyFrom.apply {
+                visibility = View.VISIBLE
+                requestFocus()
+                text?.clear()
+            }
+            tvResultCurrency.text = "0.00"
         }
     }
 
     private fun isValidate(): Boolean {
         var isValidate = false
         with(binding) {
-            val inputMoney = edtCurrencyFrom.text.toString()
+            val inputMoney = edtCurrencyFrom.text.toString().trim().replace(",", "")
+            val amountFrom = exchangeViewModel.currencyFrom?.balance ?: 0.0
             when {
-                inputMoney.isEmpty() || inputMoney == "0" -> {
+                inputMoney.isEmpty() || inputMoney == "0" || inputMoney.toDouble() > amountFrom -> {
                     isExchangeInvalid = true
                 }
+
                 else -> isValidate = true
             }
         }
@@ -275,13 +309,12 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
         exchangeViewModel.exchange()
     }
 
-    private fun exchangeSuccess(){
+    private fun exchangeSuccess() {
         val msg = resources.getString(R.string.message_exchange_success)
         val btn = resources.getString(R.string.button_back_to_main)
         showAlertSuccessDialog(msg, btn) {
             finish()
         }
     }
-
 
 }

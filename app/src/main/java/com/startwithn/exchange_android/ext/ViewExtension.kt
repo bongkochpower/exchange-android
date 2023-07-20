@@ -268,6 +268,16 @@ fun EditText.removeStartWithSpace(){
         }
     }
 }
+fun EditText.deleteAmount() {
+    this.text?.let { editable ->
+        if (editable.isNotEmpty()) {
+            editable.delete(editable.length - 1, editable.length)
+            this.text = editable
+            this.setSelection(editable.length)
+        }
+    }
+}
+
 
 /*scroll view*/
 fun NestedScrollView.scrollToBottom() = run { postDelayed({ fullScroll(View.FOCUS_DOWN) }, 500) }

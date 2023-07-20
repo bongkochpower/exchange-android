@@ -17,6 +17,9 @@ import com.ncorti.slidetoact.SlideToActView
 import com.startwithn.exchange_android.R
 import com.startwithn.exchange_android.common.alert.AppAlert
 import com.startwithn.exchange_android.databinding.ActivityTopupBinding
+import com.startwithn.exchange_android.ext.deleteAmount
+import com.startwithn.exchange_android.ext.isMonoClickable
+import com.startwithn.exchange_android.ext.monoLastTimeClick
 import com.startwithn.exchange_android.network.ResultWrapper
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import com.startwithn.exchange_android.ui.widget.NumberPad
@@ -61,7 +64,7 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
                     }
 
                     NumberPad.NumberPadEnum.DELETE -> {
-                        deleteAmount()
+                        edtMoneyAmount.deleteAmount()
                     }
 
                     NumberPad.NumberPadEnum.DOT -> {
@@ -72,6 +75,9 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
 
 
             btnSlideConfirm.setOnClickListener {
+                if (!isMonoClickable()) return@setOnClickListener
+                monoLastTimeClick()
+
                 if (isValidate()) {
                     val amount = edtMoneyAmount.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
                     viewModel.topUp(amount = amount)
@@ -127,18 +133,6 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
         val btn = resources.getString(R.string.button_back_to_main)
         showAlertSuccessDialog(title, btn) {
             finish()
-        }
-    }
-
-    private fun deleteAmount() {
-        with(binding) {
-            edtMoneyAmount.text?.let { editable ->
-                if (editable.isNotEmpty()) {
-                    editable.delete(editable.length - 1, editable.length)
-                    edtMoneyAmount.text = editable
-                    edtMoneyAmount.setSelection(editable.length)
-                }
-            }
         }
     }
 

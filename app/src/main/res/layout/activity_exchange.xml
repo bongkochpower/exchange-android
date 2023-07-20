@@ -113,7 +113,7 @@
                             android:gravity="center"
                             android:text=""
                             android:inputType="numberDecimal"
-                            android:visibility="@{isStep2 ? View.VISIBLE : View.GONE , default = invisible}"
+                            android:visibility="gone"
                             android:textColor="@{isExchangeInvalid ? @color/yellow_sea_buckthorn : @color/white , default=@color/white}"
                             android:textCursorDrawable="@drawable/cursor_color">
                             <requestFocus/>
@@ -156,6 +156,7 @@
             app:layout_constraintTop_toBottomOf="@id/ll_header">
 
             <TextView
+                android:id="@+id/tv_value_change_pre"
                 style="@style/TextViewRegular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -231,7 +232,7 @@
                     android:layout_marginTop="@dimen/margin_12dp"
                     android:drawablePadding="@dimen/padding_10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/hint_exchange_your_balance_to"
+                    android:text="@string/hint_exchange_your_balance_from"
                     android:textColor="@color/gray_silver_sand"
                     app:fontFamily="@font/prompt_regular" />
 
@@ -268,7 +269,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/bg_slide_confirm"
-                        android:text="@string/title_main_exchange"
+                        android:text="@string/button_slide_to_exchange"
                         android:id="@+id/btn_exchange"
                         android:textAllCaps="false"
                         android:textColor="@color/colorPrimary"
@@ -303,9 +304,10 @@
 
                 <com.startwithn.exchange_android.ui.widget.NumberPad
                     android:layout_width="match_parent"
+                    android:id="@+id/np_exchange"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:visibility="gone" />
+                    android:visibility="@{isStep2 ? View.VISIBLE : View.GONE}" />
             </RelativeLayout>
 
 

@@ -21,15 +21,14 @@ class ExchangeViewModel(
     private val state: SavedStateHandle
 ) : ViewModel() {
 
-    //private val currencyFrom : MutableList<UserModel.CustomerBalance> = mutableListOf()
     val exchangeLiveData = SingleLiveEvent<ResultWrapper<TopUpResponse>>()
     val exchangeCalculateLiveData = SingleLiveEvent<ResultWrapper<ExchangeCalculateResponse>>()
 
-    var currencyFrom: Int?
+    var currencyFrom: UserModel.CustomerBalance?
         get() = state["currency_from"]
         set(value) = state.set("currency_from", value)
 
-    var currencyTo: Int?
+    var currencyTo: UserModel.CustomerBalance?
         get() = state["currency_to"]
         set(value) = state.set("currency_to", value)
 

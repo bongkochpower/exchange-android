@@ -46,9 +46,6 @@
             name="isSelectIdCardImage"
             type="Boolean" />
 
-        <variable
-            name="user"
-            type="com.startwithn.exchange_android.model.response.UserModel" />
 
     </data>
 
@@ -71,10 +68,11 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewLarge"
+                android:id="@+id/tv_register_title"
+                android:text="@string/title_register_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@{user != null ? @string/title_register_edit_form : @string/title_register_form,default=@string/title_register_form}"
                 android:textColor="@color/black"
                 app:fontFamily="@font/prompt_semibold" />
 
@@ -155,7 +153,6 @@
 
             <!--password-->
             <EditText
-                android:backgroundTint="@{user != null ? @color/gray_alto : null}"
                 android:id="@+id/edt_reg_phone"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
@@ -503,8 +500,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_30dp"
                 android:background="@drawable/bg_confirm"
-                android:text="@{user != null ? @string/title_register_edit_form : @string/button_register,default = @string/button_register}"
                 android:textAllCaps="false"
+                android:text="@string/button_register"
                 android:textColor="@color/white" />
 
 

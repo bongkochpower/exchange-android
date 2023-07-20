@@ -75,7 +75,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
-            fadeIn()
+            //fadeIn()
         }
     }
 
@@ -83,9 +83,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         binding.apply {
             lifecycleOwner = this.lifecycleOwner
             fragment = this@RegisterFragment
-            appManager.getUser()?.let {
-                user = it
-            }
         }
 
         //edit profile
@@ -93,7 +90,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             setupEditProfile(it)
         }
 
-        Log.d("LOGD", "setUp: $user")
 
     }
 
@@ -522,6 +518,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         with(binding) {
             user.apply {
 
+                tvRegisterTitle.text = resources.getString(R.string.title_register_edit_form)
                 profileImage?.let { imgProfile.loadImageCircle(it) }
                 edtRegName.setText(firstName.orEmpty())
                 edtRegLastname.setText(lastName.orEmpty())
@@ -540,6 +537,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 edtRegDistrict.setText(district.orEmpty())
                 edtRegProvince.setText(provine.orEmpty())
                 edtRegPostcode.setText(postCode.orEmpty())
+                btnRegister.setText(resources.getString(R.string.title_register_edit_form))
             }
         }
     }

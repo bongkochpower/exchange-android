@@ -13,8 +13,11 @@ import com.startwithn.exchange_android.ui.page.base.OnBackPressedFragment
 import com.startwithn.exchange_android.ui.page.login.forgot.verify_phone_number.ForgotPasswordFragment
 import com.startwithn.exchange_android.ui.page.login.register.register.RegisterFragment
 import com.startwithn.exchange_android.ui.page.login.register.TermRegisterFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+
+    private val loginViewModel: LoginViewModel by viewModel()
 
     companion object {
         fun open(activity: Activity) =
@@ -32,11 +35,24 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         super.onBackPressed()
     }
     override fun setUp() {
+        with(binding){
 
+        }
     }
 
     override fun listener() {
+        with(binding){
+            appBarLayout.setOnBackListener { onBackPressed() }
+        }
 
+    }
+
+    override fun subscribe() {
+        super.subscribe()
+
+        loginViewModel.iconLeftMenu.observe(this){ iconRes ->
+            binding.appBarLayout.setIcon(iconRes)
+        }
     }
 
     private fun getCurrentFragment(): Fragment =

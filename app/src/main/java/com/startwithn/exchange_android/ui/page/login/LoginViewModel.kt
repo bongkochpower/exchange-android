@@ -1,5 +1,6 @@
 package com.startwithn.exchange_android.ui.page.login
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.startwithn.exchange_android.common.manager.AppManager
@@ -19,6 +20,7 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
 ) : ViewModel() {
 
     val loginLiveData = SingleLiveEvent<ResultWrapper<BaseResponseModel<AccessTokenModel>>>()
+    val iconLeftMenu = MutableLiveData<Int>()
 
     fun login(request: LoginRequestModel) {
         viewModelScope.launch {
@@ -32,4 +34,12 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
             loginLiveData.value = result
         }
     }
+
+    fun setIcon(iconRes : Int){
+        iconLeftMenu.value = iconRes
+    }
+
+
+
+
 }

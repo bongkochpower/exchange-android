@@ -10,9 +10,15 @@ import com.startwithn.exchange_android.databinding.FragmentTermRegisterBinding
 import com.startwithn.exchange_android.ext.setOnTouchAnimation
 import com.startwithn.exchange_android.ui.page.base.BaseFragment
 import com.startwithn.exchange_android.ui.page.login.LoginFragmentDirections
+import com.startwithn.exchange_android.ui.page.login.LoginViewModel
 import com.startwithn.exchange_android.ui.page.login.register.register.RegisterFragment
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TermRegisterFragment : BaseFragment<FragmentTermRegisterBinding>(R.layout.fragment_term_register) {
+
+    private val loginViewModel: LoginViewModel by sharedViewModel()
+
     companion object {
         fun newInstance() = TermRegisterFragment()
 
@@ -27,7 +33,7 @@ class TermRegisterFragment : BaseFragment<FragmentTermRegisterBinding>(R.layout.
         }
     }
     override fun setUp() {
-
+        loginViewModel.setIcon(R.drawable.icon_back)
     }
 
     override fun listener() {
@@ -38,7 +44,8 @@ class TermRegisterFragment : BaseFragment<FragmentTermRegisterBinding>(R.layout.
                     if(isValidateTerm()){
                         RegisterFragment.navigate(this@TermRegisterFragment)
                     }else{
-                        AppAlert.alert(requireContext(),"กรุณายอมรับ term & con").show(childFragmentManager)
+                        val msg = resources.getString(R.string.message_valid_term_and_con)
+                        AppAlert.alert(requireContext(),msg).show(childFragmentManager)
                     }
                 }
             }

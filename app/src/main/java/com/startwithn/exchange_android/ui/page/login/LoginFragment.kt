@@ -31,7 +31,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
-    private val loginViewModel: LoginViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by sharedViewModel()
 
     companion object {
         fun newInstance() = LoginFragment()
@@ -48,7 +48,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         binding.apply {
 
         }
-
+        loginViewModel.setIcon(0)
         listener()
     }
 

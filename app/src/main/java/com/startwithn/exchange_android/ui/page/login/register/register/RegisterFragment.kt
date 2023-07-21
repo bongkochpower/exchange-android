@@ -116,6 +116,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             edtRegDistrict.validateAfterTextChange()
             edtRegProvince.validateAfterTextChange()
 
+            edtRegPostcode.doAfterTextChanged {
+                if (it.toString().isNotEmpty() && binding.isPostcodeEmpty == true) {
+                    isPostcodeEmpty = false
+                }
+            }
+
             edtRegPhone.doAfterTextChanged {
                 if (it.toString().isNotEmpty() && binding.isPhoneEmpty == true) {
                     isPhoneEmpty = false
@@ -219,8 +225,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
                 is ResultWrapper.Success -> {
                     hideLoading()
+
                     showAlertSuccessDialog {
-                        AppNavigator(this.requireActivity()).goToMain()
+                        AppNavigator(this.requireActivity()).goToLogin(true)
                     }
                 }
 
@@ -246,7 +253,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
                 is ResultWrapper.Success -> {
                     hideLoading()
-                    showAlertSuccessDialog {
+                    val msg = resources.getString(R.string.message_edit_profile_success)
+                    val btn = resources.getString(R.string.button_close)
+                    showAlertSuccessDialog(title = msg, textButtonRight = btn) {
                         activity?.finish()
                     }
                 }
@@ -402,7 +411,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     binding.nsv.smoothScrollTo(0, 0)
                 }
 
-                //!email.isEmail() -> validateEdittextErrorView(edtRegEmail)
+                !email.isEmail() -> validateEdittextErrorView(edtRegEmail)
                 dob.isEmpty() -> {
                     isDobEmpty = true
                     validateEdittextErrorView(edtRegDob)
@@ -469,8 +478,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 if(p0?.toString().orEmpty().isNotEmpty() && this@validateAfterTextChange.getValidation()){
                     this@validateAfterTextChange.setValidation(false)
                 }
-//                val isNotEmpty = (p0?.toString().orEmpty().isNotEmpty() && this@validateAfterTextChange.getValidation())
-//                this@validateAfterTextChange.setValidation(false)
             }
         })
     }

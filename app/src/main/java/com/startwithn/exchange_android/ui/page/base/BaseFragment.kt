@@ -82,8 +82,9 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layout: 
                 onRightClick?.invoke()
                 it.dismiss()
             }
-            show(childFragmentManager)
+
         }
+        alertSuccessDialog.show(requireActivity().supportFragmentManager)
     }
 
 }

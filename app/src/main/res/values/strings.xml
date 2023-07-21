@@ -86,6 +86,7 @@
     <string name="message_main_empty">รายการล่าสุดจะแสดงที่นี่เมื่อคุณเริ่มใช้งาน</string>
     <string name="message_topup_success">คุณเติมเงินสำเร็จ</string>
     <string name="message_exchange_success">คุณแลกเงินสำเร็จ</string>
+    <string name="message_edit_profile_success">คุณแก้ไขข้อมูลสมาชิกสำเร็จ</string>
     <string name="message_valid_term_and_con">กรุณายอมรับเงื่อนไขในการใช้บริการ</string>
     <string name="message_policy">การเก็งกำไรค่าเงินถือเป็นการปฏิบัติที่ไม่เป็นไปตามเงื่อนไข และอาจ
 ไม่ชอบด้วยกฎหมาย หากฝ่าฝืน ผู้ให้บริการ ขอสงวนสิทธิ์ในการ

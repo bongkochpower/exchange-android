@@ -70,6 +70,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
+    override fun onBackPressed() {
+        return
+    }
+
     override fun getExtra(bundle: Bundle) {
         super.getExtra(bundle)
         bundle.apply {

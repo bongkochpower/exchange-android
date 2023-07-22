@@ -20,6 +20,7 @@ import com.startwithn.exchange_android.ext.monoLastTimeClick
 import com.startwithn.exchange_android.ext.setItemPadding
 import com.startwithn.exchange_android.ext.setOnLoadMoreListener
 import com.startwithn.exchange_android.ext.setOnTouchAnimation
+import com.startwithn.exchange_android.ext.setTextSlideButtonEnable
 import com.startwithn.exchange_android.ext.slideUp
 import com.startwithn.exchange_android.ext.toServiceFormat
 import com.startwithn.exchange_android.model.response.TransactionsModel
@@ -31,6 +32,7 @@ import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHel
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import com.startwithn.exchange_android.ui.page.main.MainViewModel
 import com.startwithn.exchange_android.ui.page.main.topup.TopUpActivity
+import com.startwithn.exchange_android.ui.widget.SlideButton
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_history) {
@@ -82,8 +84,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                     showDatePickerDialog { date ->
                         edtStartDate.setText(date)
 
-                        if(edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()){
-                            setTextSlideButtonEnable(true)
+                        if (edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()) {
+                            slideToConfirm.setTextSlideButtonEnable(true,R.string.button_slide_to_confirm)
                         }
 
 
@@ -97,15 +99,15 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                     showDatePickerDialog { date ->
                         edtEndDate.setText(date)
 
-                        if(edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()){
-                            setTextSlideButtonEnable(true)
+                        if (edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()) {
+                            slideToConfirm.setTextSlideButtonEnable(true,R.string.button_slide_to_confirm)
                         }
                     }
                 }
             }
 
 
-            setTextSlideButtonEnable(false)
+            slideToConfirm.setTextSlideButtonEnable(false,R.string.button_slide_to_confirm)
             slideToConfirm.setOnClickListener {
                 if (!isMonoClickable()) return@setOnClickListener
                 monoLastTimeClick()
@@ -118,18 +120,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
                     showTransactionListView(true)
                     getHistory(dateFrom, dateTo)
-                }else{
-                    //slideToConfirm.initView()
                 }
-
             }
-        }
-    }
-
-    private fun setTextSlideButtonEnable(isEnable : Boolean){
-        with(binding){
-            slideToConfirm.initView(isEnable)
-            slideToConfirm.setText(resources.getString(R.string.button_slide_to_confirm),isEnable)
         }
     }
 
@@ -142,12 +134,15 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                 is ResultWrapper.Loading -> {
                     historyAdapter.isLoading = true
                 }
+
                 is ResultWrapper.GenericError -> {
-                    AppAlert.alertGenericError(this,it.code, it.message).show(supportFragmentManager)
+                    AppAlert.alertGenericError(this, it.code, it.message).show(supportFragmentManager)
                 }
+
                 is ResultWrapper.NetworkError -> {
                     AppAlert.alertNetworkError(this).show(supportFragmentManager)
                 }
+
                 else -> {
                     /*none*/
                 }
@@ -156,7 +151,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         historyViewModel.historyResultLiveData.observe(this) {
             it?.let {
                 showTransactionListView(true)
-                historyAdapter.updateList(it,true)
+                historyAdapter.updateList(it, true)
                 binding.isEmpty = historyAdapter.itemCount == 0
             }
         }
@@ -179,10 +174,10 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
             tvTransactionList.isVisible = isShow
             tvSelectedDate.isVisible = isShow
 
-            if(isShow){
+            if (isShow) {
                 val dateFrom = edtStartDate.text.toString()
                 val dateTo = edtEndDate.text.toString()
-                val textDateSelected = resources.getString(R.string.title_history_date_select,dateFrom,dateTo)
+                val textDateSelected = resources.getString(R.string.title_history_date_select, dateFrom, dateTo)
                 val isSelected = (dateFrom.isNotEmpty() && dateTo.isNotEmpty())
                 tvSelectedDate.isVisible = isSelected
                 tvSelectedDate.text = textDateSelected
@@ -190,7 +185,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         }
     }
 
-    private fun isValidate() : Boolean{
+    private fun isValidate(): Boolean {
         var isValidate = false
         with(binding) {
             val dateFrom = edtStartDate.text.toString()
@@ -213,7 +208,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         historyViewModel.getHistory(dateForm = dateFrom.toServiceFormat(), dateTo = dateTo.toServiceFormat())
     }
 
-    private fun onClose(){
+    private fun onClose() {
         setResult(Activity.RESULT_OK, Intent())
         finish()
     }

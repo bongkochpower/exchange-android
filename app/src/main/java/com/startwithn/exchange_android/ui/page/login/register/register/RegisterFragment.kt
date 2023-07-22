@@ -526,7 +526,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             user.apply {
 
                 tvRegisterTitle.text = resources.getString(R.string.title_register_edit_form)
-                profileImage?.let { imgProfile.loadImageCircle(it) }
+                profileImage?.let {
+                    imgProfile.loadImageCircle(it)
+                    llProfileDummy.gone()
+                }
                 edtRegName.setText(firstName.orEmpty())
                 edtRegLastname.setText(lastName.orEmpty())
                 edtRegPhone.apply {
@@ -535,6 +538,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 }
                 edtRegEmail.setText(email.orEmpty())
                 edtRegDob.setText(birthDate.toDisplayFormat())
+
+                isSelectIdCardImage = true
+                val filename: String = idCardImage.orEmpty()
+                binding.tvIdCardName.text = getString(R.string.hint_attach_file).replace("#file_name", filename)
+
+
                 edtRegHouseNo.setText(houseNo.orEmpty())
                 edtRegVillage.setText(village.orEmpty())
                 edtRegVillageNo.setText(moo.orEmpty())

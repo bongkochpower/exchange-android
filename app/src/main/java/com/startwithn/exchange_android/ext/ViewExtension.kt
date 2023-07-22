@@ -48,6 +48,7 @@ import com.startwithn.exchange_android.common.constant.AppConstant
 import com.startwithn.exchange_android.ui.list.ItemViewType
 import com.startwithn.exchange_android.ui.list.LoadingIVT
 import com.startwithn.exchange_android.ui.list.itemdecoration.EqualSpacingItemDecoration
+import com.startwithn.exchange_android.ui.widget.SlideButton
 import java.io.File
 import java.lang.reflect.Field
 import kotlin.math.roundToInt
@@ -514,10 +515,14 @@ fun WebView.loadHtmlView(data : String){
     }
 }
 
-
 fun View.show(){
     this.visibility = View.VISIBLE
 }
 fun View.gone() {
     this.visibility = View.GONE
+}
+
+fun SlideButton.setTextSlideButtonEnable(isEnable: Boolean, textRes : Int) {
+    this.initView(isEnable)
+    this.setText(resources.getString(textRes), isEnable)
 }

@@ -12,6 +12,7 @@ import com.startwithn.exchange_android.databinding.ActivityTopupBinding
 import com.startwithn.exchange_android.ext.deleteAmount
 import com.startwithn.exchange_android.ext.isMonoClickable
 import com.startwithn.exchange_android.ext.monoLastTimeClick
+import com.startwithn.exchange_android.ext.setTextSlideButtonEnable
 import com.startwithn.exchange_android.network.ResultWrapper
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import com.startwithn.exchange_android.ui.widget.NumberPad
@@ -48,6 +49,7 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
                 if (isTopupInvalid == true) {
                     isTopupInvalid = false
                 }
+                slideToConfirm.setTextSlideButtonEnable(it.toString().isNotEmpty(),R.string.button_slide_to_topup)
             }
             npTopup.setOnNumberClickListener { type, number ->
                 when (type) {
@@ -66,21 +68,23 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
             }
 
 
-            slideToConfirm.setText(resources.getString(R.string.button_slide_to_topup))
+            slideToConfirm.setTextSlideButtonEnable(false,R.string.button_slide_to_topup)
             slideToConfirm.setOnClickListener {
                 if (!isMonoClickable()) return@setOnClickListener
                 monoLastTimeClick()
 
+                slideToConfirm.setEnable(false)
                 slideToConfirm.setBackgroundRes(R.drawable.bg_slide_confirm_done)
+
                 if(isValidate()){
                     val amount = edtMoneyAmount.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
                     viewModel.topUp(amount = amount)
                 }else{
-//                    slideToConfirm.slideToStartPos()
-                    //slideToConfirm.initView()
+                    slideToConfirm.setTextSlideButtonEnable(true,R.string.button_slide_to_topup)
                 }
 
             }
+
 
         }
     }

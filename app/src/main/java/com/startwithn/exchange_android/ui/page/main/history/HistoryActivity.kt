@@ -15,6 +15,8 @@ import com.startwithn.exchange_android.databinding.ItemRvTransactionBinding
 import com.startwithn.exchange_android.ext.fadeIn
 import com.startwithn.exchange_android.ext.getDatePickerDialog
 import com.startwithn.exchange_android.ext.gone
+import com.startwithn.exchange_android.ext.isMonoClickable
+import com.startwithn.exchange_android.ext.monoLastTimeClick
 import com.startwithn.exchange_android.ext.setItemPadding
 import com.startwithn.exchange_android.ext.setOnLoadMoreListener
 import com.startwithn.exchange_android.ext.setOnTouchAnimation
@@ -64,6 +66,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
             historyAdapter.submitList(true, mutableListOf())
             historyAdapter.initTransactions(this@HistoryActivity)
+
         }
     }
 
@@ -78,6 +81,12 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                 setOnClickListener {
                     showDatePickerDialog { date ->
                         edtStartDate.setText(date)
+
+                        if(edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()){
+                            setTextSlideButtonEnable(true)
+                        }
+
+
                     }
                 }
             }
@@ -87,19 +96,40 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                 setOnClickListener {
                     showDatePickerDialog { date ->
                         edtEndDate.setText(date)
+
+                        if(edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()){
+                            setTextSlideButtonEnable(true)
+                        }
                     }
                 }
             }
 
-            btnSlideConfirm.setOnClickListener {
-                if(isValidate()){
+
+            setTextSlideButtonEnable(false)
+            slideToConfirm.setOnClickListener {
+                if (!isMonoClickable()) return@setOnClickListener
+                monoLastTimeClick()
+
+                slideToConfirm.setEnable(false)
+                slideToConfirm.setBackgroundRes(R.drawable.bg_slide_confirm_done)
+                if (isValidate()) {
                     val dateFrom = edtStartDate.text.toString()
                     val dateTo = edtEndDate.text.toString()
 
                     showTransactionListView(true)
-                    getHistory(dateFrom,dateTo)
+                    getHistory(dateFrom, dateTo)
+                }else{
+                    //slideToConfirm.initView()
                 }
+
             }
+        }
+    }
+
+    private fun setTextSlideButtonEnable(isEnable : Boolean){
+        with(binding){
+            slideToConfirm.initView(isEnable)
+            slideToConfirm.setText(resources.getString(R.string.button_slide_to_confirm),isEnable)
         }
     }
 

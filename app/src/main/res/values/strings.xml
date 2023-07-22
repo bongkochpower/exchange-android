@@ -109,6 +109,7 @@
     <string name="button_confirm_phone_number">ยืนยันเบอร์โทรศัพท์</string>
     <string name="button_slide_to_topup">เลื่อนเพื่อเติมเงิน</string>
     <string name="button_slide_to_exchange">เลื่อนเพื่อแลกเงิน</string>
+    <string name="button_slide_to_confirm">เลื่อนเพื่อยืนยัน</string>
     <string name="button_back_to_main">กลับสู่หน้าหลัก</string>
     <string name="button_next">ต่อไป</string>
 

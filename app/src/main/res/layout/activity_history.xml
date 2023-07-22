@@ -119,18 +119,13 @@
             </LinearLayout>
 
             <!--slide to confirm-->
-            <com.google.android.material.button.MaterialButton
-                style="@style/TextViewRegularPlus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+            <com.startwithn.exchange_android.ui.widget.SlideButton
+                android:id="@+id/slide_to_confirm"
+                android:layout_marginHorizontal="@dimen/margin_14dp"
                 android:layout_marginTop="@dimen/margin_16dp"
-                android:background="@drawable/bg_slide_confirm"
-                android:text="@string/button_next"
-                android:id="@+id/btn_slide_confirm"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                android:textFontWeight="600" />
+                android:layout_width="match_parent"
+                android:layout_height="58dp"/>
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

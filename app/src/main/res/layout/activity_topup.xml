@@ -159,9 +159,17 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/bg_slide_confirm"
                     android:text="@string/button_next"
+                    android:visibility="invisible"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textFontWeight="600" />
+
+                <com.startwithn.exchange_android.ui.widget.SlideButton
+                    android:id="@+id/slide_to_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
 
             </FrameLayout>
 

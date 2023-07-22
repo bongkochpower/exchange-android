@@ -6,6 +6,7 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.icu.text.CompactDecimalFormat
 import android.net.Uri
 import android.util.TypedValue
 import android.view.View
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.common.util.Base64Utils
 import com.startwithn.exchange_android.common.manager.AppManager
 import com.startwithn.exchange_android.common.navigator.AppNavigator
+import java.math.RoundingMode
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.text.DecimalFormat
@@ -128,6 +130,11 @@ fun Double.toStringFormat(): String = DecimalFormat("#,##0.00").format(this)
 fun Double.toPointStringFormat(): String = DecimalFormat("#,##0.#").format(this)
 
 fun Double.toThaiCurrencyStringFormat(): String = String.format("฿%s", toStringFormat(true))
+
+fun Double.toCompactDecimalFormat() : String {
+    val cdf = CompactDecimalFormat.getInstance(Locale.getDefault(), CompactDecimalFormat.CompactStyle.SHORT)
+    return cdf.format(this)
+}
 
 fun String.toTimeAgo(format: String): String {
     val offerTime = this.toCalendar(format)

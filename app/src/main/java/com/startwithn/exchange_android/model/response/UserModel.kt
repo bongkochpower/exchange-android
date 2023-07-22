@@ -57,6 +57,8 @@ data class UserModel(
 ) {
     @Parcelize
     data class CustomerBalance(
+        @field:SerializedName("currency_id")
+        var id: Int?,
         @field:SerializedName("balance")
         var balance: Double?,
         @field:SerializedName("currency_name")

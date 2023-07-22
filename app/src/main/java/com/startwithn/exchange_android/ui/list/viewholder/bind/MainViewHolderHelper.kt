@@ -9,6 +9,7 @@ import com.startwithn.exchange_android.databinding.ItemRvBalanceBinding
 import com.startwithn.exchange_android.databinding.ItemRvTransactionBinding
 import com.startwithn.exchange_android.ext.loadImage
 import com.startwithn.exchange_android.ext.reDateFormat
+import com.startwithn.exchange_android.ext.toCompactDecimalFormat
 import com.startwithn.exchange_android.ext.toDisplayFormat
 import com.startwithn.exchange_android.ext.toStringFormat
 import com.startwithn.exchange_android.model.response.TransactionsModel
@@ -28,7 +29,7 @@ object MainViewHolderHelper {
                     val amount = it.balance
 
                     tvTitle.text = label
-                    tvMoney.text = amount?.toDouble()?.toStringFormat()
+                    tvMoney.text = amount?.toCompactDecimalFormat()
                 }
             }
         }

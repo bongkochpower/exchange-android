@@ -2,43 +2,31 @@ package com.startwithn.exchange_android.ui.page.main
 
 import android.app.Activity
 import android.content.Intent
+import android.icu.text.CompactDecimalFormat
+import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.LiveData
-import androidx.navigation.NavController
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import com.startwithn.exchange_android.R
 import com.startwithn.exchange_android.common.alert.AppAlert
 import com.startwithn.exchange_android.common.navigator.AppNavigator
 import com.startwithn.exchange_android.databinding.ActivityMainBinding
 import com.startwithn.exchange_android.databinding.ItemRvBalanceBinding
 import com.startwithn.exchange_android.databinding.ItemRvTransactionBinding
-import com.startwithn.exchange_android.ext.goToGoogleStore
 import com.startwithn.exchange_android.ext.logout
-import com.startwithn.exchange_android.ext.setItemPadding
 import com.startwithn.exchange_android.ext.setOnLoadMoreListener
 import com.startwithn.exchange_android.model.response.TransactionsModel
 import com.startwithn.exchange_android.model.response.UserModel
 import com.startwithn.exchange_android.network.ResultWrapper
 import com.startwithn.exchange_android.ui.list.LoadingStyleEnum
-import com.startwithn.exchange_android.ui.list.ViewType
 import com.startwithn.exchange_android.ui.list.adapter.SimpleRecyclerViewAdapter
-import com.startwithn.exchange_android.ui.list.diffutil.BalanceDiffUtilCallback
-import com.startwithn.exchange_android.ui.list.itemdecoration.EqualSpacingItemDecoration
 import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHelper.initBalance
 import com.startwithn.exchange_android.ui.list.viewholder.bind.MainViewHolderHelper.initTransactions
 import com.startwithn.exchange_android.ui.page.base.BaseActivity
-import com.startwithn.exchange_android.ui.page.login.LoginViewModel
-import com.startwithn.exchange_android.ui.page.main.history.HistoryActivity
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.Locale
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 

@@ -197,10 +197,12 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
 
                 is ResultWrapper.Success -> {
                     hideLoading()
-                    binding.tvResultCurrency.text = it.response.value?.toStringFormat()
-
-                    val txtCurrencyValueChange = resources.getString(R.string.hint_exchange_to_other_currency, exchangeViewModel.currencyFrom?.label,it.response.value?.toStringFormat() , exchangeViewModel.currencyTo?.label)
-                    binding.tvValueChangePre.text = txtCurrencyValueChange
+                    if(getCurrentStep() == 1){
+                        val txtCurrencyValueChange = resources.getString(R.string.hint_exchange_to_other_currency, exchangeViewModel.currencyFrom?.label,it.response.value?.toStringFormat() , exchangeViewModel.currencyTo?.label)
+                        binding.tvValueChangePre.text = txtCurrencyValueChange
+                    }else{
+                        binding.tvResultCurrency.text = it.response.value?.toStringFormat()
+                    }
                 }
 
                 else -> {

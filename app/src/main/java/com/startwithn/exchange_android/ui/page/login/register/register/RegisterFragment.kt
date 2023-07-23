@@ -533,6 +533,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 edtRegName.setText(firstName.orEmpty())
                 edtRegLastname.setText(lastName.orEmpty())
                 edtRegPhone.apply {
+                    backgroundTintList = resources.getColorStateList(R.color.gray_alto)
                     setText(tel)
                     isEnabled = false
                 }

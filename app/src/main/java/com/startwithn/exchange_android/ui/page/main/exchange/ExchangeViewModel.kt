@@ -45,8 +45,8 @@ class ExchangeViewModel(
             exchangeLiveData.value = ResultWrapper.Loading
             val result = appRemoteRepository.exchange(
                 ExchangeRequestModel(
-                    currencyFormId = 1,
-                    currencyToId = 3,
+                    currencyFormId = currencyFrom?.id  ?: 0,
+                    currencyToId = currencyTo?.id ?: 0,
                     amount = amount ?: 0.0
                 )
             )
@@ -58,9 +58,9 @@ class ExchangeViewModel(
         viewModelScope.launch {
             exchangeCalculateLiveData.value = ResultWrapper.Loading
             val request = ExchangeRequestModel(
-                currencyFormId = 1,
-                currencyToId = 3,
-                amount = amount ?: 0.0
+                currencyFormId = currencyFrom?.id  ?: 1,
+                currencyToId = currencyTo?.id ?: 1,
+                amount = amount ?: 1.0
             )
             val result = appRemoteRepository.exchangeCalculate(request)
             exchangeCalculateLiveData.value = result

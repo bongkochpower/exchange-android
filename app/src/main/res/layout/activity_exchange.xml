@@ -245,7 +245,9 @@
                 android:layout_height="match_parent"
                 android:paddingTop="@dimen/margin_40dp">
 
+                <!--button-->
                 <FrameLayout
+                    android:layout_marginHorizontal="@dimen/padding_30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true">
@@ -263,21 +265,17 @@
                         android:textFontWeight="600"
                         android:visibility="@{isStep2 ? View.GONE : View.VISIBLE}" />
 
-                    <com.google.android.material.button.MaterialButton
-                        style="@style/TextViewRegularPlus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/bg_slide_confirm"
-                        android:text="@string/button_slide_to_exchange"
-                        android:id="@+id/btn_exchange"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorPrimary"
-                        android:textFontWeight="600"
-                        android:visibility="@{isStep2 ? View.VISIBLE : View.GONE,default=gone}" />
+                    <com.startwithn.exchange_android.ui.widget.SlideButton
+                        android:id="@+id/slide_to_exchange"
+                        android:layout_marginHorizontal="@dimen/margin_14dp"
+                        android:layout_width="match_parent"
+                        android:visibility="@{isStep2 ? View.VISIBLE : View.GONE,default=visible}"
+                        android:layout_height="58dp"/>
+
                 </FrameLayout>
 
                 <androidx.cardview.widget.CardView
+                    android:visibility="@{isStep2 ? View.GONE : View.VISIBLE}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -305,6 +303,7 @@
                 <com.startwithn.exchange_android.ui.widget.NumberPad
                     android:layout_width="match_parent"
                     android:id="@+id/np_exchange"
+                    tools:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:visibility="@{isStep2 ? View.VISIBLE : View.GONE}" />

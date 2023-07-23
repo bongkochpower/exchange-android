@@ -18,7 +18,10 @@ import com.startwithn.exchange_android.databinding.ActivityExchangeBinding
 import com.startwithn.exchange_android.databinding.ItemRvExchangeCurrencyBinding
 import com.startwithn.exchange_android.ext.deleteAmount
 import com.startwithn.exchange_android.ext.hideKeyboard
+import com.startwithn.exchange_android.ext.isMonoClickable
+import com.startwithn.exchange_android.ext.monoLastTimeClick
 import com.startwithn.exchange_android.ext.setOnTouchAnimation
+import com.startwithn.exchange_android.ext.setTextSlideButtonEnable
 import com.startwithn.exchange_android.ext.toStringFormat
 import com.startwithn.exchange_android.model.response.UserModel
 import com.startwithn.exchange_android.network.ResultWrapper
@@ -108,6 +111,7 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
                 }
 
                 override fun afterTextChanged(it: Editable?) {
+                    slideToExchange.setTextSlideButtonEnable(it.toString().isNotEmpty(),R.string.button_slide_to_exchange)
                     if (it.isNullOrEmpty()) {
                         tvResultCurrency.text = "0.00"
                     } else {
@@ -153,10 +157,20 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
                 }
             }
 
-            btnExchange.setOnClickListener {
+            slideToExchange.setTextSlideButtonEnable(false,R.string.button_slide_to_exchange)
+            slideToExchange.setOnClickListener {
+                if (!isMonoClickable()) return@setOnClickListener
+                monoLastTimeClick()
+
+                slideToExchange.setEnable(false)
+                slideToExchange.setBackgroundRes(R.drawable.bg_slide_confirm_done)
+
                 if (isValidate()) {
-                    //exchange()
+                    exchange()
+                }else{
+                    slideToExchange.setTextSlideButtonEnable(true,R.string.button_slide_to_exchange)
                 }
+
             }
         }
     }
@@ -168,26 +182,29 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
         exchangeViewModel.exchangeCalculateLiveData.observe(this) {
             when (it) {
                 is ResultWrapper.Loading -> {
-                    //showLoading()
+                    showLoading()
                 }
 
                 is ResultWrapper.GenericError -> {
                     AppAlert.alertGenericError(this, it.code, it.message).show(supportFragmentManager)
-//                    hideLoading()
+                    hideLoading()
                 }
 
                 is ResultWrapper.NetworkError -> {
                     AppAlert.alertNetworkError(this).show(supportFragmentManager)
-//                    hideLoading()
+                    hideLoading()
                 }
 
                 is ResultWrapper.Success -> {
-//                    hideLoading()
+                    hideLoading()
                     binding.tvResultCurrency.text = it.response.value?.toStringFormat()
+
+                    val txtCurrencyValueChange = resources.getString(R.string.hint_exchange_to_other_currency, exchangeViewModel.currencyFrom?.label,it.response.value?.toStringFormat() , exchangeViewModel.currencyTo?.label)
+                    binding.tvValueChangePre.text = txtCurrencyValueChange
                 }
 
                 else -> {
-//                    hideLoading()
+                    hideLoading()
                 }
             }
         }
@@ -226,7 +243,8 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
         //date on start
         updateCurrencyFormSelected(list.first())
 
-        getCurrencyExchangeTo(list.first())
+        //getCurrencyExchangeTo(list.first())
+
     }
 
     private fun getCurrencyExchangeTo(selectedForm: UserModel.CustomerBalance,isInit : Boolean = true) {
@@ -243,21 +261,30 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
         if (isCurrencyFrom) {
             if (!exchangeFromAdapter.isLoading) {
                 binding.tvCurrencyForm.text = txtCurrency
+                exchangeViewModel.currencyFrom = currencyModel
                 lifecycleScope.launch {
                     getCurrencyExchangeTo(currencyModel,false)
                 }
 
-                exchangeViewModel.currencyFrom = currencyModel
             }
         } else {
             if (!exchangeToAdapter.isLoading) {
                 binding.tvCurrencyTo.text = txtCurrency
                 exchangeViewModel.currencyTo = currencyModel
+
+            }
+
+            //update result
+            exchangeViewModel.amount = 1.0
+            lifecycleScope.launch {
+                exchangeViewModel.exchangeCalculate()
             }
         }
 
-        val txtCurrencyValueChange = resources.getString(R.string.hint_exchange_to_other_currency, exchangeViewModel.currencyFrom?.label, "100", exchangeViewModel.currencyTo?.label)
-        binding.tvValueChangePre.text = txtCurrencyValueChange
+
+
+//        val txtCurrencyValueChange = resources.getString(R.string.hint_exchange_to_other_currency, exchangeViewModel.currencyFrom?.label, "100", exchangeViewModel.currencyTo?.label)
+//        binding.tvValueChangePre.text = txtCurrencyValueChange
 
     }
 

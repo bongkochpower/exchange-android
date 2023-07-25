@@ -303,10 +303,9 @@
                 <com.startwithn.exchange_android.ui.widget.NumberPad
                     android:layout_width="match_parent"
                     android:id="@+id/np_exchange"
-                    tools:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:visibility="@{isStep2 ? View.VISIBLE : View.GONE}" />
+                    android:visibility="gone" />
             </RelativeLayout>
 
 

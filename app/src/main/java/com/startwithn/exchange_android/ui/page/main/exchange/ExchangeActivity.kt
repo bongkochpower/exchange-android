@@ -134,7 +134,7 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
                 }
             })
 
-            npExchange.setOnNumberClickListener { type, number ->
+            /*npExchange.setOnNumberClickListener { type, number ->
                 when (type) {
                     NumberPad.NumberPadEnum.NUMBER -> {
                         edtCurrencyFrom.append(number)
@@ -148,7 +148,7 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
                         edtCurrencyFrom.append(".")
                     }
                 }
-            }
+            }*/
 
             btnContinue.apply {
                 setOnTouchAnimation()

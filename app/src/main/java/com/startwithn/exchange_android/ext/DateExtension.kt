@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.DatePicker
 import com.startwithn.exchange_android.common.constant.AppConstant
+import com.startwithn.exchange_android.common.constant.AppConstant.FORMAT_SERVICE_DATE_TIME
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -83,14 +84,26 @@ fun String?.toDate(format: String): Date? {
 fun String?.toServiceFormat() : String{
     return reDateFormat(AppConstant.FORMAT_UI_DATE, AppConstant.FORMAT_SERVICE_DATE).toDashWhenNullOrEmpty()
 }
+
+
 fun String?.toDisplayFormat() : String{
     return reDateFormat(AppConstant.FORMAT_SERVICE_DATE,AppConstant.FORMAT_UI_DATE).toDashWhenNullOrEmpty()
 }
-/*@JvmStatic
-    fun convertStringToDateFormat(value: String?): String = value.reDateFormat(
-        AppConstant.FORMAT_SERVICE_DATE,
-        AppConstant.FORMAT_UI_DATE
-    ) ?: ""*/
+
+fun String?.convertUtcToIct(): String? {
+    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss",Locale.getDefault())
+    sdf.timeZone = TimeZone.getTimeZone("UTC")
+
+    return try {
+        val date = sdf.parse(this)
+        val outputSdf = SimpleDateFormat(FORMAT_SERVICE_DATE_TIME,Locale.getDefault())
+        outputSdf.timeZone = TimeZone.getTimeZone("Asia/Bangkok")
+        outputSdf.format(date)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
+}
 
 private const val diffYear: Int = 543
 fun Int?.convertToBuddhistYear(): Int? = this?.plus(diffYear) ?: run { this }

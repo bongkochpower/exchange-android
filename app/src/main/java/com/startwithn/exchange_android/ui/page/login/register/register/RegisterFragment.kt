@@ -485,12 +485,19 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private fun register() {
         getRegisterData().apply {
             isConsent = binding.chkRegTerm.isChecked
+            profileImagePath = this@RegisterFragment.profileImagePath
         }.also {
             registerViewModel.register(it)
         }
     }
     private fun updateProfile(userId : Int){
-        registerViewModel.updateProfile(userId,getRegisterData())
+        getRegisterData().apply {
+            if(this@RegisterFragment.profileImagePath?.isNotEmpty() == true){
+                profileImagePath = this@RegisterFragment.profileImagePath
+            }
+        }.also {
+            registerViewModel.updateProfile(userId,it)
+        }
     }
 
     private fun getRegisterData() : RegisterRequestModel{
@@ -504,7 +511,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 email = edtRegEmail.getText(),
                 password = edtRegPassword.text.trim().toString(),
                 idCardImagePath = registerViewModel.selectedIdCardImage ?: this@RegisterFragment.user?.idCardImage.toDashWhenNullOrEmpty(),
-                profileImagePath = profileImagePath ?: this@RegisterFragment.user?.profileImage.toDashWhenNullOrEmpty(),
                 postCode = edtRegPostcode.text.toString(),
                 moo = edtRegVillageNo.text.trim().toString(),
                 soi = edtRegAlley.text.trim().toString(),
@@ -538,7 +544,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     isEnabled = false
                 }
                 edtRegEmail.setText(email.orEmpty())
-                edtRegDob.setText(birthDate.toDisplayFormat())
+                edtRegDob.setText(birthDate.toDisplayFormat().convertDisplayDateToBuddhistYear())
 
                 isSelectIdCardImage = true
                 val filename: String = idCardImage.orEmpty()

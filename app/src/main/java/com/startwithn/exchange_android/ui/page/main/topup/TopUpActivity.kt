@@ -51,7 +51,7 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
                 }
                 slideToConfirm.setTextSlideButtonEnable(it.toString().isNotEmpty(),R.string.button_slide_to_topup)
             }
-            npTopup.setOnNumberClickListener { type, number ->
+            /*npTopup.setOnNumberClickListener { type, number ->
                 when (type) {
                     NumberPad.NumberPadEnum.NUMBER -> {
                         edtMoneyAmount.append(number)
@@ -65,7 +65,7 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
                         edtMoneyAmount.append(".")
                     }
                 }
-            }
+            }*/
 
 
             slideToConfirm.setTextSlideButtonEnable(false,R.string.button_slide_to_topup)

@@ -161,6 +161,7 @@
 
             <com.startwithn.exchange_android.ui.widget.NumberPad
                 android:id="@+id/np_topup"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

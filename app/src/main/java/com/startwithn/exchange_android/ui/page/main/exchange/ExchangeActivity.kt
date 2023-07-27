@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -32,6 +33,7 @@ import com.startwithn.exchange_android.ui.page.base.BaseActivity
 import com.startwithn.exchange_android.ui.widget.NumberPad
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import org.koin.core.definition.indexKey
 import java.util.Timer
 import kotlin.concurrent.schedule
 
@@ -245,16 +247,20 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
         //date on start
         updateCurrencyFormSelected(list.first())
 
-        //getCurrencyExchangeTo(list.first())
-
     }
 
     private fun getCurrencyExchangeTo(selectedForm: UserModel.CustomerBalance,isInit : Boolean = true) {
         val list = exchangeViewModel.getCurrencyForm()
         val listFiltered = list.filter { it.label != selectedForm.label }
+        listFiltered.find { it.id == exchangeViewModel.currencyTo?.id }?.isSelected = true
+
+        var itemIndex = exchangeToAdapter.getOriginalList().map { it.apply { it.isSelected = false } }.indexOf(selectedForm)
+        if(itemIndex < 0 ) {
+            itemIndex = 0
+        }
         exchangeToAdapter.submitList(true, listFiltered.toMutableList())
 
-        updateCurrencyFormSelected(listFiltered.first(), false)
+        updateCurrencyFormSelected(listFiltered.find { it.isSelected } ?: listFiltered[itemIndex], false)
     }
 
     private fun updateCurrencyFormSelected(currencyModel: UserModel.CustomerBalance, isCurrencyFrom: Boolean = true) {

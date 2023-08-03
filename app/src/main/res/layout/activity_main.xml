@@ -9,7 +9,7 @@
 
         <variable
             name="activity"
-            type="com.startwithn.exchange_android.ui.page.main.MainActivity" />
+            type="com.powersoftlab.exchange_android.ui.page.main.MainActivity" />
 
         <variable
             name="isTransactionEmpty"
@@ -50,7 +50,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <com.startwithn.exchange_android.ui.widget.AppToolbar
+                        <com.powersoftlab.exchange_android.ui.widget.AppToolbar
                             android:id="@+id/toolbar"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"

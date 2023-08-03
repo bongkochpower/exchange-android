@@ -9,7 +9,7 @@
 
         <variable
             name="fragment"
-            type="com.startwithn.exchange_android.ui.page.login.register.register.RegisterFragment" />
+            type="com.powersoftlab.exchange_android.ui.page.login.register.register.RegisterFragment" />
 
         <variable
             name="isAvatarUpdating"
@@ -138,14 +138,14 @@
             </FrameLayout>
 
             <!--data form-->
-            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_24dp"
                 app:edtTitle="@string/hint_name" />
 
-            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
                 android:visibility="@{isPhoneEmpty ? View.VISIBLE : View.INVISIBLE , default= visible}"
                 app:fontFamily="@font/prompt_regular" />
 
-            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -369,7 +369,7 @@
             </LinearLayout>
 
             <!--road-->
-            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_street"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -377,19 +377,19 @@
                 app:edtTitle="@string/hint_street" />
 
             <!--sub district-->
-            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_sub_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:edtTitle="@string/hint_sub_district" />
 
-            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:edtTitle="@string/hint_district" />
 
-            <com.startwithn.exchange_android.ui.widget.EdittextRegister
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_province"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

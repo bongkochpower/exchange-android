@@ -12,14 +12,14 @@
         android:background="@drawable/bg_app"
         tools:context=".ui.page.login.LoginActivity">
 
-        <com.startwithn.exchange_android.ui.widget.AppToolbar
+        <com.powersoftlab.exchange_android.ui.widget.AppToolbar
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:elevation="@dimen/zero"
             app:layout_constraintTop_toTopOf="parent">
 
-        </com.startwithn.exchange_android.ui.widget.AppToolbar>
+        </com.powersoftlab.exchange_android.ui.widget.AppToolbar>
 
         <!-- <androidx.cardview.widget.CardView
              android:id="@+id/cv_content"

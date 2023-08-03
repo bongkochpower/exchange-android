@@ -6,7 +6,7 @@
 
         <variable
             name="widget"
-            type="com.startwithn.exchange_android.ui.widget.AppToolbar" />
+            type="com.powersoftlab.exchange_android.ui.widget.AppToolbar" />
 
         <variable
             name="title"

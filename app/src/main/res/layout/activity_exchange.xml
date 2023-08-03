@@ -9,7 +9,7 @@
 
         <variable
             name="activity"
-            type="com.startwithn.exchange_android.ui.page.main.exchange.ExchangeActivity" />
+            type="com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeActivity" />
 
         <variable
             name="isStep2"
@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.startwithn.exchange_android.ui.widget.AppToolbar
+            <com.powersoftlab.exchange_android.ui.widget.AppToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/padding_56dp">
 
-                        <com.startwithn.exchange_android.ui.widget.CurrencyEditText
+                        <com.powersoftlab.exchange_android.ui.widget.CurrencyEditText
                             android:id="@+id/edt_currency_from"
                             style="@style/TextViewExtraLarge3"
                             android:imeOptions="actionDone"
@@ -117,7 +117,7 @@
                             android:textColor="@{isExchangeInvalid ? @color/yellow_sea_buckthorn : @color/white , default=@color/white}"
                             android:textCursorDrawable="@drawable/cursor_color">
                             <requestFocus/>
-                        </com.startwithn.exchange_android.ui.widget.CurrencyEditText>
+                        </com.powersoftlab.exchange_android.ui.widget.CurrencyEditText>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_exchange_from"
@@ -265,7 +265,7 @@
                         android:textFontWeight="600"
                         android:visibility="@{isStep2 ? View.GONE : View.VISIBLE}" />
 
-                    <com.startwithn.exchange_android.ui.widget.SlideButton
+                    <com.powersoftlab.exchange_android.ui.widget.SlideButton
                         android:id="@+id/slide_to_exchange"
                         android:layout_marginHorizontal="@dimen/margin_14dp"
                         android:layout_width="match_parent"
@@ -300,7 +300,7 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <com.startwithn.exchange_android.ui.widget.NumberPad
+                <com.powersoftlab.exchange_android.ui.widget.NumberPad
                     android:layout_width="match_parent"
                     android:id="@+id/np_exchange"
                     android:layout_height="wrap_content"

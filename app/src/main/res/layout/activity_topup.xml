@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.startwithn.exchange_android.ui.widget.AppToolbar
+            <com.powersoftlab.exchange_android.ui.widget.AppToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -95,7 +95,7 @@
 
                 </LinearLayout>
 
-                <com.startwithn.exchange_android.ui.widget.CurrencyEditText
+                <com.powersoftlab.exchange_android.ui.widget.CurrencyEditText
                     android:id="@+id/edt_money_amount"
                     style="@style/TextViewExtraLarge3"
                     android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                     android:textCursorDrawable="@drawable/cursor_color">
 
                     <requestFocus />
-                </com.startwithn.exchange_android.ui.widget.CurrencyEditText>
+                </com.powersoftlab.exchange_android.ui.widget.CurrencyEditText>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextViewMini"
@@ -151,7 +151,7 @@
                 android:layout_weight="1"
                 android:paddingTop="@dimen/margin_40dp">
 
-                <com.startwithn.exchange_android.ui.widget.SlideButton
+                <com.powersoftlab.exchange_android.ui.widget.SlideButton
                     android:id="@+id/slide_to_confirm"
                     android:layout_marginHorizontal="@dimen/margin_14dp"
                     android:layout_width="match_parent"
@@ -159,7 +159,7 @@
 
             </FrameLayout>
 
-            <com.startwithn.exchange_android.ui.widget.NumberPad
+            <com.powersoftlab.exchange_android.ui.widget.NumberPad
                 android:id="@+id/np_topup"
                 android:visibility="gone"
                 android:layout_width="match_parent"

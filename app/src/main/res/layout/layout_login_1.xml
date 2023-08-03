@@ -23,7 +23,7 @@
             android:textColor="@color/black"
             app:fontFamily="@font/prompt_semibold" />
 
-        <com.startwithn.exchange_android.ui.widget.ButtonLogin
+        <com.powersoftlab.exchange_android.ui.widget.ButtonLogin
             android:id="@+id/btn_login_apple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             app:buttonTextColorRes="@color/white"
             app:buttonTitle="@string/button_apple_login" />
 
-        <com.startwithn.exchange_android.ui.widget.ButtonLogin
+        <com.powersoftlab.exchange_android.ui.widget.ButtonLogin
             android:id="@+id/btn_login_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             app:buttonTextColorRes="@color/white"
             app:buttonTitle="@string/button_facebook_login" />
 
-        <com.startwithn.exchange_android.ui.widget.ButtonLogin
+        <com.powersoftlab.exchange_android.ui.widget.ButtonLogin
             android:id="@+id/btn_login_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:buttonTextColorRes="@color/white"
             app:buttonTitle="@string/button_line_login" />
 
-        <com.startwithn.exchange_android.ui.widget.ButtonLogin
+        <com.powersoftlab.exchange_android.ui.widget.ButtonLogin
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

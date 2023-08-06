@@ -11,6 +11,10 @@
     <string name="fb_login_protocol_scheme">fb848468592937873</string>
     <string name="facebook_client_token">dc2752cc34605754c6211c32d36b15e6</string>
 
+    <!--line-->
+    <string name="line_channel_id">2000299834</string>
+    <string name="line_channel_secret">f20406dc71b57cf464e49a1165ebebe0</string>
+
     <!--title-->
     <string name="title_code">Code</string>
     <string name="title_login">เข้าสู่ระบบ</string>

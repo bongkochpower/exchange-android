@@ -11,11 +11,12 @@ import com.powersoftlab.exchange_android.ext.getCurrentFragment
 import com.powersoftlab.exchange_android.ui.page.base.BaseActivity
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.login.forgot.verify_phone_number.ForgotPasswordFragment
-import com.powersoftlab.exchange_android.ui.page.login.register.register.RegisterFragment
 import com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragment
+import com.powersoftlab.exchange_android.ui.page.login.register.register.RegisterFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+
+class LoginActivity : BaseActivity<ActivityLoginBinding>(com.powersoftlab.exchange_android.R.layout.activity_login) {
 
     private val loginViewModel: LoginViewModel by viewModel()
 
@@ -53,6 +54,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         loginViewModel.iconLeftMenu.observe(this){ iconRes ->
             binding.appBarLayout.setIcon(iconRes)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        getCurrentFragment().onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun getCurrentFragment(): Fragment =

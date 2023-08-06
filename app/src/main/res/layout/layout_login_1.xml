@@ -53,6 +53,7 @@
             app:buttonTextColorRes="@color/white"
             app:buttonTitle="@string/button_line_login" />
 
+
         <com.powersoftlab.exchange_android.ui.widget.ButtonLogin
             android:id="@+id/btn_login"
             android:layout_width="match_parent"

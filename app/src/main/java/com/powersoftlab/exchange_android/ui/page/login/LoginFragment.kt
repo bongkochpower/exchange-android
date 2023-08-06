@@ -1,16 +1,30 @@
 package com.powersoftlab.exchange_android.ui.page.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.FacebookSdk
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.github.dhaval2404.imagepicker.ImagePicker.Companion.REQUEST_CODE
+import com.linecorp.linesdk.LoginDelegate
+import com.linecorp.linesdk.LoginListener
+import com.linecorp.linesdk.Scope
+import com.linecorp.linesdk.auth.LineAuthenticationParams
+import com.linecorp.linesdk.auth.LineLoginApi
+import com.linecorp.linesdk.auth.LineLoginResult
+import com.linecorp.linesdk.widget.LoginButton
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
@@ -20,18 +34,30 @@ import com.powersoftlab.exchange_android.ext.slideUp
 import com.powersoftlab.exchange_android.model.body.LoginRequestModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.Arrays
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+
+class LoginFragment : BaseFragment<FragmentLoginBinding>(com.powersoftlab.exchange_android.R.layout.fragment_login) {
 
     private val loginViewModel: LoginViewModel by sharedViewModel()
+    private val callbackManager = CallbackManager.Factory.create()
+
+    /*line*/
+    private val scopeList = listOf(Scope.PROFILE, Scope.OPENID_CONNECT)
+    private val lineLoginResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            loginViewModel.processLoginIntent(
+                activityResult.resultCode,
+                activityResult.data
+            )
+        }
 
     companion object {
         fun newInstance() = LoginFragment()
     }
-
-    private val callbackManager = CallbackManager.Factory.create()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,17 +94,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
                 btnLoginLine.apply {
                     setOnTouchAnimation()
-                    setOnClickListener { }
+                    setOnClickListener {
+                        val intent = loginViewModel.createLineLoginIntent(
+                            context,
+                            getString(R.string.line_channel_id),
+                            scopeList
+                        )
+                        lineLoginResultLauncher.launch(intent)
+                    }
                 }
+
                 btnLogin.apply {
                     setOnTouchAnimation()
                     setOnClickListener {
                         setLoginMain(true)
                     }
                 }
-
-
-
 
                 tvRegister.setOnTouchAnimation()
             }
@@ -155,6 +186,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
             }
         }
+
+        lifecycleScope.launchWhenCreated {
+            loginViewModel.userProfileFlow.collectLatest { user ->
+                Log.d("LOGD", "subscribe line: $user")
+            }
+        }
+
     }
 
     private fun fadeIn() {
@@ -198,7 +236,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         return isValidate
     }
 
-    private fun initFacebookLogin(){
+    private fun initFacebookLogin() {
+        FacebookSdk.setAutoInitEnabled(true)
         LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onCancel() {
 
@@ -209,10 +248,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
 
             override fun onSuccess(result: LoginResult) {
-                Log.d("LOGD", "onSuccess: $result")
+                Log.d("LOGD", "onSuccess: ${result.accessToken.token}")
             }
 
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        // add this line
+        callbackManager.onActivityResult(
+            requestCode,
+            resultCode,
+            data);
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }

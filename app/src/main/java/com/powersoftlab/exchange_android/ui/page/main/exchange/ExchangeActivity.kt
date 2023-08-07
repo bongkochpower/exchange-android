@@ -12,10 +12,12 @@ import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.databinding.ActivityExchangeBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvExchangeCurrencyBinding
+import com.powersoftlab.exchange_android.ext.hideKeyboard
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ext.setTextSlideButtonEnable
+import com.powersoftlab.exchange_android.ext.showKeyboard
 import com.powersoftlab.exchange_android.ext.toStringFormat
 import com.powersoftlab.exchange_android.model.response.UserModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
@@ -295,6 +297,7 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
 
     private fun gotoStep1() {
         with(binding) {
+            hideKeyboard()
             toolbar.setIcon(R.drawable.icon_close)
             edtCurrencyFrom.visibility = View.GONE
             isExchangeInvalid = false
@@ -304,6 +307,7 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
 
     private fun gotoStep2() {
         with(binding) {
+            showKeyboard()
             isStep2 = true
             toolbar.setIcon(R.drawable.icon_back)
             edtCurrencyFrom.apply {

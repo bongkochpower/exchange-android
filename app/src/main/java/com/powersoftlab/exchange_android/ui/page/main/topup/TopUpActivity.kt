@@ -1,7 +1,10 @@
 package com.powersoftlab.exchange_android.ui.page.main.topup
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import com.powersoftlab.exchange_android.R
@@ -10,6 +13,7 @@ import com.powersoftlab.exchange_android.databinding.ActivityTopupBinding
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setTextSlideButtonEnable
+import com.powersoftlab.exchange_android.ext.showKeyboard
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
@@ -29,6 +33,7 @@ class TopUpActivity : BaseActivity<ActivityTopupBinding>(R.layout.activity_topup
     }
 
     override fun setUp() {
+        showKeyboard()
         with(binding) {
             isTopupInvalid = false
         }

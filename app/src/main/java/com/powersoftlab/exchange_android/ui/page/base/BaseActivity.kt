@@ -64,7 +64,7 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
 
         subscribe()
 
-        hideKeyboard()
+        //hideKeyboard()
     }
 
     override fun onDestroy() {

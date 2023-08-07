@@ -106,8 +106,7 @@
                     android:inputType="numberDecimal"
                     android:textColor="@{isTopupInvalid ? @color/yellow_sea_buckthorn : @color/white , default=@color/white}"
                     android:textCursorDrawable="@drawable/cursor_color">
-
-                    <requestFocus />
+<requestFocus/>
                 </com.powersoftlab.exchange_android.ui.widget.CurrencyEditText>
 
                 <androidx.appcompat.widget.AppCompatTextView

@@ -12,6 +12,7 @@ import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.ActivityMainBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvBalanceBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvTransactionBinding
+import com.powersoftlab.exchange_android.ext.hideKeyboard
 import com.powersoftlab.exchange_android.ext.logout
 import com.powersoftlab.exchange_android.ext.setOnLoadMoreListener
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
@@ -94,6 +95,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onResume() {
         super.onResume()
+        hideKeyboard()
         getUser()
         getLastTransaction()
     }

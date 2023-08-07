@@ -155,6 +155,7 @@
     <string name="validate_reg_lastname">กรุณาใส่นามสกุล</string>
     <string name="validate_reg_postcode">กรุณาใส่รหัสไปรษณีย์</string>
     <string name="validate_reg_phone_10_digit">กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 หลัก</string>
+    <string name="validate_reg_password">Password ไม่ถูกต้อง</string>
     <string name="validate_reg_confirm_password">Confirm Password ไม่ถูกต้อง</string>
     <string name="validate_reg_attach_file_fail">แนบไฟล์ไม่สำเร็จ ขนาดเกิน 25 mb</string>
     <string name="validate_reg_attach_file_success">แนบไฟล์สำเร็จ</string>

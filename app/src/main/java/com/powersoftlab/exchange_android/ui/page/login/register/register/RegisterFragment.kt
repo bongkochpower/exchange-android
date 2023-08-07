@@ -30,6 +30,7 @@ import com.powersoftlab.exchange_android.ext.getPhotoFromGallery
 import com.powersoftlab.exchange_android.ext.gone
 import com.powersoftlab.exchange_android.ext.isEmail
 import com.powersoftlab.exchange_android.ext.isMonoClickable
+import com.powersoftlab.exchange_android.ext.isValidPassword
 import com.powersoftlab.exchange_android.ext.loadImageCircle
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
@@ -429,6 +430,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 pw.isEmpty() -> {
                     isPasswordEmpty = true
                     validateEdittextErrorView(edtRegPassword, tvErrorPassword)
+                }
+                !isValidPassword(pw) -> {
+                    isPasswordEmpty = true
+                    //validateEdittextErrorView(edtRegPassword, tvErrorPassword)
+                    tvErrorPassword.text = getString(R.string.validate_reg_password)
                 }
 
                 pw != confirmPw -> {

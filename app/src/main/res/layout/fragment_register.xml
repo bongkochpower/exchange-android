@@ -443,7 +443,7 @@
                 android:layout_marginVertical="@dimen/margin_2dp"
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:gravity="start"
-                android:text="@string/validate_reg_confirm_password"
+                android:text="@string/validate_reg_password"
                 android:textColor="@color/color_error_text"
                 android:visibility="@{isPasswordEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}"
                 app:fontFamily="@font/prompt_regular" />

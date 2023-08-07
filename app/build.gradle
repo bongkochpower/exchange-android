@@ -63,11 +63,11 @@ android {
         uat {
             dimension 'default'
             applicationIdSuffix '.uat'
-            buildConfigField 'String', 'BASE_URL', '"https://haadthip-api.feyverly.com"'
+            buildConfigField 'String', 'BASE_URL', '"https://exchange-api.powersoftlab.com"'
         }
         prod {
             dimension 'default'
-            buildConfigField 'String', 'BASE_URL', '"https://haadthip-api.feyverly.com"'
+            buildConfigField 'String', 'BASE_URL', '"https://exchange-api.powersoftlab.com"'
         }
     }
 

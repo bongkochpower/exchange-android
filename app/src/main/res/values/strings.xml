@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">exchange-android</string>
+    <string name="app_name">SoSoon Exchange</string>
 
     <!--fcm-->
     <string name="fcm_channel_id">exchange-android</string>

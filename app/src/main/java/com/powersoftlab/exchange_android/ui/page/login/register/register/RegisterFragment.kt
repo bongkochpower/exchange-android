@@ -43,6 +43,7 @@ import com.powersoftlab.exchange_android.model.response.UserModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.network.builder.RetrofitBuilder
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
+import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragmentDirections
 import com.powersoftlab.exchange_android.ui.widget.EdittextRegister
 import okhttp3.MultipartBody
@@ -53,7 +54,7 @@ import java.io.File
 import java.util.Calendar
 
 
-class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
+class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register), OnBackPressedFragment {
 
     private val registerViewModel: RegisterViewModel by stateViewModel()
 
@@ -565,6 +566,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 btnRegister.setText(resources.getString(R.string.title_register_edit_form))
             }
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 
 }

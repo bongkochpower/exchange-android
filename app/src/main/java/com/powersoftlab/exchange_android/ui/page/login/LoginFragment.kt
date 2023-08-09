@@ -34,13 +34,14 @@ import com.powersoftlab.exchange_android.ext.slideUp
 import com.powersoftlab.exchange_android.model.body.LoginRequestModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
+import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.Arrays
 
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>(com.powersoftlab.exchange_android.R.layout.fragment_login) {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) , OnBackPressedFragment {
 
     private val loginViewModel: LoginViewModel by sharedViewModel()
     private val callbackManager = CallbackManager.Factory.create()
@@ -107,7 +108,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(com.powersoftlab.exchan
                 btnLogin.apply {
                     setOnTouchAnimation()
                     setOnClickListener {
-                        setLoginMain(true)
+                        goToInputPhoneLogin()
                     }
                 }
 
@@ -119,7 +120,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(com.powersoftlab.exchan
                 tvBackToLogin.apply {
                     setOnTouchAnimation()
                     setOnClickListener {
-                        setLoginMain(false)
+                        goToMainLogin()
                     }
                 }
                 tvForgotPassword.setOnTouchAnimation()
@@ -252,6 +253,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(com.powersoftlab.exchan
             }
 
         })
+    }
+
+    private fun getCurrentStep(): Int = if (binding.layoutLogin1.llLoginMain.isVisible) {
+        1
+    } else {
+        2
+    }
+
+    override fun onBackPressed(): Boolean = if (getCurrentStep() == 2) {
+        goToMainLogin()
+        true
+    } else {
+        false
+    }
+
+    private fun goToMainLogin(){
+        setLoginMain(false)
+    }
+
+    private fun goToInputPhoneLogin(){
+        setLoginMain(true)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

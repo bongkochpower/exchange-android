@@ -9,12 +9,13 @@ import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.databinding.FragmentTermRegisterBinding
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
+import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.login.LoginFragmentDirections
 import com.powersoftlab.exchange_android.ui.page.login.LoginViewModel
 import com.powersoftlab.exchange_android.ui.page.login.register.register.RegisterFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class TermRegisterFragment : BaseFragment<FragmentTermRegisterBinding>(R.layout.fragment_term_register) {
+class TermRegisterFragment : BaseFragment<FragmentTermRegisterBinding>(R.layout.fragment_term_register), OnBackPressedFragment {
 
     private val loginViewModel: LoginViewModel by sharedViewModel()
 
@@ -59,6 +60,10 @@ class TermRegisterFragment : BaseFragment<FragmentTermRegisterBinding>(R.layout.
     }
     private fun isValidateTerm() : Boolean{
         return binding.chkTerm.isChecked
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 
 }

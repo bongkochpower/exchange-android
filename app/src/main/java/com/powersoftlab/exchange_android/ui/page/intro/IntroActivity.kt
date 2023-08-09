@@ -85,6 +85,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
     }
 
     private fun goToMain() = AppNavigator(this).goToMain()
-    private fun goToLogin() = AppNavigator(this).goToLogin()
+    private fun goToLogin() = AppNavigator(this).goToLogin(true)
 
 }

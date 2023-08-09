@@ -9,9 +9,10 @@ import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.databinding.FragmentForgotPasswordBinding
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
+import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.login.LoginFragmentDirections
 
-class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>(R.layout.fragment_forgot_password) {
+class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>(R.layout.fragment_forgot_password),OnBackPressedFragment {
     companion object {
         fun newInstance() = ForgotPasswordFragment()
         fun navigate(fragment: Fragment) =
@@ -82,6 +83,8 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>(R.lay
             isVerifyPhone = false
         }
     }
+
+    override fun onBackPressed(): Boolean = false
 
 
 }

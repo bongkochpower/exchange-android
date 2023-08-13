@@ -2,6 +2,7 @@ package com.powersoftlab.exchange_android.network
 
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.LoginRequestModel
+import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.AccessTokenModel
 import com.powersoftlab.exchange_android.model.response.ExchangeCalculateResponse
@@ -29,6 +30,13 @@ interface AppAPI {
     @POST("api/v1/customer/login")
     suspend fun login(
         @Body loginRequest: LoginRequestModel
+    ): Response<BaseResponseModel<AccessTokenModel>>
+
+    @FormUrlEncoded
+    @POST("api/v1/customer/login/social")
+    suspend fun loginSocial(
+        @Field("social") social: String,
+        @Field("access_token") token: String
     ): Response<BaseResponseModel<AccessTokenModel>>
 
     @POST("api/v1/customer")
@@ -85,7 +93,6 @@ interface AppAPI {
         @Field("currency_to") currencyToID: Int,
         @Field("amount") amount: Double
     ): Response<ExchangeCalculateResponse>
-
 
     //endregion
 

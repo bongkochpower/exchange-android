@@ -3,6 +3,7 @@ package com.powersoftlab.exchange_android.repository.remote
 import android.content.Context
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.LoginRequestModel
+import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.AccessTokenModel
 import com.powersoftlab.exchange_android.model.response.RegisterResponseModel
@@ -27,6 +28,19 @@ class UserRemoteRepository(
             dispatcher,
             call = {
                 api.login(request)
+            })
+    }
+
+    suspend fun loginSocial(
+        request: LoginSocialRequestModel
+    ): ResultWrapper<BaseResponseModel<AccessTokenModel>> {
+        return safeApiCall(
+            dispatcher,
+            call = {
+                api.loginSocial(
+                    social = request.social,
+                    token = request.accessToken
+                )
             })
     }
 

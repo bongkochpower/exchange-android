@@ -35,6 +35,7 @@ import com.powersoftlab.exchange_android.model.body.LoginRequestModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -188,12 +189,38 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         }
 
+        loginViewModel.loginSocialLiveData.observe(viewLifecycleOwner) {
+            progressDialog.dismiss()
+            when (it) {
+                is ResultWrapper.Loading -> {
+                    showLoading()
+                }
+
+                is ResultWrapper.Success -> {
+                    hideLoading()
+                    AppNavigator(requireActivity()).goToMain()
+                }
+
+                is ResultWrapper.GenericError -> {
+                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
+                    hideLoading()
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
+                }
+
+                else -> {
+                    /*none*/
+                }
+            }
+        }
+
         lifecycleScope.launchWhenCreated {
             loginViewModel.userProfileFlow.collectLatest { user ->
                 Log.d("LOGD", "subscribe line: $user")
             }
         }
-
     }
 
     private fun fadeIn() {
@@ -245,7 +272,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
 
             override fun onError(error: FacebookException) {
-                Log.d("LOGD", "onError: ${error.message}")
+                AppAlert.alert(requireContext(), error.message).show(childFragmentManager)
             }
 
             override fun onSuccess(result: LoginResult) {

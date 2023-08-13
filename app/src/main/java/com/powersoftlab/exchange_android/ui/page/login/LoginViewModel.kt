@@ -14,6 +14,7 @@ import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.other.SingleLiveEvent
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.LoginRequestModel
+import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.response.AccessTokenModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.repository.remote.UserRemoteRepository
@@ -28,6 +29,7 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
 ) : ViewModel() {
 
     val loginLiveData = SingleLiveEvent<ResultWrapper<BaseResponseModel<AccessTokenModel>>>()
+    val loginSocialLiveData = SingleLiveEvent<ResultWrapper<BaseResponseModel<AccessTokenModel>>>()
     val iconLeftMenu = MutableLiveData<Int>()
 
     private val _userProfileFlow = MutableStateFlow<LineProfile?>(null)
@@ -44,6 +46,19 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
                 }
             }
             loginLiveData.value = result
+        }
+    }
+
+    fun loginSocial(request: LoginSocialRequestModel) {
+        viewModelScope.launch {
+            loginSocialLiveData.value = ResultWrapper.Loading
+            val result = userRemoteRepository.loginSocial(request)
+            if(result is ResultWrapper.Success){
+                result.response.data?.let { token ->
+                    appManager.setAuthToken(token.accessToken)
+                }
+            }
+            loginSocialLiveData.value = result
         }
     }
 

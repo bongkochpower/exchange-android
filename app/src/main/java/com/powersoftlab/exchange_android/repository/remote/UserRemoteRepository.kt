@@ -55,7 +55,7 @@ class UserRemoteRepository(
     }
 
     suspend fun updateProfile(
-        userId : Int,
+        userId : String,
         request: RegisterRequestModel
     ): ResultWrapper<Any>{
         return safeApiCall(

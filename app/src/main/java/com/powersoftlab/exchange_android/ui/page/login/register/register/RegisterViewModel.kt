@@ -51,7 +51,7 @@ class RegisterViewModel(private val userRemoteRepository: UserRemoteRepository, 
         }
     }
 
-    fun updateProfile(userId : Int , request: RegisterRequestModel){
+    fun updateProfile(userId : String , request: RegisterRequestModel){
         updateProfileLiveData.value = ResultWrapper.Loading
         viewModelScope.launch {
             updateProfileLiveData.value = userRemoteRepository.updateProfile(userId, request)

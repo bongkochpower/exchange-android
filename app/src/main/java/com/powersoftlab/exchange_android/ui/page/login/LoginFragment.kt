@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -27,24 +28,30 @@ import com.linecorp.linesdk.auth.LineLoginResult
 import com.linecorp.linesdk.widget.LoginButton
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
+import com.powersoftlab.exchange_android.common.enum.SocialLoginTypeEnum
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentLoginBinding
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ext.slideUp
 import com.powersoftlab.exchange_android.model.body.LoginRequestModel
+import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
+import com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 import java.util.Arrays
+import kotlin.math.log
 
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) , OnBackPressedFragment {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login), OnBackPressedFragment {
 
-    private val loginViewModel: LoginViewModel by sharedViewModel()
+    private val loginViewModel: LoginViewModel by sharedStateViewModel()
     private val callbackManager = CallbackManager.Factory.create()
 
     /*line*/
@@ -92,6 +99,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     setOnTouchAnimation()
                     setOnClickListener {
                         LoginManager.getInstance().logInWithReadPermissions(requireActivity(), listOf("public_profile"));
+                        loginViewModel.selectedLoginType = SocialLoginTypeEnum.FB
+
+                        //TermRegisterFragment.navigate(this@LoginFragment)
+
                     }
                 }
                 btnLoginLine.apply {
@@ -103,6 +114,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                             scopeList
                         )
                         lineLoginResultLauncher.launch(intent)
+                        loginViewModel.selectedLoginType = SocialLoginTypeEnum.LINE
+
+                        //TermRegisterFragment.navigate(this@LoginFragment)
                     }
                 }
 
@@ -198,7 +212,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
                 is ResultWrapper.Success -> {
                     hideLoading()
-                    AppNavigator(requireActivity()).goToMain()
+                    if (it.response.data?.isFirstLogin == true) {
+                        TermRegisterFragment.navigate(this)
+                    } else {
+                        AppNavigator(requireActivity()).goToMain()
+                    }
                 }
 
                 is ResultWrapper.GenericError -> {
@@ -216,11 +234,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        /*lifecycleScope.launchWhenCreated {
             loginViewModel.userProfileFlow.collectLatest { user ->
                 Log.d("LOGD", "subscribe line: $user")
             }
-        }
+        }*/
+
     }
 
     private fun fadeIn() {
@@ -276,7 +295,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
 
             override fun onSuccess(result: LoginResult) {
-                Log.d("LOGD", "onSuccess: ${result.accessToken.token}")
+                val token = result.accessToken.token
+                Timber.d("$token")
+                loginViewModel.loginSocial(
+                    LoginSocialRequestModel(
+                        social = SocialLoginTypeEnum.FB.name,
+                        accessToken = token
+                    )
+                )
             }
 
         })
@@ -295,11 +321,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         false
     }
 
-    private fun goToMainLogin(){
+    private fun goToMainLogin() {
         setLoginMain(false)
     }
 
-    private fun goToInputPhoneLogin(){
+    private fun goToInputPhoneLogin() {
         setLoginMain(true)
     }
 
@@ -309,7 +335,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         callbackManager.onActivityResult(
             requestCode,
             resultCode,
-            data);
+            data
+        );
         super.onActivityResult(requestCode, resultCode, data)
     }
 

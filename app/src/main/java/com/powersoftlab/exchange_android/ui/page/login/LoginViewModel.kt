@@ -1,8 +1,11 @@
 package com.powersoftlab.exchange_android.ui.page.login
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.linecorp.linesdk.LineProfile
@@ -10,6 +13,7 @@ import com.linecorp.linesdk.Scope
 import com.linecorp.linesdk.auth.LineAuthenticationParams
 import com.linecorp.linesdk.auth.LineLoginApi
 import com.linecorp.linesdk.auth.LineLoginResult
+import com.powersoftlab.exchange_android.common.enum.SocialLoginTypeEnum
 import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.other.SingleLiveEvent
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
@@ -20,12 +24,12 @@ import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.repository.remote.UserRemoteRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
-                     private val appManager: AppManager
+                     private val appManager: AppManager,
+                     private val state: SavedStateHandle
 ) : ViewModel() {
 
     val loginLiveData = SingleLiveEvent<ResultWrapper<BaseResponseModel<AccessTokenModel>>>()
@@ -35,6 +39,14 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
     private val _userProfileFlow = MutableStateFlow<LineProfile?>(null)
     val userProfileFlow
         get(): StateFlow<LineProfile?> = _userProfileFlow
+
+    private val _operationFailedPopupMsgFlow = MutableStateFlow<String?>(null)
+    val operationFailedPopupMsgFlow
+        get(): StateFlow<String?> = _operationFailedPopupMsgFlow
+
+    var selectedLoginType : SocialLoginTypeEnum?
+        get() = state["selected_login_type"]
+        set(value) = state.set("selected_login_type",value)
 
     fun login(request: LoginRequestModel) {
         viewModelScope.launch {
@@ -104,34 +116,49 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
         .botPrompt(botPrompt)
         .build()
 
+    private fun isResultCodeOk(resultCode: Int): Boolean = resultCode == Activity.RESULT_OK
+
     fun processLoginIntent(resultCode: Int, intent: Intent?) {
-//        if (!isResultCodeOk(resultCode)) {
-//            val errorMessage = intent?.dataString ?: "login error but no error message"
-//            processFailureMsg(errorMessage)
-//            return
-//        }
-//
-//        if (intent == null) {
-//            processFailureMsg("success but no intent")
-//            return
-//        }
+        if (!isResultCodeOk(resultCode)) {
+            val errorMessage = intent?.dataString ?: "login error but no error message"
+            _operationFailedPopupMsgFlow.value = errorMessage
+            return
+        }
+
+        if (intent == null) {
+            _operationFailedPopupMsgFlow.value = "success but no intent"
+            return
+        }
 
         val loginResult = LineLoginApi.getLoginResultFromIntent(intent)
         processLoginResult(loginResult)
     }
     fun processLoginResult(result: LineLoginResult) = with(result) {
-//        if (!isSuccess) {
-//            processFailureMsg(responseCode.name, errorData.message)
-//            return
-//        }
-//
-//        if (lineProfile == null) {
-//            processFailureMsg("lineProfile of LineLoginResult is null.", errorData.message)
-//            return
-//        }
+        if (!isSuccess) {
+            processFailureMsg(errorData.message.orEmpty())
+            return
+        }
+
+        if (lineProfile == null) {
+            processFailureMsg("lineProfile of LineLoginResult is null.")
+            return
+        }
 
         //_isLoginFlow.update { true }
-        _userProfileFlow.update { lineProfile }
+        //_userProfileFlow.update { lineProfile }
+
+        val accessToken = result.lineCredential!!.accessToken.tokenString
+        loginSocial(
+            LoginSocialRequestModel(
+                social = SocialLoginTypeEnum.LINE.name,
+                accessToken = accessToken
+            )
+        )
+        return@with
+    }
+
+    private fun processFailureMsg(errorMessage : String){
+        _operationFailedPopupMsgFlow.value = errorMessage
     }
 
     //endregion

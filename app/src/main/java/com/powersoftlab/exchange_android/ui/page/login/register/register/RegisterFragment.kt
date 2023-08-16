@@ -20,6 +20,7 @@ import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.common.constant.AppConstant.FORMAT_UI_DATE
 import com.powersoftlab.exchange_android.common.constant.AppConstant.PHONE_NUMBER_LENGTH
+import com.powersoftlab.exchange_android.common.enum.SocialLoginTypeEnum
 import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentRegisterBinding
@@ -38,17 +39,20 @@ import com.powersoftlab.exchange_android.ext.toDashWhenNullOrEmpty
 import com.powersoftlab.exchange_android.ext.toDisplayFormat
 import com.powersoftlab.exchange_android.ext.toServiceFormat
 import com.powersoftlab.exchange_android.ext.toString
+import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.UserModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.network.builder.RetrofitBuilder
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
+import com.powersoftlab.exchange_android.ui.page.login.LoginViewModel
 import com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragmentDirections
 import com.powersoftlab.exchange_android.ui.widget.EdittextRegister
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import java.io.File
 import java.util.Calendar
@@ -57,11 +61,13 @@ import java.util.Calendar
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register), OnBackPressedFragment {
 
     private val registerViewModel: RegisterViewModel by stateViewModel()
+    private val loginViewModel : LoginViewModel by sharedStateViewModel()
 
     //private var idCardPath: String? = null
     private var profileImagePath: String? = null
     private val appManager: AppManager by inject()
     private val user by lazy { appManager.getUser() }
+    private lateinit var registerType : SocialLoginTypeEnum
 
     companion object {
         fun newInstance() = RegisterFragment()
@@ -82,6 +88,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             lifecycleOwner = this.lifecycleOwner
             fragment = this@RegisterFragment
         }
+
+        registerType = loginViewModel.selectedLoginType ?: SocialLoginTypeEnum.APP
+
+        //test header
+        binding.tvRegisterTitle.text = getString(R.string.title_register_form).plus(loginViewModel.selectedLoginType?.name)
 
         //edit profile
         appManager.getUser()?.let {
@@ -152,9 +163,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
                     if (isValidateRegister()) {
                         user?.let {
-                            updateProfile(it.id ?: 0)
+                            updateProfile(it.id.toString())
                         }?:run {
-                            register()
+                            if(registerType != SocialLoginTypeEnum.APP){
+                                updateProfile(appManager.getAuthToken().orEmpty())
+                            }else{
+                                register()
+                            }
                         }
 
                     }
@@ -428,17 +443,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     validateEdittextErrorView(edtRegPostcode)
                 }
 
-                pw.isEmpty() -> {
+                (pw.isEmpty() && registerType.equals(SocialLoginTypeEnum.APP)) -> {
                     isPasswordEmpty = true
                     validateEdittextErrorView(edtRegPassword, tvErrorPassword)
                 }
-                !isValidPassword(pw) -> {
+                (!isValidPassword(pw) && registerType.equals(SocialLoginTypeEnum.APP)) -> {
                     isPasswordEmpty = true
                     //validateEdittextErrorView(edtRegPassword, tvErrorPassword)
                     tvErrorPassword.text = getString(R.string.validate_reg_password)
                 }
 
-                pw != confirmPw -> {
+                ((pw != confirmPw) && registerType.equals(SocialLoginTypeEnum.APP))-> {
                     isConfirmPwNotMatch = true
                     validateEdittextErrorView(edtRegConfirmPassword)
                 }
@@ -493,7 +508,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             registerViewModel.register(it)
         }
     }
-    private fun updateProfile(userId : Int){
+    private fun updateProfile(userId : String){
         getRegisterData().apply {
             if(this@RegisterFragment.profileImagePath?.isNotEmpty() == true){
                 profileImagePath = this@RegisterFragment.profileImagePath

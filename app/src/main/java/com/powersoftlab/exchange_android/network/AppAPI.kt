@@ -44,7 +44,7 @@ interface AppAPI {
 
     @PUT("api/v1/customer/{id}")
     suspend fun updateProfile(
-        @Path("id") id : Int,
+        @Path("id") id : String,
         @Body request: RegisterRequestModel): Response<Any>
 
 

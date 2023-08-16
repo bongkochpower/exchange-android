@@ -9,7 +9,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 var viewModelModule = module {
-    viewModel { LoginViewModel(get(),get()) }
+    viewModel { LoginViewModel(get(),get(),get()) }
     viewModel { RegisterViewModel(get(),get()) }
     viewModel { MainViewModel(get(),get(),get(),get()) }
     viewModel { HistoryViewModel(get(),get()) }

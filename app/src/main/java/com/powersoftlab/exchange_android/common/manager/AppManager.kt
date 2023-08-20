@@ -3,6 +3,7 @@ package com.powersoftlab.exchange_android.common.manager
 import android.content.Context
 import com.google.gson.Gson
 import com.powersoftlab.exchange_android.common.constant.KeyConstant
+import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.config.AppApplication
 import com.powersoftlab.exchange_android.config.AppApplication.Companion.getSecureSharePreferences
 import com.powersoftlab.exchange_android.model.response.UserModel
@@ -35,6 +36,17 @@ class AppManager(private val context: Context) {
     fun getAuthToken(): String? {
         return AppApplication.getSecureSharePreferences(context)
             .getString(KeyConstant.AUTH_TOKEN, null)
+    }
+    //endregion
+
+    //region login type
+    fun setLoginType(loginType : String) {
+        getSecureSharePreferences(context).edit().putString(KeyConstant.LOGIN_TYPE, loginType).apply()
+    }
+
+    fun getLoginType(): LoginTypeEnum {
+        val type = getSecureSharePreferences(context).getString(KeyConstant.LOGIN_TYPE, LoginTypeEnum.APP.name)
+        return LoginTypeEnum.fromName(type)
     }
     //endregion
 
@@ -87,6 +99,7 @@ class AppManager(private val context: Context) {
             remove(KeyConstant.FCM_TOKEN)
             remove(KeyConstant.AUTH_TOKEN)
             remove(KeyConstant.USER)
+            remove(KeyConstant.LOGIN_TYPE)
         }.apply()
         //removeNotificationCount()
 

@@ -422,6 +422,13 @@
                 android:visibility="@{isPostcodeEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}"
                 app:fontFamily="@font/prompt_regular" />
 
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:id="@+id/layout_password"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <!--pw-->
             <EditText
                 android:id="@+id/edt_reg_password"
@@ -472,6 +479,7 @@
                 android:textColor="@color/color_error_text"
                 android:visibility="@{isConfirmPwNotMatch ? View.VISIBLE : View.INVISIBLE , default=invisible}"
                 app:fontFamily="@font/prompt_regular" />
+            </LinearLayout>
 
             <!--term-->
             <View

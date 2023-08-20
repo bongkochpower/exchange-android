@@ -20,7 +20,7 @@ import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.common.constant.AppConstant.FORMAT_UI_DATE
 import com.powersoftlab.exchange_android.common.constant.AppConstant.PHONE_NUMBER_LENGTH
-import com.powersoftlab.exchange_android.common.enum.SocialLoginTypeEnum
+import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentRegisterBinding
@@ -39,7 +39,6 @@ import com.powersoftlab.exchange_android.ext.toDashWhenNullOrEmpty
 import com.powersoftlab.exchange_android.ext.toDisplayFormat
 import com.powersoftlab.exchange_android.ext.toServiceFormat
 import com.powersoftlab.exchange_android.ext.toString
-import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.UserModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
@@ -67,7 +66,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private var profileImagePath: String? = null
     private val appManager: AppManager by inject()
     private val user by lazy { appManager.getUser() }
-    private lateinit var registerType : SocialLoginTypeEnum
+    private lateinit var loginType : LoginTypeEnum
 
     companion object {
         fun newInstance() = RegisterFragment()
@@ -89,17 +88,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             fragment = this@RegisterFragment
         }
 
-        registerType = loginViewModel.selectedLoginType ?: SocialLoginTypeEnum.APP
+        loginType = appManager.getLoginType() ?: LoginTypeEnum.APP
 
         //test header
-        binding.tvRegisterTitle.text = getString(R.string.title_register_form).plus(loginViewModel.selectedLoginType?.name)
+        binding.tvRegisterTitle.text = getString(R.string.title_register_form).plus(loginType.name)
+
+        manageLoginMode()
 
         //edit profile
         appManager.getUser()?.let {
             setupEditProfile(it)
         }
-
-
     }
 
     override fun listener() {
@@ -165,7 +164,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                         user?.let {
                             updateProfile(it.id.toString())
                         }?:run {
-                            if(registerType != SocialLoginTypeEnum.APP){
+                            if(loginType != LoginTypeEnum.APP){
                                 updateProfile(appManager.getAuthToken().orEmpty())
                             }else{
                                 register()
@@ -443,17 +442,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     validateEdittextErrorView(edtRegPostcode)
                 }
 
-                (pw.isEmpty() && registerType.equals(SocialLoginTypeEnum.APP)) -> {
+                (pw.isEmpty() && loginType.equals(LoginTypeEnum.APP)) -> {
                     isPasswordEmpty = true
                     validateEdittextErrorView(edtRegPassword, tvErrorPassword)
                 }
-                (!isValidPassword(pw) && registerType.equals(SocialLoginTypeEnum.APP)) -> {
+                (!isValidPassword(pw) && loginType.equals(LoginTypeEnum.APP)) -> {
                     isPasswordEmpty = true
                     //validateEdittextErrorView(edtRegPassword, tvErrorPassword)
                     tvErrorPassword.text = getString(R.string.validate_reg_password)
                 }
 
-                ((pw != confirmPw) && registerType.equals(SocialLoginTypeEnum.APP))-> {
+                ((pw != confirmPw) && loginType.equals(LoginTypeEnum.APP))-> {
                     isConfirmPwNotMatch = true
                     validateEdittextErrorView(edtRegConfirmPassword)
                 }
@@ -585,6 +584,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
     override fun onBackPressed(): Boolean {
         return false
+    }
+
+    private fun manageLoginMode(){
+        with(binding){
+            if(loginType != LoginTypeEnum.APP){
+                layoutPassword.gone()
+            }
+        }
     }
 
 }

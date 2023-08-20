@@ -4,31 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.FacebookSdk
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.github.dhaval2404.imagepicker.ImagePicker.Companion.REQUEST_CODE
-import com.linecorp.linesdk.LoginDelegate
-import com.linecorp.linesdk.LoginListener
 import com.linecorp.linesdk.Scope
-import com.linecorp.linesdk.auth.LineAuthenticationParams
-import com.linecorp.linesdk.auth.LineLoginApi
-import com.linecorp.linesdk.auth.LineLoginResult
-import com.linecorp.linesdk.widget.LoginButton
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
-import com.powersoftlab.exchange_android.common.enum.SocialLoginTypeEnum
+import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentLoginBinding
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
@@ -39,14 +27,8 @@ import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragment
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
-import java.util.Arrays
-import kotlin.math.log
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login), OnBackPressedFragment {
@@ -99,7 +81,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     setOnTouchAnimation()
                     setOnClickListener {
                         LoginManager.getInstance().logInWithReadPermissions(requireActivity(), listOf("public_profile"));
-                        loginViewModel.selectedLoginType = SocialLoginTypeEnum.FB
 
                         //TermRegisterFragment.navigate(this@LoginFragment)
 
@@ -114,7 +95,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                             scopeList
                         )
                         lineLoginResultLauncher.launch(intent)
-                        loginViewModel.selectedLoginType = SocialLoginTypeEnum.LINE
 
                         //TermRegisterFragment.navigate(this@LoginFragment)
                     }
@@ -299,7 +279,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 Timber.d("$token")
                 loginViewModel.loginSocial(
                     LoginSocialRequestModel(
-                        social = SocialLoginTypeEnum.FB.name,
+                        social = LoginTypeEnum.FB.name,
                         accessToken = token
                     )
                 )

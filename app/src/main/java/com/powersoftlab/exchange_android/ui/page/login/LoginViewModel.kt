@@ -3,7 +3,6 @@ package com.powersoftlab.exchange_android.ui.page.login
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -13,7 +12,7 @@ import com.linecorp.linesdk.Scope
 import com.linecorp.linesdk.auth.LineAuthenticationParams
 import com.linecorp.linesdk.auth.LineLoginApi
 import com.linecorp.linesdk.auth.LineLoginResult
-import com.powersoftlab.exchange_android.common.enum.SocialLoginTypeEnum
+import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.other.SingleLiveEvent
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
@@ -44,10 +43,6 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
     val operationFailedPopupMsgFlow
         get(): StateFlow<String?> = _operationFailedPopupMsgFlow
 
-    var selectedLoginType : SocialLoginTypeEnum?
-        get() = state["selected_login_type"]
-        set(value) = state.set("selected_login_type",value)
-
     fun login(request: LoginRequestModel) {
         viewModelScope.launch {
             loginLiveData.value = ResultWrapper.Loading
@@ -55,6 +50,7 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
             if(result is ResultWrapper.Success){
                 result.response.data?.let { token ->
                     appManager.setAuthToken(token.accessToken)
+                    appManager.setLoginType(LoginTypeEnum.APP.name)
                 }
             }
             loginLiveData.value = result
@@ -68,6 +64,7 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
             if(result is ResultWrapper.Success){
                 result.response.data?.let { token ->
                     appManager.setAuthToken(token.accessToken)
+                    appManager.setLoginType(request.social)
                 }
             }
             loginSocialLiveData.value = result
@@ -150,7 +147,7 @@ class LoginViewModel(private val userRemoteRepository: UserRemoteRepository,
         val accessToken = result.lineCredential!!.accessToken.tokenString
         loginSocial(
             LoginSocialRequestModel(
-                social = SocialLoginTypeEnum.LINE.name,
+                social = LoginTypeEnum.LINE.name,
                 accessToken = accessToken
             )
         )

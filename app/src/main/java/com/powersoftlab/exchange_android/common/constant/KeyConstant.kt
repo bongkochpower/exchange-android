@@ -5,6 +5,7 @@ object KeyConstant {
     const val FCM_TOKEN = "fcm_token"
     const val AUTH_TOKEN = "auth_token"
     const val USER = "user"
+    const val LOGIN_TYPE = "login_type"
 
 
     /*general*/

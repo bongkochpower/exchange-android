@@ -4,10 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.powersoftlab.exchange_android.R
-import com.powersoftlab.exchange_android.common.enum.SocialLoginTypeEnum
+import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.databinding.ActivityLoginBinding
 import com.powersoftlab.exchange_android.ext.getCurrentFragment
 import com.powersoftlab.exchange_android.ui.page.base.BaseActivity
@@ -16,7 +15,6 @@ import com.powersoftlab.exchange_android.ui.page.login.forgot.verify_phone_numbe
 import com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragment
 import com.powersoftlab.exchange_android.ui.page.login.register.register.RegisterFragment
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(com.powersoftlab.exchange_android.R.layout.activity_login) {
@@ -81,7 +79,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(com.powersoftlab.exchan
     }
 
     fun goToRegisterTerm(v : View){
-        loginViewModel.selectedLoginType = SocialLoginTypeEnum.APP
         TermRegisterFragment.navigate(getCurrentFragment())
     }
 

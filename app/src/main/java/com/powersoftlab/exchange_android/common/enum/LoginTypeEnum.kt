@@ -1,15 +1,13 @@
 package com.powersoftlab.exchange_android.common.enum
 
-import com.powersoftlab.exchange_android.R
-
-enum class SocialLoginTypeEnum() {
+enum class LoginTypeEnum() {
     FB,
     LINE,
     APP;
 
 
     companion object {
-        fun fromName(name: String?): SocialLoginTypeEnum {
+        fun fromName(name: String?): LoginTypeEnum {
             if (name != null) {
                 values().find { name.equals(it.name, true) }?.let {
                     return it

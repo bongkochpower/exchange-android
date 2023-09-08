@@ -60,13 +60,13 @@ import java.util.Calendar
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register), OnBackPressedFragment {
 
     private val registerViewModel: RegisterViewModel by stateViewModel()
-    private val loginViewModel : LoginViewModel by sharedStateViewModel()
+    private val loginViewModel: LoginViewModel by sharedStateViewModel()
 
     //private var idCardPath: String? = null
     private var profileImagePath: String? = null
     private val appManager: AppManager by inject()
     private val user by lazy { appManager.getUser() }
-    private lateinit var loginType : LoginTypeEnum
+    private lateinit var loginType: LoginTypeEnum
 
     companion object {
         fun newInstance() = RegisterFragment()
@@ -144,6 +144,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 if (it.toString().isNotEmpty() && binding.isPasswordEmpty == true) {
                     isPasswordEmpty = false
                 }
+
+                if (!isValidPassword(it.toString()) && loginType.equals(LoginTypeEnum.APP)) {
+                    isPasswordEmpty = true
+                    tvErrorPassword.text = getString(R.string.validate_reg_password)
+                }
             }
             edtRegConfirmPassword.doAfterTextChanged {
                 if (it.toString().isNotEmpty() && binding.isConfirmPwNotMatch == true) {
@@ -163,10 +168,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     if (isValidateRegister()) {
                         user?.let {
                             updateProfile(it.id.toString())
-                        }?:run {
-                            if(loginType != LoginTypeEnum.APP){
+                        } ?: run {
+                            if (loginType != LoginTypeEnum.APP) {
                                 updateProfile(appManager.getAuthToken().orEmpty())
-                            }else{
+                            } else {
                                 register()
                             }
                         }
@@ -324,6 +329,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             Activity.RESULT_OK -> {
                 data?.let { uri ->
                     binding.isSelectIdCardImage = true
+                    binding.isIdCardImageEmpty = false
                     //check file size
                     val file = ImagePicker.getFile(uri)
                     val fileSize = (file?.length()?.div(1024)).toString().toInt()
@@ -409,6 +415,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             val confirmPw = edtRegConfirmPassword.text.trim().toString()
             val chkTerm = chkRegTerm.isChecked
 
+
             when {
                 name.isEmpty() -> validateEdittextErrorView(edtRegName)
                 lastname.isEmpty() -> validateEdittextErrorView(edtRegLastname)
@@ -429,6 +436,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     validateEdittextErrorView(edtRegDob)
                 }
 
+                isSelectIdCardImage == null -> {
+                    isIdCardImageEmpty = true
+                    binding.nsv.smoothScrollTo(0, 0)
+                }
+
                 houseNo.isEmpty() -> {
                     isHouseNoEmpty = true
                     validateEdittextErrorView(edtRegHouseNo)
@@ -446,13 +458,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     isPasswordEmpty = true
                     validateEdittextErrorView(edtRegPassword, tvErrorPassword)
                 }
+
                 (!isValidPassword(pw) && loginType.equals(LoginTypeEnum.APP)) -> {
                     isPasswordEmpty = true
                     //validateEdittextErrorView(edtRegPassword, tvErrorPassword)
                     tvErrorPassword.text = getString(R.string.validate_reg_password)
                 }
 
-                ((pw != confirmPw) && loginType.equals(LoginTypeEnum.APP))-> {
+                ((pw != confirmPw) && loginType.equals(LoginTypeEnum.APP)) -> {
                     isConfirmPwNotMatch = true
                     validateEdittextErrorView(edtRegConfirmPassword)
                 }
@@ -492,7 +505,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if(p0?.toString().orEmpty().isNotEmpty() && this@validateAfterTextChange.getValidation()){
+                if (p0?.toString().orEmpty().isNotEmpty() && this@validateAfterTextChange.getValidation()) {
                     this@validateAfterTextChange.setValidation(false)
                 }
             }
@@ -507,18 +520,19 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             registerViewModel.register(it)
         }
     }
-    private fun updateProfile(userId : String){
+
+    private fun updateProfile(userId: String) {
         getRegisterData().apply {
-            if(this@RegisterFragment.profileImagePath?.isNotEmpty() == true){
+            if (this@RegisterFragment.profileImagePath?.isNotEmpty() == true) {
                 profileImagePath = this@RegisterFragment.profileImagePath
             }
         }.also {
-            registerViewModel.updateProfile(userId,it)
+            registerViewModel.updateProfile(userId, it)
         }
     }
 
-    private fun getRegisterData() : RegisterRequestModel{
-        with(binding){
+    private fun getRegisterData(): RegisterRequestModel {
+        with(binding) {
             val dobToServer = edtRegDob.text.trim().toString().convertDisplayDateToChristianYear().toServiceFormat()
             return RegisterRequestModel(
                 firstname = edtRegName.getText(),
@@ -586,9 +600,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         return false
     }
 
-    private fun manageLoginMode(){
-        with(binding){
-            if(loginType != LoginTypeEnum.APP){
+    private fun manageLoginMode() {
+        with(binding) {
+            if (loginType != LoginTypeEnum.APP) {
                 layoutPassword.gone()
             }
         }

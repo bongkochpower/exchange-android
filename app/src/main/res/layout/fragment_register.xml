@@ -46,6 +46,10 @@
             name="isSelectIdCardImage"
             type="Boolean" />
 
+        <variable
+            name="isIdCardImageEmpty"
+            type="Boolean" />
+
 
     </data>
 
@@ -219,11 +223,8 @@
                 android:layout_width="@dimen/edit_text_reg_size"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_24dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/hint_id_card"
-                android:importantForAutofill="no"
-                android:paddingHorizontal="@dimen/padding_8dp"
-                tools:ignore="RtlSymmetry">
+                android:background="@{isIdCardImageEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:paddingHorizontal="@dimen/padding_8dp">
 
                 <include
                     android:layout_centerHorizontal="true"
@@ -249,8 +250,8 @@
                         android:ellipsize="end"
                         android:gravity="start"
                         android:maxLines="1"
+                        android:textColor="@{isIdCardImageEmpty ? @color/color_error_text : @color/text_edittext_gray}"
                         android:text="@string/hint_id_card"
-                        android:textColor="@color/text_edittext_gray"
                         app:fontFamily="@font/prompt_regular"
                         />
 

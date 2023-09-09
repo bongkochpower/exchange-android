@@ -564,7 +564,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 districtId = 1,
                 district = edtRegDistrict.getText(),
                 subDistrictId = 1,
-                subDistrict = edtRegDistrict.getText(),
+                subDistrict = edtRegSubDistrict.getText(),
                 province = edtRegProvince.getText(),
                 provinceId = 1
             )

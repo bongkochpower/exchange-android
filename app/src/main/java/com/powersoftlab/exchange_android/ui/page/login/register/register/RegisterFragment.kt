@@ -1,22 +1,27 @@
 package com.powersoftlab.exchange_android.ui.page.login.register.register
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Intent
+import android.content.Context
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.github.dhaval2404.imagepicker.ImagePicker
 import com.powersoftlab.exchange_android.R
+import com.powersoftlab.exchange_android.common.*
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.common.constant.AppConstant.FORMAT_UI_DATE
 import com.powersoftlab.exchange_android.common.constant.AppConstant.PHONE_NUMBER_LENGTH
@@ -27,7 +32,6 @@ import com.powersoftlab.exchange_android.databinding.FragmentRegisterBinding
 import com.powersoftlab.exchange_android.ext.convertDisplayDateToBuddhistYear
 import com.powersoftlab.exchange_android.ext.convertDisplayDateToChristianYear
 import com.powersoftlab.exchange_android.ext.fadeIn
-import com.powersoftlab.exchange_android.ext.getPhotoFromGallery
 import com.powersoftlab.exchange_android.ext.gone
 import com.powersoftlab.exchange_android.ext.isEmail
 import com.powersoftlab.exchange_android.ext.isMonoClickable
@@ -39,6 +43,7 @@ import com.powersoftlab.exchange_android.ext.toDashWhenNullOrEmpty
 import com.powersoftlab.exchange_android.ext.toDisplayFormat
 import com.powersoftlab.exchange_android.ext.toServiceFormat
 import com.powersoftlab.exchange_android.ext.toString
+import com.powersoftlab.exchange_android.ext.uriToFile
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.UserModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
@@ -54,6 +59,9 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 import java.util.Calendar
 
 
@@ -68,6 +76,22 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private val user by lazy { appManager.getUser() }
     private lateinit var loginType: LoginTypeEnum
 
+    val pickIdCardLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            uploadIdCardImage(uri)
+        } else {
+            Log.d("PhotoPicker", "No media selected")
+        }
+    }
+
+    val pickProfileLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            uploadProfileImage(uri)
+        } else {
+            Log.d("PhotoPicker", "No media selected")
+        }
+    }
+
     companion object {
         fun newInstance() = RegisterFragment()
 
@@ -81,6 +105,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             //fadeIn()
         }
     }
+
 
     override fun setUp() {
         binding.apply {
@@ -109,9 +134,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     if (!isMonoClickable()) return@setOnClickListener
                     monoLastTimeClick()
 
-                    activity?.getPhotoFromGallery { resultCode, data ->
-                        uploadProfileImage(resultCode, data)
-                    }
+//                    activity?.getPhotoFromGallery { resultCode, data ->
+//                        uploadProfileImage(resultCode, data)
+//                    }
+
+                    pickProfileLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
+
                 }
             }
 
@@ -298,76 +327,57 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         }
     }
 
-    private fun uploadProfileImage(resultCode: Int, data: Intent?) {
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                data?.let { uri ->
-                    binding.imgProfile.loadImageCircle(uri.data)
-                    binding.llProfileDummy.gone()
-                    //upload
-                    uri.data?.path?.let {
-                        val file: File = File(it)
-                        val reqFile = file.asRequestBody(RetrofitBuilder.MEDIA_TYPE_FILE)
-                        reqFile.let { it1 ->
-                            registerViewModel.uploadImageProfile(
-                                MultipartBody.Part.createFormData("image", file.name, it1)
-                            )
-                        }
-                    }
-                }
-            }
 
-            ImagePicker.RESULT_ERROR -> {
-                Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+    private fun uploadProfileImage(uri: Uri) {
+        binding.imgProfile.loadImageCircle(uri)
+        binding.llProfileDummy.gone()
+        //upload
+        uri.path?.let {
+            val file: File = uri.uriToFile(requireContext())
+            val reqFile = file.asRequestBody(RetrofitBuilder.MEDIA_TYPE_FILE)
+            reqFile.let { it1 ->
+                registerViewModel.uploadImageProfile(
+                    MultipartBody.Part.createFormData("image", file.name, it1)
+                )
             }
         }
     }
 
     @SuppressLint("Range")
-    private fun uploadIdCardImage(resultCode: Int, data: Intent?) {
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                data?.let { uri ->
-                    binding.isSelectIdCardImage = true
-                    binding.isIdCardImageEmpty = false
-                    //check file size
-                    val file = ImagePicker.getFile(uri)
-                    val fileSize = (file?.length()?.div(1024)).toString().toInt()
+    private fun uploadIdCardImage(uri: Uri) {
 
-                    //update ui
-                    if ((fileSize.times(0.001)) > 2) {
-                        binding.apply {
-                            tvIdCardStatus.text = resources.getString(R.string.validate_reg_attach_file_fail)
-                        }
-                    } else {
-                        binding.apply {
-                            tvIdCardStatus.text = resources.getString(R.string.validate_reg_attach_file_success)
-                        }
-                    }
+        binding.isSelectIdCardImage = true
+        binding.isIdCardImageEmpty = false
+        //check file size
+        val file = uri.uriToFile(requireContext())
+        val fileSize = (file.length().div(1024)).toString().toInt()
 
-                    try {
-                        val filename: String = file?.path.toString().substring(file?.path.toString().lastIndexOf("/") + 1)
-                        binding.tvIdCardName.text = getString(R.string.hint_attach_file).replace("#file_name", filename)
-                    } catch (e: Exception) {
-                        e.stackTrace
-                    }
-
-                    //upload
-                    uri.data?.path?.let {
-                        val file: File = File(it)
-                        val reqFile = file.asRequestBody(RetrofitBuilder.MEDIA_TYPE_FILE)
-                        reqFile.let { it1 ->
-                            registerViewModel.uploadIdCardImage(
-                                MultipartBody.Part.createFormData("image", file.name, it1)
-                            )
-                        }
-                    }
-                }
+        //update ui
+        if ((fileSize.times(0.001)) > 25) { //25mb
+            binding.apply {
+                tvIdCardStatus.text = resources.getString(R.string.validate_reg_attach_file_fail)
+                tvIdCardStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_attach_fail, 0, 0, 0);
             }
-
-            ImagePicker.RESULT_ERROR -> {
-                Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+        } else {
+            binding.apply {
+                tvIdCardStatus.text = resources.getString(R.string.validate_reg_attach_file_success)
+                tvIdCardStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_attach_success, 0, 0, 0);
             }
+        }
+
+        try {
+            val filename: String = file.path.toString().substring(file?.path.toString().lastIndexOf("/") + 1)
+            binding.tvIdCardName.text = getString(R.string.hint_attach_file,filename)
+        } catch (e: Exception) {
+            e.stackTrace
+        }
+
+        //upload
+        val reqFile = file.asRequestBody(RetrofitBuilder.MEDIA_TYPE_FILE)
+        reqFile.let { it1 ->
+            registerViewModel.uploadIdCardImage(
+                MultipartBody.Part.createFormData("image", file.name, it1)
+            )
         }
     }
 
@@ -392,9 +402,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     }
 
     fun selectIdCardImage() {
-        activity?.getPhotoFromGallery { resultCode, data ->
-            uploadIdCardImage(resultCode, data)
-        }
+//        activity?.getPhotoFromGallery { resultCode, data ->
+//            uploadIdCardImage(resultCode, data)
+//        }
+
+        pickIdCardLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
     }
 
     private fun isValidateRegister(): Boolean {
@@ -579,7 +592,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
                 isSelectIdCardImage = true
                 val filename: String = idCardImage.orEmpty()
-                binding.tvIdCardName.text = getString(R.string.hint_attach_file).replace("#file_name", filename)
+                binding.tvIdCardName.text = getString(R.string.hint_attach_file,filename)
 
 
                 edtRegHouseNo.setText(houseNo.orEmpty())

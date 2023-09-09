@@ -62,7 +62,7 @@
     <string name="hint_reg_password">Password</string>
     <string name="hint_reg_confirm_password">Confirm Password</string>
     <string name="hint_resend_otp">ขอรหัส OTP ใหม่อีกครั้ง</string>
-    <string name="hint_attach_file">Name File : #file_name</string>
+    <string name="hint_attach_file">Name File : %1$s</string>
     <string name="hint_th_currency">THB</string>
     <string name="hint_zero_with_point">0.00</string>
     <string name="hint_main_empty_item">กรุณาเติมเงินก่อนการใช้งาน</string>

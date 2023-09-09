@@ -11,19 +11,23 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.view.PixelCopy
 import android.view.View
 import android.view.Window
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.FileProvider
 import androidx.databinding.BindingAdapter
+import androidx.documentfile.provider.DocumentFile
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.powersoftlab.exchange_android.R
+import com.powersoftlab.exchange_android.common.other.AppUtil.scanImageToGallery
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.*
@@ -76,6 +80,31 @@ fun Activity.getFile(completionHandler: ((resultCode: Int, data: Intent?) -> Uni
         )
         .compress(IMAGE_COMPRESS_MAX_SIZE)
         .start(completionHandler)
+}
+
+fun Uri.uriToFile(context: Context): File {
+    val fileExtension = getFileExtension(context, this)
+    val fileName = DocumentFile.fromSingleUri(context, this)?.name ?: "temp_file.$fileExtension"
+
+    val file = File(context.cacheDir, fileName)
+    try {
+        val inputStream = context.contentResolver.openInputStream(this)
+        val outputStream = FileOutputStream(file)
+        val buf = ByteArray(1024)
+        var len: Int
+        while (inputStream!!.read(buf).also { len = it } > 0) {
+            outputStream.write(buf, 0, len)
+        }
+        outputStream.close()
+        inputStream.close()
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+    return file
+}
+private fun getFileExtension(context: Context, uri: Uri): String? {
+    val fileType: String? = context.contentResolver.getType(uri)
+    return MimeTypeMap.getSingleton().getExtensionFromMimeType(fileType) ?: "jpg"
 }
 
 private fun Context.getOutputDirectory(): File {

@@ -131,6 +131,10 @@ fun Double.toThaiCurrencyStringFormat(): String = String.format("฿%s", toStrin
 
 fun Double.toCompactDecimalFormat() : String {
     val cdf = CompactDecimalFormat.getInstance(Locale.getDefault(), CompactDecimalFormat.CompactStyle.SHORT)
+    cdf.maximumIntegerDigits = 3
+    cdf.maximumFractionDigits = 1
+    cdf.setSignificantDigitsUsed(false)
+
     return cdf.format(this)
 }
 

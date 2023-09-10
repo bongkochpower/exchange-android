@@ -232,6 +232,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         AppNavigator(this).goToCards()
     }
 
+    fun gotoWithdraw() {
+        AppNavigator(this).goToWithdraw()
+    }
+
     private fun open() {
         binding.drawerLayout.openDrawer(GravityCompat.START)
     }

@@ -108,7 +108,8 @@
                                 <com.powersoftlab.exchange_android.ui.widget.CircleMenu
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="@dimen/margin_24dp"
+                                    android:onClick="@{() -> activity.gotoWithdraw()}"
+
                                     app:iconSrc="@drawable/selector_topup"
                                     app:menuTitle="@string/title_main_withdraw" />
 

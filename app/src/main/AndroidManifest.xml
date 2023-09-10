@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.powersoftlab.exchange_android.config.AppApplication"
+        android:name=".config.AppApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,31 +18,34 @@
         android:theme="@style/Theme.Exchangeandroid"
         tools:targetApi="31">
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.hamburger_menu.edit_profile.EditProfileActivity"
+            android:name=".ui.page.main.withdraw.WithdrawActivity"
             android:exported="false" />
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.hamburger_menu.setting.SettingsActivity"
+            android:name=".ui.page.hamburger_menu.edit_profile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.hamburger_menu.help.HelpActivity"
+            android:name=".ui.page.hamburger_menu.setting.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeActivity"
+            android:name=".ui.page.hamburger_menu.help.HelpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.page.main.exchange.ExchangeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.page.main.cards.CardsActivity"
             android:exported="false" />
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.main.history.HistoryActivity"
+            android:name=".ui.page.main.history.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.main.topup.TopUpActivity"
+            android:name=".ui.page.main.topup.TopUpActivity"
             android:exported="false" />
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.login.LoginActivity"
+            android:name=".ui.page.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.intro.IntroActivity"
+            android:name=".ui.page.intro.IntroActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash"
@@ -54,9 +57,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.powersoftlab.exchange_android.ui.page.main.MainActivity"
+            android:name=".ui.page.main.MainActivity"
             android:exported="false" />
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
@@ -73,16 +75,12 @@
             </intent-filter>
         </activity>
 
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
-            android:value="@string/facebook_client_token" />
-
-
-        <!-- Trigger Google Play services to install the backported photo picker module. -->
+            android:value="@string/facebook_client_token" /> <!-- Trigger Google Play services to install the backported photo picker module. -->
         <service
             android:name="com.google.android.gms.metadata.ModuleDependencies"
             android:enabled="false"
@@ -91,11 +89,11 @@
             <intent-filter>
                 <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
             </intent-filter>
+
             <meta-data
                 android:name="photopicker_activity:0:required"
                 android:value="" />
         </service>
-
     </application>
 
 </manifest>

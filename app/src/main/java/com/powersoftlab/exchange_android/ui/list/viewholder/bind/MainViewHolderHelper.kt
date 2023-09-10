@@ -31,6 +31,7 @@ object MainViewHolderHelper {
 
                     tvTitle.text = label
                     tvMoney.text = amount?.toCompactDecimalFormat()
+
                 }
             }
         }

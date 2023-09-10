@@ -58,86 +58,63 @@
                             app:layout_collapseMode="pin" />
 
                         <!--menu-->
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <HorizontalScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/padding_34dp"
-                            android:paddingTop="@dimen/padding_30dp"
-                            android:paddingBottom="@dimen/padding_26dp">
+                            android:layout_height="wrap_content">
 
-                            <ImageView
-                                android:id="@+id/img_topup"
-                                android:layout_width="135dp"
-                                android:layout_height="wrap_content"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:onClick="@{() -> activity.gotoTopUp()}"
-                                android:src="@drawable/selector_topup"
-                                app:layout_constraintEnd_toStartOf="@+id/img_exchange"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/TextViewRegular"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/title_main_topup"
-                                android:textColor="@color/white"
-                                app:fontFamily="@font/prompt_bold"
-                                app:layout_constraintEnd_toEndOf="@id/img_topup"
-                                app:layout_constraintStart_toStartOf="@id/img_topup"
-                                app:layout_constraintTop_toBottomOf="@+id/img_topup" />
+                                android:paddingHorizontal="@dimen/padding_34dp"
+                                android:paddingTop="@dimen/padding_30dp"
+                                android:paddingBottom="@dimen/padding_26dp">
 
-                            <ImageView
-                                android:id="@+id/img_exchange"
-                                android:layout_width="136dp"
-                                android:layout_height="wrap_content"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:onClick="@{() -> activity.gotoExchange()}"
-                                android:src="@drawable/selector_exchange"
-                                app:layout_constraintEnd_toStartOf="@+id/img_topup"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toEndOf="@+id/img_history"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                <com.powersoftlab.exchange_android.ui.widget.CircleMenu
+                                    android:layout_width="wrap_content"
+                                    android:layout_marginEnd="@dimen/margin_24dp"
+                                    android:id="@+id/cm_topup"
+                                    android:clickable="true"
+                                    android:onClick="@{() -> activity.gotoTopUp()}"
+                                    android:focusable="true"
+                                    android:layout_height="wrap_content"
+                                    app:iconSrc="@drawable/selector_topup"
+                                    app:menuTitle="@string/title_main_topup" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/TextViewRegular"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/title_main_exchange"
-                                android:textColor="@color/white"
-                                app:fontFamily="@font/prompt_bold"
-                                app:layout_constraintEnd_toEndOf="@id/img_exchange"
-                                app:layout_constraintStart_toStartOf="@id/img_exchange"
-                                app:layout_constraintTop_toBottomOf="@+id/img_exchange" />
+                                <com.powersoftlab.exchange_android.ui.widget.CircleMenu
+                                    android:layout_width="wrap_content"
+                                    android:layout_marginEnd="@dimen/margin_24dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="@{() -> activity.gotoExchange()}"
+                                    app:iconSrc="@drawable/selector_exchange"
+                                    app:menuTitle="@string/title_main_exchange" />
 
-                            <ImageView
-                                android:id="@+id/img_history"
-                                android:layout_width="136dp"
-                                android:layout_height="wrap_content"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:onClick="@{() -> activity.gotoHistory()}"
-                                android:src="@drawable/selector_history"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toEndOf="@+id/img_exchange"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                <com.powersoftlab.exchange_android.ui.widget.CircleMenu
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/margin_24dp"
+                                    app:iconSrc="@drawable/selector_history"
+                                    android:onClick="@{() -> activity.gotoHistory()}"
+                                    app:menuTitle="@string/title_main_history" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/TextViewRegular"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/title_main_history"
-                                android:textColor="@color/white"
-                                app:fontFamily="@font/prompt_bold"
-                                app:layout_constraintEnd_toEndOf="@id/img_history"
-                                app:layout_constraintStart_toStartOf="@id/img_history"
-                                app:layout_constraintTop_toBottomOf="@+id/img_history" />
+                                <com.powersoftlab.exchange_android.ui.widget.CircleMenu
+                                    android:layout_width="wrap_content"
+                                    android:layout_marginEnd="@dimen/margin_24dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="@{() -> activity.gotoCards()}"
+                                    app:iconSrc="@drawable/selector_topup"
+                                    app:menuTitle="@string/title_main_cards" />
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                                <com.powersoftlab.exchange_android.ui.widget.CircleMenu
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/margin_24dp"
+                                    app:iconSrc="@drawable/selector_topup"
+                                    app:menuTitle="@string/title_main_withdraw" />
+
+
+                            </LinearLayout>
+                        </HorizontalScrollView>
                     </LinearLayout>
 
 
@@ -145,12 +122,11 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <LinearLayout
-                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                android:background="@color/gray_tasman"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/gray_tasman"
                 android:orientation="vertical"
-                >
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                 <!--balance-->
                 <LinearLayout
@@ -231,7 +207,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
 
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

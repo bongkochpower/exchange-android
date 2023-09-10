@@ -1,6 +1,7 @@
 package com.powersoftlab.exchange_android.ui.list.viewholder.bind
 
 import android.content.Context
+import android.util.Log
 import com.powersoftlab.exchange_android.common.constant.AppConstant
 import com.powersoftlab.exchange_android.common.enum.TransactionStatusEnum
 import com.powersoftlab.exchange_android.common.enum.TransactionTypeEnum

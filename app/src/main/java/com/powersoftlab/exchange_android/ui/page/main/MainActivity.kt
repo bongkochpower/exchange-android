@@ -3,6 +3,7 @@ package com.powersoftlab.exchange_android.ui.page.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
@@ -133,7 +134,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             toolbar.setOnBackListener {
                 open()
             }
-
             layoutNavigation.apply {
                 btnClose.setOnClickListener {
                     close()
@@ -226,6 +226,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun gotoHistory() {
         AppNavigator(this).goToHistory()
+    }
+
+    fun gotoCards() {
+        AppNavigator(this).goToCards()
     }
 
     private fun open() {

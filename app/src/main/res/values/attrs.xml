@@ -5,6 +5,11 @@
         <attr name="iconBackSrc" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="CircleMenu">
+        <attr name="menuTitle" format="string" />
+        <attr name="iconSrc" format="reference" />
+    </declare-styleable>
+
     <declare-styleable name="ButtonLogin">
         <attr name="buttonTitle" format="string" />
         <attr name="buttonIconSrc" format="reference" />

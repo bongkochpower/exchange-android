@@ -9,6 +9,7 @@ import com.powersoftlab.exchange_android.ui.page.hamburger_menu.help.HelpActivit
 import com.powersoftlab.exchange_android.ui.page.hamburger_menu.setting.SettingsActivity
 import com.powersoftlab.exchange_android.ui.page.login.LoginActivity
 import com.powersoftlab.exchange_android.ui.page.main.MainActivity
+import com.powersoftlab.exchange_android.ui.page.main.cards.CardsActivity
 import com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeActivity
 import com.powersoftlab.exchange_android.ui.page.main.history.HistoryActivity
 import com.powersoftlab.exchange_android.ui.page.main.topup.TopUpActivity
@@ -40,6 +41,10 @@ class AppNavigator(private val activity: Activity) {
 
     fun goToHistory() {
         HistoryActivity.open(activity)
+    }
+
+    fun goToCards() {
+        CardsActivity.open(activity)
     }
 
     fun goToSettings() {

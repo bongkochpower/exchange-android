@@ -3,8 +3,10 @@ package com.powersoftlab.exchange_android.ui.page.login.register.register
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.text.Editable
@@ -16,6 +18,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -76,7 +79,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private val user by lazy { appManager.getUser() }
     private lateinit var loginType: LoginTypeEnum
 
-    val pickIdCardLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+    private val pickIdCardLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
             uploadIdCardImage(uri)
         } else {
@@ -84,7 +87,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         }
     }
 
-    val pickProfileLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+    private val pickIdCardForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                result?.data?.data?.let { imageUri ->
+                    uploadIdCardImage(imageUri)
+                }
+            }
+        }
+
+    private val pickProfileLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
             uploadProfileImage(uri)
         } else {
@@ -402,12 +414,19 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     }
 
     fun selectIdCardImage() {
-//        activity?.getPhotoFromGallery { resultCode, data ->
-//            uploadIdCardImage(resultCode, data)
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            pickIdCardLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }else{
+            pickImageFromGallery()
+        }
+    }
 
-        pickIdCardLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        val mimeTypes = arrayOf("image/jpeg", "image/png")
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        pickIdCardForResult.launch(intent)
     }
 
     private fun isValidateRegister(): Boolean {

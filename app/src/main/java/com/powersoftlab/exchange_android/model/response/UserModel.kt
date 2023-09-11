@@ -65,7 +65,7 @@ data class UserModel(
         @field:SerializedName("label")
         var label: String?,
 
-        @Transient
+        @field:Transient
         var isSelected : Boolean = false
     ) : Parcelable
 }

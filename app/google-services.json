@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "239730508436",
+    "project_id": "exchange-android-b9858",
+    "storage_bucket": "exchange-android-b9858.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239730508436:android:2dd58c32284e5592a7ea81",
+        "android_client_info": {
+          "package_name": "com.powersoftlab.exchange_android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsLO-Rd8Wn3gy5pMOlHRXapWOcz3-jCWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

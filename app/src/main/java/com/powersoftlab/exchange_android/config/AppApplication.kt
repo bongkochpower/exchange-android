@@ -75,6 +75,6 @@ class AppApplication : MultiDexApplication() {
         }
 
         /*disable night mode*/
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }

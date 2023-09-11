@@ -16,8 +16,10 @@ android {
         applicationId "com.powersoftlab.exchange_android"
         minSdk 24
         targetSdk 33
-        versionCode 7
-        versionName "1.0.6"
+        versionCode 8
+        versionName "1.0.7"
+
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,7 +35,7 @@ android {
             shrinkResources true
             minifyEnabled true
             debuggable false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
@@ -97,7 +99,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Security
-    implementation "androidx.security:security-crypto:1.1.0-alpha03"
+    implementation "androidx.security:security-crypto:1.1.0-alpha06"
 
     // Multidex
     implementation "androidx.multidex:multidex:$multidex_version"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_cards"
+    app:startDestination="@id/cardsFragment">
+
+    <fragment
+        android:id="@+id/cardsFragment"
+        tools:layout="@layout/fragment_cards"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.cards.CardsFragment"
+        android:label="CardsFragment" >
+        <action
+            android:id="@+id/action_cardsFragment_to_requestNewCardFragment"
+            app:destination="@id/requestNewCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestNewCardFragment"
+        tools:layout="@layout/fragment_request_new_card"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.cards.request_new_card.RequestNewCardFragment"
+        android:label="RequestNewCardFragment" />
+</navigation>

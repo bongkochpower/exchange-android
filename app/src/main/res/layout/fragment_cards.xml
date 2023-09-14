@@ -28,10 +28,10 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:padding="@dimen/padding_12dp"
                 android:src="@drawable/icon_arrow_left" />
 
@@ -43,10 +43,10 @@
                 android:src="@drawable/bg_card" />
 
             <ImageView
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
                 android:padding="@dimen/padding_12dp"
                 android:src="@drawable/icon_arrow_right" />
 
@@ -60,8 +60,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_30dp"
             android:background="@drawable/bg_confirm"
-            android:textAllCaps="false"
             android:text="@string/button_request_new_card"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
 
 

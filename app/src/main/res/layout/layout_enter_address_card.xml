@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="isHouseNoEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isPostcodeEmpty"
+            type="Boolean" />
+        <variable
+            name="isPasswordEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isConfirmPwNotMatch"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_reg_house_no"
+                    style="@style/AppEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:background="@{isHouseNoEmpty ? @drawable/bg_edittext_small_error : @drawable/bg_edittext_small , default = @drawable/bg_edittext_small}"
+                    android:hint="@string/hint_house_no"
+                    android:importantForAutofill="no"
+                    android:maxLength="@integer/length_edt_small"
+                    android:textColorHint="@{isHouseNoEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+
+                <EditText
+                    android:id="@+id/edt_reg_village"
+                    style="@style/AppEditText"
+                    tools:ignore="RtlSymmetry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:background="@drawable/bg_edittext_small"
+                    android:hint="@string/hint_village"
+                    android:importantForAutofill="no"
+                    android:maxLength="@integer/length_edt_small" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_reg_village_no"
+                    style="@style/AppEditText"
+                    tools:ignore="RtlSymmetry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:background="@drawable/bg_edittext_small"
+                    android:hint="@string/hint_village_no"
+                    android:importantForAutofill="no"
+                    android:maxLength="@integer/length_edt_small" />
+
+                <EditText
+                    android:id="@+id/edt_reg_alley"
+                    style="@style/AppEditText"
+                    tools:ignore="RtlSymmetry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:background="@drawable/bg_edittext_small"
+                    android:hint="@string/hint_alley"
+                    android:importantForAutofill="no"
+                    android:maxLength="@integer/length_edt_small" />
+            </LinearLayout>
+
+            <!--road-->
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_street"
+                app:edtTitle="@string/hint_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp" />
+
+            <!--sub district-->
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_sub_district"
+                app:edtTitle="@string/hint_sub_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_district"
+                app:edtTitle="@string/hint_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_province"
+                app:edtTitle="@string/hint_province"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--postcode-->
+            <EditText
+                android:id="@+id/edt_reg_postcode"
+                style="@style/AppEditText"
+                tools:ignore="RtlSymmetry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{isPostcodeEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:hint="@string/hint_postcode"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:maxLength="@integer/length_postal_code"
+                android:textColorHint="@{isPostcodeEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_error_postcode"
+                style="@style/TextViewExtraMini"
+                app:fontFamily="@font/prompt_regular"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_2dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:gravity="start"
+                android:text="@string/validate_reg_postcode"
+                android:textColor="@color/color_error_text"
+                android:visibility="@{isPostcodeEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}" />
+
+            <LinearLayout
+                android:id="@+id/layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <!--pw-->
+                <EditText
+                    android:id="@+id/edt_reg_password"
+                    style="@style/AppEditText"
+                    tools:ignore="RtlSymmetry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@{isPasswordEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                    android:hint="@string/hint_reg_password"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:textColorHint="@{isPasswordEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_error_password"
+                    style="@style/TextViewExtraMini"
+                    app:fontFamily="@font/prompt_regular"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/margin_2dp"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:gravity="start"
+                    android:text="@string/validate_reg_password"
+                    android:textColor="@color/color_error_text"
+                    android:visibility="@{isPasswordEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}" />
+
+                <!--confirm pw-->
+                <EditText
+                    android:id="@+id/edt_reg_confirm_password"
+                    style="@style/AppEditText"
+                    tools:ignore="RtlSymmetry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@{isConfirmPwNotMatch ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                    android:hint="@string/hint_reg_confirm_password"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:textColorHint="@{isConfirmPwNotMatch ? @color/color_error_text : @color/text_edittext_gray}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewExtraMini"
+                    app:fontFamily="@font/prompt_regular"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/margin_4dp"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:gravity="start"
+                    android:text="@string/validate_reg_confirm_password"
+                    android:textColor="@color/color_error_text"
+                    android:visibility="@{isConfirmPwNotMatch ? View.VISIBLE : View.INVISIBLE , default=invisible}" />
+            </LinearLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

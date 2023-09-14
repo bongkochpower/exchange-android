@@ -39,6 +39,8 @@
     <string name="title_history_transaction">เลือกดูประวัติการทำรายการ</string>
     <string name="title_history_transactino_list">รายการ</string>
     <string name="title_history_date_select">ตั้งแต่วันที่ %1$s - %2$s</string>
+    <string name="title_enter_address_card">ใส่ข้อมูลที่อยู่จัดส่ง Card</string>
+    <string name="title_send_card_detail">รายละเอียดการจัดส่ง Card</string>
 
 
     <!--description-->

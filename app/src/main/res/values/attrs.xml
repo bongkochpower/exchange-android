@@ -18,8 +18,9 @@
     </declare-styleable>
 
     <declare-styleable name="EdittextRegister">
-        <attr name="edtTitle" format="string" />
+        <attr name="edtHint" format="string" />
         <attr name="isValidateError" format="boolean" />
+        <attr name="isEditable" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="NumberPad">

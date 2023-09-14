@@ -1,101 +1,158 @@
 package com.powersoftlab.exchange_android.common.manager
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyProperties
+import android.system.Os.remove
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.powersoftlab.exchange_android.common.constant.KeyConstant
 import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
-import com.powersoftlab.exchange_android.config.AppApplication
-import com.powersoftlab.exchange_android.config.AppApplication.Companion.getSecureSharePreferences
+import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
 import me.leolin.shortcutbadger.ShortcutBadger
+import okhttp3.internal.cache2.Relay.Companion.edit
 import timber.log.Timber
 
 class AppManager(private val context: Context) {
+
+    companion object {
+        private var secureSharedPreferencesInstance: SharedPreferences? = null
+    }
+
+    private fun getSecureSharePreferences(): SharedPreferences {
+        if (secureSharedPreferencesInstance == null) {
+            secureSharedPreferencesInstance =
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    val spec = KeyGenParameterSpec.Builder(
+                        MasterKey.DEFAULT_MASTER_KEY_ALIAS,
+                        KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+                    )
+                        .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
+                        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+                        .setKeySize(256)
+                        .build()
+
+                    val masterKey =
+                        MasterKey.Builder(context).setKeyGenParameterSpec(spec).build()
+
+                    EncryptedSharedPreferences.create(
+                        context,
+                        "encrypted_preferences",
+                        masterKey, // masterKey created above
+                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                    )
+                } else {
+                    return getSharePreferences()
+                }
+        }
+
+        return secureSharedPreferencesInstance!!
+    }
+
+    private fun getSharePreferences(): SharedPreferences =
+        context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
+
+
     //region secure
     //region fcm
     fun setFcmToken(fcmToken: String?) {
         Timber.d("${KeyConstant.FCM_TOKEN} -> $fcmToken")
-        AppApplication.getSecureSharePreferences(context).edit()
+        getSecureSharePreferences().edit()
             .putString(KeyConstant.FCM_TOKEN, fcmToken)
             .apply()
     }
 
     fun getFcmToken(): String? {
-        return AppApplication.getSecureSharePreferences(context)
-            .getString(KeyConstant.FCM_TOKEN, "")
+        return getSecureSharePreferences().getString(KeyConstant.FCM_TOKEN, "")
     }
     //endregion
 
     //region auth
     fun setAuthToken(authToken: String?) {
         Timber.d("${KeyConstant.AUTH_TOKEN} -> $authToken")
-        AppApplication.getSecureSharePreferences(context).edit()
-            .putString(KeyConstant.AUTH_TOKEN, authToken).apply()
+        getSecureSharePreferences().edit().putString(KeyConstant.AUTH_TOKEN, authToken).apply()
     }
 
     fun getAuthToken(): String? {
-        return AppApplication.getSecureSharePreferences(context)
+        return getSecureSharePreferences()
             .getString(KeyConstant.AUTH_TOKEN, null)
     }
     //endregion
 
     //region login type
-    fun setLoginType(loginType : String) {
-        getSecureSharePreferences(context).edit().putString(KeyConstant.LOGIN_TYPE, loginType).apply()
+    fun setLoginType(loginType: String) {
+        getSecureSharePreferences().edit().putString(KeyConstant.LOGIN_TYPE, loginType).apply()
     }
 
     fun getLoginType(): LoginTypeEnum {
-        val type = getSecureSharePreferences(context).getString(KeyConstant.LOGIN_TYPE, LoginTypeEnum.APP.name)
+        val type = getSecureSharePreferences().getString(KeyConstant.LOGIN_TYPE, LoginTypeEnum.APP.name)
         return LoginTypeEnum.fromName(type)
     }
     //endregion
 
     //region user
     fun setUser(userModel: UserModel?) =
-        getSecureSharePreferences(context).edit().putString(KeyConstant.USER, Gson().toJson(userModel))
+        getSecureSharePreferences().edit().putString(KeyConstant.USER, Gson().toJson(userModel))
             .apply()
 
     fun getUser(): UserModel? = Gson().fromJson(
-        getSecureSharePreferences(context).getString(KeyConstant.USER, null),
+        getSecureSharePreferences().getString(KeyConstant.USER, null),
         UserModel::class.java
     )
+    //endregion
     //endregion
 
     //region notification
     fun setOpenNotification(isOpen: Boolean): Boolean {
         Timber.d("${KeyConstant.IS_OPEN_NOTIFICATION} -> $isOpen")
-        AppApplication.getGeneralSharePreferences(context).edit()
+        getSharePreferences().edit()
             .putBoolean(KeyConstant.IS_OPEN_NOTIFICATION, isOpen)
             .apply()
         return isOpen
     }
 
     fun isOpenNotification(): Boolean {
-        return AppApplication.getGeneralSharePreferences(context)
+        return getSharePreferences()
             .getBoolean(KeyConstant.IS_OPEN_NOTIFICATION, true)
     }
 
     fun addNotificationCount(count: Int = 1) {
-        AppApplication.getGeneralSharePreferences(context).edit()
+        getSharePreferences().edit()
             .putInt(KeyConstant.NOTIFY_COUNT, getNotificationCount().plus(count)).apply()
         ShortcutBadger.applyCount(context, getNotificationCount())
     }
 
     fun getNotificationCount(): Int {
-        return AppApplication.getGeneralSharePreferences(context)
-            .getInt(KeyConstant.NOTIFY_COUNT, 0)
+        return getSharePreferences().getInt(KeyConstant.NOTIFY_COUNT, 0)
     }
 
     fun removeNotificationCount() {
-        AppApplication.getGeneralSharePreferences(context).edit().remove(KeyConstant.NOTIFY_COUNT)
+        getSharePreferences().edit().remove(KeyConstant.NOTIFY_COUNT)
             .apply()
         ShortcutBadger.removeCount(context)
     }
     //endregion
+
+    //region address
+    fun setSubDistricts(list: List<AddressAutoFillResponseModel.SubDistrictResponse>?) =
+        getSharePreferences().edit()
+            .putString(KeyConstant.SUB_DISTRICTS, Gson().toJson(list)).apply()
+
+    fun getSubDistricts(): List<AddressAutoFillResponseModel.SubDistrictResponse>? = Gson().fromJson(
+        getSharePreferences().getString(KeyConstant.SUB_DISTRICTS, null),
+        object : TypeToken<List<AddressAutoFillResponseModel.SubDistrictResponse>?>() {}.type
+    )
+
     //endregion
 
+
     fun removeAll(cb: () -> Unit) {
-        AppApplication.getSecureSharePreferences(context).edit().apply {
+        getSecureSharePreferences().edit().apply {
             remove(KeyConstant.FCM_TOKEN)
             remove(KeyConstant.AUTH_TOKEN)
             remove(KeyConstant.USER)

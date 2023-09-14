@@ -3,6 +3,7 @@ package com.powersoftlab.exchange_android.repository.remote
 import android.content.Context
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.ExchangeRequestModel
+import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.ExchangeCalculateResponse
 import com.powersoftlab.exchange_android.model.response.TopUpResponse
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
@@ -53,6 +54,18 @@ class AppRemoteRepository(
                 currencyToID = requestModel.currencyToId,
                 amount = requestModel.amount
             )
+        })
+    }
+
+    suspend fun getSubDistricts(): ResultWrapper<BaseResponseModel<List<AddressAutoFillResponseModel.SubDistrictResponse>>> {
+        return safeApiCall(dispatcher, call = {
+            api.subDistricts()
+        })
+    }
+
+    suspend fun getAddressDataBySubId(id : Int): ResultWrapper<BaseResponseModel<AddressAutoFillResponseModel>> {
+        return safeApiCall(dispatcher, call = {
+            api.getAddressBySubDistrictId(id)
         })
     }
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UnusedAttribute,UseCompoundDrawables">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/padding_24dp"
+            android:paddingVertical="@dimen/padding_12dp"
+            tools:ignore="UselessParent">
+
+            <TextView
+                android:fontFamily="@font/prompt_regular"
+                android:id="@+id/tv_menu"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@tools:sample/lorem" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_linear"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line"
+            android:background="@color/linear_gallery" />
+
+    </LinearLayout>
+
+</layout>

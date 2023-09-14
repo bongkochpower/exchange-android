@@ -48,11 +48,15 @@ import com.powersoftlab.exchange_android.ext.toServiceFormat
 import com.powersoftlab.exchange_android.ext.toString
 import com.powersoftlab.exchange_android.ext.uriToFile
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
+import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.network.builder.RetrofitBuilder
+import com.powersoftlab.exchange_android.ui.dialog.bottomsheet.AddressAutoFillBottomSheetDialog
+import com.powersoftlab.exchange_android.ui.dialog.bottomsheet.OptionMenuModel
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
+import com.powersoftlab.exchange_android.ui.page.intro.IntroViewModel
 import com.powersoftlab.exchange_android.ui.page.login.LoginViewModel
 import com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragmentDirections
 import com.powersoftlab.exchange_android.ui.widget.EdittextRegister
@@ -78,6 +82,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private val appManager: AppManager by inject()
     private val user by lazy { appManager.getUser() }
     private lateinit var loginType: LoginTypeEnum
+    private var mAddressAutoFillData : AddressAutoFillResponseModel? = null
 
     private val pickIdCardLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
@@ -102,6 +107,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         } else {
             Log.d("PhotoPicker", "No media selected")
         }
+    }
+
+    private val subDistrictBottomSheetDialog: AddressAutoFillBottomSheetDialog by lazy {
+        val subDistricts = appManager.getSubDistricts() ?: mutableListOf()
+        AddressAutoFillBottomSheetDialog.newInstance(subDistricts.toMutableList())
     }
 
     companion object {
@@ -156,12 +166,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 }
             }
 
+            edtRegSubDistrict.setOnClickListener {
+                subDistrictBottomSheetDialog.show(childFragmentManager)
+                subDistrictBottomSheetDialog.setOnItemSelectedListener {
+                    registerViewModel.getAddressDataById(it)
+                }
 
+            }
 
             edtRegName.validateAfterTextChange()
             edtRegLastname.validateAfterTextChange()
             edtRegEmail.validateAfterTextChange()
-            edtRegSubDistrict.validateAfterTextChange()
             edtRegDistrict.validateAfterTextChange()
             edtRegProvince.validateAfterTextChange()
 
@@ -331,6 +346,29 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 else -> hideLoading()
             }
         }
+        registerViewModel.addressByIdLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultWrapper.Loading -> {
+
+                }
+
+                is ResultWrapper.Success -> {
+                    val data = it.response.data
+                    data?.let { it1 -> updateAddressData(it1) }
+
+                }
+
+                is ResultWrapper.GenericError -> {
+                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
+                }
+
+                else -> {}
+            }
+        }
     }
 
     private fun fadeIn() {
@@ -379,7 +417,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
         try {
             val filename: String = file.path.toString().substring(file?.path.toString().lastIndexOf("/") + 1)
-            binding.tvIdCardName.text = getString(R.string.hint_attach_file,filename)
+            binding.tvIdCardName.text = getString(R.string.hint_attach_file, filename)
         } catch (e: Exception) {
             e.stackTrace
         }
@@ -416,7 +454,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     fun selectIdCardImage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             pickIdCardLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        }else{
+        } else {
             pickImageFromGallery()
         }
     }
@@ -580,12 +618,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 houseNo = edtRegHouseNo.text.trim().toString(),
                 village = edtRegVillage.text.toString(),
                 road = edtRegStreet.getText(),
-                districtId = 1,
+                districtId = mAddressAutoFillData?.district?.districtId,
                 district = edtRegDistrict.getText(),
-                subDistrictId = 1,
-                subDistrict = edtRegSubDistrict.getText(),
+                subDistrictId = mAddressAutoFillData?.subDistrict?.id,
+                subDistrict = edtRegSubDistrict.text.trim().toString(),
                 province = edtRegProvince.getText(),
-                provinceId = 1
+                provinceId = mAddressAutoFillData?.province?.provinceId
             )
         }
     }
@@ -606,23 +644,24 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     setText(tel)
                     isEnabled = false
                 }
+
                 edtRegEmail.setText(email.orEmpty())
                 edtRegDob.setText(birthDate.toDisplayFormat().convertDisplayDateToBuddhistYear())
 
                 isSelectIdCardImage = true
                 val filename: String = idCardImage.orEmpty()
-                binding.tvIdCardName.text = getString(R.string.hint_attach_file,filename)
-
+                binding.tvIdCardName.text = getString(R.string.hint_attach_file, filename)
 
                 edtRegHouseNo.setText(houseNo.orEmpty())
                 edtRegVillage.setText(village.orEmpty())
                 edtRegVillageNo.setText(moo.orEmpty())
                 edtRegAlley.setText(soi.orEmpty())
                 edtRegStreet.setText(road.orEmpty())
-                edtRegSubDistrict.setText(subDistict.orEmpty())
-                edtRegDistrict.setText(district.orEmpty())
-                edtRegProvince.setText(provine.orEmpty())
-                edtRegPostcode.setText(postCode.orEmpty())
+                //edtRegSubDistrict.setText(subDistict.orEmpty())
+                //edtRegDistrict.setText(district.orEmpty())
+                //edtRegProvince.setText(provine.orEmpty())
+                //edtRegPostcode.setText(postCode.orEmpty())
+                subDistictId?.let { registerViewModel.getAddressDataById(it) }
                 btnRegister.setText(resources.getString(R.string.title_register_edit_form))
             }
         }
@@ -637,6 +676,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             if (loginType != LoginTypeEnum.APP) {
                 layoutPassword.gone()
             }
+        }
+    }
+
+
+    private fun updateAddressData(data : AddressAutoFillResponseModel){
+        mAddressAutoFillData = data
+        with(binding){
+            edtRegSubDistrict.setText(data.subDistrict?.nameTH.toDashWhenNullOrEmpty())
+            edtRegDistrict.setText(data.district?.nameTH.toDashWhenNullOrEmpty())
+            edtRegProvince.setText(data.province?.nameTH.toDashWhenNullOrEmpty())
+            edtRegPostcode.setText(data.subDistrict?.zipCode.toDashWhenNullOrEmpty())
         }
     }
 

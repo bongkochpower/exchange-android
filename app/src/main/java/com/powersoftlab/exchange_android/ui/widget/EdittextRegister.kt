@@ -19,19 +19,23 @@ class EdittextRegister(context: Context, attrs: AttributeSet) : FrameLayout(cont
 
     init {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.EdittextRegister)
-        val title = attributes.getString(R.styleable.EdittextRegister_edtTitle)
+        val hint = attributes.getString(R.styleable.EdittextRegister_edtHint)
         val isError = attributes.getBoolean(R.styleable.EdittextRegister_isValidateError,false)
+        val isEditable = attributes.getBoolean(R.styleable.EdittextRegister_isEditable,true)
 
-        setTitle(title)
+        setHint(hint)
         setValidation(isError)
+        setIsEditable(isEditable)
+
 
         attributes.recycle()
 
     }
 
-    fun setTitle(title: String?) {
+
+    fun setHint(str: String?) {
         with(binding) {
-            edtRegister.hint = title
+            edtRegister.hint = str
         }
     }
 
@@ -51,6 +55,12 @@ class EdittextRegister(context: Context, attrs: AttributeSet) : FrameLayout(cont
             tvErrorValidate.text = msg
         }
     }
+    fun setIsEditable(isEdit : Boolean){
+        binding.edtRegister.apply {
+            isEnabled = isEdit
+        }
+    }
+
     fun getValidation() = binding.isErrorValidate ?: true
 
     fun addOnTextChangeListener(textWatcher: TextWatcher){

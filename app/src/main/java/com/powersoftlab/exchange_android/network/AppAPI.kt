@@ -5,6 +5,7 @@ import com.powersoftlab.exchange_android.model.body.LoginRequestModel
 import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.AccessTokenModel
+import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.ExchangeCalculateResponse
 import com.powersoftlab.exchange_android.model.response.RegisterResponseModel
 import com.powersoftlab.exchange_android.model.response.TopUpResponse
@@ -93,6 +94,14 @@ interface AppAPI {
         @Field("currency_to") currencyToID: Int,
         @Field("amount") amount: Double
     ): Response<ExchangeCalculateResponse>
+
+    @GET("api/v1/address/getSubDistrict?search=พระ")
+    suspend fun subDistricts(): Response<BaseResponseModel<List<AddressAutoFillResponseModel.SubDistrictResponse>>>
+
+    @GET("api/v1/address/getProvinceAndDistrict")
+    suspend fun getAddressBySubDistrictId(
+        @Query("subDistrictId") subDistrictId: Int,
+    ): Response<BaseResponseModel<AddressAutoFillResponseModel>>
 
     //endregion
 

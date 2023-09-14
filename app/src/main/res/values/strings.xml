@@ -78,6 +78,7 @@
     <string name="hint_exchange_to">เป็น</string>
     <string name="hint_date_from">ตั้งแต่วันที่</string>
     <string name="hint_date_to">ถึงวันที่</string>
+    <string name="hint_search">ค้นหา</string>
 
     <!--message-->
     <string name="message_maintenance">ปิดปรับปรุงระบบชั่วคราว\nขออภัยในความไม่สะดวก</string>
@@ -161,6 +162,7 @@
     <string name="validate_reg_attach_file_success">แนบไฟล์สำเร็จ</string>
     <string name="validate_money_incorrect">จำนวนเงินของท่านไม่ถูกต้อง</string>
     <string name="validate_enter_money_again">กรุณาใส่จำนวนเงินอีกครั้ง</string>
+    <string name="validate_select_sub_district">กรุณาเลือกตำบล/แขวง</string>
 
     <!--checkbox-->
     <string name="chk_term_and_con">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการใช้บริการ</string>

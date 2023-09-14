@@ -6,29 +6,54 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentManager
-import com.powersoftlab.exchange_android.ext.fixFontScale
-import com.powersoftlab.exchange_android.ext.hideKeyboard
-import com.powersoftlab.exchange_android.ui.dialog.popup.ProgressDialog
+import androidx.lifecycle.LifecycleObserver
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.powersoftlab.exchange_android.R
+import com.powersoftlab.exchange_android.ext.fixFontScale
+import com.powersoftlab.exchange_android.ext.hideKeyboard
+import com.powersoftlab.exchange_android.ui.dialog.popup.ProgressDialog
 
-abstract class BaseBottomSheetDialogFragment<B : ViewDataBinding> : BottomSheetDialogFragment() {
+abstract class BaseBottomSheetDialogFragment<B : ViewDataBinding>(@LayoutRes private val layout: Int) :
+    BottomSheetDialogFragment(),
+    LifecycleObserver {
 
     protected lateinit var binding: B
+
+    protected val TAG = javaClass.name
+
     var isShow: Boolean = false
+
     protected val progressDialog: ProgressDialog by lazy { ProgressDialog.newInstance() }
+
+    companion object {
+        private const val EXTRA_IS_SHOW = "extra_is_show"
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Disable dialog window animations for this instance
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            dialog?.window?.setWindowAnimations(-1)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.LightBottomSheetDialogTheme)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        //dialog.setWhiteNavigationBar()
         dialog.setOnShowListener {
             val d = it as BottomSheetDialog
             val bottomSheet = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
-            BottomSheetBehavior.from(bottomSheet).state = BottomSheetBehavior.STATE_EXPANDED
+            BottomSheetBehavior.from(bottomSheet).state = BottomSheetBehavior.STATE_DRAGGING
         }
         return dialog
     }
@@ -38,7 +63,7 @@ abstract class BaseBottomSheetDialogFragment<B : ViewDataBinding> : BottomSheetD
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+        binding = DataBindingUtil.inflate(inflater, layout, container, false)
         return binding.root
 
     }
@@ -46,13 +71,15 @@ abstract class BaseBottomSheetDialogFragment<B : ViewDataBinding> : BottomSheetD
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        lifecycle.addObserver(this)
+
         arguments?.let {
             getExtra(it)
         }
 
         context?.apply {
             fixFontScale()
-            //overrideUIText(binding.root)
+//            overrideUIText(binding.root)
         }
 
         setUp()
@@ -62,28 +89,38 @@ abstract class BaseBottomSheetDialogFragment<B : ViewDataBinding> : BottomSheetD
         hideKeyboard()
     }
 
-    abstract fun getLayoutId(): Int
-
-    open fun getExtra(bundle: Bundle) {}
-
-    open fun setUp() {}
-
-    open fun subscribe() {}
-
     override fun show(manager: FragmentManager, tag: String?) {
-        super.show(manager, tag)
-        isShow = true
+        if (!isAdded) {
+            isShow = true
+            super.show(manager, tag)
+        }
     }
 
     override fun dismiss() {
         try {
-            if (isShow) {
-                super.dismiss()
-                isShow = false
-            }
+            isShow = false
+            super.dismiss()
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
+    open fun getExtra(bundle: Bundle) {
+        with(bundle) {
+            isShow = getBoolean(EXTRA_IS_SHOW, true)
+        }
+    }
+
+    abstract fun setUp()
+
+    open fun subscribe() {}
+
+    fun show(manager: FragmentManager) {
+        show(manager, TAG)
+    }
+
+//    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+//    private fun dismissBottomSheet() {
+//        dismiss()
+//    }
 }

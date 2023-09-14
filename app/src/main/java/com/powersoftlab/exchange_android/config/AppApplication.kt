@@ -18,44 +18,6 @@ import org.koin.core.context.startKoin
 import timber.log.Timber
 
 class AppApplication : MultiDexApplication() {
-    companion object {
-        private var secureSharedPreferencesInstance: SharedPreferences? = null
-        fun getSecureSharePreferences(context: Context): SharedPreferences {
-            if (secureSharedPreferencesInstance == null) {
-                secureSharedPreferencesInstance =
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        val spec = KeyGenParameterSpec.Builder(
-                            MasterKey.DEFAULT_MASTER_KEY_ALIAS,
-                            KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
-                        )
-                            .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-                            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-                            .setKeySize(256)
-                            .build()
-
-                        val masterKey =
-                            MasterKey.Builder(context).setKeyGenParameterSpec(spec).build()
-
-                        EncryptedSharedPreferences.create(
-                            context,
-                            "encrypted_preferences",
-                            masterKey, // masterKey created above
-                            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-                        )
-                    } else {
-                        getGeneralSharePreferences(context)
-                    }
-            }
-
-            return secureSharedPreferencesInstance!!
-        }
-
-        fun getGeneralSharePreferences(context: Context): SharedPreferences {
-            return context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
-        }
-    }
-
     override fun onCreate() {
         super.onCreate()
 

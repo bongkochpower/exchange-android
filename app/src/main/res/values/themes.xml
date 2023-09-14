@@ -63,6 +63,18 @@
         <item name="materialAlertDialogBodyTextStyle">@font/prompt_medium</item>
     </style>
 
+
+    <!--Bottom Sheet-->
+    <style name="LightBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog" />
+
+    <style name="CurveBottomSheetDialogTheme" parent="LightBottomSheetDialogTheme">
+        <item name="bottomSheetStyle">@style/CurveBottomSheetStyle</item>
+    </style>
+
+    <style name="CurveBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_card_top_curve</item>
+    </style>
+
     <!--CardView-->
     <style name="CardViewStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">@dimen/margin_8dp</item>
@@ -123,7 +135,7 @@
         <item name="android:inputType">textPersonName</item>
         <item name="android:textColor">@color/text_edittext_gray</item>
         <item name="android:textCursorDrawable">@null</item>
-        <item name="android:textColorHint">@color/text_edittext_gray</item>
+        <item name="android:textColorHint">@color/text_back</item>
         <item name="android:paddingStart">@dimen/padding_16dp</item>
 <!--        <item name="android:paddingEnd">@dimen/padding_8dp</item>-->
 <!--        <item name="android:paddingTop">@dimen/zero</item>-->
@@ -133,6 +145,5 @@
     <style name="CurrencyEditText" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/green_yellow</item>
     </style>
-
 
 </resources>

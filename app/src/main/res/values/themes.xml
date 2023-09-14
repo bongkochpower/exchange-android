@@ -142,8 +142,19 @@
 <!--        <item name="android:paddingBottom">@dimen/zero</item>-->
     </style>
 
+    <style name="AppEditText.Dropdown">
+        <item name="android:importantForAutofill">no</item>
+        <item name="android:inputType">none</item>
+
+        <item name="android:paddingEnd">@dimen/padding_16dp</item>
+        <item name="android:drawableEnd">@drawable/icon_arrow_down</item>
+        <item name="android:focusable">false</item>
+    </style>
+
     <style name="CurrencyEditText" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/green_yellow</item>
     </style>
+
+
 
 </resources>

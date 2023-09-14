@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isSelectCurrencyEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isSelectCountryEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isSelectShopEmpty"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:paddingHorizontal="@dimen/padding_50dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_40dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title_card"
+            style="@style/TextViewLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/title_withdraw_detail"
+            android:textColor="@color/text_edittext_gray"
+            app:fontFamily="@font/prompt_semibold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextViewSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:maxLines="3"
+            android:layout_marginVertical="@dimen/margin_28dp"
+            android:text="@string/message_dummy_term"
+            android:textColor="@color/text_back"
+            app:fontFamily="@font/prompt_regular" />
+
+        <!--date-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_date"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="29 Aug 2023/16:30"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold" />
+
+        </FrameLayout>
+
+        <!--amount-->
+        <FrameLayout
+            android:layout_marginTop="@dimen/margin_18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_amount"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="500.00 THB.-" />
+        </FrameLayout>
+
+        <!--country-->
+        <FrameLayout
+            android:layout_marginTop="@dimen/margin_18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_country"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="ไทย"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold" />
+        </FrameLayout>
+
+        <!--shop-->
+        <FrameLayout
+            android:layout_marginTop="@dimen/margin_18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_shop"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="ชื่อร้านที่เข้าร่วม"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold" />
+        </FrameLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/TextViewRegularPlus"
+            android:layout_width="wrap_content"
+            android:id="@+id/btn_save_picture"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/bg_confirm"
+            android:text="บันทึกรูป"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+</layout>

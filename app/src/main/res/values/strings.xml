@@ -41,6 +41,14 @@
     <string name="title_history_date_select">ตั้งแต่วันที่ %1$s - %2$s</string>
     <string name="title_enter_address_card">ใส่ข้อมูลที่อยู่จัดส่ง Card</string>
     <string name="title_send_card_detail">รายละเอียดการจัดส่ง Card</string>
+    <string name="title_withdraw_by_k_plus">ถอนเงินไปยัง K PLUS</string>
+    <string name="title_confirm_password">ยืนยันรหัสผ่าน</string>
+    <string name="title_or_finger_scan">หรือแสกนลายนิ้วมือ</string>
+    <string name="title_withdraw_detail">รายละเอียดการถอนเงิน</string>
+    <string name="title_summary_date">วันที่/เวลา</string>
+    <string name="title_summary_amount">จำนวนเงิน</string>
+    <string name="title_summary_country">ประเทศ</string>
+    <string name="title_summary_shop">ร้าน</string>
 
 
     <!--description-->
@@ -86,6 +94,11 @@
     <string name="hint_card_no">1234 5678 9123 4567</string>
     <string name="hint_card_date">VALID DATES %1$d/%2$d</string>
     <string name="hint_card_name">YOUR NAME HERE</string>
+    <string name="hint_select_currency">เลือกสกุลเงิน</string>
+    <string name="hint_select_country">เลือกประเทศ</string>
+    <string name="hint_select_shop">เลือกร้าน</string>
+    <string name="hint_withdraw_your_balance">คุณมีเงินอยู่ </string>
+
 
     <!--message-->
     <string name="message_maintenance">ปิดปรับปรุงระบบชั่วคราว\nขออภัยในความไม่สะดวก</string>
@@ -109,6 +122,8 @@
 ไม่ชอบด้วยกฎหมาย หากฝ่าฝืน ผู้ให้บริการ ขอสงวนสิทธิ์ในการ
 ยกเลิกบัตร และเรียกค่าเสียหายที่เกิดขึ้น</string>
     <string name="message_logout">คุณต้องการออกจากระบบหรือไม่ ?</string>
+    <string name="message_input_pin">กรุณาใส่เลขรหัส PIN 6 หลัก\nที่คุณต้องการสำหรับการทำธุรกรรม</string>
+    <string name="message_save_picture_success">บันทึกรูปเรียบร้อย</string>
 
     <!--button-->
     <string name="button_close">ปิด</string>
@@ -130,6 +145,9 @@
     <string name="button_back_to_main">กลับสู่หน้าหลัก</string>
     <string name="button_next">ต่อไป</string>
     <string name="button_request_new_card">ขอ Card ใหม่</string>
+    <string name="button_next_step">ขั้นตอนต่อไป</string>
+    <string name="button_scan_qr">Scan QR Code</string>
+    <string name="button_slide_to_withdraw">เลื่อนเพื่อถอนเงิน</string>
 
     <!--contentDescription-->
     <string name="cd_bg">background</string>
@@ -171,6 +189,7 @@
     <string name="validate_money_incorrect">จำนวนเงินของท่านไม่ถูกต้อง</string>
     <string name="validate_enter_money_again">กรุณาใส่จำนวนเงินอีกครั้ง</string>
     <string name="validate_select_sub_district">กรุณาเลือกตำบล/แขวง</string>
+    <string name="validate_password_incorrect">รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง</string>
 
     <!--checkbox-->
     <string name="chk_term_and_con">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการใช้บริการ</string>

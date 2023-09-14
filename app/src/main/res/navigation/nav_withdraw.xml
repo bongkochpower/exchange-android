@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_withdraw"
+    app:startDestination="@id/withDrawTypeFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_withdraw_type"
+        android:id="@+id/withDrawTypeFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_type.WithDrawTypeFragment"
+        android:label="WithDrawTypeFragment" >
+        <action
+            android:id="@+id/action_withDrawTypeFragment_to_withDrawInputMoneyFragment"
+            app:destination="@id/withDrawInputMoneyFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_withdraw_input_money"
+        android:id="@+id/withDrawInputMoneyFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_input_money.WithDrawInputMoneyFragment"
+        android:label="WithDrawInputMoneyFragment" >
+        <action
+            android:id="@+id/action_withDrawInputMoneyFragment_to_authWithBioFragment"
+            app:destination="@id/authWithBioFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_withdraw_summary"
+        android:id="@+id/withDrawSummaryFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_summary.WithDrawSummaryFragment"
+        android:label="WithDrawSummaryFragment" />
+    <fragment
+        tools:layout="@layout/fragment_auth_with_bio"
+        android:id="@+id/authWithBioFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio.AuthWithBioFragment"
+        android:label="AuthWithBioFragment" >
+        <action
+            android:id="@+id/action_authWithBioFragment_to_withDrawSummaryFragment"
+            app:destination="@id/withDrawSummaryFragment" />
+    </fragment>
+</navigation>

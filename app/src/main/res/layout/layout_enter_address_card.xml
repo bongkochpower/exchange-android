@@ -95,7 +95,7 @@
             <!--road-->
             <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_street"
-                app:edtTitle="@string/hint_street"
+                app:edtHint="@string/hint_street"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_24dp" />
@@ -103,19 +103,19 @@
             <!--sub district-->
             <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_sub_district"
-                app:edtTitle="@string/hint_sub_district"
+                app:edtHint="@string/hint_sub_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_district"
-                app:edtTitle="@string/hint_district"
+                app:edtHint="@string/hint_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_province"
-                app:edtTitle="@string/hint_province"
+                app:edtHint="@string/hint_province"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

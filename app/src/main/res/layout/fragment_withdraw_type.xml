@@ -5,28 +5,92 @@
 
     <data>
 
+        <variable
+            name="isSelectCurrencyEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isSelectCountryEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isSelectShopEmpty"
+            type="Boolean" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/margin_40dp"
         android:orientation="vertical">
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layout_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                style="@style/AppEditText.Dropdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{isSelectCurrencyEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:hint="@string/hint_select_currency"
+                android:textColorHint="@{isSelectCurrencyEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+
+            <EditText
+                style="@style/AppEditText.Dropdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_20dp"
+                android:background="@{isSelectCurrencyEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:hint="@string/hint_select_country"
+                android:textColorHint="@{isSelectCurrencyEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+
+            <EditText
+                style="@style/AppEditText.Dropdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{isSelectCurrencyEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:hint="@string/hint_select_shop"
+                android:textColorHint="@{isSelectCurrencyEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_req_new_card"
             style="@style/TextViewRegularPlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/margin_30dp"
+            android:id="@+id/btn_next_step"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:background="@drawable/bg_confirm"
+            android:text="@string/button_next_step"
             android:textAllCaps="false"
-            android:text="@string/button_request_new_card"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_dropdown" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/TextViewRegularPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:id="@+id/btn_scan_qr"
+            android:background="@drawable/bg_confirm"
+            android:text="@string/button_scan_qr"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="38dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

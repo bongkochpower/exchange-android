@@ -1,5 +1,6 @@
 package com.powersoftlab.exchange_android.ext
 
+import android.R.id.mask
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
@@ -23,6 +24,7 @@ import java.security.MessageDigest
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.experimental.and
+
 
 /*activity*/
 fun Activity.hideKeyboard() {
@@ -181,8 +183,6 @@ fun String.toTimeAgo(format: String): String {
     return String.format("%s %s", value.toDouble().toStringFormat(), unit)
 }
 
-
-
 fun String?.toDashWhenNullOrEmpty(): String =
     if (!this.isNullOrEmpty()) {
         this
@@ -250,6 +250,16 @@ fun String.toSHA256(): String? {
     val md = MessageDigest.getInstance("SHA-256")
     md.update(this.toByteArray())
     return md.digest().bytesToHex()
+}
+
+fun String.toCardNumberFormat(): String {
+    var str: StringBuilder = StringBuilder("")
+
+    for(i in 0..this.lastIndex){
+        str.append(this[i])
+        if (i ==3 || i == 7 || i == 11 || i == 15 ) str.append(" ")
+    }
+    return str.toString()
 }
 
 private fun ByteArray.bytesToHex(): String? {

@@ -178,6 +178,10 @@ dependencies {
     //line login
     implementation 'com.linecorp.linesdk:linesdk:5.8.1'
 
+    //viewpager2
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta02'
+
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

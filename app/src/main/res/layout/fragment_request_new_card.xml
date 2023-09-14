@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@string/title_enter_address_card"
+            android:text="@{isStepInfo ? @string/title_enter_address_card : @string/title_send_card_detail,default=@string/title_enter_address_card}"
             android:textColor="@color/text_edittext_gray"
             app:fontFamily="@font/prompt_semibold" />
 

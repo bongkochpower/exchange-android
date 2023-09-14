@@ -82,6 +82,9 @@
     <string name="hint_exchange_to">เป็น</string>
     <string name="hint_date_from">ตั้งแต่วันที่</string>
     <string name="hint_date_to">ถึงวันที่</string>
+    <string name="hint_card_no">1234 5678 9123 4567</string>
+    <string name="hint_card_date">VALID DATES %1$d/%2$d</string>
+    <string name="hint_card_name">YOUR NAME HERE</string>
 
     <!--message-->
     <string name="message_maintenance">ปิดปรับปรุงระบบชั่วคราว\nขออภัยในความไม่สะดวก</string>

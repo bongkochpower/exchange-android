@@ -14,6 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@drawable/bg_app"
         android:layout_height="match_parent"
         tools:context=".ui.page.main.topup.TopupActivity">
 
@@ -22,7 +23,6 @@
             android:id="@+id/ll_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_main"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_topup_amount"
-                        android:textColor="@color/green_yellow"
+                        android:textColor="@color/green_fun_green"
                         app:fontFamily="@font/prompt_semibold" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_8dp"
                         android:text="@string/title_topup_amount_th"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         app:fontFamily="@font/prompt_semibold" />
                 </LinearLayout>
 
@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/validate_money_incorrect"
-                        android:textColor="@color/yellow_sea_buckthorn"
+                        android:textColor="@color/color_error_text"
                         app:fontFamily="@font/prompt_regular" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/validate_enter_money_again"
-                        android:textColor="@color/yellow_sea_buckthorn"
+                        android:textColor="@color/color_error_text"
                         app:fontFamily="@font/prompt_regular" />
 
                 </LinearLayout>
@@ -92,11 +92,11 @@
                     style="@style/TextViewExtraLarge3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@{isTopupInvalid ? @color/red_cardinal : @color/green_yellow , default = @color/green_yellow}"
+                    android:backgroundTint="@{isTopupInvalid ? @color/red_cardinal : @color/green_fun_green , default = @color/green_fun_green}"
                     android:digits="0123456789.,"
                     android:gravity="center_horizontal"
                     android:inputType="numberDecimal"
-                    android:textColor="@{isTopupInvalid ? @color/yellow_sea_buckthorn : @color/white , default=@color/white}"
+                    android:textColor="@{isTopupInvalid ? @color/yellow_sea_buckthorn : @color/green_chateau , default=@color/green_chateau}"
                     android:textCursorDrawable="@drawable/cursor_color">
                     <requestFocus/>
                 </com.powersoftlab.exchange_android.ui.widget.CurrencyEditText>
@@ -109,7 +109,7 @@
                     android:drawablePadding="@dimen/padding_10dp"
                     android:gravity="center_horizontal"
                     android:text="@string/hint_withdraw_your_balance"
-                    android:textColor="@color/green_yellow"
+                    android:textColor="@color/green_fun_green"
                     app:fontFamily="@font/prompt_regular" />
 
             </LinearLayout>
@@ -136,9 +136,10 @@
 
             <!--button-->
             <FrameLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginHorizontal="@dimen/padding_30dp"
+                android:paddingHorizontal="@dimen/padding_30dp"
                 android:layout_weight="1"
                 android:paddingTop="@dimen/margin_40dp">
 

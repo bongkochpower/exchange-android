@@ -16,15 +16,14 @@
         android:layout_width="match_parent"
         android:id="@+id/root"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@drawable/bg_app"
         tools:context=".ui.page.main.history.HistoryActivity">
 
         <com.powersoftlab.exchange_android.ui.widget.AppToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/bg_toolbar"
-            app:iconBackSrc="@drawable/icon_close"
+            android:layout_height="wrap_content"
+            app:iconBackSrc="@drawable/icon_back"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/title_main_history" />
 
@@ -82,7 +81,7 @@
                             android:layout_alignEnd="@id/edt_start_date"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/margin_8dp"
-                            android:background="@drawable/bg_circle_green"
+                            android:background="@drawable/bg_circle_gray"
                             android:padding="@dimen/padding_10dp"
                             android:src="@drawable/icon_select_date" />
                     </RelativeLayout>
@@ -110,7 +109,7 @@
                             android:layout_alignEnd="@id/edt_end_date"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/margin_8dp"
-                            android:background="@drawable/bg_circle_green"
+                            android:background="@drawable/bg_circle_gray"
                             android:padding="@dimen/padding_10dp"
                             android:src="@drawable/icon_select_date" />
                     </RelativeLayout>

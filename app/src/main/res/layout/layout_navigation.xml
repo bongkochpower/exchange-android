@@ -38,7 +38,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line"
-                    android:background="@color/green_yellow" />
+                    android:background="@color/colorSecondary" />
 
                 <!--setting-->
                 <LinearLayout
@@ -62,14 +62,14 @@
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:maxLines="1"
                         android:text="@string/menu_setting"
-                        android:textColor="@color/green_yellow" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line"
-                    android:background="@color/green_yellow" />
+                    android:background="@color/colorSecondary" />
 
                 <!--edit profile-->
                 <LinearLayout
@@ -93,14 +93,14 @@
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:maxLines="1"
                         android:text="@string/menu_edit_profile"
-                        android:textColor="@color/green_yellow" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line"
-                    android:background="@color/green_yellow" />
+                    android:background="@color/colorSecondary" />
 
                 <!--help-->
                 <LinearLayout
@@ -124,14 +124,14 @@
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:maxLines="1"
                         android:text="@string/menu_help"
-                        android:textColor="@color/green_yellow" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line"
-                    android:background="@color/green_yellow" />
+                    android:background="@color/colorSecondary" />
 
                 <!--logout-->
                 <LinearLayout
@@ -155,7 +155,7 @@
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:maxLines="1"
                         android:text="@string/menu_logout"
-                        android:textColor="@color/green_yellow" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 

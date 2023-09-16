@@ -216,7 +216,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/margin_8dp"
-                    android:background="@drawable/bg_circle_green"
+                    android:background="@drawable/bg_circle_gray"
                     android:onClick="@{() -> fragment.selectBirthDate()}"
                     android:padding="@dimen/padding_10dp"
                     android:src="@drawable/icon_select_date" />
@@ -304,7 +304,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:background="@drawable/bg_circle_green"
+                    android:background="@drawable/bg_circle_gray"
                     android:onClick="@{() -> fragment.selectIdCardImage()}"
                     android:padding="@dimen/padding_10dp"
                     android:src="@drawable/icon_attachfile" />
@@ -517,7 +517,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line"
                 android:layout_marginVertical="@dimen/margin_24dp"
-                android:background="@color/green_yellow" />
+                android:background="@color/colorSecondary" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/chk_reg_term"
@@ -527,8 +527,8 @@
                 android:button="@drawable/selector_chk_term"
                 android:checked="false"
                 android:padding="@dimen/padding_10dp"
-                android:text="@string/chk_term_and_con"
-                android:textColor="@color/green_yellow"
+                android:text="@string/chk_term_and_con_register"
+                android:textColor="@color/yellow_green"
                 app:useMaterialThemeColors="false" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -538,7 +538,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_30dp"
-                android:background="@drawable/bg_confirm"
+                android:background="@drawable/button_confirm"
                 android:text="@string/button_register"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />

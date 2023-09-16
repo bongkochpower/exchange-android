@@ -77,7 +77,7 @@ open class SlideButton @JvmOverloads constructor(
 
         //primary slide
         setTextSize(21f)
-        val color = if (isEnable) context.getColor(R.color.colorPrimary) else context.getColor(R.color.gray_silver_sand)
+        val color = if (isEnable) context.getColor(R.color.green_fun_green) else context.getColor(R.color.gray_silver_sand)
         setTextColor(color)
         //notifyTextAlpha(1)
         val typeface = ResourcesCompat.getFont(context, R.font.prompt_regular)

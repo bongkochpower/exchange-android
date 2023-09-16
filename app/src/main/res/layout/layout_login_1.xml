@@ -61,7 +61,7 @@
             android:layout_marginBottom="@dimen/margin_16dp"
             app:buttonBgSrc="@drawable/button_login"
             app:buttonIconSrc="@null"
-            app:buttonTextColorRes="@color/colorPrimary"
+            app:buttonTextColorRes="@color/text_edittext_gray"
             app:buttonTitle="@string/button_app_login" />
 
         <androidx.appcompat.widget.AppCompatTextView

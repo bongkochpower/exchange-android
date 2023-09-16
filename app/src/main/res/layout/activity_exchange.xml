@@ -23,6 +23,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_app"
         tools:context=".ui.page.main.exchange.ExchangeActivity">
 
         <!--header-->
@@ -30,7 +31,6 @@
             android:id="@+id/ll_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_main"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,8 +39,8 @@
             <com.powersoftlab.exchange_android.ui.widget.AppToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:iconBackSrc="@drawable/icon_close"
+                android:layout_height="wrap_content"
+                app:iconBackSrc="@drawable/icon_back"
                 app:title="@string/title_main_exchange" />
 
             <!--current to-->
@@ -93,7 +93,7 @@
                         android:drawableEnd="@drawable/icon_next"
                         android:drawablePadding="@dimen/padding_8dp"
                         android:text="@string/hint_exchange_from"
-                        android:textColor="@color/white"
+                        android:textColor="@color/text_edittext_gray"
                         app:fontFamily="@font/prompt_regular" />
 
                     <FrameLayout
@@ -107,14 +107,14 @@
                             android:imeOptions="actionDone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@{isExchangeInvalid ? @color/red_cardinal : @color/green_yellow , default = @color/green_yellow}"
+                            android:backgroundTint="@{isExchangeInvalid ? @color/red_cardinal : @color/green_fun_green , default = @color/green_fun_green}"
                             android:digits="0123456789.,"
                             android:layout_marginEnd="@dimen/margin_30dp"
                             android:gravity="center"
                             android:text=""
                             android:inputType="numberDecimal"
                             android:visibility="gone"
-                            android:textColor="@{isExchangeInvalid ? @color/yellow_sea_buckthorn : @color/white , default=@color/white}"
+                            android:textColor="@{isExchangeInvalid ? @color/yellow_sea_buckthorn : @color/green_chateau , default=@color/green_chateau}"
                             android:textCursorDrawable="@drawable/cursor_color">
                             <requestFocus/>
                         </com.powersoftlab.exchange_android.ui.widget.CurrencyEditText>
@@ -140,7 +140,7 @@
                     android:drawablePadding="@dimen/padding_10dp"
                     android:gravity="center_horizontal"
                     android:text="@string/hint_exchange_your_balance_from"
-                    android:textColor="@color/green_yellow"
+                    android:textColor="@color/green_fun_green"
                     app:fontFamily="@font/prompt_regular" />
 
             </LinearLayout>
@@ -241,6 +241,7 @@
 
             <!--footer-->
             <RelativeLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="@dimen/margin_40dp">
@@ -258,10 +259,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/bg_slide_confirm"
+                        android:background="@drawable/button_confirm_normal"
+                        app:backgroundTint="@null"
                         android:text="@string/button_next"
                         android:textAllCaps="false"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textFontWeight="600"
                         android:visibility="@{isStep2 ? View.GONE : View.VISIBLE}" />
 

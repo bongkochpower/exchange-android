@@ -29,7 +29,8 @@
     <string name="title_main_topup">เติมเงิน</string>
     <string name="title_main_exchange">แลกเงิน</string>
     <string name="title_main_history">ประวัติ</string>
-    <string name="title_main_cards">Physical Card</string>
+    <string name="title_main_cards">Card</string>
+    <string name="title_main_cards_toolbar">Physical Card</string>
     <string name="title_main_withdraw">ถอนเงิน</string>
     <string name="title_main_balance">ยอดเงินคงเหลือ</string>
     <string name="title_main_recent_list">รายการล่าสุด</string>

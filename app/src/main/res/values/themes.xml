@@ -152,7 +152,7 @@
     </style>
 
     <style name="CurrencyEditText" parent="Widget.AppCompat.EditText">
-        <item name="colorControlNormal">@color/green_yellow</item>
+        <item name="colorControlNormal">@color/green_fun_green</item>
     </style>
 
 

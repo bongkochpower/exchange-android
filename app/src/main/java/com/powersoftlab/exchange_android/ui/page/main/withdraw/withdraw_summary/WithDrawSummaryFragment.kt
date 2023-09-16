@@ -29,7 +29,7 @@ class WithDrawSummaryFragment : BaseFragment<FragmentWithdrawSummaryBinding>(R.l
         with(binding){
             btnSavePicture.setOnClickListener {
                 val msg = resources.getString(R.string.message_save_picture_success)
-                val btn = resources.getString(R.string.button_close)
+                val btn = resources.getString(R.string.button_back_to_main)
                 showAlertSuccessDialog(title = msg, textButtonRight = btn) {
                     activity?.finish()
                 }

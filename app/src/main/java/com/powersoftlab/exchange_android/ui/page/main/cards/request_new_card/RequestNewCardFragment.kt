@@ -46,6 +46,7 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
                         gotoStepDetail()
                     } else {
                         Log.d("LOGD", "listener: call api new card")
+                        activity?.finish()
                     }
                 }
             }

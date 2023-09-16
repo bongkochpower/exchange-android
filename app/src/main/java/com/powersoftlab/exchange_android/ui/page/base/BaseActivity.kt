@@ -47,6 +47,10 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
 
         binding.root.requestLayout()
 

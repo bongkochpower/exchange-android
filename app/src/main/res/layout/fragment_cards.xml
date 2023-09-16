@@ -8,9 +8,10 @@
     </data>
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_40dp"
+        android:paddingTop="@dimen/margin_40dp"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -58,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_30dp"
-            android:background="@drawable/bg_confirm"
+            android:background="@drawable/button_confirm_normal"
             android:text="@string/button_request_new_card"
             android:textAllCaps="false"
             android:textColor="@color/white" />

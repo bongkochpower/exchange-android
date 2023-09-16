@@ -21,7 +21,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_40dp"
+        android:background="@color/white"
+        android:paddingTop="@dimen/margin_40dp"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -67,7 +68,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_next_step"
             android:layout_marginTop="@dimen/margin_20dp"
-            android:background="@drawable/bg_confirm"
+            android:background="@drawable/button_confirm_normal"
             android:text="@string/button_next_step"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -81,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20dp"
             android:id="@+id/btn_scan_qr"
-            android:background="@drawable/bg_confirm"
+            android:background="@drawable/button_confirm_normal"
             android:text="@string/button_scan_qr"
             android:textAllCaps="false"
             android:textColor="@color/white"

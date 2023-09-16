@@ -21,9 +21,10 @@
     <LinearLayout
         android:paddingHorizontal="@dimen/padding_50dp"
         android:gravity="center_horizontal"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_40dp"
+        android:paddingTop="@dimen/margin_40dp"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -154,7 +155,7 @@
             android:id="@+id/btn_save_picture"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20dp"
-            android:background="@drawable/bg_confirm"
+            android:background="@drawable/button_confirm_normal"
             android:text="บันทึกรูป"
             android:textAllCaps="false"
             android:textColor="@color/white"

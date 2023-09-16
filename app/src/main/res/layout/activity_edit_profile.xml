@@ -10,15 +10,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_app"
         tools:context=".ui.page.hamburger_menu.edit_profile.EditProfileActivity">
 
         <com.powersoftlab.exchange_android.ui.widget.AppToolbar
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             app:elevation="@dimen/zero"
-            android:background="@drawable/bg_toolbar"
-            app:iconBackSrc="@drawable/icon_close"
+            app:iconBackSrc="@drawable/icon_close_black"
             app:layout_constraintTop_toTopOf="parent">
 
         </com.powersoftlab.exchange_android.ui.widget.AppToolbar>

@@ -1,25 +1,25 @@
 package com.powersoftlab.exchange_android.ui.page.base
 
 import android.content.res.Configuration
-import android.hardware.biometrics.BiometricPrompt
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricPrompt
 import androidx.databinding.ViewDataBinding
+import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.databinding.inflater.contentView
+import com.powersoftlab.exchange_android.common.enum.AppEventEnum
 import com.powersoftlab.exchange_android.common.manager.AppManager
+import com.powersoftlab.exchange_android.common.manager.BiometricPromptUtils
+import com.powersoftlab.exchange_android.common.rx.RxBus
+import com.powersoftlab.exchange_android.common.rx.RxEvent
 import com.powersoftlab.exchange_android.ext.fixFontScale
 import com.powersoftlab.exchange_android.ext.getNavigationBarHeight
 import com.powersoftlab.exchange_android.ext.goToGoogleStore
-import com.powersoftlab.exchange_android.ext.hideKeyboard
 import com.powersoftlab.exchange_android.ext.logout
 import com.powersoftlab.exchange_android.ui.dialog.popup.AlertMessageDialog
-import com.powersoftlab.exchange_android.common.enum.AppEventEnum
-import com.powersoftlab.exchange_android.common.rx.RxBus
-import com.powersoftlab.exchange_android.common.rx.RxEvent
-import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.ui.dialog.popup.AlertSuccessDialog
 import com.powersoftlab.exchange_android.ui.dialog.popup.ProgressDialog
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -280,6 +280,19 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
                 }
             }
         }
+    }
+
+    fun showBiometricPrompt(
+        onSuccess: (result:BiometricPrompt.AuthenticationResult) -> Unit,
+        onError: (errorCode: Int, message: String) -> Unit
+    ) {
+        biometricPrompt =
+            BiometricPromptUtils.createBiometricPrompt(
+                this@BaseActivity as AppCompatActivity,
+                onSuccess,
+                onError
+            )
+        biometricPrompt.authenticate(BiometricPromptUtils.createPromptInfo(this@BaseActivity))
     }
 
 

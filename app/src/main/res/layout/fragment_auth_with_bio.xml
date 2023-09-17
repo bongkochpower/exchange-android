@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_36dp"
                 android:background="@drawable/bg_pin_field"
-                android:inputType="number"
+                android:inputType="numberPassword"
                 android:scaleY="1.5"
                 app:cornerRadius="6dp"
                 app:distanceInBetween="8dp"
@@ -81,6 +81,7 @@
                 app:fontFamily="@font/prompt_semibold" />
 
             <ImageView
+                android:id="@+id/img_finger_scan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_finger_scan" />

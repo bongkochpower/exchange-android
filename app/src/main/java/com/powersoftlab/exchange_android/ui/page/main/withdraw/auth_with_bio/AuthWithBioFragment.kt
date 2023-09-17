@@ -1,18 +1,17 @@
 package com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.databinding.FragmentAuthWithBioBinding
-import com.powersoftlab.exchange_android.databinding.FragmentWithdrawInputMoneyBinding
+import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
-import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_input_money.WithDrawInputMoneyFragment
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_input_money.WithDrawInputMoneyFragmentDirections
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_summary.WithDrawSummaryFragment
-import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_type.WithDrawTypeFragmentDirections
 
-class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fragment_auth_with_bio),OnBackPressedFragment {
+class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fragment_auth_with_bio), OnBackPressedFragment {
 
     companion object {
         fun newInstance() = AuthWithBioFragment()
@@ -29,6 +28,20 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
             btnConfirm.setOnClickListener {
                 gotoSummary()
             }
+
+            imgFingerScan.apply {
+                setOnTouchAnimation()
+                setOnClickListener {
+                    showBiometricPrompt(
+                        { result ->
+                            Log.d("LOGD", "listener: ${result}")
+                        },
+                        { errorCode, message ->
+
+                        })
+                }
+            }
+
         }
     }
 

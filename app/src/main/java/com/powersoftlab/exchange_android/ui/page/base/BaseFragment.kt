@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricPrompt
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.powersoftlab.exchange_android.common.manager.BiometricPromptUtils
 import com.powersoftlab.exchange_android.ext.fixFontScale
 import com.powersoftlab.exchange_android.ext.hideKeyboard
 import com.powersoftlab.exchange_android.ui.dialog.popup.AlertSuccessDialog
@@ -20,6 +23,8 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layout: 
     protected lateinit var binding: B
 
     protected val progressDialog: ProgressDialog by lazy { ProgressDialog.newInstance() }
+
+    private lateinit var biometricPrompt: BiometricPrompt
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,6 +89,19 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layout: 
 
         }
         alertSuccessDialog.show(requireActivity().supportFragmentManager)
+    }
+
+    fun showBiometricPrompt(
+        onSuccess: (result: BiometricPrompt.AuthenticationResult) -> Unit,
+        onError: (errorCode: Int, message: String) -> Unit
+    ) {
+        biometricPrompt =
+            BiometricPromptUtils.createBiometricPrompt(
+                this.activity as AppCompatActivity,
+                onSuccess,
+                onError
+            )
+        biometricPrompt.authenticate(BiometricPromptUtils.createPromptInfo(this.requireContext()))
     }
 
 }

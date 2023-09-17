@@ -201,6 +201,12 @@
     <string name="chk_term_and_con">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการใช้บริการ</string>
     <string name="chk_term_and_con_register">การสร้างบัญชีแสดงว่าคุณยอมรับเงื่อนไขในการใช้บริการ</string>
 
+    <!--biometric-->
+    <string name="prompt_info_title">Biometric login for</string>
+    <string name="prompt_info_subtitle">Log in using your biometric credential</string>
+    <string name="prompt_info_description"></string>
+    <string name="prompt_info_negative_button">Cancel</string>
+
     <!--drawer nav-->
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>

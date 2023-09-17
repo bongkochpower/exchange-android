@@ -94,6 +94,10 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                 }
             }
 
+            swipeRefresh.setOnRefreshListener {
+                getHistory()
+            }
+
 
             slideToConfirm.setTextSlideButtonEnable(false,R.string.button_slide_to_confirm)
             slideToConfirm.setOnClickListener {
@@ -102,13 +106,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
                 slideToConfirm.setEnable(false)
                 slideToConfirm.setBackgroundRes(R.drawable.bg_slide_confirm_done)
-                if (isValidate()) {
-                    val dateFrom = edtStartDate.text.toString()
-                    val dateTo = edtEndDate.text.toString()
 
-                    showTransactionListView(true)
-                    getHistory(dateFrom, dateTo)
-                }
+                getHistory()
             }
         }
     }
@@ -118,9 +117,11 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
         historyViewModel.historyRequestLiveData.observe(this) {
             historyAdapter.isLoading = false
+
             when (it) {
                 is ResultWrapper.Loading -> {
                     historyAdapter.isLoading = true
+                    binding.swipeRefresh.isRefreshing = historyAdapter.isLoading
                 }
 
                 is ResultWrapper.GenericError -> {
@@ -129,6 +130,10 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
                 is ResultWrapper.NetworkError -> {
                     AppAlert.alertNetworkError(this).show(supportFragmentManager)
+                }
+
+                is ResultWrapper.Success -> {
+                    binding.swipeRefresh.isRefreshing = false
                 }
 
                 else -> {
@@ -191,14 +196,24 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         return isValidate
     }
 
-    private fun getHistory(dateFrom: String, dateTo: String) {
-
-        historyViewModel.getHistory(dateForm = dateFrom.toServiceFormat(), dateTo = dateTo.toServiceFormat())
-    }
-
     private fun onClose() {
         setResult(Activity.RESULT_OK, Intent())
         finish()
+    }
+
+    private fun getHistory(){
+        if (isValidate()) {
+            val dateFrom = binding.edtStartDate.text.toString()
+            val dateTo = binding.edtEndDate.text.toString()
+
+            showTransactionListView(true)
+            getHistory(dateFrom, dateTo)
+        }else{
+            historyViewModel.getLastHistory()
+        }
+    }
+    private fun getHistory(dateFrom: String, dateTo: String) {
+        historyViewModel.getHistory(dateForm = dateFrom.toServiceFormat(), dateTo = dateTo.toServiceFormat())
     }
 
 }

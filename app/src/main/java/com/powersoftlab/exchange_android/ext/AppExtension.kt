@@ -1,6 +1,5 @@
 package com.powersoftlab.exchange_android.ext
 
-import android.R.id.mask
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
@@ -19,6 +18,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.common.util.Base64Utils
 import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
+import java.math.RoundingMode
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.text.DecimalFormat
@@ -136,6 +136,7 @@ fun Double.toCompactDecimalFormat() : String {
     cdf.maximumIntegerDigits = 3
     cdf.maximumFractionDigits = 1
     cdf.setSignificantDigitsUsed(false)
+    cdf.roundingMode = RoundingMode.DOWN.ordinal
 
     return cdf.format(this)
 }

@@ -165,9 +165,6 @@ dependencies {
     // Pin
     implementation 'com.github.poovamraj:PinEditTextField:1.2.6'
 
-    //swipe refreshlayout
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-
     //slide confirm
     implementation "com.ncorti:slidetoact:0.10.0"
 
@@ -180,6 +177,9 @@ dependencies {
 
     //viewpager2
     implementation 'androidx.viewpager2:viewpager2:1.1.0-beta02'
+
+    //pull-to-refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
 
 
     testImplementation 'junit:junit:4.13.2'

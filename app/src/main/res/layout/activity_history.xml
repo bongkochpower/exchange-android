@@ -13,8 +13,8 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/root"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_app"
         tools:context=".ui.page.main.history.HistoryActivity">
@@ -65,14 +65,14 @@
                         android:gravity="center">
 
                         <EditText
-                            android:enabled="false"
                             android:id="@+id/edt_start_date"
                             style="@style/AppEditText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_edittext_date"
-                            android:inputType="date"
-                            android:hint="@string/hint_date_from" />
+                            android:enabled="false"
+                            android:hint="@string/hint_date_from"
+                            android:inputType="date" />
 
                         <ImageView
                             android:id="@+id/img_date_from"
@@ -93,14 +93,14 @@
                         android:gravity="center">
 
                         <EditText
-                            android:enabled="false"
                             android:id="@+id/edt_end_date"
                             style="@style/AppEditText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_edittext_date"
-                            android:inputType="date"
-                            android:hint="@string/hint_date_to" />
+                            android:enabled="false"
+                            android:hint="@string/hint_date_to"
+                            android:inputType="date" />
 
                         <ImageView
                             android:id="@+id/img_date_to"
@@ -120,10 +120,10 @@
             <!--slide to confirm-->
             <com.powersoftlab.exchange_android.ui.widget.SlideButton
                 android:id="@+id/slide_to_confirm"
-                android:layout_marginHorizontal="@dimen/margin_14dp"
-                android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"/>
+                android:layout_height="58dp"
+                android:layout_marginHorizontal="@dimen/margin_14dp"
+                android:layout_marginTop="@dimen/margin_16dp" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -183,12 +183,18 @@
                     app:layout_constraintBaseline_toBaselineOf="@id/tv_transaction_list"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_history"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refresh"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:listitem="@layout/item_rv_transaction" />
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_rv_transaction" />
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             </FrameLayout>
 

@@ -50,6 +50,8 @@
     <string name="title_summary_amount">จำนวนเงิน</string>
     <string name="title_summary_country">ประเทศ</string>
     <string name="title_summary_shop">ร้าน</string>
+    <string name="title_set_pin">ตั้งค่า PIN</string>
+    <string name="title_finger_scan">แสกนลายนิ้วมือ</string>
 
 
     <!--description-->
@@ -99,6 +101,7 @@
     <string name="hint_select_country">เลือกประเทศ</string>
     <string name="hint_select_shop">เลือกร้าน</string>
     <string name="hint_withdraw_your_balance">คุณมีเงินอยู่ </string>
+    <string name="hint_reset_pin">รีเซ็ทรหัส PIN</string>
 
 
     <!--message-->
@@ -125,6 +128,8 @@
     <string name="message_logout">คุณต้องการออกจากระบบหรือไม่ ?</string>
     <string name="message_input_pin">กรุณาใส่เลขรหัส PIN 6 หลัก\nที่คุณต้องการสำหรับการทำธุรกรรม</string>
     <string name="message_save_picture_success">บันทึกรูปเรียบร้อย</string>
+    <string name="message_pls_set_pin">กรุณากำหนดเลขรหัส PIN 6 หลัก\nที่คุณต้องการสำหรับการทำธุรกรรม</string>
+    <string name="message_pls_set_finger">กรุณาสแกนลายนิ้วมือ\nสำหรับการทำธุรกรรม</string>
 
     <!--button-->
     <string name="button_close">ปิด</string>

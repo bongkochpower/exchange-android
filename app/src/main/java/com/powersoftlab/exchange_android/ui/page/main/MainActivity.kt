@@ -90,15 +90,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         // Now that BottomNavigationBar has restored its instance state
         // and its selectedItemId, we can proceed with setting up the
         // BottomNavigationBar with Navigation
-
         //setUpBottomNavigatorBar()
     }
 
     override fun onResume() {
         super.onResume()
         hideKeyboard()
-        getUser()
-        getLastTransaction()
+
+        getInitData()
     }
 
     override fun setUp() {
@@ -134,6 +133,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             toolbar.setOnBackListener {
                 open()
             }
+
+            swiperefresh.setOnRefreshListener {
+                getInitData()
+            }
+
             layoutNavigation.apply {
                 btnClose.setOnClickListener {
                     close()
@@ -191,9 +195,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         mainViewModel.transactionRequestLiveData.observe(this) {
             lastTransactionAdapter.isLoading = false
+            binding.swiperefresh.isRefreshing = lastTransactionAdapter.isLoading
             when (it) {
                 is ResultWrapper.Loading -> {
                     lastTransactionAdapter.isLoading = true
+                    //binding.swiperefresh.isRefreshing = lastTransactionAdapter.isLoading
                 }
 
                 is ResultWrapper.GenericError -> {
@@ -214,6 +220,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 setLastTransactions(it)
             }
         }
+    }
+
+    private fun getInitData(){
+        getUser()
+        getLastTransaction()
     }
 
     fun gotoTopUp() {

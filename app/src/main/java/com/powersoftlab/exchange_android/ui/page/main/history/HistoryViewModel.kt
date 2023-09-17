@@ -60,7 +60,7 @@ class HistoryViewModel(
         }
     }
 
-    private fun getLastHistory() {
+    fun getLastHistory() {
         viewModelScope.launch {
             historyRequestLiveData.value = ResultWrapper.Loading
             val result = appRemoteRepository.getLastTransactions()

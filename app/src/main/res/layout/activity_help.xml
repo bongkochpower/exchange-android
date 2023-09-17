@@ -28,7 +28,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout" >
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_14dp"
+                android:drawablePadding="@dimen/padding_10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/menu_help"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_regular" />
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

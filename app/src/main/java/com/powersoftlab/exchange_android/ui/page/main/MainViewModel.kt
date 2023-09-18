@@ -30,6 +30,8 @@ class MainViewModel(
         get() = state["transaction_list"] ?: mutableListOf()
         set(value) = state.set("transaction_list", value)
 
+
+
     fun getMe() {
         me.value = ResultWrapper.Loading
         viewModelScope.launch {

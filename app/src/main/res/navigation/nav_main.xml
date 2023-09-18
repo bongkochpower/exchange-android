@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/topUpFragment">
+
+    <fragment
+        android:id="@+id/topUpFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.topup.TopUpFragment"
+        android:label="TopUpFragment"
+        tools:layout="@layout/fragment_topup">
+        <action
+            android:id="@+id/action_topUpFragment_to_authWithBioFragment2"
+            app:destination="@id/authWithBioFragment2">
+
+        </action>
+        <action
+            android:id="@+id/action_topUpFragment_to_exchangeFragment"
+            app:destination="@id/exchangeFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/authWithBioFragment2"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio.AuthWithBioFragment"
+        android:label="AuthWithBioFragment"
+        tools:layout="@layout/fragment_auth_with_bio" >
+        <argument
+            android:name="authBy"
+            app:argType="com.powersoftlab.exchange_android.common.enum.AuthByEnum"
+            android:defaultValue="TOPUP" />
+        <argument
+            android:name="amount"
+            app:argType="float"
+            android:defaultValue="0.0" />
+
+
+    </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_exchange"
+        android:id="@+id/exchangeFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeFragment"
+        android:label="ExchangeFragment" >
+        <action
+            android:id="@+id/action_exchangeFragment_to_authWithBioFragment2"
+            app:destination="@id/authWithBioFragment2" />
+    </fragment>
+</navigation>

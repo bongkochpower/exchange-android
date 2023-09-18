@@ -5,28 +5,35 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
-            name="isSelectCurrencyEmpty"
+            name="isPinEmpty"
             type="Boolean" />
 
         <variable
-            name="isSelectCountryEmpty"
+            name="isPinInvalid"
             type="Boolean" />
 
         <variable
-            name="isSelectShopEmpty"
+            name="isCanFingerScan"
             type="Boolean" />
+
+        <variable
+            name="isEnableConfirmBtn"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
             android:id="@+id/layout_pin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
@@ -50,6 +57,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/message_input_pin"
                 android:textColor="@color/color_error_text"
+                android:visibility="@{isPinEmpty ? View.VISIBLE : View.INVISIBLE , default = invisible}"
                 app:fontFamily="@font/prompt_regular" />
 
             <com.poovam.pinedittextfield.SquarePinField
@@ -60,31 +68,42 @@
                 android:background="@drawable/bg_pin_field"
                 android:inputType="numberPassword"
                 android:scaleY="1.5"
+                android:cursorVisible="false"
                 app:cornerRadius="6dp"
-                app:distanceInBetween="8dp"
+                app:distanceInBetween="6dp"
                 app:fieldBgColor="#F1F2F2"
-                app:fieldColor="@color/colorPrimary"
-                app:highlightColor="@color/colorPrimary"
+                app:fieldColor="@color/colorSecondary"
+                app:highlightColor="@color/colorSecondary"
                 app:isCursorEnabled="true"
                 app:lineThickness="0.5dp"
                 app:noOfFields="@integer/length_otp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/TextViewLarge"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_36dp"
-                android:layout_marginBottom="@dimen/margin_28dp"
                 android:gravity="center_horizontal"
-                android:text="@string/title_or_finger_scan"
-                android:textColor="@color/text_edittext_gray"
-                app:fontFamily="@font/prompt_semibold" />
+                android:orientation="vertical"
+                android:visibility="@{isCanFingerScan ? View.VISIBLE : View.INVISIBLE}">
 
-            <ImageView
-                android:id="@+id/img_finger_scan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_finger_scan" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_36dp"
+                    android:layout_marginBottom="@dimen/margin_28dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/title_or_finger_scan"
+                    android:textColor="@color/text_edittext_gray"
+                    app:fontFamily="@font/prompt_semibold" />
+
+                <ImageView
+                    android:id="@+id/img_finger_scan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_finger_scan" />
+
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_confirm"
@@ -93,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="90dp"
-                android:background="@drawable/button_confirm"
+                android:enabled="@{isEnableConfirmBtn ? true : false}"
+                android:background="@{isEnableConfirmBtn ? @drawable/button_confirm : @drawable/bg_confirm_disable, default=@drawable/button_confirm}"
                 android:text="@string/button_confirm"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
@@ -103,14 +123,15 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/TextViewMini"
-            app:layout_constraintTop_toBottomOf="@id/layout_pin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_18dp"
             android:gravity="center_horizontal"
             android:text="@string/validate_password_incorrect"
             android:textColor="@color/color_error_text"
-            app:fontFamily="@font/prompt_regular" />
+            android:visibility="@{isPinInvalid ? View.VISIBLE : View.INVISIBLE , default = invisible}"
+            app:fontFamily="@font/prompt_regular"
+            app:layout_constraintTop_toBottomOf="@id/layout_pin" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

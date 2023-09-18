@@ -6,6 +6,7 @@ import com.powersoftlab.exchange_android.ui.page.main.MainViewModel
 import com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeViewModel
 import com.powersoftlab.exchange_android.ui.page.main.history.HistoryViewModel
 import com.powersoftlab.exchange_android.ui.page.main.topup.TopUpViewModel
+import com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio.AuthWithBioViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -17,5 +18,6 @@ var viewModelModule = module {
     viewModel { TopUpViewModel(get(),get()) }
     viewModel { ExchangeViewModel(get(),get(),get()) }
     viewModel { IntroViewModel(get(),get(),get()) }
+    viewModel { AuthWithBioViewModel(get(),get()) }
 
 }

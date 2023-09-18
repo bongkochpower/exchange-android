@@ -4,17 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.databinding.FragmentWithdrawInputMoneyBinding
-import com.powersoftlab.exchange_android.databinding.FragmentWithdrawTypeBinding
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setTextSlideButtonEnable
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
-import com.powersoftlab.exchange_android.ui.page.main.cards.CardsFragmentDirections
-import com.powersoftlab.exchange_android.ui.page.main.cards.request_new_card.RequestNewCardFragment
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio.AuthWithBioFragment
-import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_summary.WithDrawSummaryFragment
-import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_type.WithDrawTypeFragment
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_type.WithDrawTypeFragmentDirections
 
 class WithDrawInputMoneyFragment : BaseFragment<FragmentWithdrawInputMoneyBinding>(R.layout.fragment_withdraw_input_money),OnBackPressedFragment {
@@ -59,7 +54,7 @@ class WithDrawInputMoneyFragment : BaseFragment<FragmentWithdrawInputMoneyBindin
     }
 
     private fun gotoAuthBio() {
-        AuthWithBioFragment.navigate(this@WithDrawInputMoneyFragment)
+        AuthWithBioFragment.navigate(this@WithDrawInputMoneyFragment,WithDrawTypeFragmentDirections.actionWithDrawTypeFragmentToWithDrawInputMoneyFragment())
     }
 
 

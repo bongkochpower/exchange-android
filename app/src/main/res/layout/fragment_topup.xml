@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isTopupInvalid"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_app"
+        >
+
+        <!--header-->
+        <LinearLayout
+            android:id="@+id/ll_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/padding_34dp"
+                android:paddingBottom="@dimen/padding_20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/margin_6dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_topup_amount"
+                        android:textColor="@color/green_fun_green"
+                        app:fontFamily="@font/prompt_semibold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:text="@string/title_topup_amount_th"
+                        android:textColor="@color/black"
+                        app:fontFamily="@font/prompt_semibold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="@{isTopupInvalid ? View.VISIBLE : View.GONE}">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/validate_money_incorrect"
+                        android:textColor="@color/color_error_text"
+                        app:fontFamily="@font/prompt_regular" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewMini"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/validate_enter_money_again"
+                        android:textColor="@color/color_error_text"
+                        app:fontFamily="@font/prompt_regular" />
+
+                </LinearLayout>
+
+                <com.powersoftlab.exchange_android.ui.widget.CurrencyEditText
+                    android:id="@+id/edt_money_amount"
+                    style="@style/TextViewExtraLarge3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@{isTopupInvalid ? @color/red_cardinal : @color/green_fun_green , default = @color/green_fun_green}"
+                    android:digits="0123456789.,"
+                    android:gravity="center_horizontal"
+                    android:inputType="numberDecimal"
+                    android:textColor="@{isTopupInvalid ? @color/yellow_sea_buckthorn : @color/green_chateau , default=@color/green_chateau}"
+                    android:textCursorDrawable="@drawable/cursor_color">
+                    <requestFocus/>
+                </com.powersoftlab.exchange_android.ui.widget.CurrencyEditText>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewMini"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_14dp"
+                    android:drawableEnd="@drawable/icon_info"
+                    android:drawablePadding="@dimen/padding_10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/hint_topup_max"
+                    android:textColor="@color/green_fun_green"
+                    app:fontFamily="@font/prompt_regular" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--body-->
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_header">
+
+            <TextView
+                style="@style/TextViewRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_tasman"
+                android:gravity="center_horizontal"
+                android:paddingVertical="@dimen/padding_10dp"
+                android:text="@string/title_topup_by_k_plus"
+                android:textColor="@color/black_thunder" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/padding_30dp"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/margin_40dp">
+
+                <com.powersoftlab.exchange_android.ui.widget.SlideButton
+                    android:id="@+id/slide_to_confirm"
+                    android:layout_marginHorizontal="@dimen/margin_14dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </FrameLayout>
+
+            <com.powersoftlab.exchange_android.ui.widget.NumberPad
+                android:id="@+id/np_topup"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

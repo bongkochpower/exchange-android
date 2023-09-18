@@ -1,4 +1,17 @@
 package com.powersoftlab.exchange_android.ui.page.main.withdraw
 
-class WithdrawViewModel {
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import com.powersoftlab.exchange_android.common.manager.AppManager
+
+class WithdrawViewModel(
+    private val appManager: AppManager,
+    private val state: SavedStateHandle
+):ViewModel() {
+    val iconLeftMenu = MutableLiveData<Int>()
+
+    fun setIcon(iconRes : Int){
+        iconLeftMenu.value = iconRes
+    }
 }

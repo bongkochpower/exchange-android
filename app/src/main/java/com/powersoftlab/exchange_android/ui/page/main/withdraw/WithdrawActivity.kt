@@ -4,19 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import com.powersoftlab.exchange_android.R
-import com.powersoftlab.exchange_android.databinding.ActivityCardsBinding
 import com.powersoftlab.exchange_android.databinding.ActivityWithdrawBinding
 import com.powersoftlab.exchange_android.ext.getCurrentFragment
 import com.powersoftlab.exchange_android.ui.page.base.BaseActivity
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
-import com.powersoftlab.exchange_android.ui.page.main.cards.CardsActivity
-import com.powersoftlab.exchange_android.ui.page.main.cards.CardsFragment
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_type.WithDrawTypeFragment
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class WithdrawActivity : BaseActivity<ActivityWithdrawBinding>(R.layout.activity_withdraw) {
+
+    private val withdrawViewModel : WithdrawViewModel by stateViewModel()
 
     companion object {
 
@@ -37,6 +36,14 @@ class WithdrawActivity : BaseActivity<ActivityWithdrawBinding>(R.layout.activity
             appBarLayout.setOnBackListener {
                 onBackPressed()
             }
+        }
+    }
+
+    override fun subscribe() {
+        super.subscribe()
+
+        withdrawViewModel.iconLeftMenu.observe(this){ iconRes ->
+            binding.appBarLayout.setIcon(iconRes)
         }
     }
 

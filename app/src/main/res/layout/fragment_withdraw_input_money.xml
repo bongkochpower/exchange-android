@@ -8,7 +8,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="isTopupInvalid"
+            name="isWithdrawInvalid"
             type="Boolean" />
     </data>
 
@@ -67,7 +67,7 @@
                     android:layout_marginBottom="@dimen/margin_20dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
-                    android:visibility="@{isTopupInvalid ? View.VISIBLE : View.GONE}">
+                    android:visibility="@{isWithdrawInvalid ? View.VISIBLE : View.GONE}">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/TextViewRegular"
@@ -92,11 +92,11 @@
                     style="@style/TextViewExtraLarge3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@{isTopupInvalid ? @color/red_cardinal : @color/green_fun_green , default = @color/green_fun_green}"
+                    android:backgroundTint="@{isWithdrawInvalid ? @color/red_cardinal : @color/green_fun_green , default = @color/green_fun_green}"
                     android:digits="0123456789.,"
                     android:gravity="center_horizontal"
                     android:inputType="numberDecimal"
-                    android:textColor="@{isTopupInvalid ? @color/yellow_sea_buckthorn : @color/green_chateau , default=@color/green_chateau}"
+                    android:textColor="@{isWithdrawInvalid ? @color/color_error_text : @color/green_chateau , default=@color/green_chateau}"
                     android:textCursorDrawable="@drawable/cursor_color">
                     <requestFocus/>
                 </com.powersoftlab.exchange_android.ui.widget.CurrencyEditText>

@@ -205,7 +205,9 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
             AuthByEnum.EXCHANGE -> {
                 exchangeViewModel.exchange()
             }
-            AuthByEnum.WITHDRAW -> TODO()
+            AuthByEnum.WITHDRAW -> {
+                gotoSummary()
+            }
         }
     }
 

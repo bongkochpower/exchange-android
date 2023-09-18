@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/validate_money_incorrect"
-                        android:textColor="@color/yellow_sea_buckthorn"
+                        android:textColor="@color/color_error_text"
                         app:fontFamily="@font/prompt_regular" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/validate_enter_money_again"
-                        android:textColor="@color/yellow_sea_buckthorn"
+                        android:textColor="@color/color_error_text"
                         app:fontFamily="@font/prompt_regular" />
 
                 </LinearLayout>

@@ -33,6 +33,14 @@
         android:id="@+id/authWithBioFragment"
         android:name="com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio.AuthWithBioFragment"
         android:label="AuthWithBioFragment" >
+        <argument
+            android:name="authBy"
+            app:argType="com.powersoftlab.exchange_android.common.enum.AuthByEnum"
+            android:defaultValue="WITHDRAW" />
+        <argument
+            android:name="amount"
+            app:argType="float"
+            android:defaultValue="0.0" />
         <action
             android:id="@+id/action_authWithBioFragment_to_withDrawSummaryFragment"
             app:destination="@id/withDrawSummaryFragment" />

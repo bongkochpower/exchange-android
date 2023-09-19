@@ -108,8 +108,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
             else -> {
                 val isHasPin = appManager.getPin() != null
                 if (isHasPin) {
-                    //goToPinPassword()
-                    goToMain()
+                    goToPinPassword()
+                    //goToMain()
                 } else {
                     goToMain()
                 }

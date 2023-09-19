@@ -146,14 +146,14 @@
                 android:textColor="@color/color_error_text"
                 android:visibility="@{isPostcodeEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}" />
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:id="@+id/layout_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <!--pw-->
+                &lt;!&ndash;pw&ndash;&gt;
                 <EditText
                     android:id="@+id/edt_reg_password"
                     style="@style/AppEditText"
@@ -179,7 +179,7 @@
                     android:textColor="@color/color_error_text"
                     android:visibility="@{isPasswordEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}" />
 
-                <!--confirm pw-->
+                &lt;!&ndash;confirm pw&ndash;&gt;
                 <EditText
                     android:id="@+id/edt_reg_confirm_password"
                     style="@style/AppEditText"
@@ -203,7 +203,7 @@
                     android:text="@string/validate_reg_confirm_password"
                     android:textColor="@color/color_error_text"
                     android:visibility="@{isConfirmPwNotMatch ? View.VISIBLE : View.INVISIBLE , default=invisible}" />
-            </LinearLayout>
+            </LinearLayout>-->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>

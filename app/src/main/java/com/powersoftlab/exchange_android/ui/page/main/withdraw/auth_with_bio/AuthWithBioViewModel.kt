@@ -21,8 +21,8 @@ class AuthWithBioViewModel(
 //        authPin.value = pin
 //    }
 
-    fun getPin(): String? = "111111"
-    fun isPinMatch(inputPin: String): Boolean = inputPin.equals(getPin(), true)
+    private fun getPin(): String? = appManager.getPin()
+    private fun isPinMatch(inputPin: String): Boolean = inputPin.equals(getPin(), true)
 
     fun authPin(pin : String) {
         viewModelScope.launch {

@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Exchangeandroid"
         tools:targetApi="31">
         <activity
+            android:name=".ui.page.intro.auth_pin.AuthPinActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.page.main.withdraw.WithdrawActivity"
             android:exported="false" />
         <activity

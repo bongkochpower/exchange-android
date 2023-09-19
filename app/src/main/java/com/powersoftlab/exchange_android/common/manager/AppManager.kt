@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import android.system.Os.remove
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.google.gson.Gson
@@ -14,7 +13,6 @@ import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
 import me.leolin.shortcutbadger.ShortcutBadger
-import okhttp3.internal.cache2.Relay.Companion.edit
 import timber.log.Timber
 
 class AppManager(private val context: Context) {
@@ -147,8 +145,12 @@ class AppManager(private val context: Context) {
         getSharePreferences().getString(KeyConstant.SUB_DISTRICTS, null),
         object : TypeToken<List<AddressAutoFillResponseModel.SubDistrictResponse>?>() {}.type
     )
-
     //endregion
+
+    fun setPin(pin: String?) {
+        getSecureSharePreferences().edit().putString(KeyConstant.PIN_AUTH, pin).apply()
+    }
+    fun getPin(): String? = getSecureSharePreferences().getString(KeyConstant.PIN_AUTH, null)
 
 
     fun removeAll(cb: () -> Unit) {
@@ -157,6 +159,7 @@ class AppManager(private val context: Context) {
             remove(KeyConstant.AUTH_TOKEN)
             remove(KeyConstant.USER)
             remove(KeyConstant.LOGIN_TYPE)
+            remove(KeyConstant.PIN_AUTH)
         }.apply()
         //removeNotificationCount()
 

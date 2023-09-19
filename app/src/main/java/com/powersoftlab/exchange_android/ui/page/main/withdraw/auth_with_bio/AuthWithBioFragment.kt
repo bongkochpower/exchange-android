@@ -12,6 +12,7 @@ import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.common.constant.AppConstant
 import com.powersoftlab.exchange_android.common.enum.AuthByEnum
+import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentAuthWithBioBinding
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.network.ResultWrapper
@@ -67,6 +68,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                     showBiometricPrompt(
                         { result ->
                             Log.d("LOGD", "listener: ${result}")
+                            manageTransactionMode()
                         },
                         { errorCode, message ->
                             Toast.makeText(requireContext(), "${message}", Toast.LENGTH_SHORT).show()
@@ -100,19 +102,16 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 }
 
                 is ResultWrapper.Success -> {
-                    Log.d("LOGD", "subscribe: auth success")
                     progressDialog.dismiss()
                     manageTransactionMode()
                 }
 
                 is ResultWrapper.GenericError -> {
-                    //AppAlert.alertGenericError(this, it.code, it.message).show(supportFragmentManager)
                     progressDialog.dismiss()
                     binding.isPinInvalid = true
                 }
 
                 is ResultWrapper.NetworkError -> {
-                    //AppAlert.alertNetworkError(this).show(supportFragmentManager)
                     binding.isPinInvalid = true
                 }
 
@@ -207,6 +206,9 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
             }
             AuthByEnum.WITHDRAW -> {
                 gotoSummary()
+            }
+            else ->{
+                AppNavigator(requireActivity()).goToMain()
             }
         }
     }

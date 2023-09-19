@@ -6,6 +6,7 @@ object KeyConstant {
     const val AUTH_TOKEN = "auth_token"
     const val USER = "user"
     const val LOGIN_TYPE = "login_type"
+    const val PIN_AUTH = "pin_password"
 
 
     /*general*/

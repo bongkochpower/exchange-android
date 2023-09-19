@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import com.powersoftlab.exchange_android.ui.page.hamburger_menu.edit_profile.EditProfileActivity
 import com.powersoftlab.exchange_android.ui.page.hamburger_menu.help.HelpActivity
 import com.powersoftlab.exchange_android.ui.page.hamburger_menu.setting.SettingsActivity
+import com.powersoftlab.exchange_android.ui.page.intro.auth_pin.AuthPinActivity
 import com.powersoftlab.exchange_android.ui.page.login.LoginActivity
 import com.powersoftlab.exchange_android.ui.page.main.MainActivity
 import com.powersoftlab.exchange_android.ui.page.main.cards.CardsActivity
@@ -23,6 +24,9 @@ class AppNavigator(private val activity: Activity) {
 
     fun goToMain() {
         MainActivity.open(activity)
+    }
+    fun goToPinPassword() {
+        AuthPinActivity.open(activity)
     }
 
     fun goToLogin(isClearTask: Boolean = false) {

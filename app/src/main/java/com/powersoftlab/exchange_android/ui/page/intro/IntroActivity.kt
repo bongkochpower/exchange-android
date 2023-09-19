@@ -1,8 +1,6 @@
 package com.powersoftlab.exchange_android.ui.page.intro
 
 import android.os.Bundle
-import android.os.Handler
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
@@ -12,7 +10,6 @@ import com.powersoftlab.exchange_android.databinding.ActivityIntroBinding
 import com.powersoftlab.exchange_android.ext.fadeIn
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseActivity
-import com.powersoftlab.exchange_android.ui.page.login.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import timber.log.Timber
 
@@ -37,6 +34,11 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         initFullScreenWithStatusBar(false)
 
         loadMasterData()
+
+        //test
+        if(appManager.getPin() == null){
+            appManager.setPin("111111")
+        }
     }
 
     override fun listener() {
@@ -104,19 +106,19 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
                 goToLogin()
             }
             else -> {
-                /*val isHasPin = appManager.getPin() != null
+                val isHasPin = appManager.getPin() != null
                 if (isHasPin) {
                     goToPinPassword()
                 } else {
                     goToMain()
-                }*/
+                }
                 Timber.d("token -> ${AppManager(this).getAuthToken()}")
-                goToMain()
             }
         }
     }
 
     private fun goToMain() = AppNavigator(this).goToMain()
+    private fun goToPinPassword() = AppNavigator(this).goToPinPassword()
     private fun goToLogin() = AppNavigator(this).goToLogin(true)
 
 }

@@ -24,7 +24,6 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
     }
 
     override fun setUp() {
-        setThisFragmentToStartDestination()
     }
 
     override fun listener() {
@@ -49,9 +48,5 @@ class ExchangeActivity : BaseActivity<ActivityExchangeBinding>(R.layout.activity
 
     private fun getCurrentFragment(): Fragment =
         supportFragmentManager.getCurrentFragment(R.id.fragment_container)
-
-    private fun setThisFragmentToStartDestination() {
-        ExchangeFragment.navigate(getCurrentFragment())
-    }
 
 }

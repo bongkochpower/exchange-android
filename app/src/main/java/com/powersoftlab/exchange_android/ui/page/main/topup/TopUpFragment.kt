@@ -88,7 +88,7 @@ class TopUpFragment : BaseFragment<FragmentTopupBinding>(R.layout.fragment_topup
     }
 
     private fun gotoAuthBio(amount : Double) {
-        val action = TopUpFragmentDirections.actionTopUpFragmentToAuthWithBioFragment2(AuthByEnum.TOPUP, amount.toFloat())
+        val action = TopUpFragmentDirections.actionTopUpFragmentToAuthWithBioFragmentTopup(AuthByEnum.TOPUP, amount.toFloat())
         AuthWithBioFragment.navigate(this@TopUpFragment,action)
     }
 

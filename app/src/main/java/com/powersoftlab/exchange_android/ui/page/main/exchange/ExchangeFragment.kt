@@ -4,9 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.common.enum.AuthByEnum
@@ -26,7 +24,6 @@ import com.powersoftlab.exchange_android.ui.list.viewholder.bind.ExchangeHolderH
 import com.powersoftlab.exchange_android.ui.list.viewholder.bind.ExchangeHolderHelper.initExchangeTo
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
-import com.powersoftlab.exchange_android.ui.page.main.topup.TopUpFragmentDirections
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio.AuthWithBioFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
@@ -51,8 +48,6 @@ class ExchangeFragment : BaseFragment<FragmentExchangeBinding>(R.layout.fragment
 
     companion object{
         private const val DELAY = 1000L
-        fun navigate(fragment: Fragment) =
-            fragment.findNavController().navigate(TopUpFragmentDirections.actionTopUpFragmentToExchangeFragment())
     }
 
     override fun onResume() {
@@ -281,7 +276,7 @@ class ExchangeFragment : BaseFragment<FragmentExchangeBinding>(R.layout.fragment
     }
 
     private fun gotoAuthBio() {
-        val action = ExchangeFragmentDirections.actionExchangeFragmentToAuthWithBioFragment2(AuthByEnum.EXCHANGE,0.0F)
+        val action = ExchangeFragmentDirections.actionExchangeFragmentToAuthWithBioFragmentExchange(AuthByEnum.EXCHANGE,0.0F)
         AuthWithBioFragment.navigate(this@ExchangeFragment,action)
     }
 

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="isSaveImage"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/padding_50dp"
+        android:paddingVertical="@dimen/margin_40dp">
+
+        <ImageView
+            android:layout_marginBottom="@dimen/margin_14dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:src="@drawable/icon_toolbar"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title_card"
+            style="@style/TextViewLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/title_withdraw_detail"
+            android:textColor="@color/text_edittext_gray"
+            app:fontFamily="@font/prompt_semibold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextViewSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_28dp"
+            android:gravity="center_horizontal"
+            android:maxLines="3"
+            android:text="@string/message_dummy_term"
+            android:textColor="@color/text_back"
+            app:fontFamily="@font/prompt_regular" />
+
+        <!--date-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_date"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="29 Aug 2023/16:30" />
+
+        </FrameLayout>
+
+        <!--amount-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_18dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_amount"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="500.00 THB.-" />
+        </FrameLayout>
+
+        <!--country-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_18dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_country"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="ไทย" />
+        </FrameLayout>
+
+        <!--shop-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_18dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_shop"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="ชื่อร้านที่เข้าร่วม" />
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

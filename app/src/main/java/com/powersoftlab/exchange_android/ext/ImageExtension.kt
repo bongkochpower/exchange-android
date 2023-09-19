@@ -3,7 +3,11 @@ package com.powersoftlab.exchange_android.ext
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.ImageDecoder
+import android.graphics.Matrix
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.media.MediaScannerConnection
 import android.net.Uri
@@ -11,13 +15,11 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.view.PixelCopy
 import android.view.View
 import android.view.Window
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.FileProvider
 import androidx.databinding.BindingAdapter
 import androidx.documentfile.provider.DocumentFile
@@ -30,7 +32,11 @@ import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.other.AppUtil.scanImageToGallery
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import java.io.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
 const val IMAGE_RESULT_MAX_SIZE = 800
 const val IMAGE_COMPRESS_MAX_SIZE = 400
@@ -242,6 +248,13 @@ inline fun View.captureView(window: Window, crossinline bitmapCallback: (Bitmap)
         canvas.setBitmap(null)
         bitmapCallback.invoke(tBitmap)
     }
+}
+inline fun View.createBitmapFromView(crossinline bitmapCallback: (Bitmap) -> Unit) {
+    val tBitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.RGB_565)
+    val canvas = Canvas(tBitmap)
+    this.draw(canvas)
+    canvas.setBitmap(null)
+    bitmapCallback.invoke(tBitmap)
 }
 
 fun String?.getMimeType(): MediaType? {

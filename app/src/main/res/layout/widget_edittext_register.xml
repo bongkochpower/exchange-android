@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@{isErrorValidate ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
-            android:textColorHint="@{isErrorValidate ? @color/color_error_text : @color/text_edittext_gray , default = @color/text_edittext_gray }"
+            android:textColorHint="@{isErrorValidate ? @color/color_error_text : @color/text_back , default = @color/text_back }"
             android:hint="@string/hint_name"
             android:importantForAutofill="no"
             tools:ignore="RtlSymmetry" />

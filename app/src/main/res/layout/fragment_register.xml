@@ -433,6 +433,7 @@
                 android:layout_height="wrap_content"
                 android:background="@{isPostcodeEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
                 android:enabled="false"
+                android:backgroundTint="@color/gray_alto"
                 android:hint="@string/hint_postcode"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"

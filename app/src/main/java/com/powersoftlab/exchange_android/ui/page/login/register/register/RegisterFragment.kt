@@ -47,6 +47,7 @@ import com.powersoftlab.exchange_android.ext.toDisplayFormat
 import com.powersoftlab.exchange_android.ext.toServiceFormat
 import com.powersoftlab.exchange_android.ext.toString
 import com.powersoftlab.exchange_android.ext.uriToFile
+import com.powersoftlab.exchange_android.ext.validateAfterTextChange
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
@@ -566,21 +567,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         }
     }
 
-    fun EdittextRegister.validateAfterTextChange() {
-        this.addOnTextChangeListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                if (p0?.toString().orEmpty().isNotEmpty() && this@validateAfterTextChange.getValidation()) {
-                    this@validateAfterTextChange.setValidation(false)
-                }
-            }
-        })
-    }
 
     private fun register() {
         getRegisterData().apply {

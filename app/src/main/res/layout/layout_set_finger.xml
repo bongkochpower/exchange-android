@@ -53,20 +53,6 @@
             android:src="@drawable/icon_finger_scan"
             android:layout_height="wrap_content"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_back_to_login"
-            style="@style/TextViewSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:drawableStart="@drawable/icon_back_forget_pw"
-            android:drawablePadding="@dimen/padding_12dp"
-            android:onClick="goToLogin"
-            android:text="@string/title_back_to_main_login"
-            android:textColor="@color/text_back"
-            app:fontFamily="@font/prompt_regular"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

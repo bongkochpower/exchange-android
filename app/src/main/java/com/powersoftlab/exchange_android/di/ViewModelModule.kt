@@ -3,6 +3,7 @@ import com.powersoftlab.exchange_android.ui.page.intro.IntroViewModel
 import com.powersoftlab.exchange_android.ui.page.login.LoginViewModel
 import com.powersoftlab.exchange_android.ui.page.login.register.register.RegisterViewModel
 import com.powersoftlab.exchange_android.ui.page.main.MainViewModel
+import com.powersoftlab.exchange_android.ui.page.main.cards.CardsViewModel
 import com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeViewModel
 import com.powersoftlab.exchange_android.ui.page.main.history.HistoryViewModel
 import com.powersoftlab.exchange_android.ui.page.main.topup.TopUpViewModel
@@ -21,5 +22,6 @@ var viewModelModule = module {
     viewModel { IntroViewModel(get(),get(),get()) }
     viewModel { AuthWithBioViewModel(get(),get()) }
     viewModel { WithdrawViewModel(get(),get()) }
+    viewModel { CardsViewModel() }
 
 }

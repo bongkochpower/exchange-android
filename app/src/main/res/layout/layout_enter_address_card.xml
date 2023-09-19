@@ -9,16 +9,20 @@
         <variable
             name="isHouseNoEmpty"
             type="Boolean" />
+        <variable
+            name="isSubDistrictEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isDistrictEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isProvinceEmpty"
+            type="Boolean" />
 
         <variable
             name="isPostcodeEmpty"
-            type="Boolean" />
-        <variable
-            name="isPasswordEmpty"
-            type="Boolean" />
-
-        <variable
-            name="isConfirmPwNotMatch"
             type="Boolean" />
 
     </data>
@@ -47,7 +51,7 @@
                     android:hint="@string/hint_house_no"
                     android:importantForAutofill="no"
                     android:maxLength="@integer/length_edt_small"
-                    android:textColorHint="@{isHouseNoEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+                    android:textColorHint="@{isHouseNoEmpty ? @color/color_error_text : @color/text_back}" />
 
                 <EditText
                     android:id="@+id/edt_reg_village"
@@ -56,6 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_24dp"
+                    android:textColor="@color/text_edittext_gray"
                     android:background="@drawable/bg_edittext_small"
                     android:hint="@string/hint_village"
                     android:importantForAutofill="no"
@@ -71,6 +76,7 @@
                     style="@style/AppEditText"
                     tools:ignore="RtlSymmetry"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/text_edittext_gray"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_24dp"
                     android:layout_marginEnd="@dimen/margin_8dp"
@@ -83,6 +89,7 @@
                     android:id="@+id/edt_reg_alley"
                     style="@style/AppEditText"
                     tools:ignore="RtlSymmetry"
+                    android:textColor="@color/text_edittext_gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_24dp"
@@ -131,7 +138,7 @@
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:maxLength="@integer/length_postal_code"
-                android:textColorHint="@{isPostcodeEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+                android:textColorHint="@{isPostcodeEmpty ? @color/color_error_text : @color/text_back}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_error_postcode"

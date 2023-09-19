@@ -5,6 +5,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.databinding.WidgetEdittextRegisterBinding
@@ -58,6 +59,9 @@ class EdittextRegister(context: Context, attrs: AttributeSet) : FrameLayout(cont
     fun setIsEditable(isEdit : Boolean){
         binding.edtRegister.apply {
             isEnabled = isEdit
+            if(!isEdit){
+                backgroundTintList = ContextCompat.getColorStateList(context,R.color.gray_alto)
+            }
         }
     }
 

@@ -2,13 +2,13 @@ package com.powersoftlab.exchange_android.ui.dialog.bottomsheet
 
 import android.os.Bundle
 import androidx.core.widget.doAfterTextChanged
-import com.powersoftlab.exchange_android.ui.dialog.bottomsheet.base.BaseBottomSheetDialogFragment
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.databinding.BottomSheetDialogAddressAutoFillBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvAddressAutoFillBinding
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
+import com.powersoftlab.exchange_android.ui.dialog.bottomsheet.base.BaseBottomSheetDialogFragment
 import com.powersoftlab.exchange_android.ui.list.adapter.SimpleRecyclerViewAdapter
 
 class AddressAutoFillBottomSheetDialog :
@@ -96,8 +96,3 @@ class AddressAutoFillBottomSheetDialog :
         }
     }
 }
-
-data class OptionMenuModel<T>(
-    var name: String? = null,
-    var data: T? = null
-)

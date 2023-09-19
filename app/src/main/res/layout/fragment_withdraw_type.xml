@@ -6,6 +6,9 @@
     <data>
 
         <variable
+            name="fragment"
+            type="com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_type.WithDrawTypeFragment" />
+        <variable
             name="isSelectCurrencyEmpty"
             type="Boolean" />
 
@@ -36,6 +39,8 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:id="@+id/edt_currency"
+                android:onClick="@{(view) -> fragment.selectCurrency(view)}"
                 style="@style/AppEditText.Dropdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,6 +49,8 @@
                 android:textColorHint="@{isSelectCurrencyEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
 
             <EditText
+                android:id="@+id/edt_country"
+                android:onClick="@{(view) -> fragment.selectCountry(view)}"
                 style="@style/AppEditText.Dropdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,6 +60,8 @@
                 android:textColorHint="@{isSelectCurrencyEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
 
             <EditText
+                android:id="@+id/edt_shop"
+                android:onClick="@{(view) -> fragment.selectShop(view)}"
                 style="@style/AppEditText.Dropdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

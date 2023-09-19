@@ -15,48 +15,26 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:src="@drawable/icon_minus"
-            app:tint="@color/linear_alto"
-            tools:ignore="ContentDescription" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_14dp"
-            android:layout_marginVertical="@dimen/margin_12dp"
-            app:boxStrokeColor="@color/gray_nevada"
-            app:boxStrokeWidth="1dp"
-            app:hintEnabled="false"
-            app:endIconMode="clear_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:id="@+id/edt_search"
-                android:textColorHint="@color/text_hint"
-                android:hint="@string/hint_search"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            tools:ignore="ContentDescription"
+            app:tint="@color/linear_alto" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:overScrollMode="never"
             android:scrollbars="none"
-            tools:itemCount="3"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_weight="1"
-            tools:listitem="@layout/item_rv_address_auto_fill" />
+            tools:itemCount="3"
+            tools:listitem="@layout/item_rv_option_menu" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_cancel"
             style="@style/TextViewRegular"
-            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
-            android:gravity="center_horizontal"
             android:text="@string/button_cancel"
             android:textColor="@color/color_error_text"
             app:fontFamily="@font/prompt_regular" />

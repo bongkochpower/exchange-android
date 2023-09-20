@@ -21,7 +21,7 @@ var viewModelModule = module {
     viewModel { ExchangeViewModel(get(),get(),get()) }
     viewModel { IntroViewModel(get(),get(),get()) }
     viewModel { AuthWithBioViewModel(get(),get()) }
-    viewModel { WithdrawViewModel(get(),get()) }
+    viewModel { WithdrawViewModel(get(),get(),get()) }
     viewModel { CardsViewModel(get()) }
 
 }

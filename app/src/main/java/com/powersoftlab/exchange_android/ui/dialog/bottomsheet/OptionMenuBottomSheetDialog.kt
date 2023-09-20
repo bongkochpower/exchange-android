@@ -32,6 +32,7 @@ class OptionMenuBottomSheetDialog<T> :
                 }
                 arguments = bundle
             }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,3 +85,8 @@ data class OptionMenuModel<T>(
     var name: String? = null,
     var data: T? = null
 )
+
+fun <D, CZ> OptionMenuModel<D>.convertToModel(clazz: Class<CZ>): CZ {
+    val jsonObject = Gson().toJsonTree(this.data).asJsonObject
+    return Gson().fromJson(jsonObject, clazz)
+}

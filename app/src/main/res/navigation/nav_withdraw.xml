@@ -27,7 +27,11 @@
         tools:layout="@layout/fragment_withdraw_summary"
         android:id="@+id/withDrawSummaryFragment"
         android:name="com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_summary.WithDrawSummaryFragment"
-        android:label="WithDrawSummaryFragment" />
+        android:label="WithDrawSummaryFragment" >
+        <argument
+            android:name="response"
+            app:argType="com.powersoftlab.exchange_android.model.response.WithdrawResponseModel" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_auth_with_bio"
         android:id="@+id/authWithBioFragment"

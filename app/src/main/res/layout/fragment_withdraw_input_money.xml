@@ -57,6 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_8dp"
                         android:text="@string/title_topup_amount_th"
+                        android:id="@+id/tv_currency_type"
                         android:textColor="@color/black"
                         app:fontFamily="@font/prompt_semibold" />
                 </LinearLayout>
@@ -106,6 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_14dp"
+                    android:id="@+id/tv_show_your_balance"
                     android:drawablePadding="@dimen/padding_10dp"
                     android:gravity="center_horizontal"
                     android:text="@string/hint_withdraw_your_balance"

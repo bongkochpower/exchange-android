@@ -6,8 +6,8 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="isSaveImage"
-            type="Boolean" />
+            name="item"
+            type="com.powersoftlab.exchange_android.model.response.WithdrawResponseModel" />
     </data>
 
     <LinearLayout
@@ -63,6 +63,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewMini"
+                android:text="@{item.transactionDate}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -89,6 +90,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewMini"
+                android:text="@{item.amount}"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
@@ -114,6 +116,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewMini"
+                android:text="@{item.country}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -139,6 +142,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewMini"
+                android:text="@{item.shop}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"

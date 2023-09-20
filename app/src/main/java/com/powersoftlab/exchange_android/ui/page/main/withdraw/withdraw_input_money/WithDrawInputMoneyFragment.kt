@@ -9,12 +9,17 @@ import com.powersoftlab.exchange_android.databinding.FragmentWithdrawInputMoneyB
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setTextSlideButtonEnable
+import com.powersoftlab.exchange_android.ext.toStringFormat
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
+import com.powersoftlab.exchange_android.ui.page.main.withdraw.WithdrawViewModel
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio.AuthWithBioFragment
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_type.WithDrawTypeFragmentDirections
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 class WithDrawInputMoneyFragment : BaseFragment<FragmentWithdrawInputMoneyBinding>(R.layout.fragment_withdraw_input_money),OnBackPressedFragment {
+
+    private val withdrawViewModel : WithdrawViewModel by sharedStateViewModel()
 
     companion object {
         fun newInstance() = WithDrawInputMoneyFragment()
@@ -23,7 +28,7 @@ class WithDrawInputMoneyFragment : BaseFragment<FragmentWithdrawInputMoneyBindin
     }
 
     override fun setUp() {
-
+        setupWithdrawData()
     }
 
     override fun listener() {
@@ -47,7 +52,7 @@ class WithDrawInputMoneyFragment : BaseFragment<FragmentWithdrawInputMoneyBindin
 
 
                 if(isValidate()){
-                    /*val amount = edtMoneyAmount.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
+                    /*
                     viewModel.topUp(amount = amount)*/
                     gotoAuthBio()
                 }else{
@@ -65,9 +70,10 @@ class WithDrawInputMoneyFragment : BaseFragment<FragmentWithdrawInputMoneyBindin
     private fun isValidate(): Boolean {
         var isValidate = false
         with(binding) {
-            val inputMoney = edtMoneyAmount.text.toString()
+            val inputMoney = edtMoneyAmount.text.toString().trim().replace(",", "")
+            val currentBalance = withdrawViewModel.selectedCurrency?.balance ?: 0.0
             when {
-                inputMoney.isEmpty() || inputMoney == "0" -> {
+                inputMoney.isEmpty() || inputMoney == "0" || inputMoney.toDouble() > currentBalance -> {
                     isWithdrawInvalid = true
                 }
 
@@ -78,8 +84,17 @@ class WithDrawInputMoneyFragment : BaseFragment<FragmentWithdrawInputMoneyBindin
     }
 
     private fun gotoAuthBio() {
-        val action = WithDrawInputMoneyFragmentDirections.actionWithDrawInputMoneyFragmentToAuthWithBioFragment(AuthByEnum.WITHDRAW,0.0F)
+        val amount = binding.edtMoneyAmount.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
+        val action = WithDrawInputMoneyFragmentDirections.actionWithDrawInputMoneyFragmentToAuthWithBioFragment(AuthByEnum.WITHDRAW,amount.toFloat())
         AuthWithBioFragment.navigate(this@WithDrawInputMoneyFragment,action)
+    }
+
+    private fun setupWithdrawData() {
+        val currentData = withdrawViewModel.selectedCurrency
+        binding.apply {
+            tvCurrencyType.text = "(${currentData?.label})"
+            tvShowYourBalance.text = "${getString(R.string.hint_withdraw_your_balance)} ${currentData?.balance?.toStringFormat()} ${currentData?.label}"
+        }
     }
 
 

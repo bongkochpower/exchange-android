@@ -14,6 +14,7 @@ import com.powersoftlab.exchange_android.model.response.TopUpResponse
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
 import com.powersoftlab.exchange_android.model.response.UploadResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
+import com.powersoftlab.exchange_android.model.response.WithdrawResponseModel
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -105,14 +106,34 @@ interface AppAPI {
         @Query("subDistrictId") subDistrictId: Int,
     ): Response<BaseResponseModel<AddressAutoFillResponseModel>>
 
-    @GET("/api/v1/card")
-    suspend fun getCards(
-    ): Response<List<CardsResponseModel>>
+    @GET("api/v1/card")
+    suspend fun getCards(): Response<List<CardsResponseModel>>
 
     @POST("api/v1/card/requestCard")
     suspend fun registerNewCard(
         @Body request : RequestNewCardRequestModel
     ): Response<RequestNewCardResponseModel>
+
+    @GET("api/v1/country")
+    suspend fun getCountry(
+        @Query("page") page : Int,
+        @Query("limit") limit : Int,
+    ): Response<BaseResponseModel<List<UserModel.CountryModel>>>
+
+    @GET("api/v1/shop")
+    suspend fun getShopsByCountryId(
+        @Query("country_id") countryId : Int,
+        @Query("page") page : Int,
+        @Query("limit") limit : Int
+    ): Response<BaseResponseModel<List<UserModel.ShopModel>>>
+
+    @FormUrlEncoded
+    @POST("api/v1/transaction/cashout")
+    suspend fun withdraw(
+        @Field("currency_id") currencyId: Int,
+        @Field("value") value: Double,
+        @Field("shop_id") shopId: Int
+    ): Response<WithdrawResponseModel>
 
     //endregion
 

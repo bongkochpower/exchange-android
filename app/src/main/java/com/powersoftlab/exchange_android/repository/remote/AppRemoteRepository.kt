@@ -4,12 +4,15 @@ import android.content.Context
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.ExchangeRequestModel
 import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
+import com.powersoftlab.exchange_android.model.body.WithdrawRequestModel
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.CardsResponseModel
 import com.powersoftlab.exchange_android.model.response.ExchangeCalculateResponse
 import com.powersoftlab.exchange_android.model.response.RequestNewCardResponseModel
 import com.powersoftlab.exchange_android.model.response.TopUpResponse
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
+import com.powersoftlab.exchange_android.model.response.UserModel
+import com.powersoftlab.exchange_android.model.response.WithdrawResponseModel
 import com.powersoftlab.exchange_android.network.AppAPI
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.repository.remote.base.BaseRemoteRepository
@@ -86,6 +89,30 @@ class AppRemoteRepository(
             call = {
                 api.registerNewCard(request)
             })
+    }
+
+    suspend fun getCountry() : ResultWrapper<BaseResponseModel<List<UserModel.CountryModel>>>{
+        return safeApiCall(
+            dispatcher,
+            call = { api.getCountry(1,20)}
+        )
+    }
+
+    suspend fun getShopByCountryId(countryId : Int) : ResultWrapper<BaseResponseModel<List<UserModel.ShopModel>>>{
+        return safeApiCall(
+            dispatcher,
+            call = { api.getShopsByCountryId(countryId,1,20)}
+        )
+    }
+
+    suspend fun withdraw(requestModel: WithdrawRequestModel): ResultWrapper<WithdrawResponseModel> {
+        return safeApiCall(dispatcher, call = {
+            api.withdraw(
+                currencyId = requestModel.currencyId,
+                value = requestModel.amount,
+                shopId = requestModel.shopId
+            )
+        })
     }
 
 }

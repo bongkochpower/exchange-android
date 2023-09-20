@@ -68,5 +68,24 @@ data class UserModel(
         @field:Transient
         var isSelected : Boolean = false
     ) : Parcelable
+
+    @Parcelize
+    data class CountryModel(
+        @field:SerializedName("id") var id: Int? = null,
+        @field:SerializedName("label") var label: String? = null,
+        @field:SerializedName("name_th") var nameTh: String? = null,
+        @field:SerializedName("name_en") var nameEn: String? = null,
+        @field:SerializedName("is_active") var isActive: Boolean? = null
+    ) : Parcelable
+
+    @Parcelize
+    data class ShopModel(
+        @field:SerializedName("id") var id: Int?,
+        @field:SerializedName("shop_name") var shopName: String?,
+        @field:SerializedName("shop_name_en") var shopNameEn: String?,
+        @field:SerializedName("country_id") var countryId: String?,
+        @field:SerializedName("is_active") var isActive: Boolean?
+    ) : Parcelable
+
 }
 

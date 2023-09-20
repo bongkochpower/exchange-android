@@ -2,13 +2,16 @@ package com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_type
 
 import android.view.View
 import com.powersoftlab.exchange_android.R
+import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.databinding.FragmentWithdrawTypeBinding
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.model.response.UserModel
+import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.dialog.bottomsheet.OptionMenuBottomSheetDialog
 import com.powersoftlab.exchange_android.ui.dialog.bottomsheet.OptionMenuModel
+import com.powersoftlab.exchange_android.ui.dialog.bottomsheet.convertToModel
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.WithdrawViewModel
@@ -26,21 +29,15 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
         )
     }
 
-    private val countryBottomSheetDialog: OptionMenuBottomSheetDialog<String> by lazy {
-        OptionMenuBottomSheetDialog.newInstance(
-            mockCountry().map { OptionMenuModel(name = it, data = it) }.toMutableList()
-        )
-    }
+    private lateinit var countryBottomSheetDialog: OptionMenuBottomSheetDialog<UserModel.CountryModel>
 
-    private val shopBottomSheetDialog: OptionMenuBottomSheetDialog<String> by lazy {
-        OptionMenuBottomSheetDialog.newInstance(
-            mockShop().map { OptionMenuModel(name = it, data = it) }.toMutableList()
-        )
-    }
+    private lateinit var shopBottomSheetDialog: OptionMenuBottomSheetDialog<UserModel.ShopModel>
 
     val scanQrCodeLauncher = registerForActivityResult(ScanQRCode()) { result ->
         // handle QRResult
     }
+
+    private var mCountryModel : MutableList<UserModel.CountryModel>? = null
 
     companion object {
         fun newInstance() = WithDrawTypeFragment()
@@ -74,13 +71,50 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
 
             currencyBottomSheetDialog.setOnItemSelectedListener { item ->
                 edtCurrency.setText(item.name)
+                withdrawViewModel.selectedCurrency = item.convertToModel(UserModel.CustomerBalance::class.java)
+                withdrawViewModel.getCountryList()
             }
 
-            countryBottomSheetDialog.setOnItemSelectedListener { item ->
-                edtCountry.setText(item.name)
+        }
+    }
+
+    override fun subscribe() {
+        super.subscribe()
+        withdrawViewModel.countryRequestLiveData.observe(this) {
+            when (it) {
+                is ResultWrapper.Loading -> {
+                }
+
+                is ResultWrapper.GenericError -> {
+                    AppAlert.alertGenericError(requireContext(), it.code, it.message).show(childFragmentManager)
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    AppAlert.alertNetworkError(requireContext()).show(childFragmentManager)
+                }
+
+                else -> {
+                    /*none*/
+                }
             }
-            shopBottomSheetDialog.setOnItemSelectedListener { item ->
-                edtShop.setText(item.name)
+        }
+        withdrawViewModel.countryResultLiveData.observe(this) {
+            it?.let { listItem ->
+                setCountry(listItem)
+            }
+        }
+
+        withdrawViewModel.shopByIdLiveData.observe(viewLifecycleOwner){
+            when(it){
+                is ResultWrapper.Loading -> {}
+                is ResultWrapper.Success -> {
+                    it.response.data?.let { itemList ->
+                        setShop(itemList.toMutableList())
+                    }
+                }
+                is ResultWrapper.GenericError -> AppAlert.alertGenericError(requireContext(), it.code, it.message).show(childFragmentManager)
+                is ResultWrapper.NetworkError -> AppAlert.alertNetworkError(requireContext()).show(childFragmentManager)
+                else -> {}
             }
         }
     }
@@ -112,14 +146,25 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
         return list.map { OptionMenuModel(name = it.currencyName , data = it) }.toMutableList()
     }
 
-    private fun mockCountry(): MutableList<String> {
-        return mutableListOf("THAILAND", "USA", "JAPAN")
+    private fun setCountry(list : MutableList<UserModel.CountryModel>) {
+        val countryList = list.map { OptionMenuModel(name = it.nameTh , data = it) }.toMutableList()
+        countryBottomSheetDialog = OptionMenuBottomSheetDialog.newInstance(countryList)
+        countryBottomSheetDialog.setOnItemSelectedListener { item ->
+
+            withdrawViewModel.selectedCountry = item.convertToModel(UserModel.CountryModel::class.java)
+            binding.edtCountry.setText(item.name)
+            withdrawViewModel.getShopById()
+
+        }
     }
 
-    private fun mockShop(): MutableList<String> {
-        return mutableListOf<String>(
-            "SHOP1", "SHOP2", "SHOP3", "SHOP4"
-        )
+    private fun setShop(list : MutableList<UserModel.ShopModel>) {
+        val shopList = list.map { OptionMenuModel(name = it.shopName , data = it) }.toMutableList()
+        shopBottomSheetDialog = OptionMenuBottomSheetDialog.newInstance(shopList)
+        shopBottomSheetDialog.setOnItemSelectedListener { item ->
+            binding.edtShop.setText(item.name)
+            withdrawViewModel.selectedShop = item.convertToModel(UserModel.ShopModel::class.java)
+        }
     }
 
 

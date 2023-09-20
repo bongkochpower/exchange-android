@@ -15,11 +15,13 @@ import com.powersoftlab.exchange_android.common.enum.AuthByEnum
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentAuthWithBioBinding
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
+import com.powersoftlab.exchange_android.model.response.WithdrawResponseModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeViewModel
 import com.powersoftlab.exchange_android.ui.page.main.topup.TopUpViewModel
+import com.powersoftlab.exchange_android.ui.page.main.withdraw.WithdrawViewModel
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_summary.WithDrawSummaryFragment
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
@@ -29,6 +31,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
     private val authViewModel: AuthWithBioViewModel by stateViewModel()
     private val topupViewModel: TopUpViewModel by stateViewModel()
     private val exchangeViewModel: ExchangeViewModel by sharedStateViewModel()
+    private val withdrawViewModel: WithdrawViewModel by sharedStateViewModel()
     private val args: AuthWithBioFragmentArgs by navArgs()
 
 
@@ -170,10 +173,31 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 else -> hideLoading()
             }
         }
-    }
 
-    private fun gotoSummary() {
-        WithDrawSummaryFragment.navigate(this@AuthWithBioFragment)
+        withdrawViewModel.withdrawLiveData.observe(this) {
+            when (it) {
+                is ResultWrapper.Loading -> {
+                    showLoading()
+                }
+
+                is ResultWrapper.GenericError -> {
+                    AppAlert.alertGenericError(requireContext(), it.code, it.message).show(childFragmentManager)
+                    hideLoading()
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    AppAlert.alertNetworkError(requireContext()).show(childFragmentManager)
+                    hideLoading()
+                }
+
+                is ResultWrapper.Success -> {
+                    gotoSummary(it.response)
+                    hideLoading()
+                }
+
+                else -> hideLoading()
+            }
+        }
     }
 
     override fun onBackPressed(): Boolean {
@@ -205,7 +229,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 exchangeViewModel.exchange()
             }
             AuthByEnum.WITHDRAW -> {
-                gotoSummary()
+                withdrawViewModel.withdraw(amount = args.amount.toDouble())
             }
             else ->{
                 AppNavigator(requireActivity()).goToMain()
@@ -227,5 +251,10 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
         showAlertSuccessDialog(msg, btn) {
             activity?.finish()
         }
+    }
+
+    private fun gotoSummary(resp : WithdrawResponseModel) {
+        val action = AuthWithBioFragmentDirections.actionAuthWithBioFragmentToWithDrawSummaryFragment(resp)
+        WithDrawSummaryFragment.navigate(this@AuthWithBioFragment,action)
     }
 }

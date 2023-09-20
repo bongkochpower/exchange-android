@@ -9,8 +9,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.powersoftlab.exchange_android.ui.page.login.LoginFragment"
-        tools:layout="@layout/fragment_login"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_termRegisterFragment"
             app:destination="@id/termRegisterFragment" />
@@ -19,22 +19,31 @@
             app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_register"
         android:id="@+id/registerFragment"
         android:name="com.powersoftlab.exchange_android.ui.page.login.register.register.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_setAuthenticationFragment"
+            app:destination="@id/setAuthenticationFragment" />
+    </fragment>
     <fragment
-        tools:layout="@layout/fragment_term_register"
         android:id="@+id/termRegisterFragment"
         android:name="com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragment"
-        android:label="TermRegisterFragment" >
+        android:label="TermRegisterFragment"
+        tools:layout="@layout/fragment_term_register">
         <action
             android:id="@+id/action_termRegisterFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_forgot_password"
         android:id="@+id/forgotPasswordFragment"
         android:name="com.powersoftlab.exchange_android.ui.page.login.forgot.verify_phone_number.ForgotPasswordFragment"
-        android:label="ForgotPasswordFragment" />
+        android:label="ForgotPasswordFragment"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/setAuthenticationFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.login.register.set_auth.SetAuthenticationFragment"
+        android:label="SetAuthenticationFragment"
+        tools:layout="@layout/fragment_set_auth" />
 </navigation>

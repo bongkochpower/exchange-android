@@ -34,11 +34,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         initFullScreenWithStatusBar(false)
 
         loadMasterData()
-
-        //test
-        if(appManager.getPin() == null){
-            appManager.setPin("111111")
-        }
     }
 
     override fun listener() {
@@ -108,8 +103,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
             else -> {
                 val isHasPin = appManager.getPin() != null
                 if (isHasPin) {
-//                    goToPinPassword()
-                    goToMain()
+                    goToPinPassword()
+//                    goToMain()
                 } else {
                     goToMain()
                 }

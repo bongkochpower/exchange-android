@@ -107,7 +107,7 @@ interface AppAPI {
     ): Response<BaseResponseModel<AddressAutoFillResponseModel>>
 
     @GET("api/v1/card")
-    suspend fun getCards(): Response<List<CardsResponseModel>>
+    suspend fun getCards(): Response<BaseResponseModel<List<CardsResponseModel>>>
 
     @POST("api/v1/card/requestCard")
     suspend fun registerNewCard(

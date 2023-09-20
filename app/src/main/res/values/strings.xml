@@ -130,6 +130,8 @@
     <string name="message_save_picture_success">บันทึกรูปเรียบร้อย</string>
     <string name="message_pls_set_pin">กรุณากำหนดเลขรหัส PIN 6 หลัก\nที่คุณต้องการสำหรับการทำธุรกรรม</string>
     <string name="message_pls_set_finger">กรุณาสแกนลายนิ้วมือ\nสำหรับการทำธุรกรรม</string>
+    <string name="message_set_pin_success">ตั้งค่ารหัส PIN สำเร็จ</string>
+    <string name="message_set_finger_scan_success">ตั้งค่าลายนิ้วมือสำเร็จ</string>
 
     <!--button-->
     <string name="button_close">ปิด</string>

@@ -60,6 +60,7 @@ import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.intro.IntroViewModel
 import com.powersoftlab.exchange_android.ui.page.login.LoginViewModel
 import com.powersoftlab.exchange_android.ui.page.login.register.TermRegisterFragmentDirections
+import com.powersoftlab.exchange_android.ui.page.login.register.set_auth.SetAuthenticationFragment
 import com.powersoftlab.exchange_android.ui.widget.EdittextRegister
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -139,7 +140,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         loginType = appManager.getLoginType() ?: LoginTypeEnum.APP
 
         //test header
-        binding.tvRegisterTitle.text = getString(R.string.title_register_form).plus(loginType.name)
+        //binding.tvRegisterTitle.text = getString(R.string.title_register_form).plus(loginType.name)
 
         manageLoginMode()
 
@@ -234,6 +235,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                         }
 
                     }
+
+                    //test
+//                    gotoSetPinPassword()
+
                 }
             }
         }
@@ -301,7 +306,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     hideLoading()
 
                     showAlertSuccessDialog {
-                        AppNavigator(this.requireActivity()).goToLogin(true)
+                        //AppNavigator(this.requireActivity()).goToLogin(true)
+                        gotoSetPinPassword()
                     }
                 }
 
@@ -675,6 +681,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             edtRegProvince.setText(data.province?.nameTH.toDashWhenNullOrEmpty())
             edtRegPostcode.setText(data.subDistrict?.zipCode.toDashWhenNullOrEmpty())
         }
+    }
+
+    private fun gotoSetPinPassword(){
+        val action = RegisterFragmentDirections.actionRegisterFragmentToSetAuthenticationFragment()
+        SetAuthenticationFragment.navigate(this@RegisterFragment,action)
     }
 
 }

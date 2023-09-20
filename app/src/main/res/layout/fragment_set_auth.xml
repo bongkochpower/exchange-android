@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<import type="android.view.View"/>
+        <variable
+            name="isPinStep"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingHorizontal="@dimen/padding_30dp"
         android:layout_height="match_parent"
-        tools:context=".ui.page.login.LoginFragment">
+        android:paddingHorizontal="@dimen/padding_30dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -20,28 +22,27 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHeight_percent="0.65"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.40"
-            >
+            app:layout_constraintVertical_bias="0.40">
 
             <FrameLayout
                 android:id="@+id/fl_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
-                >
-                <include
+                android:background="@color/white">
 
+                <include
+                    android:visibility="@{isPinStep ? View.VISIBLE : View.GONE}"
                     android:id="@+id/layout_set_pin"
                     layout="@layout/layout_set_pin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
                 <include
-                    android:visibility="gone"
                     android:id="@+id/layout_set_finger"
                     layout="@layout/layout_set_finger"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:visibility="@{!isPinStep ? View.VISIBLE : View.GONE,default=gone}" />
 
             </FrameLayout>
         </androidx.cardview.widget.CardView>

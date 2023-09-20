@@ -1,6 +1,6 @@
 package com.powersoftlab.exchange_android.ui.page.main.cards
 
-import android.util.Log
+import androidx.core.view.isVisible
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.databinding.FragmentCardsBinding
@@ -41,8 +41,6 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>(R.layout.fragment_cards
 
         val dummyCards = listOf<CardsResponseModel>(
             CardsResponseModel("1231231231231233".toCardNumberFormat(),1,"12/12","classic","username 001"),
-            CardsResponseModel("3213231232123131".toCardNumberFormat(),2,"12/12","premium","username 002"),
-            CardsResponseModel("5123412324123112".toCardNumberFormat(),3,"12/12","diamond","username 003")
         )
         cardsAdapter.submitList(true,dummyCards.toMutableList())
         cardsAdapter.initCards(requireContext())
@@ -76,11 +74,14 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>(R.layout.fragment_cards
                     cardsAdapter.isLoading = true
                 }
                 is ResultWrapper.Success -> {
-                    //setCardUI(it.response)
-                    Log.d("LOGD", "subscribe: ${it.response}")
+                    it.response.data?.let { it1 ->
+                        setCardData(
+                            it1
+                        )
+                    }
                 }
                 is ResultWrapper.GenericError -> {
-                    AppAlert.alertGenericError(requireContext(), it.code, it.message).show(childFragmentManager)
+                    //AppAlert.alertGenericError(requireContext(), it.code, it.message).show(childFragmentManager)
                 }
 
                 is ResultWrapper.NetworkError -> {
@@ -94,7 +95,8 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>(R.layout.fragment_cards
         }
     }
 
-    private fun setCardUI(list : List<CardsResponseModel>){
+    private fun setCardData(list : List<CardsResponseModel>){
+        binding.layoutCards.isVisible = list.isNotEmpty()
         cardsAdapter.updateList(list.toMutableList(),true)
     }
 

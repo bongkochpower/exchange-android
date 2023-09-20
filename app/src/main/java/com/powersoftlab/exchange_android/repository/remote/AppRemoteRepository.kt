@@ -75,7 +75,7 @@ class AppRemoteRepository(
         })
     }
 
-    suspend fun getCards(): ResultWrapper<List<CardsResponseModel>> {
+    suspend fun getCards(): ResultWrapper<BaseResponseModel<List<CardsResponseModel>>> {
         return safeApiCall(dispatcher, call = {
             api.getCards()
         })

@@ -15,6 +15,7 @@ class AuthWithBioViewModel(
 ) : ViewModel() {
 
     val authPinLiveData : SingleLiveEvent<ResultWrapper<String>> = SingleLiveEvent()
+    private val DELEY = 1000L
 
 
 //    fun setPin(pin : String){
@@ -27,7 +28,7 @@ class AuthWithBioViewModel(
     fun authPin(pin : String) {
         viewModelScope.launch {
             authPinLiveData.value = ResultWrapper.Loading
-            delay(2000)
+            delay(DELEY)
             val result = if(isPinMatch(pin)) ResultWrapper.Success<String>("111111") else ResultWrapper.GenericError(1,"")
             authPinLiveData.value = result
         }

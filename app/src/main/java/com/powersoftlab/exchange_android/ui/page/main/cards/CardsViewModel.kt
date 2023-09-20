@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.powersoftlab.exchange_android.common.other.SingleLiveEvent
+import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
 import com.powersoftlab.exchange_android.model.response.CardsResponseModel
 import com.powersoftlab.exchange_android.model.response.RequestNewCardResponseModel
@@ -16,7 +17,7 @@ class CardsViewModel(
 ) : ViewModel(){
 
     val iconLeftMenu = MutableLiveData<Int>()
-    private val cardsLiveData: MutableLiveData<ResultWrapper<List<CardsResponseModel>>> = MutableLiveData()
+    private val cardsLiveData: MutableLiveData<ResultWrapper<BaseResponseModel<List<CardsResponseModel>>>> = MutableLiveData()
     private val requestNewCardLiveData = SingleLiveEvent<ResultWrapper<RequestNewCardResponseModel>>()
 
 

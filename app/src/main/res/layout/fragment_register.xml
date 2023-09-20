@@ -171,7 +171,7 @@
                 android:importantForAutofill="no"
                 android:inputType="phone"
                 android:maxLength="@integer/length_phone_number"
-                android:textColorHint="@{isPhoneEmpty ? @color/color_error_text : @color/text_edittext_gray}"
+                android:textColorHint="@{isPhoneEmpty ? @color/color_error_text : @color/text_back}"
                 tools:ignore="RtlSymmetry" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -207,7 +207,7 @@
                     android:enabled="false"
                     android:hint="@string/hint_dob"
                     android:importantForAutofill="no"
-                    android:textColorHint="@{isDobEmpty ? @color/color_error_text : @color/text_edittext_gray}"
+                    android:textColorHint="@{isDobEmpty ? @color/color_error_text : @color/text_back}"
                     tools:ignore="RtlSymmetry" />
 
                 <ImageView
@@ -326,7 +326,7 @@
                     android:hint="@string/hint_house_no"
                     android:importantForAutofill="no"
                     android:maxLength="@integer/length_edt_small"
-                    android:textColorHint="@{isHouseNoEmpty ? @color/color_error_text : @color/text_edittext_gray}"
+                    android:textColorHint="@{isHouseNoEmpty ? @color/color_error_text : @color/text_back}"
                     tools:ignore="RtlSymmetry" />
 
                 <EditText
@@ -394,7 +394,7 @@
                 android:inputType="none"
                 android:paddingTop="@dimen/padding_6dp"
                 android:paddingEnd="@dimen/padding_16dp"
-                android:textColorHint="@{isPhoneEmpty ? @color/color_error_text : @color/text_edittext_gray}"
+                android:textColorHint="@{isPhoneEmpty ? @color/color_error_text : @color/text_back}"
                 tools:ignore="RtlSymmetry" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -413,17 +413,16 @@
             <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_district"
                 android:layout_width="match_parent"
-                app:edtHint="@string/hint_district"
                 android:layout_height="wrap_content"
-                app:isEditable="false"
-                />
+                app:edtHint="@string/hint_district"
+                app:isEditable="false" />
 
             <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_province"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:isEditable="false"
-                app:edtHint="@string/hint_province" />
+                app:edtHint="@string/hint_province"
+                app:isEditable="false" />
 
             <!--postcode-->
             <EditText
@@ -432,13 +431,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@{isPostcodeEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
-                android:enabled="false"
                 android:backgroundTint="@color/gray_alto"
+                android:enabled="false"
                 android:hint="@string/hint_postcode"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:maxLength="@integer/length_postal_code"
-                android:textColorHint="@{isPostcodeEmpty ? @color/color_error_text : @color/text_edittext_gray}"
+                android:textColorHint="@{isPostcodeEmpty ? @color/color_error_text : @color/text_back}"
                 tools:ignore="RtlSymmetry" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -471,7 +470,7 @@
                     android:hint="@string/hint_reg_password"
                     android:importantForAutofill="no"
                     android:inputType="textPassword"
-                    android:textColorHint="@{isPasswordEmpty ? @color/color_error_text : @color/text_edittext_gray}"
+                    android:textColorHint="@{isPasswordEmpty ? @color/color_error_text : @color/text_back}"
                     tools:ignore="RtlSymmetry" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -497,7 +496,7 @@
                     android:hint="@string/hint_reg_confirm_password"
                     android:importantForAutofill="no"
                     android:inputType="textPassword"
-                    android:textColorHint="@{isConfirmPwNotMatch ? @color/color_error_text : @color/text_edittext_gray}"
+                    android:textColorHint="@{isConfirmPwNotMatch ? @color/color_error_text : @color/text_back}"
                     tools:ignore="RtlSymmetry" />
 
                 <androidx.appcompat.widget.AppCompatTextView

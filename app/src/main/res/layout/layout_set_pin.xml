@@ -4,6 +4,14 @@
 
     <data>
 
+        <import type="android.view.View"/>
+        <variable
+            name="isInputPinInvalid"
+            type="Boolean" />
+
+        <variable
+            name="isEnableBtnConfirm"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +42,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewMini"
+                android:visibility="@{isInputPinInvalid ? View.VISIBLE : View.INVISIBLE,default=invisible}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_20dp"
@@ -82,13 +91,14 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_confirm_tel"
+                android:id="@+id/btn_confirm_pin"
                 style="@style/TextViewRegularPlus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_52dp"
-                android:background="@drawable/button_confirm"
+                android:background="@{isEnableBtnConfirm ? @drawable/button_confirm : @drawable/bg_confirm_disable , default =@drawable/bg_confirm_disable}"
                 android:text="@string/button_confirm"
+                android:enabled="@{isEnableBtnConfirm ? true : false}"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

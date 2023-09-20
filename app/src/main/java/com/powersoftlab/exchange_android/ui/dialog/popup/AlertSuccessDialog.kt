@@ -56,7 +56,7 @@ class AlertSuccessDialog :
     override fun getExtra(bundle: Bundle) {
         super.getExtra(bundle)
         title = bundle.getString(KEY_TITLE,getString(R.string.message_register_success))
-        textButtonRight = bundle.getString(KEY_TEXT_BUTTON_RIGHT, getString(R.string.button_start_working))
+        textButtonRight = bundle.getString(KEY_TEXT_BUTTON_RIGHT, getString(R.string.title_set_pin))
     }
 
     override fun setUp() {

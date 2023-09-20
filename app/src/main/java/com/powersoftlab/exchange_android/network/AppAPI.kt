@@ -8,6 +8,7 @@ import com.powersoftlab.exchange_android.model.response.AccessTokenModel
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.CardsResponseModel
 import com.powersoftlab.exchange_android.model.response.ExchangeCalculateResponse
+import com.powersoftlab.exchange_android.model.response.PinResponseModel
 import com.powersoftlab.exchange_android.model.response.RegisterResponseModel
 import com.powersoftlab.exchange_android.model.response.RequestNewCardResponseModel
 import com.powersoftlab.exchange_android.model.response.TopUpResponse
@@ -58,6 +59,14 @@ interface AppAPI {
     @Multipart
     @POST("api/v1/upload")
     suspend fun uploadProfile(@Part image: MultipartBody.Part): Response<UploadResponseModel>
+
+    @FormUrlEncoded
+
+    @POST("api/v1/pin/checkPin")
+    suspend fun checkPin(
+        @Field("pin") pin: String,
+    ): Response<PinResponseModel>
+
     //endregion
 
     //region app func

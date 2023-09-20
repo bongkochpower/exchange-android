@@ -106,7 +106,9 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
 
                 is ResultWrapper.Success -> {
                     progressDialog.dismiss()
-                    manageTransactionMode()
+                    if(it.response.success == true){
+                        manageTransactionMode()
+                    }
                 }
 
                 is ResultWrapper.GenericError -> {

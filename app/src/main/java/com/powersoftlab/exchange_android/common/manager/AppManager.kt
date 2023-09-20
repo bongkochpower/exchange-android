@@ -150,7 +150,7 @@ class AppManager(private val context: Context) {
     fun setPin(pin: String?) {
         getSecureSharePreferences().edit().putString(KeyConstant.PIN_AUTH, pin).apply()
     }
-    fun getPin(): String? = getSecureSharePreferences().getString(KeyConstant.PIN_AUTH, null)
+    fun getPin(): String? = getSecureSharePreferences().getString(KeyConstant.PIN_AUTH, "111111")
 
 
     fun removeAll(cb: () -> Unit) {

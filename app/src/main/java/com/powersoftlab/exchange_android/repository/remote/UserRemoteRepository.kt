@@ -6,6 +6,7 @@ import com.powersoftlab.exchange_android.model.body.LoginRequestModel
 import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.AccessTokenModel
+import com.powersoftlab.exchange_android.model.response.PinResponseModel
 import com.powersoftlab.exchange_android.model.response.RegisterResponseModel
 import com.powersoftlab.exchange_android.model.response.UploadResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
@@ -71,6 +72,10 @@ class UserRemoteRepository(
 
     suspend fun me() : ResultWrapper<BaseResponseModel<UserModel>>{
         return safeApiCall(dispatcher, call = { api.me() })
+    }
+
+    suspend fun checkPin(pin : String) : ResultWrapper<PinResponseModel>{
+        return safeApiCall(dispatcher, call = { api.checkPin(pin) })
     }
 
 }

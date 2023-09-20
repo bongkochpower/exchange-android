@@ -19,6 +19,18 @@
         <variable
             name="isSelectShopEmpty"
             type="Boolean" />
+
+        <variable
+            name="isEnableSelectCountry"
+            type="Boolean" />
+
+        <variable
+            name="isEnableSelectShop"
+            type="Boolean" />
+
+        <variable
+            name="isEnableNextBtn"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,25 +61,27 @@
                 android:textColorHint="@{isSelectCurrencyEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
 
             <EditText
+                android:enabled="@{isEnableSelectCountry ? true : false,default=false}"
                 android:id="@+id/edt_country"
                 android:onClick="@{(view) -> fragment.selectCountry(view)}"
                 style="@style/AppEditText.Dropdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_20dp"
-                android:background="@{isSelectCurrencyEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:background="@{isSelectCountryEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
                 android:hint="@string/hint_select_country"
-                android:textColorHint="@{isSelectCurrencyEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+                android:textColorHint="@{isSelectCountryEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
 
             <EditText
+                android:enabled="@{isEnableSelectShop ? true : false,default=false}"
                 android:id="@+id/edt_shop"
                 android:onClick="@{(view) -> fragment.selectShop(view)}"
                 style="@style/AppEditText.Dropdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@{isSelectCurrencyEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:background="@{isSelectShopEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
                 android:hint="@string/hint_select_shop"
-                android:textColorHint="@{isSelectCurrencyEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
+                android:textColorHint="@{isSelectShopEmpty ? @color/color_error_text : @color/text_edittext_gray}" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -77,7 +91,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_next_step"
             android:layout_marginTop="@dimen/margin_20dp"
-            android:background="@drawable/button_confirm_normal"
+            android:background="@{isEnableNextBtn ? @drawable/button_confirm_normal : @drawable/button_confirm_normal_disable,default=@drawable/button_confirm_normal}"
+            android:enabled="@{isEnableNextBtn ? true : false}"
             android:text="@string/button_next_step"
             android:textAllCaps="false"
             android:textColor="@color/white"

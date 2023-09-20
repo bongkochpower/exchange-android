@@ -46,6 +46,7 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
     override fun setUp() {
         with(binding) {
             fragment = this@WithDrawTypeFragment
+            isEnableNextBtn = false
         }
     }
 
@@ -57,7 +58,9 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
                     if (!isMonoClickable()) return@setOnClickListener
                     monoLastTimeClick()
 
-                    gotoInputMoney()
+                    if(isValidate()){
+                        gotoInputMoney()
+                    }
 
                 }
             }
@@ -71,6 +74,7 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
 
             currencyBottomSheetDialog.setOnItemSelectedListener { item ->
                 edtCurrency.setText(item.name)
+                isEnableSelectCountry = true
                 withdrawViewModel.selectedCurrency = item.convertToModel(UserModel.CustomerBalance::class.java)
                 withdrawViewModel.getCountryList()
             }
@@ -123,20 +127,45 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
         return false
     }
 
+    private fun isValidate() : Boolean{
+        with(binding){
+            var isValidate = false
+            val edtCurrency = edtCurrency.text.toString().trim()
+            val edtCountry = edtCountry.text.toString().trim()
+            val edtShop = edtShop.text.toString().trim()
+            when{
+                edtCurrency.isEmpty() -> isSelectCurrencyEmpty = true
+                edtCountry.isEmpty() -> isSelectCountryEmpty = true
+                edtShop.isEmpty() -> isSelectShopEmpty = true
+                else -> isValidate = true
+            }
+            return isValidate
+        }
+    }
+
     private fun gotoInputMoney() {
         WithDrawInputMoneyFragment.navigate(this@WithDrawTypeFragment)
     }
 
     fun selectCurrency(view: View) {
         currencyBottomSheetDialog.show(childFragmentManager)
+        if(binding.isSelectCurrencyEmpty == true){
+            binding.isSelectCurrencyEmpty = false
+        }
     }
 
     fun selectCountry(view: View) {
         countryBottomSheetDialog.show(childFragmentManager)
+        if(binding.isSelectCountryEmpty == true){
+            binding.isSelectCountryEmpty = false
+        }
     }
 
     fun selectShop(view: View) {
         shopBottomSheetDialog.show(childFragmentManager)
+        if(binding.isSelectShopEmpty == true){
+            binding.isSelectShopEmpty = false
+        }
     }
 
 
@@ -152,6 +181,7 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
         countryBottomSheetDialog.setOnItemSelectedListener { item ->
 
             withdrawViewModel.selectedCountry = item.convertToModel(UserModel.CountryModel::class.java)
+            binding.isEnableSelectShop = true
             binding.edtCountry.setText(item.name)
             withdrawViewModel.getShopById()
 
@@ -162,7 +192,10 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
         val shopList = list.map { OptionMenuModel(name = it.shopName , data = it) }.toMutableList()
         shopBottomSheetDialog = OptionMenuBottomSheetDialog.newInstance(shopList)
         shopBottomSheetDialog.setOnItemSelectedListener { item ->
-            binding.edtShop.setText(item.name)
+            binding.apply {
+                isEnableNextBtn = true
+                edtShop.setText(item.name)
+            }
             withdrawViewModel.selectedShop = item.convertToModel(UserModel.ShopModel::class.java)
         }
     }

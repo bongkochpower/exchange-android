@@ -9,12 +9,14 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.powersoftlab.exchange_android.R
+import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.databinding.FragmentRequestNewCardBinding
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ext.validateAfterTextChange
-import com.powersoftlab.exchange_android.model.body.RegisterNewCardRequestModel
+import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
+import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.main.cards.CardsFragmentDirections
@@ -69,7 +71,7 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
 
                     if (getCurrentStep() == 1) {
                         if (isValidate(getRegisterNewCardData())) {
-                            gotoStepDetail()
+                            cardViewMode.requestNewCard(getRegisterNewCardData())
                         }
                         //gotoStepDetail()
                     } else {
@@ -80,6 +82,35 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
             }
         }
 
+    }
+
+    override fun subscribe() {
+        super.subscribe()
+
+        cardViewMode.requestNewCardResult().observe(viewLifecycleOwner){
+            when (it) {
+                is ResultWrapper.Loading -> {
+                    showProgress()
+                }
+                is ResultWrapper.Success -> {
+                    hideProgress()
+                    gotoStepDetail()
+                }
+                is ResultWrapper.GenericError -> {
+                    hideProgress()
+                    AppAlert.alertGenericError(requireContext(), it.code, it.message).show(childFragmentManager)
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    hideProgress()
+                    AppAlert.alertNetworkError(requireContext()).show(childFragmentManager)
+                }
+
+                else -> {
+                    /*none*/
+                }
+            }
+        }
     }
 
     private fun getCurrentStep(): Int = if (binding.layoutEnterAddress.root.isVisible) {
@@ -104,15 +135,10 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
     }
 
     override fun onBackPressed(): Boolean {
-        return if (getCurrentStep() == 1) {
-            false
-        } else {
-            gotoStepInfo()
-            true
-        }
+        return getCurrentStep() != 1
     }
 
-    private fun isValidate(item: RegisterNewCardRequestModel): Boolean {
+    private fun isValidate(item: RequestNewCardRequestModel): Boolean {
         var isValidate = false
         with(binding.layoutEnterAddress) {
             when {
@@ -168,9 +194,9 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
         }
     }
 
-    private fun getRegisterNewCardData(): RegisterNewCardRequestModel {
+    private fun getRegisterNewCardData(): RequestNewCardRequestModel {
         with(binding.layoutEnterAddress) {
-            return RegisterNewCardRequestModel(
+            return RequestNewCardRequestModel(
                 postCode = edtRegPostcode.text.trim().toString(),
                 moo = edtRegVillageNo.text.trim().toString(),
                 soi = edtRegAlley.text.trim().toString(),
@@ -186,5 +212,8 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
             )
         }
     }
+
+    private fun showProgress() = progressDialog.show(childFragmentManager)
+    private fun hideProgress() = progressDialog.dismiss()
 
 }

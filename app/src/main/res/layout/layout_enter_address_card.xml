@@ -40,18 +40,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/edt_reg_house_no"
-                    style="@style/AppEditText"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_24dp"
-                    android:layout_marginEnd="@dimen/margin_8dp"
-                    android:background="@{isHouseNoEmpty ? @drawable/bg_edittext_small_error : @drawable/bg_edittext_small , default = @drawable/bg_edittext_small}"
-                    android:hint="@string/hint_house_no"
-                    android:importantForAutofill="no"
-                    android:maxLength="@integer/length_edt_small"
-                    android:textColorHint="@{isHouseNoEmpty ? @color/color_error_text : @color/text_back}" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edt_reg_house_no"
+                        style="@style/AppEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_24dp"
+                        android:layout_marginEnd="@dimen/margin_8dp"
+                        android:background="@{isHouseNoEmpty ? @drawable/bg_edittext_small_error : @drawable/bg_edittext_small , default = @drawable/bg_edittext_small}"
+                        android:hint="@string/hint_house_no"
+                        android:importantForAutofill="no"
+                        android:maxLength="@integer/length_edt_small"
+                        android:textColorHint="@{isHouseNoEmpty ? @color/color_error_text : @color/text_back}" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_error_house_no"
+                        style="@style/TextViewExtraMini"
+                        app:fontFamily="@font/prompt_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_2dp"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:gravity="start"
+                        android:text="@string/validate_reg_house_no"
+                        android:textColor="@color/color_error_text"
+                        android:visibility="@{isHouseNoEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}" />
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/edt_reg_village"
@@ -78,7 +97,6 @@
                     android:layout_width="wrap_content"
                     android:textColor="@color/text_edittext_gray"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_24dp"
                     android:layout_marginEnd="@dimen/margin_8dp"
                     android:background="@drawable/bg_edittext_small"
                     android:hint="@string/hint_village_no"
@@ -92,7 +110,6 @@
                     android:textColor="@color/text_edittext_gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_24dp"
                     android:background="@drawable/bg_edittext_small"
                     android:hint="@string/hint_alley"
                     android:importantForAutofill="no"

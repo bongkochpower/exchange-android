@@ -2,12 +2,14 @@ package com.powersoftlab.exchange_android.network
 
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.LoginRequestModel
-import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
+import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
 import com.powersoftlab.exchange_android.model.response.AccessTokenModel
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
+import com.powersoftlab.exchange_android.model.response.CardsResponseModel
 import com.powersoftlab.exchange_android.model.response.ExchangeCalculateResponse
 import com.powersoftlab.exchange_android.model.response.RegisterResponseModel
+import com.powersoftlab.exchange_android.model.response.RequestNewCardResponseModel
 import com.powersoftlab.exchange_android.model.response.TopUpResponse
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
 import com.powersoftlab.exchange_android.model.response.UploadResponseModel
@@ -102,6 +104,15 @@ interface AppAPI {
     suspend fun getAddressBySubDistrictId(
         @Query("subDistrictId") subDistrictId: Int,
     ): Response<BaseResponseModel<AddressAutoFillResponseModel>>
+
+    @GET("/api/v1/card")
+    suspend fun getCards(
+    ): Response<List<CardsResponseModel>>
+
+    @POST("api/v1/card/requestCard")
+    suspend fun registerNewCard(
+        @Body request : RequestNewCardRequestModel
+    ): Response<RequestNewCardResponseModel>
 
     //endregion
 

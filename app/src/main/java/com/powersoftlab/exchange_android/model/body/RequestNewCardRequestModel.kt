@@ -2,7 +2,7 @@ package com.powersoftlab.exchange_android.model.body
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterNewCardRequestModel(
+data class RequestNewCardRequestModel(
     @field:SerializedName("post_code") var postCode: String? = null,
     @field:SerializedName("moo") var moo: String? = null,
     @field:SerializedName("soi") var soi: String? = null,

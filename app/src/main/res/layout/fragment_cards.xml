@@ -14,43 +14,39 @@
         android:paddingTop="@dimen/margin_40dp"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/TextViewLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_28dp"
-            android:gravity="center_horizontal"
-            android:textColor="@color/text_edittext_gray"
-            app:fontFamily="@font/prompt_semibold"
-            tools:text="Card Name" />
 
-        <RelativeLayout
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.7"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
+                app:layout_constraintStart_toStartOf="parent"
                 android:padding="@dimen/padding_12dp"
                 android:src="@drawable/icon_arrow_left" />
             <androidx.viewpager2.widget.ViewPager2
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/vp_cards"
-                android:layout_centerHorizontal="true"
                 android:layout_width="match_parent"
-                android:layout_height="146dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal" />
 
             <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.7"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:padding="@dimen/padding_12dp"
                 android:src="@drawable/icon_arrow_right" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_req_new_card"

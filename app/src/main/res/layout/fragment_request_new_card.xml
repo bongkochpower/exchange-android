@@ -4,62 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="isStepInfo"
             type="Boolean" />
     </data>
 
-    <LinearLayout
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/margin_40dp"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/TextViewLarge"
-            android:id="@+id/tv_title_card"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@{isStepInfo ? @string/title_enter_address_card : @string/title_send_card_detail,default=@string/title_enter_address_card}"
-            android:textColor="@color/text_edittext_gray"
-            app:fontFamily="@font/prompt_semibold" />
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/margin_40dp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title_card"
+                style="@style/TextViewLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@{isStepInfo ? @string/title_enter_address_card : @string/title_send_card_detail,default=@string/title_enter_address_card}"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_semibold" />
 
-            <!--address info-->
-            <include
-                android:visibility="@{isStepInfo ? View.VISIBLE : View.GONE}"
-                android:id="@+id/layout_enter_address"
-                layout="@layout/layout_enter_address_card" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <!--detail card-->
-            <include
-                android:visibility="@{!isStepInfo ? View.VISIBLE : View.GONE}"
-                android:id="@+id/layout_card_detail"
-                layout="@layout/layout_send_card_detail" />
+                <!--address info-->
+                <include
+                    android:id="@+id/layout_enter_address"
+                    layout="@layout/layout_enter_address_card"
+                    android:visibility="@{isStepInfo ? View.VISIBLE : View.GONE}" />
 
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginBottom="@dimen/margin_24dp"
-            style="@style/TextViewRegularPlus"
-            android:id="@+id/btn_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_confirm"
-            android:text="@string/button_confirm"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+                <!--detail card-->
+                <include
+                    android:id="@+id/layout_card_detail"
+                    layout="@layout/layout_send_card_detail"
+                    android:visibility="@{!isStepInfo ? View.VISIBLE : View.GONE}" />
 
 
-    </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_confirm"
+                style="@style/TextViewRegularPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_24dp"
+                android:background="@drawable/button_confirm"
+                android:text="@string/button_confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
 </layout>

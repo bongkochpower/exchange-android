@@ -3,8 +3,11 @@ package com.powersoftlab.exchange_android.repository.remote
 import android.content.Context
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.ExchangeRequestModel
+import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
+import com.powersoftlab.exchange_android.model.response.CardsResponseModel
 import com.powersoftlab.exchange_android.model.response.ExchangeCalculateResponse
+import com.powersoftlab.exchange_android.model.response.RequestNewCardResponseModel
 import com.powersoftlab.exchange_android.model.response.TopUpResponse
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
 import com.powersoftlab.exchange_android.network.AppAPI
@@ -67,6 +70,22 @@ class AppRemoteRepository(
         return safeApiCall(dispatcher, call = {
             api.getAddressBySubDistrictId(id)
         })
+    }
+
+    suspend fun getCards(): ResultWrapper<List<CardsResponseModel>> {
+        return safeApiCall(dispatcher, call = {
+            api.getCards()
+        })
+    }
+
+    suspend fun requestNewCard(
+        request: RequestNewCardRequestModel
+    ): ResultWrapper<RequestNewCardResponseModel>{
+        return safeApiCall(
+            dispatcher,
+            call = {
+                api.registerNewCard(request)
+            })
     }
 
 }

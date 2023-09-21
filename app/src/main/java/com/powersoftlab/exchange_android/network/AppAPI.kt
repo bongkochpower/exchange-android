@@ -107,7 +107,7 @@ interface AppAPI {
         @Field("amount") amount: Double
     ): Response<ExchangeCalculateResponse>
 
-    @GET("api/v1/address/getSubDistrict?search=พระ")
+    @GET("api/v1/address/getSubDistrict")
     suspend fun subDistricts(): Response<BaseResponseModel<List<AddressAutoFillResponseModel.SubDistrictResponse>>>
 
     @GET("api/v1/address/getProvinceAndDistrict")

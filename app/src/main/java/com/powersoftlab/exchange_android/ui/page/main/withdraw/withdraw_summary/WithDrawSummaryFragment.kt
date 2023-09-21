@@ -39,6 +39,9 @@ class WithDrawSummaryFragment : BaseFragment<FragmentWithdrawSummaryBinding>(R.l
             btnSavePicture.setOnClickListener {
                 saveImageBitmap()
             }
+            btnBack.setOnClickListener{
+                activity?.finish()
+            }
         }
 
     }

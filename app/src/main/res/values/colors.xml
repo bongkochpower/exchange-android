@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#BCBEC0</color>
-    <color name="colorPrimaryVariant">#BCBEC0</color>
+    <color name="colorPrimary">#414042</color>
+    <color name="colorPrimaryVariant">#414042</color>
     <color name="colorSecondary">#414042</color>
     <color name="colorSecondaryVariant">#414042</color>
     <color name="mtrl_textinput_default_box_stroke_color">#8E8E8E</color>

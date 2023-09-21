@@ -120,6 +120,7 @@
     <string name="message_main_empty">รายการล่าสุดจะแสดงที่นี่เมื่อคุณเริ่มใช้งาน</string>
     <string name="message_topup_success">คุณเติมเงินสำเร็จ</string>
     <string name="message_exchange_success">คุณแลกเงินสำเร็จ</string>
+    <string name="message_withdraw_success">คุณถอนเงินสำเร็จ</string>
     <string name="message_edit_profile_success">คุณแก้ไขข้อมูลสมาชิกสำเร็จ</string>
     <string name="message_valid_term_and_con">กรุณายอมรับเงื่อนไขในการใช้บริการ</string>
     <string name="message_policy">การเก็งกำไรค่าเงินถือเป็นการปฏิบัติที่ไม่เป็นไปตามเงื่อนไข และอาจ
@@ -172,6 +173,7 @@
     <string name="menu_setting">การตั้งค่า</string>
     <string name="menu_edit_profile">แก้ไขข้อมูลส่วนบุคคล</string>
     <string name="menu_help">ต้องการความช่วยเหลือ</string>
+    <string name="menu_physical_card">Physical Card</string>
     <string name="menu_logout">Logout</string>
 
     <!--image picker-->
@@ -191,7 +193,8 @@
     <string name="validate_reg_postcode">กรุณาใส่รหัสไปรษณีย์</string>
     <string name="validate_reg_house_no">กรุณาใส่เลขที่บ้าน</string>
     <string name="validate_reg_phone_10_digit">กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 หลัก</string>
-    <string name="validate_reg_password">Password ไม่ถูกต้อง</string>
+    <string name="validate_reg_password_empty">กรุณาใส่ Password</string>
+    <string name="validate_reg_password_invalid">โปรดระบุรหัสผ่าน 8 หลักที่ประกอบไปด้วยตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และ อักขระพิเศษอย่างน้อย 1 ตัว (@$!%*#?&amp;)</string>
     <string name="validate_reg_confirm_password">Confirm Password ไม่ถูกต้อง</string>
     <string name="validate_reg_attach_file_fail">แนบไฟล์ไม่สำเร็จ ขนาดเกิน 25 mb</string>
     <string name="validate_reg_attach_file_success">แนบไฟล์สำเร็จ</string>

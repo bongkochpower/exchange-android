@@ -2,12 +2,14 @@ package com.powersoftlab.exchange_android.ui.page.main.history
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.databinding.ActivityHistoryBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvTransactionBinding
+import com.powersoftlab.exchange_android.ext.getCalendar
 import com.powersoftlab.exchange_android.ext.getDatePickerDialog
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
@@ -22,6 +24,7 @@ import com.powersoftlab.exchange_android.ui.list.adapter.SimpleRecyclerViewAdapt
 import com.powersoftlab.exchange_android.ui.list.viewholder.bind.MainViewHolderHelper.initTransactions
 import com.powersoftlab.exchange_android.ui.page.base.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import java.util.Calendar
 
 class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_history) {
 
@@ -69,28 +72,26 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
             imgDateFrom.apply {
                 setOnTouchAnimation()
                 setOnClickListener {
-                    showDatePickerDialog { date ->
+                    showDatePickerDialog({ date ->
                         edtStartDate.setText(date)
 
                         if (edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()) {
-                            slideToConfirm.setTextSlideButtonEnable(true,R.string.button_slide_to_confirm)
+                            slideToConfirm.setTextSlideButtonEnable(true, R.string.button_slide_to_confirm)
                         }
-
-
-                    }
+                    }, edtStartDate.text.toString())
                 }
             }
 
             imgDateTo.apply {
                 setOnTouchAnimation()
                 setOnClickListener {
-                    showDatePickerDialog { date ->
+                    showDatePickerDialog({ date ->
                         edtEndDate.setText(date)
 
                         if (edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()) {
-                            slideToConfirm.setTextSlideButtonEnable(true,R.string.button_slide_to_confirm)
+                            slideToConfirm.setTextSlideButtonEnable(true, R.string.button_slide_to_confirm)
                         }
-                    }
+                    }, edtEndDate.text.toString())
                 }
             }
 
@@ -99,7 +100,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
             }
 
 
-            slideToConfirm.setTextSlideButtonEnable(false,R.string.button_slide_to_confirm)
+            slideToConfirm.setTextSlideButtonEnable(false, R.string.button_slide_to_confirm)
             slideToConfirm.setOnClickListener {
                 if (!isMonoClickable()) return@setOnClickListener
                 monoLastTimeClick()
@@ -150,13 +151,25 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         }
     }
 
-    private fun showDatePickerDialog(cb: (String) -> Unit) {
+    private fun showDatePickerDialog(cb: (String) -> Unit, dateSelect: String? = null) {
+        val calendar = getCalendar()
+        var day = calendar.get(Calendar.DAY_OF_MONTH)
+        var month = calendar.get(Calendar.MONTH)
+        if(dateSelect?.isNotEmpty() == true){
+            day = dateSelect.split("/")[0].toInt()
+            month = dateSelect.split("/")[1].toInt()
+        }
+
         val datePickerDialog = this@HistoryActivity.getDatePickerDialog(
             cb = { date: String ->
                 cb.invoke(date)
             },
-            isMaxToday = true
+            isMaxToday = true,
+            day = day
         )
+
+        Log.d("LOGD", "showDatePickerDialog: select $dateSelect")
+
         datePickerDialog.dismiss()
         datePickerDialog.show()
     }
@@ -201,17 +214,18 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         finish()
     }
 
-    private fun getHistory(){
+    private fun getHistory() {
         if (isValidate()) {
             val dateFrom = binding.edtStartDate.text.toString()
             val dateTo = binding.edtEndDate.text.toString()
 
             showTransactionListView(true)
             getHistory(dateFrom, dateTo)
-        }else{
+        } else {
             historyViewModel.getLastHistory()
         }
     }
+
     private fun getHistory(dateFrom: String, dateTo: String) {
         historyViewModel.getHistory(dateForm = dateFrom.toServiceFormat(), dateTo = dateTo.toServiceFormat())
     }

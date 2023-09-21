@@ -33,6 +33,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:id="@+id/edt_search"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:inputType="text"
                 android:textColorHint="@color/text_hint"
                 android:hint="@string/hint_search"
                 android:layout_height="wrap_content" />

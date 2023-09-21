@@ -3,12 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.powersoftlab.exchange_android">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".config.AppApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.page.hamburger_menu.edit_profile.EditProfileActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:exported="false" />
         <activity
             android:name=".ui.page.hamburger_menu.setting.SettingsActivity"
@@ -37,7 +43,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.page.main.cards.CardsActivity"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustResize"
+             />
         <activity
             android:name=".ui.page.main.history.HistoryActivity"
             android:exported="false" />

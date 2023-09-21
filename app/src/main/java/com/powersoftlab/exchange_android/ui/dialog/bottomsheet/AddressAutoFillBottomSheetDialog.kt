@@ -89,7 +89,7 @@ class AddressAutoFillBottomSheetDialog :
 
     private fun search(str: String) {
         if (str.isNotEmpty()) {
-            val searchList = list?.filter { it.zipCode?.contains(str) == true }?.toMutableList() ?: mutableListOf()
+            val searchList = list?.filter { it.zipCode?.contains(str) == true || it.nameTH?.contains(str) == true }?.toMutableList() ?: mutableListOf()
             menuAdapter.updateList(searchList, true)
         } else {
             list?.let { menuAdapter.submitList(true, it) }

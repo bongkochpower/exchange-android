@@ -2,11 +2,15 @@ package com.powersoftlab.exchange_android.ext
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.util.Log
 import android.widget.DatePicker
 import com.powersoftlab.exchange_android.common.constant.AppConstant
 import com.powersoftlab.exchange_android.common.constant.AppConstant.FORMAT_SERVICE_DATE_TIME
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 fun getCalendar(): Calendar = Calendar.getInstance(Locale.US)
 
@@ -35,7 +39,10 @@ fun getDiffYears(first: Calendar, last: Calendar): Int {
 fun Context.getDatePickerDialog(
     cb: (date: String) -> Unit,
     calendar: Calendar = getCalendar(),
-    isMaxToday: Boolean = false
+    isMaxToday: Boolean = false,
+    year : Int = calendar.get(Calendar.YEAR),
+    month : Int = calendar.get(Calendar.MONTH),
+    day : Int = calendar.get(Calendar.DAY_OF_MONTH),
 ): DatePickerDialog {
     val datePickerDialog = DatePickerDialog(
         this,
@@ -45,10 +52,12 @@ fun Context.getDatePickerDialog(
             calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
             cb.invoke(calendar.toString(AppConstant.FORMAT_UI_DATE))
         },
-        calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)
+        year,
+        month,
+        day
     )
+
+    Log.d("LOGD", "getDatePickerDialog: $day $month $year")
 
     if (isMaxToday) {
         datePickerDialog.datePicker.maxDate = calendar.timeInMillis

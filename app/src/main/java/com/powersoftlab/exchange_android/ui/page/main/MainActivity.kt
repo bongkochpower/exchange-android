@@ -3,7 +3,6 @@ package com.powersoftlab.exchange_android.ui.page.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
@@ -151,6 +150,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
                 btnHelp.setOnClickListener {
                     AppNavigator(this@MainActivity).goToHelp()
+                }
+                btnCards.setOnClickListener {
+                    gotoCards()
                 }
                 btnLogout.setOnClickListener {
                     val msg = resources.getString(R.string.message_logout)

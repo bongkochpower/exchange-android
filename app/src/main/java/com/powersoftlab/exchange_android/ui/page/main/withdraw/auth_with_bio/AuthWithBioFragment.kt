@@ -56,7 +56,6 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
             btnConfirm.apply {
                 setOnTouchAnimation()
                 setOnClickListener {
-                    //gotoSummary()
 
                     if(isValidate()){
                         val pin = spfOtp.text.toString()
@@ -193,7 +192,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 }
 
                 is ResultWrapper.Success -> {
-                    gotoSummary(it.response)
+                    withdrawSuccess(it.response)
                     hideLoading()
                 }
 
@@ -252,6 +251,14 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
         val btn = resources.getString(R.string.button_back_to_main)
         showAlertSuccessDialog(msg, btn) {
             activity?.finish()
+        }
+    }
+
+    private fun withdrawSuccess(resp : WithdrawResponseModel) {
+        val msg = resources.getString(R.string.message_withdraw_success)
+        val btn = resources.getString(R.string.button_next)
+        showAlertSuccessDialog(msg, btn) {
+            gotoSummary(resp)
         }
     }
 

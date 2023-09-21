@@ -20,6 +20,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -205,7 +206,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
                 if (!isValidPassword(it.toString()) && loginType.equals(LoginTypeEnum.APP)) {
                     isPasswordEmpty = true
-                    tvErrorPassword.text = getString(R.string.validate_reg_password)
+                    tvErrorPassword.text = getString(R.string.validate_reg_password_invalid)
                 }
             }
             edtRegConfirmPassword.doAfterTextChanged {
@@ -213,8 +214,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     isConfirmPwNotMatch = false
                 }
             }
+
             chkRegTerm.setOnCheckedChangeListener { compoundButton, b ->
-                chkRegTerm.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+                chkRegTerm.isChecked = isValidateRegister()
+                if(chkRegTerm.isChecked){
+                    chkRegTerm.setTextColor(ContextCompat.getColor(requireContext(),R.color.yellow_green))
+                }
             }
 
             btnRegister.apply {
@@ -539,14 +544,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 (!isValidPassword(pw) && loginType.equals(LoginTypeEnum.APP)) -> {
                     isPasswordEmpty = true
                     //validateEdittextErrorView(edtRegPassword, tvErrorPassword)
-                    tvErrorPassword.text = getString(R.string.validate_reg_password)
+                    tvErrorPassword.text = getString(R.string.validate_reg_password_invalid)
                 }
 
                 ((pw != confirmPw) && loginType.equals(LoginTypeEnum.APP)) -> {
                     isConfirmPwNotMatch = true
                     validateEdittextErrorView(edtRegConfirmPassword)
                 }
-
                 !chkTerm -> chkRegTerm.setTextColor(ContextCompat.getColor(requireContext(), R.color.color_error_text))
                 else -> isValidate = true
             }
@@ -655,6 +659,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 //edtRegProvince.setText(provine.orEmpty())
                 //edtRegPostcode.setText(postCode.orEmpty())
                 subDistictId?.let { registerViewModel.getAddressDataById(it) }
+                chkRegTerm.isChecked = true
+                chkRegTerm.isVisible = false
                 btnRegister.setText(resources.getString(R.string.title_register_edit_form))
             }
         }

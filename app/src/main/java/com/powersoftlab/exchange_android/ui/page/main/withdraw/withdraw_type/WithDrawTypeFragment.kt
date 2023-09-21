@@ -43,8 +43,22 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
         fun newInstance() = WithDrawTypeFragment()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.apply {
+            val edtCurrency = edtCurrency.text.toString().trim()
+            val edtCountry = edtCountry.text.toString().trim()
+            val edtShop = edtShop.text.toString().trim()
+
+            if(edtCurrency.isNotEmpty() && edtCountry.isNotEmpty() && edtShop.isNotEmpty()){
+                isEnableNextBtn = true
+            }
+        }
+    }
+    
     override fun setUp() {
         with(binding) {
+            lifecycleOwner = this.lifecycleOwner
             fragment = this@WithDrawTypeFragment
             isEnableNextBtn = false
         }

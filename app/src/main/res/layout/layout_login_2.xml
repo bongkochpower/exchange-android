@@ -69,8 +69,7 @@
                 android:background="@{isLoginFail ? @drawable/bg_edittext_login_error : @drawable/bg_edittext_login , default = @drawable/bg_edittext_login}"
                 android:hint="@string/hint_username"
                 android:importantForAutofill="no"
-                android:inputType="phone"
-                android:maxLength="@integer/length_phone_number"
+                android:inputType="text"
                 android:paddingStart="@dimen/margin_16dp"
                 tools:ignore="RtlSymmetry" />
 

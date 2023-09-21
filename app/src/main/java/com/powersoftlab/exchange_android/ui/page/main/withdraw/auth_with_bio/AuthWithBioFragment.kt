@@ -57,7 +57,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 setOnTouchAnimation()
                 setOnClickListener {
 
-                    if(isValidate()){
+                    if (isValidate()) {
                         val pin = spfOtp.text.toString()
                         authViewModel.authPin(pin)
                     }
@@ -85,7 +85,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 }
             }
             spfOtp.doAfterTextChanged {
-                if(it.toString().isNotEmpty()){
+                if (it.toString().isNotEmpty()) {
                     binding.isPinInvalid = false
                     binding.isPinEmpty = false
                 }
@@ -97,7 +97,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
     override fun subscribe() {
         super.subscribe()
 
-        authViewModel.authPinLiveData.observe(viewLifecycleOwner){
+        authViewModel.authPinLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultWrapper.Loading -> {
                     progressDialog.show(childFragmentManager)
@@ -105,7 +105,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
 
                 is ResultWrapper.Success -> {
                     progressDialog.dismiss()
-                    if(it.response.success == true){
+                    if (it.response.success == true) {
                         manageTransactionMode()
                     }
                 }
@@ -116,10 +116,14 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 }
 
                 is ResultWrapper.NetworkError -> {
+                    progressDialog.dismiss()
                     binding.isPinInvalid = true
                 }
 
-                else -> { binding.isPinInvalid = true }
+                else -> {
+                    binding.isPinInvalid = true
+                    progressDialog.dismiss()
+                }
             }
         }
 
@@ -214,6 +218,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 pin.isEmpty() || pin.length != AppConstant.PIN_LENGTH -> {
                     isPinEmpty = true
                 }
+
                 else -> result = true
             }
         }
@@ -221,18 +226,21 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
         return result
     }
 
-    private fun manageTransactionMode(){
-        when(args.authBy){
+    private fun manageTransactionMode() {
+        when (args.authBy) {
             AuthByEnum.TOPUP -> {
                 topupViewModel.topUp(amount = args.amount.toDouble())
             }
+
             AuthByEnum.EXCHANGE -> {
                 exchangeViewModel.exchange()
             }
+
             AuthByEnum.WITHDRAW -> {
                 withdrawViewModel.withdraw(amount = args.amount.toDouble())
             }
-            else ->{
+
+            else -> {
                 AppNavigator(requireActivity()).goToMain()
             }
         }
@@ -254,7 +262,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
         }
     }
 
-    private fun withdrawSuccess(resp : WithdrawResponseModel) {
+    private fun withdrawSuccess(resp: WithdrawResponseModel) {
         val msg = resources.getString(R.string.message_withdraw_success)
         val btn = resources.getString(R.string.button_next)
         showAlertSuccessDialog(msg, btn) {
@@ -262,8 +270,8 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
         }
     }
 
-    private fun gotoSummary(resp : WithdrawResponseModel) {
+    private fun gotoSummary(resp: WithdrawResponseModel) {
         val action = AuthWithBioFragmentDirections.actionAuthWithBioFragmentToWithDrawSummaryFragment(resp)
-        WithDrawSummaryFragment.navigate(this@AuthWithBioFragment,action)
+        WithDrawSummaryFragment.navigate(this@AuthWithBioFragment, action)
     }
 }

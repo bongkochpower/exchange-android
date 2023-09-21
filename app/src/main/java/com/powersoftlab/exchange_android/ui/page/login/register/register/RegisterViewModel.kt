@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.other.SingleLiveEvent
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
@@ -19,6 +20,7 @@ import okhttp3.MultipartBody
 class RegisterViewModel(
     private val userRemoteRepository: UserRemoteRepository,
     private val appRemoteRepository: AppRemoteRepository,
+    private val appManager: AppManager,
     private val state: SavedStateHandle
 ) :
     ViewModel() {
@@ -39,7 +41,13 @@ class RegisterViewModel(
     fun register(request: RegisterRequestModel) {
         viewModelScope.launch {
             registerLiveData.value = ResultWrapper.Loading
-            registerLiveData.value = userRemoteRepository.register(request)
+            val result = userRemoteRepository.register(request)
+            if(result is ResultWrapper.Success){
+                result.response.let {
+                    appManager.setAuthToken(it.accessToken)
+                }
+            }
+            registerLiveData.value = result
         }
     }
     fun registerResult() = registerLiveData

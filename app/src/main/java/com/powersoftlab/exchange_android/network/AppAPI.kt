@@ -6,6 +6,7 @@ import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
 import com.powersoftlab.exchange_android.model.response.AccessTokenModel
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
+import com.powersoftlab.exchange_android.model.response.AuthSecretKeyModel
 import com.powersoftlab.exchange_android.model.response.CardsResponseModel
 import com.powersoftlab.exchange_android.model.response.ExchangeCalculateResponse
 import com.powersoftlab.exchange_android.model.response.PinResponseModel
@@ -60,8 +61,17 @@ interface AppAPI {
     @POST("api/v1/upload")
     suspend fun uploadProfile(@Part image: MultipartBody.Part): Response<UploadResponseModel>
 
-    @FormUrlEncoded
+    @GET("api/v1/pin")
+    suspend fun getAuthSecretKey(): Response<AuthSecretKeyModel>
 
+    @FormUrlEncoded
+    @POST("api/v1/pin")
+    suspend fun createPin(
+        @Field("pin") pin: String,
+        @Field("secret") secretKey: String,
+    ): Response<PinResponseModel>
+
+    @FormUrlEncoded
     @POST("api/v1/pin/checkPin")
     suspend fun checkPin(
         @Field("pin") pin: String,

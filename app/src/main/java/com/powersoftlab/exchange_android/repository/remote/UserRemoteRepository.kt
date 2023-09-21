@@ -6,6 +6,7 @@ import com.powersoftlab.exchange_android.model.body.LoginRequestModel
 import com.powersoftlab.exchange_android.model.body.LoginSocialRequestModel
 import com.powersoftlab.exchange_android.model.body.RegisterRequestModel
 import com.powersoftlab.exchange_android.model.response.AccessTokenModel
+import com.powersoftlab.exchange_android.model.response.AuthSecretKeyModel
 import com.powersoftlab.exchange_android.model.response.PinResponseModel
 import com.powersoftlab.exchange_android.model.response.RegisterResponseModel
 import com.powersoftlab.exchange_android.model.response.UploadResponseModel
@@ -76,6 +77,14 @@ class UserRemoteRepository(
 
     suspend fun checkPin(pin : String) : ResultWrapper<PinResponseModel>{
         return safeApiCall(dispatcher, call = { api.checkPin(pin) })
+    }
+
+    suspend fun createPin(pin : String,secretKey : String) : ResultWrapper<PinResponseModel>{
+        return safeApiCall(dispatcher, call = { api.createPin(pin, secretKey) })
+    }
+
+    suspend fun getSecretKey() : ResultWrapper<AuthSecretKeyModel>{
+        return safeApiCall(dispatcher, call = { api.getAuthSecretKey() })
     }
 
 }

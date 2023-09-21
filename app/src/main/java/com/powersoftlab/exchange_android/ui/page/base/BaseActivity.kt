@@ -101,7 +101,9 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
                         AppEventEnum.MAINTENANCE -> showMaintenance()
                         AppEventEnum.SOFT_UPDATE -> showSoftUpdate(it.message)
                         AppEventEnum.FORCE_UPDATE -> showForceUpdate()
-                        AppEventEnum.UNAUTHORIZED -> showUnAuthorized(it.message)
+                        AppEventEnum.UNAUTHORIZED -> {
+                            //showUnAuthorized(it.message)
+                        }
                         else -> {
                             /*none*/
                         }

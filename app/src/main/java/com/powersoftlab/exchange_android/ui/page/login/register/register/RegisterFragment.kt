@@ -194,6 +194,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     isPhoneEmpty = false
                 }
             }
+
+            edtRegUsername.doAfterTextChanged {
+                if (it.toString().isNotEmpty() && binding.isUsernameEmpty == true) {
+                    isUsernameEmpty = false
+                }
+            }
             edtRegHouseNo.doAfterTextChanged {
                 if (it.toString().isNotEmpty() && binding.isHouseNoEmpty == true) {
                     isHouseNoEmpty = false
@@ -242,7 +248,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     }
 
                     //test
-//                    gotoSetPinPassword()
+                    /*showAlertSuccessDialog {
+                        gotoSetPinPassword()
+                    }*/
 
                 }
             }
@@ -311,7 +319,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     hideLoading()
 
                     showAlertSuccessDialog {
-                        //AppNavigator(this.requireActivity()).goToLogin(true)
                         gotoSetPinPassword()
                     }
                 }
@@ -493,6 +500,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             val district = edtRegDistrict.getText()
             val province = edtRegProvince.getText()
             val postcode = edtRegPostcode.text.toString().trim()
+            val username = edtRegUsername.text.toString().trim()
             val pw = edtRegPassword.text.trim().toString()
             val confirmPw = edtRegConfirmPassword.text.trim().toString()
             val chkTerm = chkRegTerm.isChecked
@@ -534,6 +542,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 postcode.isEmpty() -> {
                     isPostcodeEmpty = true
                     validateEdittextErrorView(edtRegPostcode)
+                }
+                username.isEmpty() -> {
+                    isUsernameEmpty = true
+                    validateEdittextErrorView(edtRegUsername, tvErrorUsername)
                 }
 
                 (pw.isEmpty() && loginType.equals(LoginTypeEnum.APP)) -> {
@@ -605,7 +617,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 firstname = edtRegName.getText(),
                 lastname = edtRegLastname.getText(),
                 birtDate = dobToServer,
-                tel = edtRegPhone.text.trim().toString(),
+                tel = edtRegUsername.text.trim().toString(),
+                //tel = edtRegPhone.text.trim().toString(),
                 email = edtRegEmail.getText(),
                 password = edtRegPassword.text.trim().toString(),
                 idCardImagePath = registerViewModel.selectedIdCardImage ?: this@RegisterFragment.user?.idCardImage.toDashWhenNullOrEmpty(),
@@ -636,7 +649,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 }
                 edtRegName.setText(firstName.orEmpty())
                 edtRegLastname.setText(lastName.orEmpty())
-                edtRegPhone.apply {
+                edtRegUsername.apply {
                     backgroundTintList = resources.getColorStateList(R.color.gray_alto)
                     setText(tel)
                     isEnabled = false

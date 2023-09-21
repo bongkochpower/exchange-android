@@ -4,6 +4,7 @@ object KeyConstant {
     /*secure*/
     const val FCM_TOKEN = "fcm_token"
     const val AUTH_TOKEN = "auth_token"
+    const val AUTH_SECRET_KEY = "auth_secret_key"
     const val USER = "user"
     const val LOGIN_TYPE = "login_type"
     const val PIN_AUTH = "pin_password"

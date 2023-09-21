@@ -3,7 +3,10 @@ package com.powersoftlab.exchange_android.model.response
 import com.google.gson.annotations.SerializedName
 
 data class RegisterResponseModel(
-    @field:SerializedName("id") var id: Int? = null,
+    @field:SerializedName("success") var success: Boolean? = null,
+    @field:SerializedName("accessToken") var accessToken: String? = null,
+
+    /*@field:SerializedName("id") var id: Int? = null,
     @field:SerializedName("is_activate") var isActivate: Boolean? = null,
     @field:SerializedName("first_name") var firstname: String? = null,
     @field:SerializedName("last_name") var lastname: String? = null,
@@ -25,5 +28,5 @@ data class RegisterResponseModel(
     @field:SerializedName("sub_distict") var subDistrict: String? = null,
     @field:SerializedName("provine") var province: String? = null,
     @field:SerializedName("provine_id") var provinceId: Int? = null,
-    @field:SerializedName("is_consent") var isConsent: Boolean? = null,
+    @field:SerializedName("is_consent") var isConsent: Boolean? = null,*/
 )

@@ -82,6 +82,16 @@ class AppManager(private val context: Context) {
     }
     //endregion
 
+    //region secret key
+    fun setAuthSecretKey(secretKey: String?) {
+        getSecureSharePreferences().edit().putString(KeyConstant.AUTH_SECRET_KEY, secretKey).apply()
+    }
+
+    fun getAuthSecretKey(): String? {
+        return getSecureSharePreferences().getString(KeyConstant.AUTH_SECRET_KEY, null)
+    }
+    //endregion
+
     //region login type
     fun setLoginType(loginType: String) {
         getSecureSharePreferences().edit().putString(KeyConstant.LOGIN_TYPE, loginType).apply()

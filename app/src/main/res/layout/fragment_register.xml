@@ -36,6 +36,10 @@
             type="Boolean" />
 
         <variable
+            name="isUsernameEmpty"
+            type="Boolean" />
+
+        <variable
             name="isPasswordEmpty"
             type="Boolean" />
 
@@ -160,7 +164,7 @@
                 android:layout_height="wrap_content"
                 app:edtHint="@string/hint_lastname" />
 
-            <!--password-->
+            <!--phone-->
             <EditText
                 android:id="@+id/edt_reg_phone"
                 style="@style/AppEditText"
@@ -453,6 +457,34 @@
                 android:visibility="@{isPostcodeEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}"
                 app:fontFamily="@font/prompt_regular" />
 
+            <!--username-->
+            <EditText
+                android:id="@+id/edt_reg_username"
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{isUsernameEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:hint="@string/hint_username"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:maxLength="50"
+                android:textColorHint="@{isUsernameEmpty ? @color/color_error_text : @color/text_back}"
+                tools:ignore="RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_error_username"
+                style="@style/TextViewExtraMini"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_2dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:gravity="start"
+                android:text="@string/validate_reg_username_empty"
+                android:textColor="@color/color_error_text"
+                android:visibility="@{isUsernameEmpty ? View.VISIBLE : View.INVISIBLE , default= visible}"
+                app:fontFamily="@font/prompt_regular" />
+
+            <!--password and confirm-->
             <LinearLayout
                 android:id="@+id/layout_password"
                 android:layout_width="match_parent"
@@ -466,11 +498,9 @@
                     android:layout_height="wrap_content"
                     app:boxBackgroundMode="none"
                     app:hintEnabled="false"
-                    app:passwordToggleEnabled="true"
-                    >
+                    app:passwordToggleEnabled="true">
 
                     <EditText
-                        android:paddingVertical="@dimen/padding_10dp"
                         android:id="@+id/edt_reg_password"
                         style="@style/AppEditText"
                         android:layout_width="wrap_content"
@@ -479,6 +509,7 @@
                         android:hint="@string/hint_reg_password"
                         android:importantForAutofill="no"
                         android:inputType="textPassword"
+                        android:paddingVertical="@dimen/padding_10dp"
                         android:textColorHint="@{isPasswordEmpty ? @color/color_error_text : @color/text_back}"
                         tools:ignore="RtlSymmetry" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -493,7 +524,7 @@
                     android:gravity="start"
                     android:text="@string/validate_reg_password_empty"
                     android:textColor="@color/color_error_text"
-                    android:visibility="@{isPasswordEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}"
+                    android:visibility="@{isPasswordEmpty ? View.VISIBLE : View.GONE , default= invisible}"
                     app:fontFamily="@font/prompt_regular" />
 
                 <!--confirm pw-->
@@ -502,19 +533,21 @@
                     android:layout_height="wrap_content"
                     app:boxBackgroundMode="none"
                     app:hintEnabled="false"
+                    android:layout_marginTop="@dimen/margin_16dp"
                     app:passwordToggleEnabled="true">
-                <EditText
-                    android:id="@+id/edt_reg_confirm_password"
-                    style="@style/AppEditText"
-                    android:paddingVertical="@dimen/padding_10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@{isConfirmPwNotMatch ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
-                    android:hint="@string/hint_reg_confirm_password"
-                    android:importantForAutofill="no"
-                    android:inputType="textPassword"
-                    android:textColorHint="@{isConfirmPwNotMatch ? @color/color_error_text : @color/text_back}"
-                    tools:ignore="RtlSymmetry" />
+
+                    <EditText
+                        android:id="@+id/edt_reg_confirm_password"
+                        style="@style/AppEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@{isConfirmPwNotMatch ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                        android:hint="@string/hint_reg_confirm_password"
+                        android:importantForAutofill="no"
+                        android:inputType="textPassword"
+                        android:paddingVertical="@dimen/padding_10dp"
+                        android:textColorHint="@{isConfirmPwNotMatch ? @color/color_error_text : @color/text_back}"
+                        tools:ignore="RtlSymmetry" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView

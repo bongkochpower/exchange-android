@@ -59,7 +59,7 @@
     <!--hint-->
     <string name="hint_phone">เบอร์โทรศัพท์</string>
     <string name="hint_username">ชื่อผู้ใช้งาน</string>
-    <string name="hint_password">Password</string>
+    <string name="hint_password">รหัสผ่าน</string>
     <string name="hint_name">ชื่อ</string>
     <string name="hint_lastname">นามสกุล</string>
     <string name="hint_email">อีเมล</string>
@@ -194,6 +194,7 @@
     <string name="validate_reg_postcode">กรุณาใส่รหัสไปรษณีย์</string>
     <string name="validate_reg_house_no">กรุณาใส่เลขที่บ้าน</string>
     <string name="validate_reg_phone_10_digit">กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 หลัก</string>
+    <string name="validate_reg_username_empty">กรุณาใส่ชื่อผู้ใช้งาน</string>
     <string name="validate_reg_password_empty">กรุณาใส่ Password</string>
     <string name="validate_reg_password_invalid">โปรดระบุรหัสผ่าน 8 หลักที่ประกอบไปด้วยตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และ อักขระพิเศษอย่างน้อย 1 ตัว (@$!%*#?&amp;)</string>
     <string name="validate_reg_confirm_password">Confirm Password ไม่ถูกต้อง</string>

@@ -41,22 +41,22 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextViewRegular"
-                    android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="@string/title_login_not_success"
                     android:textColor="@color/color_error_text"
+                    android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                     app:fontFamily="@font/prompt_regular" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextViewExtraMini"
-                    android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="@string/validate_phone_and_pass_invalid"
                     android:textColor="@color/color_error_text"
+                    android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                     app:fontFamily="@font/prompt_regular" />
             </LinearLayout>
 
@@ -64,49 +64,58 @@
                 android:id="@+id/edt_phone_number"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
-                android:maxLength="@integer/length_phone_number"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_28dp"
                 android:background="@{isLoginFail ? @drawable/bg_edittext_login_error : @drawable/bg_edittext_login , default = @drawable/bg_edittext_login}"
-                android:hint="@string/hint_phone"
+                android:hint="@string/hint_username"
                 android:importantForAutofill="no"
                 android:inputType="phone"
+                android:maxLength="@integer/length_phone_number"
                 android:paddingStart="@dimen/margin_16dp"
                 tools:ignore="RtlSymmetry" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewExtraMini"
                 android:layout_width="250dp"
-                android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:paddingStart="@dimen/padding_16dp"
                 android:text="@string/validate_phone_number_invalid"
                 android:textColor="@color/color_error_text"
+                android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                 app:fontFamily="@font/prompt_regular" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edt_password"
-                style="@style/AppEditText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16dp"
-                android:background="@{isLoginFail ? @drawable/bg_edittext_login_error : @drawable/bg_edittext_login , default = @drawable/bg_edittext_login}"
-                android:hint="@string/hint_password"
-                android:importantForAutofill="no"
-                android:inputType="textPassword"
-                android:paddingStart="@dimen/margin_16dp"
-                tools:ignore="RtlSymmetry" />
+                app:boxBackgroundMode="none"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_password"
+                    style="@style/AppEditText"
+                    android:paddingVertical="@dimen/padding_10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@{isLoginFail ? @drawable/bg_edittext_login_error : @drawable/bg_edittext_login , default = @drawable/bg_edittext_login}"
+                    android:hint="@string/hint_password"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:paddingStart="@dimen/margin_16dp"
+                    tools:ignore="RtlSymmetry" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewExtraMini"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                 android:paddingStart="@dimen/padding_16dp"
                 android:text="@string/validate_password_invalid"
                 android:textColor="@color/color_error_text"
+                android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                 app:fontFamily="@font/prompt_regular" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -127,12 +136,12 @@
                 android:layout_marginTop="@dimen/margin_16dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_forgot_password"
                     style="@style/TextViewSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="goToForgotPassword"
                     android:text="@string/title_forgot_password"
-                    android:id="@+id/tv_forgot_password"
                     android:textColor="@color/color_error_text"
                     app:fontFamily="@font/prompt_regular"
                     app:layout_constraintStart_toStartOf="parent"

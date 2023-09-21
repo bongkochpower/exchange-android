@@ -13,15 +13,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.page.login.LoginFragment">
 
-        <!--<com.startwithn.exchange_android.ui.widget.AppToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:elevation="@dimen/zero"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </com.startwithn.exchange_android.ui.widget.AppToolbar>-->
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"

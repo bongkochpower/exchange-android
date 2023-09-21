@@ -58,6 +58,7 @@
 
     <!--hint-->
     <string name="hint_phone">เบอร์โทรศัพท์</string>
+    <string name="hint_username">ชื่อผู้ใช้งาน</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">ชื่อ</string>
     <string name="hint_lastname">นามสกุล</string>

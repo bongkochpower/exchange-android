@@ -17,6 +17,11 @@
         <item name="fontFamily">@font/prompt_regular</item>
         <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
 
+        <!--make status bar transparent-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
     </style>
 
     <style name="Theme.Exchangeandroid.NoActionBar">

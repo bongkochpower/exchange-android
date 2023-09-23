@@ -61,7 +61,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/edt_phone_number"
+                android:id="@+id/edt_username"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

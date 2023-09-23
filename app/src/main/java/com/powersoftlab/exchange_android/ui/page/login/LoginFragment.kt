@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import com.facebook.CallbackManager
@@ -130,7 +128,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     }
 
                     override fun afterTextChanged(p0: Editable?) {
-                        val userName = edtPhoneNumber.text.toString().trim()
+                        val userName = edtUsername.text.toString().trim()
                         val pw = edtPassword.text.toString().trim()
 
                         if (userName.isNotEmpty() && pw.isNotEmpty()) {
@@ -145,7 +143,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     if (isValidateLoginForm()) {
                         loginViewModel.login(
                             LoginRequestModel(
-                                mobile = edtPhoneNumber.text.toString(),
+                                username = edtUsername.text.toString(),
                                 password = edtPassword.text.toString()
                             )
                         )
@@ -242,7 +240,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     private fun isValidateLoginForm(): Boolean {
         var isValidate = true
         with(binding.layoutLogin2) {
-            val userName = edtPhoneNumber.text.toString().trim()
+            val userName = edtUsername.text.toString().trim()
             val pw = edtPassword.text.toString().trim()
 
             when {

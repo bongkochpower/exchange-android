@@ -10,6 +10,7 @@ object AppConstant {
     const val MIN_PASSWORD = 8
     const val FILE_SIZE_MAX = 25
     const val PIN_LENGTH = 6
+    const val TOP_UP_MAX = 500_000
 
     const val FORMAT_SERVICE_DATE = "yyyy-MM-dd"
     const val FORMAT_SERVICE_DATE_TIME = "yyyy-MM-dd HH:mm:ss"

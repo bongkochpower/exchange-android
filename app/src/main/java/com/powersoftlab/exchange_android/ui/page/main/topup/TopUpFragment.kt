@@ -2,6 +2,7 @@ package com.powersoftlab.exchange_android.ui.page.main.topup
 
 import androidx.core.widget.doAfterTextChanged
 import com.powersoftlab.exchange_android.R
+import com.powersoftlab.exchange_android.common.constant.AppConstant
 import com.powersoftlab.exchange_android.common.enum.AuthByEnum
 import com.powersoftlab.exchange_android.databinding.FragmentTopupBinding
 import com.powersoftlab.exchange_android.ext.isMonoClickable
@@ -75,9 +76,9 @@ class TopUpFragment : BaseFragment<FragmentTopupBinding>(R.layout.fragment_topup
     private fun isValidate(): Boolean {
         var isValidate = false
         with(binding) {
-            val inputMoney = edtMoneyAmount.text.toString()
+            val inputMoney = edtMoneyAmount.text.toString().trim().replace(",","")
             when {
-                inputMoney.isEmpty() || inputMoney == "0" -> {
+                inputMoney.isEmpty() || inputMoney == "0" || inputMoney.toDouble() > AppConstant.TOP_UP_MAX.toDouble() -> {
                     isTopupInvalid = true
                 }
 

@@ -51,6 +51,8 @@ data class UserModel(
     var subDistictId: Int?,
     @field:SerializedName("tel")
     var tel: String?,
+    @field:SerializedName("username")
+    var username: String?,
     @field:SerializedName("village")
     var village: String?
 ) {

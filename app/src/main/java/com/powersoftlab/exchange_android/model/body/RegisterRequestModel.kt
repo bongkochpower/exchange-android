@@ -7,6 +7,7 @@ data class RegisterRequestModel(
     @field:SerializedName("last_name") var lastname: String? = null,
     @field:SerializedName("birth_date") var birtDate: String? = null, //2023-01-01
     @field:SerializedName("tel") var tel: String? = null,
+    @field:SerializedName("username") var username: String? = null,
     @field:SerializedName("email") var email: String? = null,
     @field:SerializedName("password") var password: String? = null,
     @field:SerializedName("id_card_image") var idCardImagePath: String? = null,

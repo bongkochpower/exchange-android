@@ -6,7 +6,6 @@ import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.databinding.FragmentCardsBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvCardsBinding
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
-import com.powersoftlab.exchange_android.ext.toCardNumberFormat
 import com.powersoftlab.exchange_android.model.response.CardsResponseModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.list.LoadingStyleEnum
@@ -34,15 +33,10 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>(R.layout.fragment_cards
 
     override fun setUp() {
         with(binding) {
-            vpCards.adapter = cardsAdapter
+            //vpCards.adapter = cardsAdapter
 
         }
         cardsViewModel.getCards()
-
-        val dummyCards = listOf<CardsResponseModel>(
-            CardsResponseModel("1231231231231233".toCardNumberFormat(),1,"12/12","classic","username 001"),
-        )
-        cardsAdapter.submitList(true,dummyCards.toMutableList())
         cardsAdapter.initCards(requireContext())
 
     }
@@ -96,8 +90,12 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>(R.layout.fragment_cards
     }
 
     private fun setCardData(list : List<CardsResponseModel>){
-        binding.layoutCards.isVisible = list.isNotEmpty()
-        cardsAdapter.updateList(list.toMutableList(),true)
+        binding.apply {
+            layoutCards.isVisible = list.isNotEmpty()
+            vpCards.adapter = cardsAdapter
+        }
+        cardsAdapter.submitList(true,list.toMutableList())
+        //cardsAdapter.updateList(list.toMutableList(),true)
     }
 
 }

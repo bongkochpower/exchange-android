@@ -2,7 +2,6 @@ package com.powersoftlab.exchange_android.ext
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.util.Log
 import android.widget.DatePicker
 import com.powersoftlab.exchange_android.common.constant.AppConstant
 import com.powersoftlab.exchange_android.common.constant.AppConstant.FORMAT_SERVICE_DATE_TIME
@@ -56,8 +55,6 @@ fun Context.getDatePickerDialog(
         month,
         day
     )
-
-    Log.d("LOGD", "getDatePickerDialog: $day $month $year")
 
     if (isMaxToday) {
         datePickerDialog.datePicker.maxDate = calendar.timeInMillis

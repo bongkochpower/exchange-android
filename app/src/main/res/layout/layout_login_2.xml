@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="@string/validate_phone_and_pass_invalid"
+                    android:text="@string/validate_user_and_pass_invalid"
                     android:textColor="@color/color_error_text"
                     android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                     app:fontFamily="@font/prompt_regular" />
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:paddingStart="@dimen/padding_16dp"
-                android:text="@string/validate_phone_number_invalid"
+                android:text="@string/validate_username_invalid"
                 android:textColor="@color/color_error_text"
                 android:visibility="@{isLoginFail ? View.VISIBLE : View.GONE,default=gone}"
                 app:fontFamily="@font/prompt_regular" />

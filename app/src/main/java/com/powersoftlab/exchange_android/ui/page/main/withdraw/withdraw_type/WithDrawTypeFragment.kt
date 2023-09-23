@@ -186,7 +186,7 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
     /*mock data*/
     private fun getCurrency(): MutableList<OptionMenuModel<UserModel.CustomerBalance>> {
         val list = withdrawViewModel.getCurrency()
-        return list.map { OptionMenuModel(name = it.currencyName , data = it) }.toMutableList()
+        return list.map { OptionMenuModel(name = "${it.currencyName} - ${it.label}" , data = it) }.toMutableList()
     }
 
     private fun setCountry(list : MutableList<UserModel.CountryModel>) {

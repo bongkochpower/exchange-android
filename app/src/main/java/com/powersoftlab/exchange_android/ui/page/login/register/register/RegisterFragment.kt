@@ -617,8 +617,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 firstname = edtRegName.getText(),
                 lastname = edtRegLastname.getText(),
                 birtDate = dobToServer,
-                tel = edtRegUsername.text.trim().toString(),
-                //tel = edtRegPhone.text.trim().toString(),
+                username = edtRegUsername.text.trim().toString(),
+                tel = edtRegPhone.text.trim().toString(),
                 email = edtRegEmail.getText(),
                 password = edtRegPassword.text.trim().toString(),
                 idCardImagePath = registerViewModel.selectedIdCardImage ?: this@RegisterFragment.user?.idCardImage.toDashWhenNullOrEmpty(),
@@ -649,9 +649,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 }
                 edtRegName.setText(firstName.orEmpty())
                 edtRegLastname.setText(lastName.orEmpty())
+                edtRegPhone.setText(tel.orEmpty())
                 edtRegUsername.apply {
                     backgroundTintList = resources.getColorStateList(R.color.gray_alto)
-                    setText(tel)
+                    setText(username)
                     isEnabled = false
                 }
 

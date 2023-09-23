@@ -182,8 +182,8 @@
     <string name="menu_gallery">Gallery</string>
 
     <!--validate-->
-    <string name="validate_phone_and_pass_invalid">กรุณาตรวจสอบ เบอร์โทรศัพท์ และ Password อีกครั้ง</string>
-    <string name="validate_phone_number_invalid">กรุณาตรวจสอบ เบอร์โทรศัพท์</string>
+    <string name="validate_user_and_pass_invalid">กรุณาตรวจสอบ Username และ Password อีกครั้ง</string>
+    <string name="validate_username_invalid">กรุณาตรวจสอบ Username</string>
     <string name="validate_password_invalid">กรุณาตรวจสอบ Password</string>
     <string name="validate_not_found_phone_forgot_password">กรุณาใส่เบอร์โทรศัพท์ที่ลงทะเบียนไว้</string>
     <string name="validate_enter_otp_within_60_sec">กรุณาใส่หมายเลข OTP ภายใน 60 วินาที</string>
@@ -204,6 +204,7 @@
     <string name="validate_enter_money_again">กรุณาใส่จำนวนเงินอีกครั้ง</string>
     <string name="validate_select_sub_district">กรุณาเลือกตำบล/แขวง</string>
     <string name="validate_password_incorrect">รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง</string>
+    <string name="validate_select_start_date">กรุณาเลือกวันที่เริ่มต้นก่อน</string>
 
     <!--checkbox-->
     <string name="chk_term_and_con">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการใช้บริการ</string>

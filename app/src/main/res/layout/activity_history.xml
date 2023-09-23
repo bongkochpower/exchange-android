@@ -10,6 +10,7 @@
         <variable
             name="isEmpty"
             type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

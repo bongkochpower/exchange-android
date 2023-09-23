@@ -1,22 +1,26 @@
 package com.powersoftlab.exchange_android.ui.page.main.history
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
-import android.util.Log
+import android.widget.DatePicker
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
+import com.powersoftlab.exchange_android.common.constant.AppConstant.FORMAT_UI_DATE
 import com.powersoftlab.exchange_android.databinding.ActivityHistoryBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvTransactionBinding
 import com.powersoftlab.exchange_android.ext.getCalendar
-import com.powersoftlab.exchange_android.ext.getDatePickerDialog
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setOnLoadMoreListener
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ext.setTextSlideButtonEnable
+import com.powersoftlab.exchange_android.ext.toCalendar
+import com.powersoftlab.exchange_android.ext.toDate
 import com.powersoftlab.exchange_android.ext.toServiceFormat
+import com.powersoftlab.exchange_android.ext.toString
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.list.LoadingStyleEnum
@@ -85,13 +89,18 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
             imgDateTo.apply {
                 setOnTouchAnimation()
                 setOnClickListener {
-                    showDatePickerDialog({ date ->
-                        edtEndDate.setText(date)
 
-                        if (edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()) {
-                            slideToConfirm.setTextSlideButtonEnable(true, R.string.button_slide_to_confirm)
-                        }
-                    }, edtEndDate.text.toString())
+                    if(edtStartDate.text.toString().isEmpty()){
+                        AppAlert.alert(this@HistoryActivity,getString(R.string.validate_select_start_date)).show(supportFragmentManager)
+                    }else{
+                        showDatePickerDialog({ date ->
+                            edtEndDate.setText(date)
+
+                            if (edtStartDate.text.isNotEmpty() && edtEndDate.text.isNotEmpty()) {
+                                slideToConfirm.setTextSlideButtonEnable(true, R.string.button_slide_to_confirm)
+                            }
+                        }, edtEndDate.text.toString(), false)
+                    }
                 }
             }
 
@@ -151,29 +160,6 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         }
     }
 
-    private fun showDatePickerDialog(cb: (String) -> Unit, dateSelect: String? = null) {
-        val calendar = getCalendar()
-        var day = calendar.get(Calendar.DAY_OF_MONTH)
-        var month = calendar.get(Calendar.MONTH)
-        if(dateSelect?.isNotEmpty() == true){
-            day = dateSelect.split("/")[0].toInt()
-            month = dateSelect.split("/")[1].toInt()
-        }
-
-        val datePickerDialog = this@HistoryActivity.getDatePickerDialog(
-            cb = { date: String ->
-                cb.invoke(date)
-            },
-            isMaxToday = true,
-            day = day
-        )
-
-        Log.d("LOGD", "showDatePickerDialog: select $dateSelect")
-
-        datePickerDialog.dismiss()
-        datePickerDialog.show()
-    }
-
     private fun showTransactionListView(isShow: Boolean) {
         with(binding) {
             layoutHistoryList.isVisible = isShow
@@ -228,6 +214,61 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
     private fun getHistory(dateFrom: String, dateTo: String) {
         historyViewModel.getHistory(dateForm = dateFrom.toServiceFormat(), dateTo = dateTo.toServiceFormat())
+    }
+
+    private fun showDatePickerDialog(cb: (String) -> Unit, dateSelect: String? = null, isDateFrom: Boolean = true) {
+        val calendar = getCalendar()
+        var day = calendar.get(Calendar.DAY_OF_MONTH)
+        var month = calendar.get(Calendar.MONTH)
+        if (dateSelect?.isNotEmpty() == true) {
+            day = dateSelect.split("/")[0].toInt()
+            month = dateSelect.split("/")[1].toInt()
+        }
+
+
+        val datePickerDialog = this@HistoryActivity.getDatePickerHistoryDialog(
+            cb = { date: String ->
+                cb.invoke(date)
+            },
+            isMaxToday = true,
+            day = day,
+            isDateFromSelect = isDateFrom
+        )
+
+        datePickerDialog.dismiss()
+        datePickerDialog.show()
+    }
+
+    private fun getDatePickerHistoryDialog(
+        cb: (date: String) -> Unit,
+        calendar: Calendar = getCalendar(),
+        isMaxToday: Boolean = false,
+        isDateFromSelect: Boolean = true,
+        year: Int = calendar.get(Calendar.YEAR),
+        month: Int = calendar.get(Calendar.MONTH),
+        day: Int = calendar.get(Calendar.DAY_OF_MONTH),
+    ): DatePickerDialog {
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                calendar[Calendar.YEAR] = year
+                calendar[Calendar.MONTH] = monthOfYear
+                calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+                cb.invoke(calendar.toString(FORMAT_UI_DATE))
+            },
+            year,
+            month,
+            day
+        )
+
+        if (isMaxToday) {
+            datePickerDialog.datePicker.maxDate = calendar.timeInMillis
+        }
+        if (!isDateFromSelect) {
+            val fromDate = binding.edtStartDate.text.toString().toDate(FORMAT_UI_DATE).toCalendar().timeInMillis
+            datePickerDialog.datePicker.minDate = fromDate
+        }
+        return datePickerDialog
     }
 
 }

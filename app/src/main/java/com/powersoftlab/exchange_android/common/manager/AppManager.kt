@@ -169,7 +169,7 @@ class AppManager(private val context: Context) {
             remove(KeyConstant.AUTH_TOKEN)
             remove(KeyConstant.USER)
             remove(KeyConstant.LOGIN_TYPE)
-            remove(KeyConstant.PIN_AUTH)
+            remove(KeyConstant.AUTH_SECRET_KEY)
         }.apply()
         //removeNotificationCount()
 

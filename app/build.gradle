@@ -17,8 +17,8 @@ android {
         applicationId "com.powersoftlab.exchange_android"
         minSdk 24
         targetSdk 33
-        versionCode 10
-        versionName "1.0.9"
+        versionCode 12
+        versionName "1.0.11"
 
         multiDexEnabled true
 
@@ -29,9 +29,6 @@ android {
         release {
             //signingConfig signingConfigs.release
             manifestPlaceholders = [crashlyticsCollectionEnabled: "true"]
-            /*minifyEnabled true
-            debuggable false
-            shrinkResources true*/
 
             shrinkResources true
             minifyEnabled true

@@ -182,12 +182,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         with(binding) {
             val dateFrom = edtStartDate.text.toString()
             val dateTo = edtEndDate.text.toString()
-
             when {
-                dateFrom.isEmpty() && dateTo.isEmpty() -> {
-                    isValidate = false
-                }
-
+                dateFrom.isEmpty() && dateTo.isEmpty() -> {}
                 else -> isValidate = true
             }
 
@@ -204,6 +200,15 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         if (isValidate()) {
             val dateFrom = binding.edtStartDate.text.toString()
             val dateTo = binding.edtEndDate.text.toString()
+
+            val dateFromTimeStamp = dateFrom.toDate(FORMAT_UI_DATE).toCalendar().timeInMillis
+            val dateToTimeStamp = dateTo.toDate(FORMAT_UI_DATE).toCalendar().timeInMillis
+
+            if(dateFromTimeStamp > dateToTimeStamp){
+                AppAlert.alert(this@HistoryActivity,getString(R.string.validate_select_history_time_invalid)).show(supportFragmentManager)
+                binding.slideToConfirm.setTextSlideButtonEnable(true,R.string.button_slide_to_confirm)
+                return
+            }
 
             showTransactionListView(true)
             getHistory(dateFrom, dateTo)
@@ -222,7 +227,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         var month = calendar.get(Calendar.MONTH)
         if (dateSelect?.isNotEmpty() == true) {
             day = dateSelect.split("/")[0].toInt()
-            month = dateSelect.split("/")[1].toInt()
+            month = dateSelect.split("/")[1].toInt() - 1
         }
 
 
@@ -232,6 +237,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
             },
             isMaxToday = true,
             day = day,
+            month = month,
             isDateFromSelect = isDateFrom
         )
 

@@ -161,6 +161,10 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
                     validateEdittextErrorView(edtRegProvince)
                 }
 
+                item.country.isNullOrEmpty() -> {
+                    validateEdittextErrorView(edtRegCountry)
+                }
+
                 item.postCode.isNullOrEmpty() -> {
                     isPostcodeEmpty = true
                 }
@@ -208,7 +212,8 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
                 subDistrictId = 1,
                 subDistrict = edtRegSubDistrict.getText(),
                 province = edtRegProvince.getText(),
-                provinceId = 1
+                provinceId = 1,
+                country = edtRegCountry.getText(),
             )
         }
     }

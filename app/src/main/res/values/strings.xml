@@ -74,6 +74,7 @@
     <string name="hint_sub_district">ตำบล/แขวง</string>
     <string name="hint_district">อำเภอ/เขต</string>
     <string name="hint_province">จังหวัด</string>
+    <string name="hint_country">ประทศ</string>
     <string name="hint_postcode">รหัสไปรษณีย์</string>
     <string name="hint_reg_password">Password</string>
     <string name="hint_reg_confirm_password">Confirm Password</string>
@@ -134,6 +135,7 @@
     <string name="message_pls_set_finger">กรุณาสแกนลายนิ้วมือ\nสำหรับการทำธุรกรรม</string>
     <string name="message_set_pin_success">ตั้งค่ารหัส PIN สำเร็จ</string>
     <string name="message_set_finger_scan_success">ตั้งค่าลายนิ้วมือสำเร็จ</string>
+    <string name="message_currency_less_one">ไม่มีสกุลเงินอื่นให้แลกเปลี่ยน</string>
 
     <!--button-->
     <string name="button_close">ปิด</string>
@@ -205,6 +207,7 @@
     <string name="validate_select_sub_district">กรุณาเลือกตำบล/แขวง</string>
     <string name="validate_password_incorrect">รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง</string>
     <string name="validate_select_start_date">กรุณาเลือกวันที่เริ่มต้นก่อน</string>
+    <string name="validate_select_history_time_invalid">ช่วงเวลาที่ท่านเลือกไม่ถูกต้อง</string>
 
     <!--checkbox-->
     <string name="chk_term_and_con">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการใช้บริการ</string>

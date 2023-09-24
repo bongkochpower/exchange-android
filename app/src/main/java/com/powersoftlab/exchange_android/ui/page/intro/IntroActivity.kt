@@ -101,13 +101,13 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
                 goToLogin()
             }
             else -> {
-                val isHasPin = appManager.getPin() != null
-                if (isHasPin) {
-                    goToPinPassword()
+//                val isHasPin = appManager.getPin() != null
+//                if (isHasPin) {
+//                    goToPinPassword()
+//                } else {
 //                    goToMain()
-                } else {
-                    goToMain()
-                }
+//                }
+                goToPinPassword()
                 Timber.d("token -> ${AppManager(this).getAuthToken()}")
             }
         }

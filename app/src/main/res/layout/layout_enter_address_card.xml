@@ -170,6 +170,13 @@
                 android:textColor="@color/color_error_text"
                 android:visibility="@{isPostcodeEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}" />
 
+            <!--country-->
+            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
+                android:id="@+id/edt_reg_country"
+                app:edtHint="@string/hint_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <!--<LinearLayout
                 android:id="@+id/layout_password"
                 android:layout_width="match_parent"

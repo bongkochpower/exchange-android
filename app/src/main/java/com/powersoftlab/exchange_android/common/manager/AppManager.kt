@@ -2,10 +2,6 @@ package com.powersoftlab.exchange_android.common.manager
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.security.keystore.KeyGenParameterSpec
-import android.security.keystore.KeyProperties
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.powersoftlab.exchange_android.common.constant.KeyConstant
@@ -18,103 +14,103 @@ import timber.log.Timber
 class AppManager(private val context: Context) {
 
     companion object {
-        private var secureSharedPreferencesInstance: SharedPreferences? = null
+        //private var secureSharedPreferencesInstance: SharedPreferences? = null
     }
 
-    private fun getSecureSharePreferences(): SharedPreferences {
-        if (secureSharedPreferencesInstance == null) {
-            secureSharedPreferencesInstance =
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    val spec = KeyGenParameterSpec.Builder(
-                        MasterKey.DEFAULT_MASTER_KEY_ALIAS,
-                        KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
-                    )
-                        .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-                        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-                        .setKeySize(256)
-                        .build()
-
-                    val masterKey =
-                        MasterKey.Builder(context).setKeyGenParameterSpec(spec).build()
-
-                    EncryptedSharedPreferences.create(
-                        context,
-                        "encrypted_preferences",
-                        masterKey, // masterKey created above
-                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-                    )
-                } else {
-                    return getSharePreferences()
-                }
-        }
-
-        return secureSharedPreferencesInstance!!
-    }
+//    private fun getSecureSharePreferences(): SharedPreferences {
+//        if (secureSharedPreferencesInstance == null) {
+//            secureSharedPreferencesInstance =
+//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                    val spec = KeyGenParameterSpec.Builder(
+//                        MasterKey.DEFAULT_MASTER_KEY_ALIAS,
+//                        KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+//                    )
+//                        .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
+//                        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+//                        .setKeySize(256)
+//                        .build()
+//
+//                    val masterKey =
+//                        MasterKey.Builder(context).setKeyGenParameterSpec(spec).build()
+//
+//                    EncryptedSharedPreferences.create(
+//                        context,
+//                        "encrypted_preferences",
+//                        masterKey, // masterKey created above
+//                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+//                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+//                    )
+//                } else {
+//                    return getSharePreferences()
+//                }
+//        }
+//
+//        return secureSharedPreferencesInstance!!
+//    }
 
     private fun getSharePreferences(): SharedPreferences =
         context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
-
 
     //region secure
     //region fcm
     fun setFcmToken(fcmToken: String?) {
         Timber.d("${KeyConstant.FCM_TOKEN} -> $fcmToken")
-        getSecureSharePreferences().edit()
+        getSharePreferences().edit()
             .putString(KeyConstant.FCM_TOKEN, fcmToken)
             .apply()
     }
 
     fun getFcmToken(): String? {
-        return getSecureSharePreferences().getString(KeyConstant.FCM_TOKEN, "")
+        return getSharePreferences().getString(KeyConstant.FCM_TOKEN, "")
     }
     //endregion
 
     //region auth
     fun setAuthToken(authToken: String?) {
         Timber.d("${KeyConstant.AUTH_TOKEN} -> $authToken")
-        getSecureSharePreferences().edit().putString(KeyConstant.AUTH_TOKEN, authToken).apply()
+        getSharePreferences().edit().putString(KeyConstant.AUTH_TOKEN, authToken).apply()
     }
 
     fun getAuthToken(): String? {
-        return getSecureSharePreferences()
+        return getSharePreferences()
             .getString(KeyConstant.AUTH_TOKEN, null)
     }
     //endregion
 
     //region secret key
     fun setAuthSecretKey(secretKey: String?) {
-        getSecureSharePreferences().edit().putString(KeyConstant.AUTH_SECRET_KEY, secretKey).apply()
+        getSharePreferences().edit().putString(KeyConstant.AUTH_SECRET_KEY, secretKey).apply()
     }
 
     fun getAuthSecretKey(): String? {
-        return getSecureSharePreferences().getString(KeyConstant.AUTH_SECRET_KEY, null)
+        return getSharePreferences().getString(KeyConstant.AUTH_SECRET_KEY, null)
     }
     //endregion
 
     //region login type
     fun setLoginType(loginType: String) {
-        getSecureSharePreferences().edit().putString(KeyConstant.LOGIN_TYPE, loginType).apply()
+        getSharePreferences().edit().putString(KeyConstant.LOGIN_TYPE, loginType).apply()
     }
 
     fun getLoginType(): LoginTypeEnum {
-        val type = getSecureSharePreferences().getString(KeyConstant.LOGIN_TYPE, LoginTypeEnum.APP.name)
+        val type = getSharePreferences().getString(KeyConstant.LOGIN_TYPE, LoginTypeEnum.APP.name)
         return LoginTypeEnum.fromName(type)
     }
     //endregion
 
     //region user
     fun setUser(userModel: UserModel?) =
-        getSecureSharePreferences().edit().putString(KeyConstant.USER, Gson().toJson(userModel))
+        getSharePreferences().edit().putString(KeyConstant.USER, Gson().toJson(userModel))
             .apply()
 
     fun getUser(): UserModel? = Gson().fromJson(
-        getSecureSharePreferences().getString(KeyConstant.USER, null),
+        getSharePreferences().getString(KeyConstant.USER, null),
         UserModel::class.java
     )
     //endregion
     //endregion
 
+    //region normal
     //region notification
     fun setOpenNotification(isOpen: Boolean): Boolean {
         Timber.d("${KeyConstant.IS_OPEN_NOTIFICATION} -> $isOpen")
@@ -158,13 +154,13 @@ class AppManager(private val context: Context) {
     //endregion
 
     fun setPin(pin: String?) {
-        getSecureSharePreferences().edit().putString(KeyConstant.PIN_AUTH, pin).apply()
+        getSharePreferences().edit().putString(KeyConstant.PIN_AUTH, pin).apply()
     }
-    fun getPin(): String? = getSecureSharePreferences().getString(KeyConstant.PIN_AUTH, "111111")
-
+    fun getPin(): String? = getSharePreferences().getString(KeyConstant.PIN_AUTH, "111111")
+    //endregion
 
     fun removeAll(cb: () -> Unit) {
-        getSecureSharePreferences().edit().apply {
+        getSharePreferences().edit().apply {
             remove(KeyConstant.FCM_TOKEN)
             remove(KeyConstant.AUTH_TOKEN)
             remove(KeyConstant.USER)

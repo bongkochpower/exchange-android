@@ -14,5 +14,6 @@ data class RequestNewCardRequestModel(
     @field:SerializedName("sub_distict_id") var subDistrictId: Int? = null,
     @field:SerializedName("sub_distict") var subDistrict: String? = null,
     @field:SerializedName("provine") var province: String? = null,
-    @field:SerializedName("provine_id") var provinceId: Int? = null
+    @field:SerializedName("provine_id") var provinceId: Int? = null,
+    @field:SerializedName("country") var country: String? = null
 )

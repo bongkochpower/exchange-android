@@ -234,7 +234,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     fun gotoExchange() {
-        AppNavigator(this).goToExchange()
+        val currencyUser = appManager.getUser()?.customerBalances?.size ?: 0
+        if(currencyUser <= 1){
+            AppAlert.alert(this@MainActivity,getString(R.string.message_currency_less_one)).show(supportFragmentManager)
+        }else{
+            AppNavigator(this).goToExchange()
+        }
     }
 
     fun gotoHistory() {

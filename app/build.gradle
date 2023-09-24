@@ -17,8 +17,8 @@ android {
         applicationId "com.powersoftlab.exchange_android"
         minSdk 24
         targetSdk 33
-        versionCode 12
-        versionName "1.0.11"
+        versionCode 14
+        versionName "1.0.13"
 
         multiDexEnabled true
 
@@ -30,9 +30,14 @@ android {
             //signingConfig signingConfigs.release
             manifestPlaceholders = [crashlyticsCollectionEnabled: "true"]
 
-            shrinkResources true
-            minifyEnabled true
+//            shrinkResources true
+//            minifyEnabled true
+//            debuggable false
+
+            minifyEnabled false
             debuggable false
+            shrinkResources false
+
             //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
         }

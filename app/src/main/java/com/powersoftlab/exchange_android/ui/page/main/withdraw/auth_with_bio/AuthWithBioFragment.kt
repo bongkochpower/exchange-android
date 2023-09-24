@@ -229,7 +229,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
     private fun manageTransactionMode() {
         when (args.authBy) {
             AuthByEnum.TOPUP -> {
-                topupViewModel.topUp(amount = args.amount.toDouble())
+                topupViewModel.topUp(amount = args.amount.toString().toDouble())
             }
 
             AuthByEnum.EXCHANGE -> {
@@ -237,7 +237,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
             }
 
             AuthByEnum.WITHDRAW -> {
-                withdrawViewModel.withdraw(amount = args.amount.toDouble())
+                withdrawViewModel.withdraw(amount = args.amount.toString().toDouble())
             }
 
             else -> {

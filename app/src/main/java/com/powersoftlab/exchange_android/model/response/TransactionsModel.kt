@@ -7,9 +7,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TransactionsModel(
     @field:SerializedName("balance")
-    var balance: Double?,
+    var balance: String?,
     @field:SerializedName("before_balance")
-    var beforeBalance: Double?,
+    var beforeBalance: String?,
     @field:SerializedName("created_at")
     var createdAt: String?,
     @field:SerializedName("currency_change_to")
@@ -25,5 +25,5 @@ data class TransactionsModel(
     @field:SerializedName("type_text")
     var typeText: String?,
     @field:SerializedName("value")
-    var value: Double?
+    var value: String?
 ) : Parcelable

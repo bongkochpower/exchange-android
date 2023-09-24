@@ -38,7 +38,7 @@ class WithDrawInputMoneyFragment : BaseFragment<FragmentWithdrawInputMoneyBindin
                 if (isWithdrawInvalid == true) {
                     isWithdrawInvalid = false
                 }
-                slideToConfirm.setTextSlideButtonEnable(it.toString().isNotEmpty(),R.string.button_slide_to_topup)
+                slideToConfirm.setTextSlideButtonEnable(it.toString().isNotEmpty(),R.string.button_slide_to_withdraw)
             }
 
 

@@ -74,7 +74,7 @@
     <string name="hint_sub_district">ตำบล/แขวง</string>
     <string name="hint_district">อำเภอ/เขต</string>
     <string name="hint_province">จังหวัด</string>
-    <string name="hint_country">ประทศ</string>
+    <string name="hint_country">ประเทศ</string>
     <string name="hint_postcode">รหัสไปรษณีย์</string>
     <string name="hint_reg_password">Password</string>
     <string name="hint_reg_confirm_password">Confirm Password</string>

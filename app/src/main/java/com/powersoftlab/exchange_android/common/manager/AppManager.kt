@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.powersoftlab.exchange_android.common.constant.KeyConstant
+import com.powersoftlab.exchange_android.common.enum.LanguageEnum
 import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
@@ -157,6 +158,10 @@ class AppManager(private val context: Context) {
         getSharePreferences().edit().putString(KeyConstant.PIN_AUTH, pin).apply()
     }
     fun getPin(): String? = getSharePreferences().getString(KeyConstant.PIN_AUTH, "111111")
+
+    fun getLanguage(): String =
+        getSharePreferences().getString(KeyConstant.LANGUAGE, LanguageEnum.TH.language)
+            .toString()
     //endregion
 
     fun removeAll(cb: () -> Unit) {

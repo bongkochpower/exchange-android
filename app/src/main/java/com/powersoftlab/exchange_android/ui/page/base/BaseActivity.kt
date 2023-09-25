@@ -13,6 +13,7 @@ import com.powersoftlab.exchange_android.common.databinding.inflater.contentView
 import com.powersoftlab.exchange_android.common.enum.AppEventEnum
 import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.manager.BiometricPromptUtils
+import com.powersoftlab.exchange_android.common.other.LocaleHelper
 import com.powersoftlab.exchange_android.common.rx.RxBus
 import com.powersoftlab.exchange_android.common.rx.RxEvent
 import com.powersoftlab.exchange_android.ext.fixFontScale
@@ -53,6 +54,7 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes private val layout: 
 //        )
 
         binding.root.requestLayout()
+        LocaleHelper().setLocale(this,appManager.getLanguage())
 
         intent.extras?.let {
             getExtra(it)

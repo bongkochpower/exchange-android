@@ -125,7 +125,11 @@ fun Double.toStringFormat(isDecimal: Boolean = true): String {
     }
 }
 
-fun Double.toStringFormat(): String = DecimalFormat("#,##0.00").format(this)
+fun Double.toStringFormat(): String{
+    val df = DecimalFormat("#,##0.00")
+    df.roundingMode = RoundingMode.DOWN
+    return df.format(this)
+}
 
 fun Double.toPointStringFormat(): String = DecimalFormat("#,##0.#").format(this)
 

@@ -10,23 +10,37 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
+import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.databinding.FragmentRequestNewCardBinding
 import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
-import com.powersoftlab.exchange_android.ext.validateAfterTextChange
+import com.powersoftlab.exchange_android.ext.toDashWhenNullOrEmpty
 import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
+import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
+import com.powersoftlab.exchange_android.ui.dialog.bottomsheet.AddressAutoFillBottomSheetDialog
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
+import com.powersoftlab.exchange_android.ui.page.login.register.register.RegisterViewModel
 import com.powersoftlab.exchange_android.ui.page.main.cards.CardsFragmentDirections
 import com.powersoftlab.exchange_android.ui.page.main.cards.CardsViewModel
 import com.powersoftlab.exchange_android.ui.widget.EdittextRegister
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.layout.fragment_request_new_card), OnBackPressedFragment {
 
     private val cardViewMode : CardsViewModel by sharedStateViewModel()
+    private val registerViewModel: RegisterViewModel by stateViewModel()
+    private val appManager : AppManager by inject()
+    private var mAddressAutoFillData : AddressAutoFillResponseModel? = null
+
+    private val subDistrictBottomSheetDialog: AddressAutoFillBottomSheetDialog by lazy {
+        val subDistricts = appManager.getSubDistricts() ?: mutableListOf()
+        AddressAutoFillBottomSheetDialog.newInstance(subDistricts.toMutableList())
+    }
 
     companion object {
         fun newInstance() = RequestNewCardFragment()
@@ -37,6 +51,7 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
 
     override fun setUp() {
         gotoStepInfo()
+
         binding.apply {
 
         }
@@ -58,9 +73,15 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
                     }
                 }
 
-                edtRegSubDistrict.validateAfterTextChange()
-                edtRegDistrict.validateAfterTextChange()
-                edtRegProvince.validateAfterTextChange()
+                edtRegSubDistrict.setOnClickListener {
+                    subDistrictBottomSheetDialog.show(childFragmentManager)
+                    subDistrictBottomSheetDialog.setOnItemSelectedListener {
+                        registerViewModel.getAddressDataById(it)
+                    }
+
+                }
+//                edtRegDistrict.validateAfterTextChange()
+//                edtRegProvince.validateAfterTextChange()
             }
 
             btnConfirm.apply {
@@ -111,6 +132,28 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
                 }
             }
         }
+
+        registerViewModel.addressByIdLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultWrapper.Loading -> {}
+
+                is ResultWrapper.Success -> {
+                    val data = it.response.data
+                    data?.let { it1 -> updateAddressData(it1) }
+
+                }
+
+                is ResultWrapper.GenericError -> {
+                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    AppAlert.alert(requireContext(), it.message).show(childFragmentManager)
+                }
+
+                else -> {}
+            }
+        }
     }
 
     private fun getCurrentStep(): Int = if (binding.layoutEnterAddress.root.isVisible) {
@@ -123,6 +166,9 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
         binding.apply {
             isStepInfo = true
             cardViewMode.setIcon(R.drawable.icon_back)
+
+            //prepare data for register
+            setupDataRequestNewCard()
         }
     }
 
@@ -207,14 +253,40 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
                 houseNo = edtRegHouseNo.text.trim().toString(),
                 village = edtRegVillage.text.trim().toString(),
                 road = edtRegStreet.getText(),
-                districtId = 1,
+                districtId = mAddressAutoFillData?.district?.districtId,
                 district = edtRegDistrict.getText(),
-                subDistrictId = 1,
-                subDistrict = edtRegSubDistrict.getText(),
+                subDistrictId = mAddressAutoFillData?.subDistrict?.id,
+                subDistrict = edtRegSubDistrict.text.trim().toString(),
                 province = edtRegProvince.getText(),
-                provinceId = 1,
+                provinceId = mAddressAutoFillData?.province?.provinceId,
                 country = edtRegCountry.getText(),
             )
+        }
+    }
+
+    private fun setupDataRequestNewCard(){
+        val userItem = appManager.getUser()
+        with(binding.layoutEnterAddress){
+            userItem?.let {
+                edtRegHouseNo.setText(it.houseNo)
+                edtRegVillage.setText(it.village)
+                edtRegVillageNo.setText(it.moo)
+                edtRegAlley.setText(it.soi)
+                edtRegStreet.setText(it.road.toDashWhenNullOrEmpty())
+                edtRegPostcode.setText(it.postCode)
+                it.subDistictId?.let { registerViewModel.getAddressDataById(it) }
+            }
+
+        }
+    }
+
+    private fun updateAddressData(data : AddressAutoFillResponseModel){
+        mAddressAutoFillData = data
+        with(binding.layoutEnterAddress){
+            edtRegSubDistrict.setText(data.subDistrict?.nameTH.toDashWhenNullOrEmpty())
+            edtRegDistrict.setText(data.district?.nameTH.toDashWhenNullOrEmpty())
+            edtRegProvince.setText(data.province?.nameTH.toDashWhenNullOrEmpty())
+            edtRegPostcode.setText(data.subDistrict?.zipCode.toDashWhenNullOrEmpty())
         }
     }
 

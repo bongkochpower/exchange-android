@@ -125,21 +125,34 @@
                 android:layout_marginTop="@dimen/margin_24dp" />
 
             <!--sub district-->
-            <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
+            <EditText
                 android:id="@+id/edt_reg_sub_district"
-                app:edtHint="@string/hint_sub_district"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
+                android:drawableEnd="@drawable/icon_arrow_down"
+                android:focusable="false"
+                android:layout_marginBottom="@dimen/margin_20dp"
+                android:hint="@string/hint_sub_district"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:paddingTop="@dimen/padding_6dp"
+                android:paddingEnd="@dimen/padding_16dp"
+                android:textColorHint="@color/text_back"
+                tools:ignore="RtlSymmetry" />
 
             <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_district"
                 app:edtHint="@string/hint_district"
+                app:isEditable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <com.powersoftlab.exchange_android.ui.widget.EdittextRegister
                 android:id="@+id/edt_reg_province"
                 app:edtHint="@string/hint_province"
+                app:isEditable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

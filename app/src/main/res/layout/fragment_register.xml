@@ -390,7 +390,7 @@
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@{isPhoneEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
+                android:background="@{isSelectSubDistrictEmpty ? @drawable/bg_edittext_error : @drawable/bg_edittext , default = @drawable/bg_edittext}"
                 android:drawableEnd="@drawable/icon_arrow_down"
                 android:focusable="false"
                 android:hint="@string/hint_sub_district"
@@ -398,12 +398,13 @@
                 android:inputType="none"
                 android:paddingTop="@dimen/padding_6dp"
                 android:paddingEnd="@dimen/padding_16dp"
-                android:textColorHint="@{isPhoneEmpty ? @color/color_error_text : @color/text_back}"
+                android:textColorHint="@{isSelectSubDistrictEmpty ? @color/color_error_text : @color/text_back}"
                 tools:ignore="RtlSymmetry" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextViewExtraMini"
                 android:layout_width="300dp"
+                android:id="@+id/tv_error_sub_district"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_2dp"
                 android:layout_marginStart="@dimen/margin_16dp"

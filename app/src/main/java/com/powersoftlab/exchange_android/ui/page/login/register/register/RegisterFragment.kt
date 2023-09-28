@@ -169,6 +169,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             }
 
             edtRegSubDistrict.setOnClickListener {
+                isSelectSubDistrictEmpty = false
                 subDistrictBottomSheetDialog.show(childFragmentManager)
                 subDistrictBottomSheetDialog.setOnItemSelectedListener {
                     registerViewModel.getAddressDataById(it)
@@ -535,12 +536,15 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                     validateEdittextErrorView(edtRegHouseNo)
                 }
 
-                subDistrict.isEmpty() -> validateEdittextErrorView(edtRegSubDistrict)
-                district.isEmpty() -> validateEdittextErrorView(edtRegDistrict)
-                province.isEmpty() -> validateEdittextErrorView(edtRegProvince)
+                subDistrict.isEmpty() -> {
+                    isSelectSubDistrictEmpty = true
+                    validateEdittextErrorView(edtRegSubDistrict,)
+                }
+//                district.isEmpty() -> validateEdittextErrorView(edtRegDistrict)
+//                province.isEmpty() -> validateEdittextErrorView(edtRegProvince)
                 postcode.isEmpty() -> {
                     isPostcodeEmpty = true
-                    validateEdittextErrorView(edtRegPostcode)
+                    validateEdittextErrorView(edtRegPostcode,tvErrorSubDistrict)
                 }
                 username.isEmpty() -> {
                     isUsernameEmpty = true

@@ -33,7 +33,6 @@ import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentRegisterBinding
-import com.powersoftlab.exchange_android.ext.convertDisplayDateToBuddhistYear
 import com.powersoftlab.exchange_android.ext.convertDisplayDateToChristianYear
 import com.powersoftlab.exchange_android.ext.fadeIn
 import com.powersoftlab.exchange_android.ext.gone
@@ -462,7 +461,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
             val dob = cal.toString(FORMAT_UI_DATE)
-            binding.edtRegDob.setText(dob.convertDisplayDateToBuddhistYear())
+            binding.edtRegDob.setText(dob)
             binding.isDobEmpty = false
 
         }, year, month, day)
@@ -657,7 +656,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 }
 
                 edtRegEmail.setText(email.orEmpty())
-                edtRegDob.setText(birthDate.toDisplayFormat().convertDisplayDateToBuddhistYear())
+                edtRegDob.setText(birthDate.toDisplayFormat())
 
                 isSelectIdCardImage = true
                 val filename: String = idCardImage.orEmpty()

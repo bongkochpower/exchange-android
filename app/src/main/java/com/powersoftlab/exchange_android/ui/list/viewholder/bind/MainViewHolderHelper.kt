@@ -1,13 +1,11 @@
 package com.powersoftlab.exchange_android.ui.list.viewholder.bind
 
 import android.content.Context
-import android.util.Log
 import com.powersoftlab.exchange_android.common.constant.AppConstant
 import com.powersoftlab.exchange_android.common.enum.TransactionStatusEnum
 import com.powersoftlab.exchange_android.common.enum.TransactionTypeEnum
 import com.powersoftlab.exchange_android.databinding.ItemRvBalanceBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvTransactionBinding
-import com.powersoftlab.exchange_android.ext.convertDisplayDateToBuddhistYear
 import com.powersoftlab.exchange_android.ext.convertUtcToIct
 import com.powersoftlab.exchange_android.ext.loadImage
 import com.powersoftlab.exchange_android.ext.reDateFormat
@@ -48,7 +46,7 @@ object MainViewHolderHelper {
                     //วันที่ 02/06/23 เวลา 18:00 น.
                     val dateTime = it.createdAt.convertUtcToIct()
 
-                    val date = dateTime.toDisplayFormat().convertDisplayDateToBuddhistYear()
+                    val date = dateTime.toDisplayFormat()
                     val time = dateTime.reDateFormat(AppConstant.FORMAT_SERVICE_DATE_TIME, AppConstant.FORMAT_UI_TIME)
                     val status = TransactionStatusEnum.fromName(it.status)
 

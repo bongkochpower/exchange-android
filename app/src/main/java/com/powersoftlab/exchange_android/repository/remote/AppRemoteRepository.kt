@@ -1,6 +1,7 @@
 package com.powersoftlab.exchange_android.repository.remote
 
 import android.content.Context
+import com.powersoftlab.exchange_android.ext.getTimeZoneOffset
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.ExchangeRequestModel
 import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
@@ -32,7 +33,11 @@ class AppRemoteRepository(
     suspend fun getHistoryTransactions(page: Int, limit: Int, from: String, to: String): ResultWrapper<BaseResponseModel<List<TransactionsModel>>> {
         return safeApiCall(dispatcher, call = {
             api.historyTransactions(
-                page = page, limit = limit, dateFrom = from, dateTo = to
+                page = page,
+                limit = limit,
+                dateFrom = from,
+                dateTo = to,
+                timeZone = context.getTimeZoneOffset()
             )
         })
     }

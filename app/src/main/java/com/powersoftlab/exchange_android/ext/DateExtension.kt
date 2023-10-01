@@ -5,6 +5,7 @@ import android.content.Context
 import android.widget.DatePicker
 import com.powersoftlab.exchange_android.common.constant.AppConstant
 import com.powersoftlab.exchange_android.common.constant.AppConstant.FORMAT_SERVICE_DATE_TIME
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -109,6 +110,18 @@ fun String?.convertUtcToIct(): String? {
         null
     }
 }
+
+fun Context.getTimeZoneOffset() : String{
+    val calendar = Calendar.getInstance(
+        TimeZone.getTimeZone("GMT"),
+        Locale.getDefault()
+    )
+    val currentLocalTime: Date = calendar.time
+    val date: DateFormat = SimpleDateFormat("ZZZZZ")
+    val localTime: String = date.format(currentLocalTime)
+    return localTime
+}
+
 
 private const val diffYear: Int = 543
 fun Int?.convertToBuddhistYear(): Int? = this?.plus(diffYear) ?: run { this }

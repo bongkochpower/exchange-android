@@ -30,6 +30,7 @@ import com.powersoftlab.exchange_android.ui.page.base.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import java.util.Calendar
 
+
 class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_history) {
 
     private val historyViewModel: HistoryViewModel by stateViewModel()

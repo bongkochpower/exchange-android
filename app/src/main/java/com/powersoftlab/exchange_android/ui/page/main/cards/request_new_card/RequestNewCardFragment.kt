@@ -275,6 +275,7 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
                 edtRegStreet.setText(it.road.toDashWhenNullOrEmpty())
                 edtRegPostcode.setText(it.postCode)
                 it.subDistictId?.let { registerViewModel.getAddressDataById(it) }
+                edtRegCountry.setText("ไทย")
             }
 
         }

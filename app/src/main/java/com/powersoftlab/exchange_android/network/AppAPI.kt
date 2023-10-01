@@ -92,6 +92,7 @@ interface AppAPI {
         @Query("limit") limit: Int,
         @Query("dateFrom") dateFrom: String,
         @Query("dateTo") dateTo: String,
+        @Query("timezone") timeZone: String,
     ): Response<BaseResponseModel<List<TransactionsModel>>>
 
     @FormUrlEncoded

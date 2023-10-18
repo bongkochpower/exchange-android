@@ -9,7 +9,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".config.AppApplication"
@@ -23,6 +23,9 @@
         android:theme="@style/Theme.Exchangeandroid"
         tools:targetApi="31">
         <activity
+            android:name=".ui.page.main.transfer.TransferActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.page.intro.auth_pin.AuthPinActivity"
             android:exported="false" />
         <activity
@@ -30,8 +33,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.page.hamburger_menu.edit_profile.EditProfileActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".ui.page.hamburger_menu.setting.SettingsActivity"
             android:exported="false" />
@@ -43,8 +46,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.page.main.cards.CardsActivity"
-            android:windowSoftInputMode="adjustResize"
-             />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.page.main.history.HistoryActivity"
             android:exported="false" />

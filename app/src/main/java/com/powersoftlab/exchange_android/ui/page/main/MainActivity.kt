@@ -254,6 +254,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         AppNavigator(this).goToWithdraw()
     }
 
+    fun gotoTransfer() {
+        AppNavigator(this).goToTransfer()
+    }
+
     private fun open() {
         binding.drawerLayout.openDrawer(GravityCompat.START)
     }

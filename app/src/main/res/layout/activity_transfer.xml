@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_app"
+        tools:context=".ui.page.main.transfer.TransferActivity">
+
+        <com.powersoftlab.exchange_android.ui.widget.AppToolbar
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="@dimen/zero"
+            app:iconBackSrc="@drawable/icon_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/title_main_transfer">
+        </com.powersoftlab.exchange_android.ui.widget.AppToolbar>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+            app:navGraph="@navigation/nav_transfer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

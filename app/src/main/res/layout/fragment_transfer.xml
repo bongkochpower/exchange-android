@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isInputMoneyInvalid"
+            type="Boolean" />
+
+        <variable
+            name="isAccountNumberInvalid"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_app">
+
+        <!--header-->
+        <LinearLayout
+            android:id="@+id/ll_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--currency-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_6dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/padding_30dp"
+                android:paddingBottom="@dimen/padding_14dp"
+                tools:ignore="RtlSymmetry">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_32dp"
+                    android:gravity="center_vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/icon_next"
+                        android:drawablePadding="@dimen/padding_8dp"
+                        android:text="@string/hint_exchange_from"
+                        android:textColor="@color/text_edittext_gray"
+                        app:fontFamily="@font/prompt_regular" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/padding_56dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_currency"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_rv_exchange_currency" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_currency_form"
+                    style="@style/TextViewRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    android:drawablePadding="@dimen/padding_10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/hint_exchange_your_balance_from"
+                    android:textColor="@color/green_fun_green"
+                    app:fontFamily="@font/prompt_regular" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--body-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/margin_40dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_header">
+
+            <!--amount-->
+            <com.powersoftlab.exchange_android.ui.widget.CurrencyEditText
+                android:id="@+id/edt_input_transfer"
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_input_transfer"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:maxLength="@integer/length_phone_number"
+                android:textColorHint="@{isInputMoneyInvalid ? @color/color_error_text : @color/text_back}"
+                tools:ignore="RtlSymmetry" />
+
+            <!--error input-->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingStart="@dimen/padding_20dp"
+                android:orientation="vertical"
+                android:visibility="@{isInputMoneyInvalid ? View.VISIBLE : View.GONE,default=gone}"
+                tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewRegular"
+                    android:layout_marginTop="@dimen/margin_6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/validate_money_incorrect"
+                    android:textColor="@color/color_error_text"
+                    app:fontFamily="@font/prompt_regular" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewMini"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/validate_enter_money_again"
+                    android:textColor="@color/color_error_text"
+                    app:fontFamily="@font/prompt_regular" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_account_number"
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/hint_input_account_no"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="@integer/length_phone_number"
+                android:textColorHint="@{isAccountNumberInvalid ? @color/color_error_text : @color/text_back}"
+                tools:ignore="RtlSymmetry" />
+
+            <!--error account no-->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingStart="@dimen/padding_20dp"
+                android:orientation="vertical"
+                android:visibility="@{isAccountNumberInvalid ? View.VISIBLE : View.GONE,default=gone}"
+                tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewRegular"
+                    android:layout_marginTop="@dimen/margin_6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/validate_account_number_invalid"
+                    android:textColor="@color/color_error_text"
+                    app:fontFamily="@font/prompt_regular" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextViewMini"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/validate_enter_account_number_again"
+                    android:textColor="@color/color_error_text"
+                    app:fontFamily="@font/prompt_regular" />
+
+            </LinearLayout>
+
+            <com.powersoftlab.exchange_android.ui.widget.SlideButton
+                android:id="@+id/slide_to_transaction"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_24dp"
+                android:text="@string/button_slide_to_transaction" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

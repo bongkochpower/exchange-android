@@ -32,6 +32,7 @@
     <string name="title_main_cards">Card</string>
     <string name="title_main_cards_toolbar">Physical Card</string>
     <string name="title_main_withdraw">ถอนเงิน</string>
+    <string name="title_main_transfer">โอนเงิน</string>
     <string name="title_main_balance">ยอดเงินคงเหลือ</string>
     <string name="title_main_recent_list">รายการล่าสุด</string>
     <string name="title_topup_amount">จำนวนเงิน</string>
@@ -52,6 +53,10 @@
     <string name="title_summary_shop">ร้าน</string>
     <string name="title_set_pin">ตั้งค่า PIN</string>
     <string name="title_finger_scan">แสกนลายนิ้วมือ</string>
+    <string name="title_name">ชื่อ</string>
+    <string name="title_account_number">เลขบัญชี</string>
+    <string name="title_currency">สกุลเงิน</string>
+    <string name="title_transaction_id">Transactionid</string>
 
 
     <!--description-->
@@ -104,6 +109,8 @@
     <string name="hint_select_shop">เลือกร้าน</string>
     <string name="hint_withdraw_your_balance">คุณมีเงินอยู่ </string>
     <string name="hint_reset_pin">รีเซ็ทรหัส PIN</string>
+    <string name="hint_input_transfer">ใส่จำนวนเงินที่ต้องการโอน</string>
+    <string name="hint_input_account_no">กรุณาใส่เลขบัญชี</string>
 
 
     <!--message-->
@@ -160,6 +167,9 @@
     <string name="button_next_step">ขั้นตอนต่อไป</string>
     <string name="button_scan_qr">Scan QR Code</string>
     <string name="button_slide_to_withdraw">เลื่อนเพื่อถอนเงิน</string>
+    <string name="button_slide_to_transaction">เลื่อนเพื่อทำรายการ</string>
+    <string name="button_slide_to_transfer">เลื่อนเพื่อโอนเงิน</string>
+    <string name="button_save_picture">บันทึกรูป</string>
 
     <!--contentDescription-->
     <string name="cd_bg">background</string>
@@ -208,6 +218,8 @@
     <string name="validate_password_incorrect">รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง</string>
     <string name="validate_select_start_date">กรุณาเลือกวันที่เริ่มต้นก่อน</string>
     <string name="validate_select_history_time_invalid">ช่วงเวลาที่ท่านเลือกไม่ถูกต้อง</string>
+    <string name="validate_account_number_invalid">เลขบัญชีของท่านไม่ถูกต้อง</string>
+    <string name="validate_enter_account_number_again">กรุณาใส่เลขบัญชีอีกครั้ง</string>
 
     <!--checkbox-->
     <string name="chk_term_and_con">ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขการใช้บริการ</string>

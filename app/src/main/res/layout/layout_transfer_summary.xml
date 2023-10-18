@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <!--<variable
+            name="item"
+            type="com.powersoftlab.exchange_android.model.response.WithdrawResponseModel" />-->
+
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margin_40dp"
+        android:paddingHorizontal="@dimen/padding_50dp"
+        >
+
+        <!--image-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_30dp">
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="@dimen/image_profile_size"
+                android:layout_height="@dimen/image_profile_size"
+                android:src="@drawable/bg_image_profile" />
+        </FrameLayout>
+
+        <!--data-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_30dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_date"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="16 Oct 2023/17:52" />
+
+        </FrameLayout>
+
+        <!--name-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_name"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="Mr. Sompong Naja" />
+
+        </FrameLayout>
+
+        <!--account number-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_account_number"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="123-999-123-094" />
+
+        </FrameLayout>
+
+        <!--amount-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_summary_amount"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="900.00" />
+
+        </FrameLayout>
+
+        <!--currency-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_currency"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="บาท" />
+        </FrameLayout>
+
+        <!--transaction ID-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/title_transaction_id"
+                android:textColor="@color/text_edittext_gray"
+                app:fontFamily="@font/prompt_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/green_fun_green"
+                app:fontFamily="@font/prompt_bold"
+                tools:text="0123456789" />
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

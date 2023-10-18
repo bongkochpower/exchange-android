@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_transfer"
+    app:startDestination="@id/transferFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_transfer"
+        android:id="@+id/transferFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.transfer.TransferFragment"
+        android:label="TransferFragment" >
+        <action
+            android:id="@+id/action_transferFragment_to_transferDetailFragment"
+            app:destination="@id/transferDetailFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_transfer_detail"
+        android:id="@+id/transferDetailFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.transfer.transfer_detail.TransferDetailFragment"
+        android:label="TransferDetailFragment" >
+        <action
+            android:id="@+id/action_transferDetailFragment_to_authWithBioFragmentTransfer"
+            app:destination="@id/authWithBioFragmentTransfer" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_transfer_summary"
+        android:id="@+id/transferSummaryFragment"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.transfer.transfer_summary.TransferSummaryFragment"
+        android:label="TransferSummaryFragment" />
+
+    <fragment
+        tools:layout="@layout/fragment_auth_with_bio"
+        android:id="@+id/authWithBioFragmentTransfer"
+        android:name="com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio.AuthWithBioFragment"
+        android:label="AuthWithBioFragmentTransfer" >
+        <argument
+            android:name="authBy"
+            app:argType="com.powersoftlab.exchange_android.common.enum.AuthByEnum"
+            android:defaultValue="TRANSFER" />
+        <argument
+            android:name="amount"
+            app:argType="float"
+            android:defaultValue="0.0" />
+        <!--<action
+            android:id="@+id/action_authWithBioFragmentTransfer_to_transferSummaryFragment"
+            app:destination="@id/transferSummaryFragment" />-->
+
+    </fragment>
+
+
+</navigation>

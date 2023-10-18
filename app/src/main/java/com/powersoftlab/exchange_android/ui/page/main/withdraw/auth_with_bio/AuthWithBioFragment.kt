@@ -21,6 +21,7 @@ import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeViewModel
 import com.powersoftlab.exchange_android.ui.page.main.topup.TopUpViewModel
+import com.powersoftlab.exchange_android.ui.page.main.transfer.transfer_summary.TransferSummaryFragment
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.WithdrawViewModel
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_summary.WithDrawSummaryFragment
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
@@ -240,6 +241,9 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 withdrawViewModel.withdraw(amount = args.amount.toString().toDouble())
             }
 
+            AuthByEnum.TRANSFER ->{
+              gotoTransferSummary()
+            }
             else -> {
                 AppNavigator(requireActivity()).goToMain()
             }
@@ -273,5 +277,10 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
     private fun gotoSummary(resp: WithdrawResponseModel) {
         val action = AuthWithBioFragmentDirections.actionAuthWithBioFragmentToWithDrawSummaryFragment(resp)
         WithDrawSummaryFragment.navigate(this@AuthWithBioFragment, action)
+    }
+
+    private fun gotoTransferSummary(){
+        //val action = AuthWithBioFragmentDirections.
+        TransferSummaryFragment.navigate(this@AuthWithBioFragment,R.id.transferSummaryFragment)
     }
 }

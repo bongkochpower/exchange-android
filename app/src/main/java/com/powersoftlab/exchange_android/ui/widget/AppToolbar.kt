@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.databinding.WidgetAppToolbarBinding
 import com.powersoftlab.exchange_android.ext.gone
+import com.powersoftlab.exchange_android.ext.show
 
 class AppToolbar(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
     private val binding: WidgetAppToolbarBinding = DataBindingUtil.inflate(
@@ -67,6 +68,13 @@ class AppToolbar(context: Context, attrs: AttributeSet) : FrameLayout(context, a
     fun setTitle(title: String?) {
         with(binding) {
             tvTitle.text = title
+        }
+    }
+
+    fun showIconCenter(){
+        with(binding){
+            logoApp.show()
+            tvTitle.gone()
         }
     }
 

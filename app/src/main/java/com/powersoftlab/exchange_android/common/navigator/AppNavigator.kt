@@ -14,6 +14,7 @@ import com.powersoftlab.exchange_android.ui.page.main.cards.CardsActivity
 import com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeActivity
 import com.powersoftlab.exchange_android.ui.page.main.history.HistoryActivity
 import com.powersoftlab.exchange_android.ui.page.main.topup.TopUpActivity
+import com.powersoftlab.exchange_android.ui.page.main.transfer.TransferActivity
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.WithdrawActivity
 
 class AppNavigator(private val activity: Activity) {
@@ -54,6 +55,10 @@ class AppNavigator(private val activity: Activity) {
 
     fun goToWithdraw() {
         WithdrawActivity.open(activity)
+    }
+
+    fun goToTransfer() {
+        TransferActivity.open(activity)
     }
 
     fun goToSettings() {

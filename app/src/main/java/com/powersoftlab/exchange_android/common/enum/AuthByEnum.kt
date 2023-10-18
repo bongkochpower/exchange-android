@@ -4,5 +4,6 @@ enum class AuthByEnum {
     TOPUP,
     EXCHANGE,
     WITHDRAW,
-    INTRO;
+    INTRO,
+    TRANSFER;
 }

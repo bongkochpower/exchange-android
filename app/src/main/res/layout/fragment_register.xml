@@ -458,8 +458,23 @@
                 android:visibility="@{isPostcodeEmpty ? View.VISIBLE : View.INVISIBLE , default= invisible}"
                 app:fontFamily="@font/prompt_regular" />
 
+            <!--wallet id-->
+            <EditText
+                style="@style/AppEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
+                android:backgroundTint="@color/gray_alto"
+                android:enabled="false"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:text="wallet ID"
+                android:textColorHint="@color/text_back"
+                tools:ignore="RtlSymmetry" />
+
             <!--username-->
             <EditText
+                android:layout_marginTop="@dimen/margin_24dp"
                 android:id="@+id/edt_reg_username"
                 style="@style/AppEditText"
                 android:layout_width="wrap_content"
@@ -525,7 +540,7 @@
                     android:gravity="start"
                     android:text="@string/validate_reg_password_empty"
                     android:textColor="@color/color_error_text"
-                    android:visibility="@{isPasswordEmpty ? View.VISIBLE : View.GONE , default= invisible}"
+                    android:visibility="@{isPasswordEmpty ? View.VISIBLE : View.GONE , default= gone}"
                     app:fontFamily="@font/prompt_regular" />
 
                 <!--confirm pw-->

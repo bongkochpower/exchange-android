@@ -47,18 +47,19 @@
                         style="@style/TextViewLarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/tv_title_amount_topup"
                         android:text="@string/title_topup_amount"
                         android:textColor="@color/green_fun_green"
                         app:fontFamily="@font/prompt_semibold" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <!--<androidx.appcompat.widget.AppCompatTextView
                         style="@style/TextViewLarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_8dp"
                         android:text="@string/title_topup_amount_th"
                         android:textColor="@color/black"
-                        app:fontFamily="@font/prompt_semibold" />
+                        app:fontFamily="@font/prompt_semibold" />-->
                 </LinearLayout>
 
                 <LinearLayout

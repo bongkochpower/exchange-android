@@ -248,8 +248,8 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
         with(binding.layoutEnterAddress) {
             return RequestNewCardRequestModel(
                 postCode = edtRegPostcode.text.trim().toString(),
-                moo = edtRegVillageNo.text.trim().toString(),
-                soi = edtRegAlley.text.trim().toString(),
+//                moo = edtRegVillageNo.text.trim().toString(),
+//                soi = edtRegAlley.text.trim().toString(),
                 houseNo = edtRegHouseNo.text.trim().toString(),
                 village = edtRegVillage.text.trim().toString(),
                 road = edtRegStreet.getText(),
@@ -270,8 +270,8 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
             userItem?.let {
                 edtRegHouseNo.setText(it.houseNo)
                 edtRegVillage.setText(it.village)
-                edtRegVillageNo.setText(it.moo)
-                edtRegAlley.setText(it.soi)
+//                edtRegVillageNo.setText(it.moo)
+//                edtRegAlley.setText(it.soi)
                 edtRegStreet.setText(it.road.toDashWhenNullOrEmpty())
                 edtRegPostcode.setText(it.postCode)
                 it.subDistictId?.let { registerViewModel.getAddressDataById(it) }

@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_confirm_normal"
-            android:text="บันทึกรูป"
+            android:text="@string/button_save_picture"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:backgroundTint="@null"

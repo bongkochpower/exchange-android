@@ -626,8 +626,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 password = edtRegPassword.text.trim().toString(),
                 idCardImagePath = registerViewModel.selectedIdCardImage ?: this@RegisterFragment.user?.idCardImage.toDashWhenNullOrEmpty(),
                 postCode = edtRegPostcode.text.toString(),
-                moo = edtRegVillageNo.text.trim().toString(),
-                soi = edtRegAlley.text.trim().toString(),
+//                moo = edtRegVillageNo.text.trim().toString(),
+//                soi = edtRegAlley.text.trim().toString(),
                 houseNo = edtRegHouseNo.text.trim().toString(),
                 village = edtRegVillage.text.toString(),
                 road = edtRegStreet.getText(),
@@ -668,8 +668,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
                 edtRegHouseNo.setText(houseNo.orEmpty())
                 edtRegVillage.setText(village.orEmpty())
-                edtRegVillageNo.setText(moo.orEmpty())
-                edtRegAlley.setText(soi.orEmpty())
+//                edtRegVillageNo.setText(moo.orEmpty())
+//                edtRegAlley.setText(soi.orEmpty())
                 edtRegStreet.setText(road.orEmpty())
                 //edtRegSubDistrict.setText(subDistict.orEmpty())
                 //edtRegDistrict.setText(district.orEmpty())

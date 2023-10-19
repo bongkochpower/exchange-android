@@ -53,7 +53,7 @@ object MainViewHolderHelper {
 
 
                     tvTitle.text = it.typeText
-                    tvTimeAgo.text = "วันที่ $date เวลา $time น."
+                    tvTimeAgo.text = "Date $date Time $time"
                     tvTransactionStatus.apply {
                         text = status.title
                         setBackgroundResource(status.drawableRes)

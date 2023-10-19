@@ -1,5 +1,8 @@
 package com.powersoftlab.exchange_android.ui.page.main.topup
 
+import android.graphics.Color
+import androidx.core.text.buildSpannedString
+import androidx.core.text.color
 import androidx.core.widget.doAfterTextChanged
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.constant.AppConstant
@@ -19,6 +22,11 @@ class TopUpFragment : BaseFragment<FragmentTopupBinding>(R.layout.fragment_topup
         showKeyboard()
         with(binding) {
             isTopupInvalid = false
+            val txtTitleAmount = buildSpannedString {
+                append(getString(R.string.title_topup_amount))
+                color(Color.BLACK) { append(" (THB)") }
+            }
+            tvTitleAmountTopup.text = txtTitleAmount
         }
     }
 

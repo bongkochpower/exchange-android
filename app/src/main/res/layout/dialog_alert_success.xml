@@ -60,6 +60,7 @@
                     style="@style/TextViewLarge"
                     android:id="@+id/btn_confirm"
                     android:textFontWeight="700"
+                    android:textAllCaps="false"
                     android:fontFamily="@font/prompt_bold"
                     android:text="@string/title_set_pin"
                     android:layout_marginTop="@dimen/margin_18dp"

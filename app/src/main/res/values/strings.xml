@@ -121,7 +121,7 @@
     <string name="message_no_internet">Connection Lost</string>
     <string name="message_please_check_no_internet">Please check your internet connection and then try again.</string>
     <string name="message_error">Sorry, something went wrong</string>
-    <string name="message_confirm_logout">คุณต้องการออกจากระบบ?</string>
+    <string name="message_confirm_logout">Do you want to logout?</string>
     <string name="message_register_success">You have successfully registered.</string>
     <string name="message_dummy_term">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas maecenas pharetra convallis posuere morbi. Praesent elementum facilisis leo vel. Dignissim cras tincidunt lobortis feugiat vivamus at augue. Odio euismod lacinia at quis. Lorem ipsum dolor sit amet consectetur adipiscing. Fermentum posuere urna nec tincidunt praesent semper. Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet consectetur. Mattis nunc sed blandit libero volutpat sed cras ornare arcu. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Tellus orci ac auctor augue mauris augue neque gravida in. Imperdiet sed euismod nisi porta lorem. Penatibus et magnis dis parturient montes nascetur. Egestas congue quisque egestas diam in. Accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu. Amet commodo nulla facilisi nullam. Sapien pellentesque habitant morbi tristique senectus et netus. Mattis ullamcorper velit sed ullamcorper morbi. Nascetur ridiculus mus mauris vitae ultricies leo. Amet porttitor eget dolor morbi non arcu. Nunc non blandit massa enim nec. Nisi scelerisque eu ultrices vitae auctor eu augue ut. In cursus turpis massa tincidunt dui ut ornare. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies. Mauris vitae ultricies leo integer. Tellus elementum sagittis vitae et leo duis ut diam quam. Tellus elementum sagittis vitae et leo duis ut diam quam.</string>
     <string name="message_main_empty">The most recent ones will be displayed here when you start using them.</string>
@@ -129,16 +129,16 @@
     <string name="message_exchange_success">Exchange successfully </string>
     <string name="message_withdraw_success">Withdrawal successfully </string>
     <string name="message_edit_profile_success">You have successfully edit profile.</string>
-    <string name="message_valid_term_and_con">กรุณายอมรับเงื่อนไขในการใช้บริการ</string>
+    <string name="message_valid_term_and_con">Please accept the terms and conditions for using the service.</string>
     <string name="message_policy">Currency speculation is a practice that does not comply with the conditions and may Illegal. If it is violated, the service provider reserves the right to Cancel the card and claim compensation for damages incurred.</string>
-    <string name="message_logout">คุณต้องการออกจากระบบหรือไม่ ?</string>
+    <string name="message_logout">Do you want to logout?</string>
     <string name="message_input_pin">Please enter your 6 digit PIN number.\nthat you need for the transaction</string>
     <string name="message_save_picture_success">The picture was saved.</string>
     <string name="message_pls_set_pin">Please enter 6 digit PIN number.\nthat you need for the transaction</string>
     <string name="message_pls_set_finger">Please scan your fingerprint.</string>
     <string name="message_set_pin_success">The PIN code was successfully set.</string>
     <string name="message_set_finger_scan_success">Fingerprint setup successful</string>
-    <string name="message_currency_less_one">ไม่มีสกุลเงินอื่นให้แลกเปลี่ยน</string>
+    <string name="message_currency_less_one">There are no other currencies that can be exchanged.</string>
 
     <!--button-->
     <string name="button_close">Close</string>
@@ -202,10 +202,10 @@
     <string name="validate_reg_lastname">Please enter your last name.</string>
     <string name="validate_reg_postcode">Please enter your postcode</string>
     <string name="validate_reg_house_no">Please enter your House No</string>
-    <string name="validate_reg_phone_10_digit">กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 หลัก</string>
+    <string name="validate_reg_phone_10_digit">Please fill in the complete 10-digit telephone number.</string>
     <string name="validate_reg_username_empty">Please check the Username.</string>
     <string name="validate_reg_password_empty">Please check the Password.</string>
-    <string name="validate_reg_password_invalid">โปรดระบุรหัสผ่าน 8 หลักที่ประกอบไปด้วยตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และ อักขระพิเศษอย่างน้อย 1 ตัว (@$!%*#?&amp;)</string>
+    <string name="validate_reg_password_invalid"> Please enter an 8-digit password containing uppercase, lowercase, numbers, and at least 1 special character (@ $!% *?&amp;)</string>
     <string name="validate_reg_confirm_password">Confirm Password is incorrect.</string>
     <string name="validate_reg_attach_file_fail">Failed to attach file, size over 25 mb.</string>
     <string name="validate_reg_attach_file_success">File attached successfully</string>
@@ -213,8 +213,8 @@
     <string name="validate_enter_money_again">Please enter the amount again.</string>
     <string name="validate_select_sub_district">Please select SubDistrict/County</string>
     <string name="validate_password_incorrect">The password is incorrect. Please try again.</string>
-    <string name="validate_select_start_date">กรุณาเลือกวันที่เริ่มต้นก่อน</string>
-    <string name="validate_select_history_time_invalid">ช่วงเวลาที่ท่านเลือกไม่ถูกต้อง</string>
+    <string name="validate_select_start_date">Please select a start date first.</string>
+    <string name="validate_select_history_time_invalid">The time range you selected is incorrect.</string>
     <string name="validate_account_number_invalid">Your account number is incorrect.</string>
     <string name="validate_enter_account_number_again">Please enter the account number again.</string>
 

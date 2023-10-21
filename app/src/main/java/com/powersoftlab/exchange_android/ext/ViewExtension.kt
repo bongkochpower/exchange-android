@@ -14,6 +14,7 @@ import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -194,6 +195,11 @@ fun View.setOnTouchAnimation() {
         }
         false
     }
+}
+
+fun View.setOnClickWithAnimationListener(callback : OnClickListener){
+    this.setOnTouchAnimation()
+    this.setOnClickListener(callback)
 }
 
 /*text view*/

@@ -34,16 +34,16 @@
             app:buttonTitle="@string/button_apple_login" />
 
         <com.powersoftlab.exchange_android.ui.widget.ButtonLogin
-            android:id="@+id/btn_login_facebook"
+            android:id="@+id/btn_login_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_16dp"
             app:buttonBgSrc="@drawable/button_facebook"
-            app:buttonIconSrc="@drawable/icon_facebook"
+            app:buttonIconSrc="@drawable/icon_google"
             app:buttonTextColorRes="@color/white"
-            app:buttonTitle="@string/button_facebook_login" />
+            app:buttonTitle="@string/button_google_login" />
 
-        <com.powersoftlab.exchange_android.ui.widget.ButtonLogin
+        <!--<com.powersoftlab.exchange_android.ui.widget.ButtonLogin
             android:id="@+id/btn_login_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             app:buttonBgSrc="@drawable/button_line"
             app:buttonIconSrc="@drawable/icon_line"
             app:buttonTextColorRes="@color/white"
-            app:buttonTitle="@string/button_line_login" />
+            app:buttonTitle="@string/button_line_login" />-->
 
 
         <com.powersoftlab.exchange_android.ui.widget.ButtonLogin

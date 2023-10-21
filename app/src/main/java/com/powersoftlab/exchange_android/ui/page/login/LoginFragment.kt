@@ -19,6 +19,7 @@ import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.common.enum.LoginTypeEnum
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentLoginBinding
+import com.powersoftlab.exchange_android.ext.setOnClickWithAnimationListener
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ext.slideUp
 import com.powersoftlab.exchange_android.model.body.LoginRequestModel
@@ -71,13 +72,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     override fun listener() {
         with(binding) {
             layoutLogin1.apply {
-                btnLoginApple.apply {
-                    setOnTouchAnimation()
-                    setOnClickListener { }
+                btnLoginApple.setOnClickWithAnimationListener{
+
+                }
+                btnLoginGoogle.setOnClickWithAnimationListener{
+
                 }
 
 
-                btnLoginFacebook.apply {
+                /*btnLoginFacebook.apply {
                     setOnTouchAnimation()
                     setOnClickListener {
                         LoginManager.getInstance().logInWithReadPermissions(requireActivity(), listOf("public_profile"));
@@ -98,13 +101,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
                         //TermRegisterFragment.navigate(this@LoginFragment)
                     }
-                }
+                }*/
 
-                btnLogin.apply {
-                    setOnTouchAnimation()
-                    setOnClickListener {
-                        goToInputPhoneLogin()
-                    }
+                btnLogin.setOnClickWithAnimationListener{
+                    goToInputPhoneLogin()
                 }
 
                 tvRegister.setOnTouchAnimation()

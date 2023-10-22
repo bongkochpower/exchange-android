@@ -19,6 +19,7 @@ object AppConstant {
 
     const val FORMAT_UI_DATE_MONTH_2 = "dd/MM"
     const val FORMAT_UI_DATE = "dd/MM/yyyy"
+    const val FORMAT_UI_DATE_ABB_MONTH = "dd MMM yyyy"
     const val FORMAT_UI_TIME = "HH:mm"
 
 }

@@ -128,6 +128,7 @@
     <string name="message_topup_success">Top up successfully </string>
     <string name="message_exchange_success">Exchange successfully </string>
     <string name="message_withdraw_success">Withdrawal successfully </string>
+    <string name="message_transfer_success">Transfer successfully </string>
     <string name="message_edit_profile_success">You have successfully edit profile.</string>
     <string name="message_valid_term_and_con">Please accept the terms and conditions for using the service.</string>
     <string name="message_policy">Currency speculation is a practice that does not comply with the conditions and may Illegal. If it is violated, the service provider reserves the right to Cancel the card and claim compensation for damages incurred.</string>

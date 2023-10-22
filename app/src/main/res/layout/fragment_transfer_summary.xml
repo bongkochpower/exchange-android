@@ -22,10 +22,10 @@
                 android:id="@+id/layout_summary"
                 layout="@layout/layout_transfer_summary" />
 
-            <!--<include
+            <include
                 android:visibility="invisible"
                 android:id="@+id/layout_summary_for_save"
-                layout="@layout/layout_withdraw_summary_for_save" />-->
+                layout="@layout/layout_transfer_summary_for_save" />
         </FrameLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -48,13 +48,13 @@
             style="@style/TextViewRegularPlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
             android:background="@drawable/button_confirm_normal"
             android:text="@string/button_back_to_main"
-            app:icon="@drawable/icon_home"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:layout_marginTop="@dimen/margin_16dp"
             app:backgroundTint="@null"
+            app:icon="@drawable/icon_home"
             app:iconGravity="textStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

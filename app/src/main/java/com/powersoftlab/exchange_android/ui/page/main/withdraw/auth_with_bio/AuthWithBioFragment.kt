@@ -1,5 +1,6 @@
 package com.powersoftlab.exchange_android.ui.page.main.withdraw.auth_with_bio
 
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
@@ -15,13 +16,16 @@ import com.powersoftlab.exchange_android.common.enum.AuthByEnum
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentAuthWithBioBinding
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
+import com.powersoftlab.exchange_android.model.response.TransferResponseModel
 import com.powersoftlab.exchange_android.model.response.WithdrawResponseModel
 import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
 import com.powersoftlab.exchange_android.ui.page.base.OnBackPressedFragment
 import com.powersoftlab.exchange_android.ui.page.main.exchange.ExchangeViewModel
 import com.powersoftlab.exchange_android.ui.page.main.topup.TopUpViewModel
+import com.powersoftlab.exchange_android.ui.page.main.transfer.TransferViewModel
 import com.powersoftlab.exchange_android.ui.page.main.transfer.transfer_summary.TransferSummaryFragment
+import com.powersoftlab.exchange_android.ui.page.main.transfer.transfer_summary.TransferSummaryFragment.Companion.KEY_TRANSFER_SUMMARY
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.WithdrawViewModel
 import com.powersoftlab.exchange_android.ui.page.main.withdraw.withdraw_summary.WithDrawSummaryFragment
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
@@ -33,6 +37,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
     private val topupViewModel: TopUpViewModel by stateViewModel()
     private val exchangeViewModel: ExchangeViewModel by sharedStateViewModel()
     private val withdrawViewModel: WithdrawViewModel by sharedStateViewModel()
+    private val transferViewModel: TransferViewModel by sharedStateViewModel()
     private val args: AuthWithBioFragmentArgs by navArgs()
 
 
@@ -204,6 +209,33 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
                 else -> hideLoading()
             }
         }
+        transferViewModel.transferRequestLiveData.observe(viewLifecycleOwner){
+            when (it) {
+                is ResultWrapper.Loading -> {
+                    showLoading()
+                }
+
+                is ResultWrapper.GenericError -> {
+                    AppAlert.alertGenericError(requireContext(), it.code, it.message).show(childFragmentManager)
+                    hideLoading()
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    AppAlert.alertNetworkError(requireContext()).show(childFragmentManager)
+                    hideLoading()
+                }
+
+                is ResultWrapper.Success -> {
+                    it.response.data?.let {
+                        transferOutSuccess(it)
+                    }
+
+                    hideLoading()
+                }
+
+                else -> hideLoading()
+            }
+        }
     }
 
     override fun onBackPressed(): Boolean {
@@ -242,7 +274,7 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
             }
 
             AuthByEnum.TRANSFER ->{
-              gotoTransferSummary()
+              transferViewModel.transfer()
             }
             else -> {
                 AppNavigator(requireActivity()).goToMain()
@@ -270,17 +302,26 @@ class AuthWithBioFragment : BaseFragment<FragmentAuthWithBioBinding>(R.layout.fr
         val msg = resources.getString(R.string.message_withdraw_success)
         val btn = resources.getString(R.string.button_next)
         showAlertSuccessDialog(msg, btn) {
-            gotoSummary(resp)
+            gotoWithdrawSummary(resp)
         }
     }
 
-    private fun gotoSummary(resp: WithdrawResponseModel) {
+    private fun transferOutSuccess(response : TransferResponseModel) {
+        val msg = resources.getString(R.string.message_transfer_success)
+        val btn = resources.getString(R.string.button_next)
+        showAlertSuccessDialog(msg, btn) {
+            gotoTransferSummary(response)
+        }
+    }
+
+    private fun gotoWithdrawSummary(resp: WithdrawResponseModel) {
         val action = AuthWithBioFragmentDirections.actionAuthWithBioFragmentToWithDrawSummaryFragment(resp)
         WithDrawSummaryFragment.navigate(this@AuthWithBioFragment, action)
     }
 
-    private fun gotoTransferSummary(){
-        //val action = AuthWithBioFragmentDirections.
-        TransferSummaryFragment.navigate(this@AuthWithBioFragment,R.id.transferSummaryFragment)
+    private fun gotoTransferSummary(data : TransferResponseModel){
+        val bundle = Bundle()
+        bundle.putParcelable(KEY_TRANSFER_SUMMARY,data)
+        TransferSummaryFragment.navigate(this@AuthWithBioFragment,R.id.transferSummaryFragment,bundle)
     }
 }

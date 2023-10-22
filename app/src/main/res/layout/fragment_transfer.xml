@@ -153,8 +153,7 @@
                 android:background="@drawable/bg_edittext"
                 android:hint="@string/hint_input_account_no"
                 android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="@integer/length_phone_number"
+                android:inputType="text"
                 android:textColorHint="@{isAccountNumberInvalid ? @color/color_error_text : @color/text_back}"
                 tools:ignore="RtlSymmetry" />
 

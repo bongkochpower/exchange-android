@@ -96,6 +96,8 @@ fun String?.toDisplayFormat() : String{
     return reDateFormat(AppConstant.FORMAT_SERVICE_DATE,AppConstant.FORMAT_UI_DATE).toDashWhenNullOrEmpty()
 }
 
+
+
 fun String?.convertUtcToIct(): String? {
     val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss",Locale.getDefault())
     sdf.timeZone = TimeZone.getTimeZone("UTC")

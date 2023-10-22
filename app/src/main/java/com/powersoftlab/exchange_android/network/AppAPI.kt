@@ -14,8 +14,10 @@ import com.powersoftlab.exchange_android.model.response.RegisterResponseModel
 import com.powersoftlab.exchange_android.model.response.RequestNewCardResponseModel
 import com.powersoftlab.exchange_android.model.response.TopUpResponse
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
+import com.powersoftlab.exchange_android.model.response.TransferResponseModel
 import com.powersoftlab.exchange_android.model.response.UploadResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
+import com.powersoftlab.exchange_android.model.response.WalletDetailResponseModel
 import com.powersoftlab.exchange_android.model.response.WithdrawResponseModel
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -50,8 +52,9 @@ interface AppAPI {
 
     @PUT("api/v1/customer/{id}")
     suspend fun updateProfile(
-        @Path("id") id : String,
-        @Body request: RegisterRequestModel): Response<Any>
+        @Path("id") id: String,
+        @Body request: RegisterRequestModel
+    ): Response<Any>
 
 
     @GET("api/v1/customer/me")
@@ -131,20 +134,20 @@ interface AppAPI {
 
     @POST("api/v1/card/requestCard")
     suspend fun registerNewCard(
-        @Body request : RequestNewCardRequestModel
+        @Body request: RequestNewCardRequestModel
     ): Response<RequestNewCardResponseModel>
 
     @GET("api/v1/country")
     suspend fun getCountry(
-        @Query("page") page : Int,
-        @Query("limit") limit : Int,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
     ): Response<BaseResponseModel<List<UserModel.CountryModel>>>
 
     @GET("api/v1/shop")
     suspend fun getShopsByCountryId(
-        @Query("country_id") countryId : Int,
-        @Query("page") page : Int,
-        @Query("limit") limit : Int
+        @Query("country_id") countryId: Int,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int
     ): Response<BaseResponseModel<List<UserModel.ShopModel>>>
 
     @FormUrlEncoded
@@ -154,6 +157,19 @@ interface AppAPI {
         @Field("value") value: Double,
         @Field("shop_id") shopId: Int
     ): Response<WithdrawResponseModel>
+
+    @GET("api/v1/customer/wallet/{walletId}")
+    suspend fun getProfileByWalletId(
+        @Path("walletId") id: String,
+    ): Response<BaseResponseModel<WalletDetailResponseModel>>
+
+    @FormUrlEncoded
+    @POST("api/v1/transaction/transfer")
+    suspend fun transfer(
+        @Field("currency_id") currencyId: Int,
+        @Field("amount") amount: Double,
+        @Field("wallet_id") walletId: String
+    ): Response<BaseResponseModel<TransferResponseModel>>
 
     //endregion
 

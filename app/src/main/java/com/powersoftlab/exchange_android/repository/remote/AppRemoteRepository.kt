@@ -5,6 +5,7 @@ import com.powersoftlab.exchange_android.ext.getTimeZoneOffset
 import com.powersoftlab.exchange_android.model.base.BaseResponseModel
 import com.powersoftlab.exchange_android.model.body.ExchangeRequestModel
 import com.powersoftlab.exchange_android.model.body.RequestNewCardRequestModel
+import com.powersoftlab.exchange_android.model.body.TransferRequestModel
 import com.powersoftlab.exchange_android.model.body.WithdrawRequestModel
 import com.powersoftlab.exchange_android.model.response.AddressAutoFillResponseModel
 import com.powersoftlab.exchange_android.model.response.CardsResponseModel
@@ -12,7 +13,9 @@ import com.powersoftlab.exchange_android.model.response.ExchangeCalculateRespons
 import com.powersoftlab.exchange_android.model.response.RequestNewCardResponseModel
 import com.powersoftlab.exchange_android.model.response.TopUpResponse
 import com.powersoftlab.exchange_android.model.response.TransactionsModel
+import com.powersoftlab.exchange_android.model.response.TransferResponseModel
 import com.powersoftlab.exchange_android.model.response.UserModel
+import com.powersoftlab.exchange_android.model.response.WalletDetailResponseModel
 import com.powersoftlab.exchange_android.model.response.WithdrawResponseModel
 import com.powersoftlab.exchange_android.network.AppAPI
 import com.powersoftlab.exchange_android.network.ResultWrapper
@@ -116,6 +119,24 @@ class AppRemoteRepository(
                 currencyId = requestModel.currencyId,
                 value = requestModel.amount,
                 shopId = requestModel.shopId
+            )
+        })
+    }
+
+    suspend fun profileByWalletId(walletId : String): ResultWrapper<BaseResponseModel<WalletDetailResponseModel>> {
+        return safeApiCall(dispatcher, call = {
+            api.getProfileByWalletId(
+                id = walletId
+            )
+        })
+    }
+
+    suspend fun transfer(requestModel: TransferRequestModel): ResultWrapper<BaseResponseModel<TransferResponseModel>> {
+        return safeApiCall(dispatcher, call = {
+            api.transfer(
+                currencyId = requestModel.currencyId,
+                amount = requestModel.amount,
+                walletId = requestModel.walletId
             )
         })
     }

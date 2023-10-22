@@ -21,16 +21,26 @@
         android:background="@color/white"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-
+        android:paddingBottom="@dimen/margin_40dp"
         android:paddingHorizontal="@dimen/padding_40dp"
         >
 
+        <!--logo-->
+        <ImageView
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:layout_marginBottom="@dimen/margin_14dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:src="@drawable/icon_toolbar"
+            android:layout_height="wrap_content"/>
+
         <!--image-->
         <FrameLayout
+            android:layout_marginTop="@dimen/margin_24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/margin_30dp">
+            >
 
             <ImageView
                 setImageCircleUrl="@{transfer.profileImage}"

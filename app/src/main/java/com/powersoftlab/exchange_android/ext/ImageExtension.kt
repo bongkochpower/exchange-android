@@ -306,7 +306,7 @@ fun ImageView.loadImageCircle(uri: Uri?) {
 fun ImageView.loadImageCircle(url: String?) {
     try {
         Glide.with(context).load(url).apply(RequestOptions().circleCrop())
-            .error(R.drawable.bg_circle_placeholder).into(this)
+            .error(R.drawable.bg_image_profile).into(this)
     } catch (e: Exception) {
         e.printStackTrace()
     }

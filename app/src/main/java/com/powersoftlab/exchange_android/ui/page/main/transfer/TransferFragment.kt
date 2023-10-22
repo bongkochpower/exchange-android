@@ -2,6 +2,7 @@ package com.powersoftlab.exchange_android.ui.page.main.transfer
 
 import androidx.core.widget.doAfterTextChanged
 import com.powersoftlab.exchange_android.R
+import com.powersoftlab.exchange_android.common.alert.AppAlert
 import com.powersoftlab.exchange_android.databinding.FragmentTransferBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvExchangeCurrencyBinding
 import com.powersoftlab.exchange_android.ext.isMonoClickable
@@ -9,6 +10,8 @@ import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setTextSlideButtonEnable
 import com.powersoftlab.exchange_android.ext.toStringFormat
 import com.powersoftlab.exchange_android.model.response.UserModel
+import com.powersoftlab.exchange_android.model.response.WalletDetailResponseModel
+import com.powersoftlab.exchange_android.network.ResultWrapper
 import com.powersoftlab.exchange_android.ui.list.adapter.SimpleRecyclerViewAdapter
 import com.powersoftlab.exchange_android.ui.list.viewholder.bind.ExchangeHolderHelper.initExchangeFrom
 import com.powersoftlab.exchange_android.ui.page.base.BaseFragment
@@ -77,8 +80,10 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(R.layout.fragment
                 slideToTransaction.setBackgroundRes(R.drawable.bg_slide_confirm_done)
 
                 if(isValidate()){
-                    val amount = edtInputTransfer.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
-                    gotoTransferDetail()
+                    val walletId = edtAccountNumber.text.toString().trim()
+                    transferViewModel.walletId = walletId
+//                    transferViewModel.walletId = "65317cc32fb065317cd6e226"
+                    transferViewModel.getProfileByWalletId()
                 }else{
                     slideToTransaction.setTextSlideButtonEnable(true,R.string.button_slide_to_transaction)
                 }
@@ -89,6 +94,42 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(R.layout.fragment
 
     override fun onBackPressed(): Boolean {
         return false
+    }
+
+    override fun subscribe() {
+        super.subscribe()
+
+        transferViewModel.profileByWalletIdRequestLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultWrapper.Loading -> {
+                    showLoading()
+                }
+
+                is ResultWrapper.GenericError -> {
+                    AppAlert.alertGenericError(requireContext(), it.code, it.message).show(childFragmentManager)
+                    hideLoading()
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    AppAlert.alertNetworkError(requireContext()).show(childFragmentManager)
+                    hideLoading()
+                }
+
+                is ResultWrapper.Success -> {
+                    hideLoading()
+
+                    it.response.data?.let {
+                        gotoTransferDetail(it)
+                    } ?: run {
+                        AppAlert.alert(requireContext(),"WalletID Not Found").show(childFragmentManager)
+                    }
+                }
+
+                else -> {
+                    /*none*/
+                }
+            }
+        }
     }
 
     private fun getCurrency() {
@@ -126,7 +167,14 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(R.layout.fragment
         return isValidate
     }
 
-    private fun gotoTransferDetail() {
-        TransferDetailFragment.navigate(this@TransferFragment)
+    private fun gotoTransferDetail(data : WalletDetailResponseModel) {
+        binding.apply {
+            val amount = edtInputTransfer.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
+            transferViewModel.inputMoneyTransfer = amount
+
+
+            val action = TransferFragmentDirections.actionTransferFragmentToTransferDetailFragment(data)
+            TransferDetailFragment.navigate(this@TransferFragment,action)
+        }
     }
 }

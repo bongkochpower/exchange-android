@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_transferDetailFragment_to_authWithBioFragmentTransfer"
             app:destination="@id/authWithBioFragmentTransfer" />
+        <argument
+            android:name="walletDetail"
+            app:argType="com.powersoftlab.exchange_android.model.response.WalletDetailResponseModel" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_transfer_summary"
@@ -42,9 +45,11 @@
             android:name="amount"
             app:argType="float"
             android:defaultValue="0.0" />
-        <!--<action
+        <action
+            app:launchSingleTop="false"
             android:id="@+id/action_authWithBioFragmentTransfer_to_transferSummaryFragment"
-            app:destination="@id/transferSummaryFragment" />-->
+            app:destination="@id/transferSummaryFragment" />
+
 
     </fragment>
 

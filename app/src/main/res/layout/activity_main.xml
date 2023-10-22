@@ -112,7 +112,7 @@
                                     android:layout_marginEnd="@dimen/margin_24dp"
                                     android:layout_height="wrap_content"
                                     android:onClick="@{() -> activity.gotoTransfer()}"
-                                    app:iconSrc="@drawable/selector_withdraw"
+                                    app:iconSrc="@drawable/selector_transfer"
                                     app:menuTitle="@string/title_main_transfer" />
 
                                 <com.powersoftlab.exchange_android.ui.widget.CircleMenu

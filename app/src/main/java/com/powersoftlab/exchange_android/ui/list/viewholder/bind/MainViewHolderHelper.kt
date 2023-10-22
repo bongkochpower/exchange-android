@@ -52,15 +52,15 @@ object MainViewHolderHelper {
 
 
 
-                    tvTitle.text = it.typeText
+                    val transactionEnum = TransactionTypeEnum.fromName(it.type)
+                    tvTitle.text = transactionEnum.title
                     tvTimeAgo.text = "Date $date Time $time"
                     tvTransactionStatus.apply {
                         text = status.title
                         setBackgroundResource(status.drawableRes)
                     }
                     tvMoneyTrans.text = it.message
-                    val iconRes = TransactionTypeEnum.fromName(it.type)
-                    imgTransaction.loadImage(iconRes.iconRes)
+                    imgTransaction.loadImage(transactionEnum.iconRes)
 
                 }
             }

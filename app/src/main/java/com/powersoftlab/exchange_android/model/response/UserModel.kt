@@ -54,7 +54,9 @@ data class UserModel(
     @field:SerializedName("username")
     var username: String?,
     @field:SerializedName("village")
-    var village: String?
+    var village: String?,
+    @field:SerializedName("wallet_id")
+    var walletId: String?
 ) {
     @Parcelize
     data class CustomerBalance(

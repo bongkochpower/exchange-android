@@ -42,6 +42,7 @@ import com.powersoftlab.exchange_android.ext.isValidPassword
 import com.powersoftlab.exchange_android.ext.loadImageCircle
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
+import com.powersoftlab.exchange_android.ext.show
 import com.powersoftlab.exchange_android.ext.toDashWhenNullOrEmpty
 import com.powersoftlab.exchange_android.ext.toDisplayFormat
 import com.powersoftlab.exchange_android.ext.toServiceFormat
@@ -489,7 +490,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private fun isValidateRegister(): Boolean {
         var isValidate = false
         with(binding) {
-            val defError = "กรุณาใส่"
             val name = edtRegName.getText()
             val lastname = edtRegLastname.getText()
             val phone = edtRegPhone.text.toString().trim()
@@ -574,7 +574,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     }
 
     private fun validateEdittextErrorView(v: View, tvError: TextView? = null) {
-        val defError = "กรุณาใส่"
+        val defError = "Please enter your "
         v.requestFocus()
 
         val scrollTo: Int = (v.parent.parent as View).top + v.top
@@ -582,12 +582,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
         when (v) {
             is EdittextRegister -> {
-                v.setValidation(true, "$defError${v.getHintText()}")
+                v.setValidation(true, "$defError${v.getHintText().toString().lowercase()}")
             }
 
             is EditText -> {
                 v.requestFocus()
-                tvError?.text = "$defError${v.hint}"
+                tvError?.text = "$defError${v.hint.toString().lowercase()}"
             }
         }
     }
@@ -679,6 +679,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 chkRegTerm.isChecked = true
                 chkRegTerm.isVisible = false
                 btnRegister.setText(resources.getString(R.string.title_register_edit_form))
+                tvWalletId.show()
+                tvWalletId.setText(user.walletId.toDashWhenNullOrEmpty())
             }
         }
     }

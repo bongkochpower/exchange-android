@@ -701,9 +701,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private fun updateAddressData(data : AddressAutoFillResponseModel){
         mAddressAutoFillData = data
         with(binding){
-            edtRegSubDistrict.setText(data.subDistrict?.nameTH.toDashWhenNullOrEmpty())
-            edtRegDistrict.setText(data.district?.nameTH.toDashWhenNullOrEmpty())
-            edtRegProvince.setText(data.province?.nameTH.toDashWhenNullOrEmpty())
+            edtRegSubDistrict.setText(data.subDistrict?.nameEN.toDashWhenNullOrEmpty())
+            edtRegDistrict.setText(data.district?.nameEN.toDashWhenNullOrEmpty())
+            edtRegProvince.setText(data.province?.nameEN.toDashWhenNullOrEmpty())
             edtRegPostcode.setText(data.subDistrict?.zipCode.toDashWhenNullOrEmpty())
         }
     }

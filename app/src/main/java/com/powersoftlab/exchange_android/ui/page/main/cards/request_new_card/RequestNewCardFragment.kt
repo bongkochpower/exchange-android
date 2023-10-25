@@ -275,7 +275,7 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
                 edtRegStreet.setText(it.road.toDashWhenNullOrEmpty())
                 edtRegPostcode.setText(it.postCode)
                 it.subDistictId?.let { registerViewModel.getAddressDataById(it) }
-                edtRegCountry.setText("ไทย")
+                edtRegCountry.setText("Thailand")
             }
 
         }
@@ -284,9 +284,9 @@ class RequestNewCardFragment : BaseFragment<FragmentRequestNewCardBinding>(R.lay
     private fun updateAddressData(data : AddressAutoFillResponseModel){
         mAddressAutoFillData = data
         with(binding.layoutEnterAddress){
-            edtRegSubDistrict.setText(data.subDistrict?.nameTH.toDashWhenNullOrEmpty())
-            edtRegDistrict.setText(data.district?.nameTH.toDashWhenNullOrEmpty())
-            edtRegProvince.setText(data.province?.nameTH.toDashWhenNullOrEmpty())
+            edtRegSubDistrict.setText(data.subDistrict?.nameEN.toDashWhenNullOrEmpty())
+            edtRegDistrict.setText(data.district?.nameEN.toDashWhenNullOrEmpty())
+            edtRegProvince.setText(data.province?.nameEN.toDashWhenNullOrEmpty())
             edtRegPostcode.setText(data.subDistrict?.zipCode.toDashWhenNullOrEmpty())
         }
     }

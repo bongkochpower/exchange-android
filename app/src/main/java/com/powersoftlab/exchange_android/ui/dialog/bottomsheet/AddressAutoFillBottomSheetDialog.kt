@@ -68,7 +68,7 @@ class AddressAutoFillBottomSheetDialog :
         menuAdapter.onBindView { binding, item, position ->
             item?.let {
                 with(binding) {
-                    tvMenu.text = "${item.nameTH} - ${item.zipCode}"
+                    tvMenu.text = "${item.nameEN} - ${item.zipCode}"
 
                     root.setOnClickListener {
                         callBackOnItemSelected?.invoke(item.id ?: 0)
@@ -89,7 +89,7 @@ class AddressAutoFillBottomSheetDialog :
 
     private fun search(str: String) {
         if (str.isNotEmpty()) {
-            val searchList = list?.filter { it.zipCode?.contains(str) == true || it.nameTH?.contains(str) == true }?.toMutableList() ?: mutableListOf()
+            val searchList = list?.filter { it.zipCode?.contains(str) == true || it.nameEN?.contains(str) == true }?.toMutableList() ?: mutableListOf()
             menuAdapter.updateList(searchList, true)
         } else {
             list?.let { menuAdapter.submitList(true, it) }

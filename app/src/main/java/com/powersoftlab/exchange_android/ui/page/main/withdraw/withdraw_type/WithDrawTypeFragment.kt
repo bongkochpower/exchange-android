@@ -190,7 +190,7 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
     }
 
     private fun setCountry(list : MutableList<UserModel.CountryModel>) {
-        val countryList = list.map { OptionMenuModel(name = it.nameTh , data = it) }.toMutableList()
+        val countryList = list.map { OptionMenuModel(name = it.nameEn , data = it) }.toMutableList()
         countryBottomSheetDialog = OptionMenuBottomSheetDialog.newInstance(countryList)
         countryBottomSheetDialog.setOnItemSelectedListener { item ->
 
@@ -203,7 +203,7 @@ class WithDrawTypeFragment : BaseFragment<FragmentWithdrawTypeBinding>(R.layout.
     }
 
     private fun setShop(list : MutableList<UserModel.ShopModel>) {
-        val shopList = list.map { OptionMenuModel(name = it.shopName , data = it) }.toMutableList()
+        val shopList = list.map { OptionMenuModel(name = it.shopNameEn , data = it) }.toMutableList()
         shopBottomSheetDialog = OptionMenuBottomSheetDialog.newInstance(shopList)
         shopBottomSheetDialog.setOnItemSelectedListener { item ->
             binding.apply {

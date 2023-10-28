@@ -3,6 +3,7 @@ package com.powersoftlab.exchange_android.ui.page.main.transfer
 import androidx.core.widget.doAfterTextChanged
 import com.powersoftlab.exchange_android.R
 import com.powersoftlab.exchange_android.common.alert.AppAlert
+import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.databinding.FragmentTransferBinding
 import com.powersoftlab.exchange_android.databinding.ItemRvExchangeCurrencyBinding
 import com.powersoftlab.exchange_android.ext.isMonoClickable
@@ -22,6 +23,9 @@ import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 class TransferFragment : BaseFragment<FragmentTransferBinding>(R.layout.fragment_transfer), OnBackPressedFragment {
 
     private val transferViewModel: TransferViewModel by sharedStateViewModel()
+    private val userModel by lazy {
+        AppManager(requireContext()).getUser()
+    }
 
     private val currencyAdapter by lazy {
         SimpleRecyclerViewAdapter<UserModel.CustomerBalance, ItemRvExchangeCurrencyBinding>(
@@ -121,7 +125,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(R.layout.fragment
                     it.response.data?.let {
                         gotoTransferDetail(it)
                     } ?: run {
-                        AppAlert.alert(requireContext(),"WalletID Not Found").show(childFragmentManager)
+                        AppAlert.alert(requireContext(),getString(R.string.message_wallet_not_found)).show(childFragmentManager)
                     }
                 }
 
@@ -153,12 +157,16 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(R.layout.fragment
             val inputMoney = edtInputTransfer.text.toString().trim().replace(",","")
             val accountNumber = edtAccountNumber.text.toString().trim()
             val currentBalance = transferViewModel.selectedCurrency?.balance ?: 0.0
+            val myWalletId = userModel?.walletId
             when {
                 inputMoney.isEmpty() || inputMoney == "0" || inputMoney.toDouble() > currentBalance -> {
                     isInputMoneyInvalid = true
                 }
                 accountNumber.isEmpty() -> {
                     isAccountNumberInvalid = true
+                }
+                accountNumber == myWalletId ->{
+                    AppAlert.alert(requireContext(),getString(R.string.message_cant_transfer_own_account)).show(childFragmentManager)
                 }
 
                 else -> isValidate = true

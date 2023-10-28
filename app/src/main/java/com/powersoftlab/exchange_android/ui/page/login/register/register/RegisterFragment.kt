@@ -34,6 +34,7 @@ import com.powersoftlab.exchange_android.common.manager.AppManager
 import com.powersoftlab.exchange_android.common.navigator.AppNavigator
 import com.powersoftlab.exchange_android.databinding.FragmentRegisterBinding
 import com.powersoftlab.exchange_android.ext.convertDisplayDateToChristianYear
+import com.powersoftlab.exchange_android.ext.copyToClipboard
 import com.powersoftlab.exchange_android.ext.fadeIn
 import com.powersoftlab.exchange_android.ext.gone
 import com.powersoftlab.exchange_android.ext.isEmail
@@ -41,6 +42,7 @@ import com.powersoftlab.exchange_android.ext.isMonoClickable
 import com.powersoftlab.exchange_android.ext.isValidPassword
 import com.powersoftlab.exchange_android.ext.loadImageCircle
 import com.powersoftlab.exchange_android.ext.monoLastTimeClick
+import com.powersoftlab.exchange_android.ext.setOnClickWithAnimationListener
 import com.powersoftlab.exchange_android.ext.setOnTouchAnimation
 import com.powersoftlab.exchange_android.ext.show
 import com.powersoftlab.exchange_android.ext.toDashWhenNullOrEmpty
@@ -227,6 +229,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 if(chkRegTerm.isChecked){
                     chkRegTerm.setTextColor(ContextCompat.getColor(requireContext(),R.color.yellow_green))
                 }
+            }
+
+            ivCopyWalletId.setOnClickWithAnimationListener{
+                val walletId = tvWalletId.text.toString()
+                walletId.copyToClipboard(requireContext())
             }
 
             btnRegister.apply {
@@ -679,7 +686,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
                 chkRegTerm.isChecked = true
                 chkRegTerm.isVisible = false
                 btnRegister.setText(resources.getString(R.string.title_register_edit_form))
-                tvWalletId.show()
+                layoutWalletId.show()
                 tvWalletId.setText(user.walletId.toDashWhenNullOrEmpty())
             }
         }

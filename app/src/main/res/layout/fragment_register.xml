@@ -265,9 +265,9 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/TextViewExtraMini"
-                        android:singleLine="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:text="@string/hint_id_card_size_25mb"
                         android:textColor="@color/gray_nevada"
                         app:fontFamily="@font/prompt_regular" />
@@ -349,9 +349,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/edt_reg_village_no"
@@ -405,9 +405,9 @@
                 tools:ignore="RtlSymmetry" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_error_sub_district"
                 style="@style/TextViewExtraMini"
                 android:layout_width="300dp"
-                android:id="@+id/tv_error_sub_district"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_2dp"
                 android:layout_marginStart="@dimen/margin_16dp"
@@ -458,28 +458,46 @@
                 android:gravity="start"
                 android:text="@string/validate_reg_postcode"
                 android:textColor="@color/color_error_text"
-                tools:visibility="visible"
                 android:visibility="@{isPostcodeEmpty ? View.VISIBLE : View.INVISIBLE , default=invisible}"
-                app:fontFamily="@font/prompt_regular" />
+                app:fontFamily="@font/prompt_regular"
+                tools:visibility="visible" />
 
 
             <!--wallet id-->
-            <EditText
-                android:visibility="gone"
-                style="@style/AppEditText"
-                android:id="@+id/tv_wallet_id"
+            <FrameLayout
+                android:id="@+id/layout_wallet_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_edittext"
-                android:backgroundTint="@color/gray_alto"
-                android:enabled="false"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"
+                android:visibility="gone"
                 android:layout_marginBottom="@dimen/margin_22dp"
-                tools:visibility="visible"
-                android:text="wallet ID"
-                android:textColorHint="@color/text_back"
-                tools:ignore="RtlSymmetry" />
+                tools:visibility="visible">
+
+                <EditText
+                    android:id="@+id/tv_wallet_id"
+                    style="@style/AppEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edittext"
+                    android:backgroundTint="@color/gray_alto"
+                    android:enabled="false"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    tools:text="wallet ID"
+                    android:text="-"
+                    android:textColorHint="@color/text_back"
+                    tools:ignore="RtlSymmetry"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_copy_wallet_id"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/colorSecondary"
+                    android:layout_marginEnd="@dimen/margin_16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:src="@drawable/icon_copy" />
+            </FrameLayout>
 
             <!--username-->
             <EditText
@@ -555,9 +573,9 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
                     app:boxBackgroundMode="none"
                     app:hintEnabled="false"
-                    android:layout_marginTop="@dimen/margin_16dp"
                     app:passwordToggleEnabled="true">
 
                     <EditText

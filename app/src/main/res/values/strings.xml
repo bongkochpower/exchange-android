@@ -140,6 +140,8 @@
     <string name="message_set_pin_success">The PIN code was successfully set.</string>
     <string name="message_set_finger_scan_success">Fingerprint setup successful</string>
     <string name="message_currency_less_one">There are no other currencies that can be exchanged.</string>
+    <string name="message_cant_transfer_own_account">Cannot transfer to own account</string>
+    <string name="message_wallet_not_found">WalletID Not Found</string>
 
     <!--button-->
     <string name="button_close">Close</string>

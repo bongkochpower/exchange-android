@@ -3,6 +3,8 @@ package com.powersoftlab.exchange_android.ext
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
@@ -17,6 +19,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.util.Base64Utils
 import com.powersoftlab.exchange_android.common.manager.AppManager
@@ -268,6 +271,14 @@ fun String.toCardNumberFormat(): String {
         if (i ==3 || i == 7 || i == 11 || i == 15 ) str.append(" ")
     }
     return str.toString()
+}
+
+fun String.copyToClipboard(context: Context){
+    //COPY
+    val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = ClipData.newPlainText("", this)
+    clipboard.setPrimaryClip(clip)
+    Toast.makeText(context, "wallet Id copied.", Toast.LENGTH_SHORT).show()
 }
 
 private fun ByteArray.bytesToHex(): String? {

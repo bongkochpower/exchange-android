@@ -142,6 +142,10 @@
     <string name="message_currency_less_one">There are no other currencies that can be exchanged.</string>
     <string name="message_cant_transfer_own_account">Cannot transfer to own account</string>
     <string name="message_wallet_not_found">WalletID Not Found</string>
+    <string name="message_shipping_card_detail">1. No daily withdrawal limit.\n\n2. In case you withdraw more than 300,000 Baht, you will need to show an Passport ID.\n\n3. Withdrawal at a clearing district different from yours will incur a fee. (Fee details can be found in Website Sosoon\'s announcements.)\n\n4. accounts on Sosoon can use this withdrawal service via Specified Bank QR code.></string>
+    <string name="message_withdraw_detail">1. Daily withdrawal limit is not more than 5,000 USD per transaction and total amounts are not more than 20,000 USD.\n\n
+2. Service fee 1-2 USD transaction , depends on the service agent.\n\n
+3. accounts on Sosoon can use this withdrawal service via Specified Bank QR Code.</string>
 
     <!--button-->
     <string name="button_close">Close</string>

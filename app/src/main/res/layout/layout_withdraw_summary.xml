@@ -34,9 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/margin_28dp"
-            android:gravity="center_horizontal"
-            android:maxLines="3"
-            android:text="@string/message_dummy_term"
+            android:gravity="start"
+            android:text="@string/message_withdraw_detail"
             android:textColor="@color/text_back"
             app:fontFamily="@font/prompt_regular" />
 

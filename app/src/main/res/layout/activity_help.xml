@@ -36,7 +36,7 @@
                 android:layout_marginTop="@dimen/margin_14dp"
                 android:drawablePadding="@dimen/padding_10dp"
                 android:gravity="center_horizontal"
-                android:text="@string/menu_help"
+                android:text="Call Center\nTel No. xx-xxxxxxx"
                 android:textColor="@color/text_edittext_gray"
                 app:fontFamily="@font/prompt_regular" />
         </FrameLayout>

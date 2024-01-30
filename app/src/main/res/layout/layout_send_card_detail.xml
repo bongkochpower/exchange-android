@@ -17,8 +17,8 @@
             style="@style/TextViewSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/message_dummy_term"
+            android:gravity="start"
+            android:text="@string/message_shipping_card_detail"
             android:textColor="@color/text_back"
             app:fontFamily="@font/prompt_regular" />
     </androidx.core.widget.NestedScrollView>
